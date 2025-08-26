@@ -149,12 +149,6 @@ export const CourseAnnouncementsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseAnnouncementsGetAnnouncementsRequest",
     isMultipart: false,
     originalName: "getAnnouncements",
@@ -181,63 +175,6 @@ export const CourseAnnouncementsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "The title of this Announcement."
-        },
-        "body": {
-            "type": "string",
-            "format": "BbML",
-            "example": "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-            "description": "The message body of the Announcement. This field supports BbML; see <a target='_blank' href='https://docs.anthology.com/docs/rest-apis/learn/advanced/bbml.html'>here</a> for more information."
-        },
-        "draft": {
-            "type": "boolean",
-            "description": "An indication of whether or not the Announcement is in draft status."
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the course to students.",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncementV1.Availability",
-            "properties": {
-                "duration": {
-                    "type": "object",
-                    "description": "Duration indicates when the System Announcement is Available based on whether it is Permanent or if the date/time of the request falls within its Start &amp; End dates.",
-                    "title": "blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncementV1.Availability.Duration",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "description": "Indicates whether this Course Announcement is always displayed (Permanent) or if it is shown only between the Start and End dates (Restricted).\n\n\n| Type      | Description\n | --------- | --------- |\n| Permanent | The Announcement will always be displayed. |\n| Restricted | The Announcement will start being displayed on Duration.Start and stop being displayed on Duration.End |\n",
-                            "enum": [
-                                "Permanent",
-                                "Restricted"
-                            ]
-                        },
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this Announcement starts being Available."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this Announcement stops being Available."
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncementV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1AnnouncementsCourseAnnouncementV1"
-},
     requestType: "CourseAnnouncementsCreateAnnouncementRequest",
     isMultipart: false,
     originalName: "createAnnouncement",
@@ -276,12 +213,6 @@ export const CourseAnnouncementsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncement",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1AnnouncementsCourseAnnouncement"
-},
     requestType: "CourseAnnouncementsGetAnnouncementRequest",
     isMultipart: false,
     originalName: "getAnnouncement",
@@ -314,8 +245,6 @@ export const CourseAnnouncementsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseAnnouncementsDeleteAnnouncementRequest",
     isMultipart: false,
     originalName: "deleteAnnouncement",
@@ -348,63 +277,6 @@ export const CourseAnnouncementsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "The title of this Announcement."
-        },
-        "body": {
-            "type": "string",
-            "format": "BbML",
-            "example": "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-            "description": "The message body of the Announcement. This field supports BbML; see <a target='_blank' href='https://docs.anthology.com/docs/rest-apis/learn/advanced/bbml.html'>here</a> for more information."
-        },
-        "draft": {
-            "type": "boolean",
-            "description": "An indication of whether or not the Announcement is in draft status."
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the course to students.",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncementV1.Availability",
-            "properties": {
-                "duration": {
-                    "type": "object",
-                    "description": "Duration indicates when the System Announcement is Available based on whether it is Permanent or if the date/time of the request falls within its Start &amp; End dates.",
-                    "title": "blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncementV1.Availability.Duration",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "description": "Indicates whether this Course Announcement is always displayed (Permanent) or if it is shown only between the Start and End dates (Restricted).\n\n\n| Type      | Description\n | --------- | --------- |\n| Permanent | The Announcement will always be displayed. |\n| Restricted | The Announcement will start being displayed on Duration.Start and stop being displayed on Duration.End |\n",
-                            "enum": [
-                                "Permanent",
-                                "Restricted"
-                            ]
-                        },
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this Announcement starts being Available."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this Announcement stops being Available."
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.announcements.CourseAnnouncement",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1AnnouncementsCourseAnnouncement"
-},
     requestType: "CourseAnnouncementsUpdateAnnouncementRequest",
     isMultipart: false,
     originalName: "updateAnnouncement",

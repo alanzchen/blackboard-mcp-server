@@ -125,12 +125,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "GoalsGetCourseGoalAlignmentsRequest",
     isMultipart: false,
     originalName: "getCourseGoalAlignments",
@@ -192,12 +186,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "GoalsGetGoalsRequest",
     isMultipart: false,
     originalName: "getGoals",
@@ -241,12 +229,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "GoalsGetGoalSetsRequest",
     isMultipart: false,
     originalName: "getGoalSets",
@@ -290,21 +272,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "GoalsGetTypesRequest",
     isMultipart: false,
     originalName: "getTypes",
@@ -331,12 +298,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.goal.web.rest.publicapi.v1.models.GoalSet",
-    "typeName": "BlackboardPluginGoalWebRestPublicapiV1ModelsGoalSet"
-},
     requestType: "GoalsGetGoalSetByIdRequest",
     isMultipart: false,
     originalName: "getGoalSetById",
@@ -387,21 +348,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "GoalsGetCategoriesRequest",
     isMultipart: false,
     originalName: "getCategories",
@@ -434,12 +380,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.goal.web.rest.publicapi.v1.models.GoalCategory",
-    "typeName": "BlackboardPluginGoalWebRestPublicapiV1ModelsGoalCategory"
-},
     requestType: "GoalsGetGoalSetCategoryByIdRequest",
     isMultipart: false,
     originalName: "getGoalSetCategoryById",
@@ -520,12 +460,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "GoalsGetGoalsFromSetAndCategoryRequest",
     isMultipart: false,
     originalName: "getGoalsFromSetAndCategory",
@@ -558,12 +492,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.goal.web.rest.publicapi.v1.models.ExpandedGoal",
-    "typeName": "BlackboardPluginGoalWebRestPublicapiV1ModelsExpandedGoal"
-},
     requestType: "GoalsGetGoalByIdRequest",
     isMultipart: false,
     originalName: "getGoalById",
@@ -686,12 +614,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "GoalsGetGoalAlignmentsRequest",
     isMultipart: false,
     originalName: "getGoalAlignments",
@@ -760,12 +682,6 @@ export const GoalsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "GoalsGetChildrenGoalsRequest",
     isMultipart: false,
     originalName: "getChildrenGoals",

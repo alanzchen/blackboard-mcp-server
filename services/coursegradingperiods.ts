@@ -53,12 +53,6 @@ export const CourseGradingPeriodsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseGradingPeriodsGetGradingPeriodsRequest",
     isMultipart: false,
     originalName: "getGradingPeriods",
@@ -78,8 +72,6 @@ export const CourseGradingPeriodsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGradingPeriodsCreateGradingPeriodRequest",
     isMultipart: false,
     originalName: "createGradingPeriod",
@@ -112,12 +104,6 @@ export const CourseGradingPeriodsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradingPeriod",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1GradingPeriod"
-},
     requestType: "CourseGradingPeriodsGetGradingPeriodRequest",
     isMultipart: false,
     originalName: "getGradingPeriod",
@@ -143,8 +129,6 @@ export const CourseGradingPeriodsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGradingPeriodsDeleteGradingPeriodRequest",
     isMultipart: false,
     originalName: "deleteGradingPeriod",
@@ -170,8 +154,6 @@ export const CourseGradingPeriodsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGradingPeriodsUpdateGradingPeriodRequest",
     isMultipart: false,
     originalName: "updateGradingPeriod",

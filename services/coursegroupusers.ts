@@ -59,12 +59,6 @@ export const CourseGroupUsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseGroupUsersGetGroupMembershipsRequest",
     isMultipart: false,
     originalName: "getGroupMemberships",
@@ -103,12 +97,6 @@ export const CourseGroupUsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.groupspace.publicapi.v1.groups.GroupMembership",
-    "typeName": "BlackboardPluginGroupspacePublicapiV1GroupsGroupMembership"
-},
     requestType: "CourseGroupUsersGetGroupMembershipRequest",
     isMultipart: false,
     originalName: "getGroupMembership",
@@ -147,12 +135,6 @@ export const CourseGroupUsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.groupspace.publicapi.v1.groups.GroupMembershipV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginGroupspacePublicapiV1GroupsGroupMembershipV1"
-},
     requestType: "CourseGroupUsersCreateGroupMembershipRequest",
     isMultipart: false,
     originalName: "createGroupMembership",
@@ -184,8 +166,6 @@ export const CourseGroupUsersMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGroupUsersDeleteGroupMembershipRequest",
     isMultipart: false,
     originalName: "deleteGroupMembership",

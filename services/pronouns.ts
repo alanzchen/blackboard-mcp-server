@@ -40,12 +40,6 @@ export const PronounsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "PronounsGetPronounsRequest",
     isMultipart: false,
     originalName: "getPronouns",
@@ -65,30 +59,6 @@ export const PronounsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "The name of the pronoun.",
-            "maxLength": 100
-        },
-        "status": {
-            "type": "string",
-            "description": "The status of the pronoun.\n\n\n| Type      | Description\n | --------- | --------- |\n| Pending |  |\n| Approved |  |\n",
-            "enum": [
-                "Pending",
-                "Approved"
-            ]
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.pronouns.PronounV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1PronounsPronounV1"
-},
     requestType: "PronounsCreatePronounRequest",
     isMultipart: false,
     originalName: "createPronoun",
@@ -108,8 +78,6 @@ export const PronounsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "PronounsDeletePronounRequest",
     isMultipart: false,
     originalName: "deletePronoun",
@@ -136,30 +104,6 @@ export const PronounsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "The name of the pronoun.",
-            "maxLength": 100
-        },
-        "status": {
-            "type": "string",
-            "description": "The status of the pronoun.\n\n\n| Type      | Description\n | --------- | --------- |\n| Pending |  |\n| Approved |  |\n",
-            "enum": [
-                "Pending",
-                "Approved"
-            ]
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.pronouns.PronounV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1PronounsPronounV1"
-},
     requestType: "PronounsUpdatePronounRequest",
     isMultipart: false,
     originalName: "updatePronoun",

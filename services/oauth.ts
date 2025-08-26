@@ -64,8 +64,6 @@ export const OauthMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "OauthAuthorizationCodeRequest",
     isMultipart: false,
     originalName: "authorizationCode",
@@ -109,12 +107,6 @@ export const OauthMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugins.apigateway.b2.rest.OAuth2AccessToken",
-    "typeName": "BlackboardPluginsApigatewayB2RestOAuth2AccessToken"
-},
     requestType: "OauthRequestTokenRequest",
     isMultipart: false,
     originalName: "requestToken",
@@ -127,8 +119,6 @@ export const OauthMethods: { [key: string]: ApiMethodInfo } = {
     path: "/learn/api/public/v1/oauth2/tokeninfo",
     pathParams: [],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "OauthGetTokenInfoRequest",
     isMultipart: false,
     originalName: "getTokenInfo",

@@ -47,12 +47,6 @@ export const ContentFileAttachmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "ContentFileAttachmentsGetFileAttachmentsRequest",
     isMultipart: false,
     originalName: "getFileAttachments",
@@ -78,16 +72,6 @@ export const ContentFileAttachmentsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.content.rest.publicapi.v1.FileAttachment",
-    "typeName": "BlackboardPluginContentRestPublicapiV1FileAttachment"
-},
     requestType: "ContentFileAttachmentsCreateFileAttachmentRequest",
     isMultipart: false,
     originalName: "createFileAttachment",
@@ -126,12 +110,6 @@ export const ContentFileAttachmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.content.rest.publicapi.v1.FileAttachment",
-    "typeName": "BlackboardPluginContentRestPublicapiV1FileAttachment"
-},
     requestType: "ContentFileAttachmentsGetFileAttachmentRequest",
     isMultipart: false,
     originalName: "getFileAttachment",
@@ -163,8 +141,6 @@ export const ContentFileAttachmentsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "ContentFileAttachmentsDeleteFileAttachmentRequest",
     isMultipart: false,
     originalName: "deleteFileAttachment",
@@ -196,8 +172,6 @@ export const ContentFileAttachmentsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "ContentFileAttachmentsDownloadRequest",
     isMultipart: false,
     originalName: "download",

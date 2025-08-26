@@ -53,12 +53,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CoursesGetCourseChildrenRequest",
     isMultipart: false,
     originalName: "getCourseChildren",
@@ -97,12 +91,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseChild",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1CoursesCourseChild"
-},
     requestType: "CoursesGetChildRequest",
     isMultipart: false,
     originalName: "getChild",
@@ -141,12 +129,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.courses.CourseChildV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1CoursesCourseChildV1"
-},
     requestType: "CoursesAddChildCourseRequest",
     isMultipart: false,
     originalName: "addChildCourse",
@@ -179,8 +161,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CoursesRemoveChildCourseRequest",
     isMultipart: false,
     originalName: "removeChildCourse",
@@ -225,12 +205,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CoursesGetCrossListSetRequest",
     isMultipart: false,
     originalName: "getCrossListSet",
@@ -263,12 +237,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.courses.CourseTaskV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1CoursesCourseTaskV1"
-},
     requestType: "CoursesGetTaskRequest",
     isMultipart: false,
     originalName: "getTask",
@@ -288,147 +256,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "targetCourse": {
-            "type": "object",
-            "description": "The destination course to copy into. This can be either a new course, defined by the courseId field, or an existing course, defined by the id field.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseCopyV2.TargetCourseTOPubV2",
-            "properties": {
-                "courseId": {
-                    "type": "string",
-                    "description": "The CourseId that will represent the new course."
-                },
-                "id": {
-                    "description": "An identifier representing an existing course to be copied into.",
-                    "$ref": "#/definitions/blackboard.platform.restspring.publicapi.v1.common.params.CourseIdParam"
-                }
-            }
-        },
-        "copy": {
-            "type": "object",
-            "description": "The options which will be used when copying the specified course",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseCopyV2.CopyTOPubV2",
-            "properties": {
-                "adaptiveReleaseRules": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the adaptive release rules will be copied."
-                },
-                "announcements": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the announcements will be copied."
-                },
-                "assessments": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the assessments will be copied."
-                },
-                "blogs": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the blogs will be copied."
-                },
-                "calendar": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the calendar will be copied."
-                },
-                "contacts": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the contacts information will be copied."
-                },
-                "contentAlignments": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the content alignments will be copied."
-                },
-                "contentAreas": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the content areas will be copied."
-                },
-                "discussions": {
-                    "type": "string",
-                    "description": "Represents whether and how to copy the discussion forum\n\n\n| Type      | Description\n | --------- | --------- |\n| None | Discussion board will not be copied |\n| ForumsAndStarterPosts | Discussion board with Formus and starter posts will be copied |\n| ForumsOnly | Discussion board with only forums will be copied |\n",
-                    "enum": [
-                        "None",
-                        "ForumsAndStarterPosts",
-                        "ForumsOnly"
-                    ]
-                },
-                "glossary": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the glossary will be copied."
-                },
-                "gradebook": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the grade book, columns and settings will be copied."
-                },
-                "groupSettings": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the group settings will be copied."
-                },
-                "journals": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the journals will be copied."
-                },
-                "retentionRules": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the retention rules will be copied."
-                },
-                "rubrics": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the rubrics will be copied."
-                },
-                "settings": {
-                    "type": "object",
-                    "description": "The course settings to be copied",
-                    "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseCopyV2.SettingsCopyOptionsTOPubV2",
-                    "properties": {
-                        "availability": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the Availability setting will be copied."
-                        },
-                        "bannerImage": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the banner image will be copied."
-                        },
-                        "duration": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the duration settings will be copied."
-                        },
-                        "enrollmentOptions": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the enrollment options will be copied."
-                        },
-                        "guestAccess": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the guest access settings will be copied."
-                        },
-                        "languagePack": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the languange packs will be copied."
-                        },
-                        "navigationSettings": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the navigation settings will be copied."
-                        },
-                        "observerAccess": {
-                            "type": "boolean",
-                            "description": "Represents whether or not the observer access settings will be copied."
-                        }
-                    }
-                },
-                "tasks": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the tasks will be copied."
-                },
-                "wikis": {
-                    "type": "boolean",
-                    "description": "Represents whether or not the wikis will be copied."
-                }
-            }
-        }
-    },
-    "description": ""
-},
-    responseSchema: null,
     requestType: "CoursesCopyCourseRequest",
     isMultipart: false,
     originalName: "copyCourse",
@@ -550,12 +377,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CoursesGetCoursesRequest",
     isMultipart: false,
     originalName: "getCourses",
@@ -575,166 +396,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "An optional externally-defined unique ID for the course. Defaults to the courseId.\n\nFormerly known as 'batchUid'.",
-            "maxLength": 256
-        },
-        "dataSourceId": {
-            "type": "string",
-            "description": "The ID of the data source associated with this course. This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
-        },
-        "courseId": {
-            "type": "string",
-            "description": "The Course ID attribute, shown to users in the UI.",
-            "maxLength": 100
-        },
-        "name": {
-            "type": "string",
-            "description": "The name of the course.",
-            "maxLength": 333
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the course."
-        },
-        "organization": {
-            "type": "boolean",
-            "description": "Whether this object represents an Organization. Defaults to false."
-        },
-        "ultraStatus": {
-            "type": "string",
-            "description": "Whether the course is rendered using Classic or Ultra Course View.\n\n\n| Type      | Description\n | --------- | --------- |\n| Undecided | The ultra status is not decided. |\n| Classic | The course is decided as classic. |\n| Ultra | The course is decided as ultra |\n| Ultrapreview | The course is currently in Ultra mode but during the preview state where it may still be reverted via a Restore to the classic state |\n",
-            "enum": [
-                "Undecided",
-                "Classic",
-                "Ultra",
-                "Ultrapreview"
-            ]
-        },
-        "allowGuests": {
-            "type": "boolean",
-            "description": "Whether guests (users with the role guest) are allowed access to the course. Modifiable only for Classic course. Defaults to {@code true} for Classic Courses and {@code false} for Ultra Courses."
-        },
-        "allowObservers": {
-            "type": "boolean",
-            "description": "Whether observers are allowed access to the course. Modifiable only for Classic course. Defaults to {@code false}.\n\n**Since**: 3900.31.0"
-        },
-        "closedComplete": {
-            "type": "boolean",
-            "description": "This status does not affect availability of the course for viewing in any way. closedComplete is valid for both Ultra and Classic courses. If an Ultra course is in closedComplete mode, updates are not possible. For a Classic course in closedComplete mode, updates are still possible (through Web UI but not through REST i.e. closed is enforced for original courses when updated through REST the same way Ultra courses are blocked) but new notifications are not generated."
-        },
-        "termId": {
-            "type": "string",
-            "description": "The ID of the term associated to this course. This may optionally be the term's externalId using the syntax \"externalId:spring.2016\"."
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the course to students.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the course is currently available to students. Instructors can always access the course if they have 'Access unavailable course' entitlement. If set to 'Term', the course's parent term availability settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course. @since 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
-                    "enum": [
-                        "Yes",
-                        "No",
-                        "Disabled",
-                        "Term"
-                    ]
-                },
-                "duration": {
-                    "type": "object",
-                    "description": "Settings controlling the length of time the course is available.",
-                    "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability.Duration",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "description": "The intended length of the course. Possible values are:\n\n- Continuous: The course is active on an ongoing basis. This is the default.\n- DateRange: The course will only be available between specific date ranges.\n- FixedNumDays: The course will only be available for a set number of days.\n- Term: The course's parent term duration settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Continuous | Course is active on an ongoing basis. |\n| DateRange | Course is only intended to be available between specific date ranges |\n| FixedNumDays | Course is only available for a set number of days |\n| UseTerm | Course availablity is dictated by its associated term |\n",
-                            "enum": [
-                                "Continuous",
-                                "DateRange",
-                                "FixedNumDays",
-                                "UseTerm"
-                            ]
-                        },
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this course starts. May only be set if availability.duration.type is DateRange."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this course ends. May only be set if availability.duration.type is DateRange."
-                        },
-                        "daysOfUse": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "The number of days this course can be used. May only be set if availability.duration.type is FixedNumDays."
-                        }
-                    }
-                }
-            }
-        },
-        "enrollment": {
-            "type": "object",
-            "description": "Settings controlling how students may enroll in the course.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Enrollment",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "Specifies the enrollment options for the course. Defaults to InstructorLed.\n\n\n| Type      | Description\n | --------- | --------- |\n| InstructorLed | Enrollment tasks for the course can only performed by the instructor |\n| SelfEnrollment | Instructors have the ability to enroll users, and students can also enroll themselves in the course |\n| EmailEnrollment | Instructors have the ability to enroll users, and students can email requests to the instructor for enrollment |\n",
-                    "enum": [
-                        "InstructorLed",
-                        "SelfEnrollment",
-                        "EmailEnrollment"
-                    ]
-                },
-                "start": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The date on which enrollments are allowed for the course. May only be set if enrollment.type is SelfEnrollment."
-                },
-                "end": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The date on which enrollment in this course ends. May only be set if enrollment.type is SelfEnrollment."
-                },
-                "accessCode": {
-                    "type": "string",
-                    "description": "The enrollment access code associated with this course. May only be set if enrollment.type is SelfEnrollment.",
-                    "maxLength": 50
-                }
-            }
-        },
-        "locale": {
-            "type": "object",
-            "description": "Settings controlling localization within the course.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Locale",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The locale of this course.",
-                    "maxLength": 20
-                },
-                "force": {
-                    "type": "boolean",
-                    "description": "Whether students are forced to use the course's specified locale."
-                }
-            }
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV2CoursesCourseV2"
-},
     requestType: "CoursesCreateCourseRequest",
     isMultipart: false,
     originalName: "createCourse",
@@ -761,12 +422,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV2CoursesCourseV2"
-},
     requestType: "CoursesGetCourseRequest",
     isMultipart: false,
     originalName: "getCourse",
@@ -786,8 +441,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CoursesDeleteCourseRequest",
     isMultipart: false,
     originalName: "deleteCourse",
@@ -814,147 +467,6 @@ export const CoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "An optional externally-defined unique ID for the course. Defaults to the courseId.\n\nFormerly known as 'batchUid'.",
-            "maxLength": 256
-        },
-        "dataSourceId": {
-            "type": "string",
-            "description": "The ID of the data source associated with this course. This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
-        },
-        "name": {
-            "type": "string",
-            "description": "The name of the course.",
-            "maxLength": 333
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the course."
-        },
-        "allowGuests": {
-            "type": "boolean",
-            "description": "Whether guests (users with the role guest) are allowed access to the course. Modifiable only for Classic course. Defaults to {@code true} for Classic Courses and {@code false} for Ultra Courses."
-        },
-        "allowObservers": {
-            "type": "boolean",
-            "description": "Whether observers are allowed access to the course. Modifiable only for Classic course. Defaults to {@code false}.\n\n**Since**: 3900.31.0"
-        },
-        "closedComplete": {
-            "type": "boolean",
-            "description": "This status does not affect availability of the course for viewing in any way. closedComplete is valid for both Ultra and Classic courses. If an Ultra course is in closedComplete mode, updates are not possible. For a Classic course in closedComplete mode, updates are still possible (through Web UI but not through REST i.e. closed is enforced for original courses when updated through REST the same way Ultra courses are blocked) but new notifications are not generated."
-        },
-        "termId": {
-            "type": "string",
-            "description": "The ID of the term associated to this course. This may optionally be the term's externalId using the syntax \"externalId:spring.2016\"."
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the course to students.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the course is currently available to students. Instructors can always access the course if they have 'Access unavailable course' entitlement. If set to 'Term', the course's parent term availability settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course. @since 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
-                    "enum": [
-                        "Yes",
-                        "No",
-                        "Disabled",
-                        "Term"
-                    ]
-                },
-                "duration": {
-                    "type": "object",
-                    "description": "Settings controlling the length of time the course is available.",
-                    "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability.Duration",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "description": "The intended length of the course. Possible values are:\n\n- Continuous: The course is active on an ongoing basis. This is the default.\n- DateRange: The course will only be available between specific date ranges.\n- FixedNumDays: The course will only be available for a set number of days.\n- Term: The course's parent term duration settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Continuous | Course is active on an ongoing basis. |\n| DateRange | Course is only intended to be available between specific date ranges |\n| FixedNumDays | Course is only available for a set number of days |\n| UseTerm | Course availablity is dictated by its associated term |\n",
-                            "enum": [
-                                "Continuous",
-                                "DateRange",
-                                "FixedNumDays",
-                                "UseTerm"
-                            ]
-                        },
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this course starts. May only be set if availability.duration.type is DateRange."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date this course ends. May only be set if availability.duration.type is DateRange."
-                        },
-                        "daysOfUse": {
-                            "type": "integer",
-                            "format": "int32",
-                            "description": "The number of days this course can be used. May only be set if availability.duration.type is FixedNumDays."
-                        }
-                    }
-                }
-            }
-        },
-        "enrollment": {
-            "type": "object",
-            "description": "Settings controlling how students may enroll in the course.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Enrollment",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "Specifies the enrollment options for the course. Defaults to InstructorLed.\n\n\n| Type      | Description\n | --------- | --------- |\n| InstructorLed | Enrollment tasks for the course can only performed by the instructor |\n| SelfEnrollment | Instructors have the ability to enroll users, and students can also enroll themselves in the course |\n| EmailEnrollment | Instructors have the ability to enroll users, and students can email requests to the instructor for enrollment |\n",
-                    "enum": [
-                        "InstructorLed",
-                        "SelfEnrollment",
-                        "EmailEnrollment"
-                    ]
-                },
-                "start": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The date on which enrollments are allowed for the course. May only be set if enrollment.type is SelfEnrollment."
-                },
-                "end": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The date on which enrollment in this course ends. May only be set if enrollment.type is SelfEnrollment."
-                },
-                "accessCode": {
-                    "type": "string",
-                    "description": "The enrollment access code associated with this course. May only be set if enrollment.type is SelfEnrollment.",
-                    "maxLength": 50
-                }
-            }
-        },
-        "locale": {
-            "type": "object",
-            "description": "Settings controlling localization within the course.",
-            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Locale",
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "description": "The locale of this course.",
-                    "maxLength": 20
-                },
-                "force": {
-                    "type": "boolean",
-                    "description": "Whether students are forced to use the course's specified locale."
-                }
-            }
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV2CoursesCourseV2"
-},
     requestType: "CoursesUpdateCourseRequest",
     isMultipart: false,
     originalName: "updateCourse",

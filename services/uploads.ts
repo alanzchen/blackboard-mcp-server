@@ -22,12 +22,6 @@ export const UploadsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.file.rest.publicapi.v1.UploadedFileInfoV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginFileRestPublicapiV1UploadedFileInfoV1"
-},
     requestType: "UploadsUploadRequest",
     isMultipart: false,
     originalName: "upload",
@@ -47,12 +41,6 @@ export const UploadsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.file.UploadSettings",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1FileUploadSettings"
-},
     requestType: "UploadsGetSettingsRequest",
     isMultipart: false,
     originalName: "getSettings",

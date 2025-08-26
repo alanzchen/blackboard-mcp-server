@@ -95,12 +95,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "ContentGetContentsRequest",
     isMultipart: false,
     originalName: "getContents",
@@ -133,98 +127,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "parentId": {
-            "type": "string",
-            "description": "The ID of the content's parent.  Note that top-level contents do not have parents. The 'parentId' field is a writable field as of the Bb Learn 3200.6.0 release.  Specifying a new value in PATCH requests allows the Content object to be moved from one parent to another."
-        },
-        "title": {
-            "type": "string",
-            "description": "The title or name of this content. Typically shown as the main text to click in the course outline when accessing the content."
-        },
-        "body": {
-            "type": "string",
-            "format": "BbML",
-            "example": "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-            "description": "The body text associated with this content. This field supports BbML; see <a target='_blank' href='https://docs.anthology.com/docs/rest-apis/learn/advanced/bbml.html'>here</a> for more information."
-        },
-        "description": {
-            "type": "string",
-            "description": "The short description of this content.\n\nThis field is not used in Classic courses.  For Ultra courses this is used to show information directly on the course outline.",
-            "maxLength": 750
-        },
-        "position": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The position of this content within its parent folder. Position values are zero-based (the first element has a position value of zero, not one). Default position is last in the list of child contents under the parent."
-        },
-        "launchInNewWindow": {
-            "type": "boolean",
-            "description": "Indicates whether the content is going to open in a new window.\n\n**Since**: 3800.10.0"
-        },
-        "reviewable": {
-            "type": "boolean",
-            "description": "Indicates whether Review Status is enabled for this content. Content items with review status enabled can be marked as reviewed by students in classic courses and content items with review status enabled in Ultra are either in a Forced Sequence or content that should be counted towards the progress tracking feature as of 3900.19 This can be used to track performance and in Adaptive Release rules to control the release of other content.\n\n**Since**: 3700.15.0"
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the content to students.",
-            "title": "blackboard.plugin.content.rest.publicapi.v1.ContentV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the content is currently available to students.  Instructors can always access the content.  If set to 'PartiallyVisible', the title will be available to students but the body will not.  Defaults to Yes.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| PartiallyVisible |  |\n",
-                    "enum": [
-                        "Yes",
-                        "No",
-                        "PartiallyVisible"
-                    ]
-                },
-                "allowGuests": {
-                    "type": "boolean",
-                    "description": "Whether this content is available to users with the 'guest' role. Defaults to true."
-                },
-                "allowObservers": {
-                    "type": "boolean",
-                    "description": "Whether or not \"observers\" are allowed access to this Content. Defaults to true.\n\n**Since**: 3900.31.0"
-                },
-                "adaptiveRelease": {
-                    "type": "object",
-                    "description": "Settings controlling adaptive release of the content to students.",
-                    "title": "blackboard.plugin.content.rest.publicapi.v1.ContentV1.Availability.AdaptiveRelease",
-                    "properties": {
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when this content will become available to students."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when this content will no longer be available to students."
-                        }
-                    }
-                }
-            }
-        },
-        "contentHandler": {
-            "description": "Extended settings specific to this content item's content handler.",
-            "$ref": "#/definitions/blackboard.platform.rest.publicapi.v1.content.ContentHandler"
-        },
-        "subtype": {
-            "type": "string",
-            "description": "Optional assessment subtype for further differentiation. For example, a test can have the subtype 'assignment' in Ultra, alongside AI conversations and knowledge checks, ensuring type-agnostic categorization."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.content.rest.publicapi.v1.ContentV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginContentRestPublicapiV1ContentV1"
-},
     requestType: "ContentCreateContentRequest",
     isMultipart: false,
     originalName: "createContent",
@@ -257,121 +159,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "parentId": {
-            "type": "string",
-            "description": "The id of the parent content for the created assignment."
-        },
-        "title": {
-            "type": "string",
-            "description": "The title used for the created assignment content and gradebook column. Typically shown as the main text to click in the course outline when accessing the assignment."
-        },
-        "instructions": {
-            "type": "string",
-            "format": "BbML",
-            "example": "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-            "description": "The text instructions to use when creating the assignment content. This field supports BbML; see <a target='_blank' href='https://docs.anthology.com/docs/rest-apis/learn/advanced/bbml.html'>here</a> for more information."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description to use when creating the assignment content."
-        },
-        "position": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The position of the created assignment within the other other content of its parent. Position values are zero-based (the first element has a position value of zero, not one). Default position is last in the list of child contents under the parent."
-        },
-        "fileUploadIds": {
-            "$ref": "#/definitions/java.util.List<java.lang.String>"
-        },
-        "availability": {
-            "type": "object",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.content.CreateAssignmentV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the created assignment is available to students. Instructors can always access the created assignment. If set to 'PartiallyVisible', the title will be available to students but the body will not. Defaults to Yes.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| PartiallyVisible |  |\n",
-                    "enum": [
-                        "Yes",
-                        "No",
-                        "PartiallyVisible"
-                    ]
-                },
-                "allowGuests": {
-                    "type": "boolean",
-                    "description": "Whether the created assignment is available to users with the 'guest' role. Defaults to true."
-                },
-                "allowObservers": {
-                    "type": "boolean",
-                    "description": "Whether the created assignment is available to users with the 'observer' role. Defaults to true.\n\n**Since**: 3900.31.0"
-                },
-                "adaptiveRelease": {
-                    "type": "object",
-                    "description": "Settings controlling adaptive release of created assignment to students.",
-                    "title": "blackboard.webapps.blackboard.publicapi.v1.content.CreateAssignmentV1.Availability.AdaptiveRelease",
-                    "properties": {
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when the created assignment will become available to students."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when the created assignment will no longer be available to students."
-                        }
-                    }
-                }
-            }
-        },
-        "grading": {
-            "type": "object",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.content.CreateAssignmentV1.Grading",
-            "properties": {
-                "due": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "Date and time that the created assignment will be due. If not specified, this will default to the specified \"availability.adaptiveRelease.end\" date. If that is also not specified, due date defaults to null."
-                },
-                "attemptsAllowed": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "The number of attempts allowed on the created assignment. Defaults to 1. Maximum allowed is 10 for an Ultra Assignment. Value will be ignored if isUnlimitedAttemptsAllowed is set to true."
-                },
-                "gradeSchemaId": {
-                    "type": "string",
-                    "description": "The grading schema to use for the created assignment. Defaults to Score."
-                },
-                "isUnlimitedAttemptsAllowed": {
-                    "type": "boolean",
-                    "description": "Determines if the assignment has unlimited number of attempts.\n\n**Since**: 3400.8.0"
-                }
-            }
-        },
-        "score": {
-            "type": "object",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.content.CreateAssignmentV1.Score",
-            "properties": {
-                "possible": {
-                    "type": "number",
-                    "description": "The number of points possible for the created assignment. Defaults to 100."
-                }
-            }
-        },
-        "originalityReportingTool": {
-            "description": "The Originality Reporting Tool options to be used for the assignment content item.\n\n**Since**: 3800.16.0",
-            "$ref": "#/definitions/blackboard.platform.rest.publicapi.v1.content.OriginalityReportingTool"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.content.CreateAssignmentResultV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1ContentCreateAssignmentResultV1"
-},
     requestType: "ContentCreateAssignmentRequest",
     isMultipart: false,
     originalName: "createAssignment",
@@ -397,8 +184,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "ContentGetContentRequest",
     isMultipart: false,
     originalName: "getContent",
@@ -437,8 +222,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "ContentDeleteContentRequest",
     isMultipart: false,
     originalName: "deleteContent",
@@ -477,98 +260,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "parentId": {
-            "type": "string",
-            "description": "The ID of the content's parent.  Note that top-level contents do not have parents. The 'parentId' field is a writable field as of the Bb Learn 3200.6.0 release.  Specifying a new value in PATCH requests allows the Content object to be moved from one parent to another."
-        },
-        "title": {
-            "type": "string",
-            "description": "The title or name of this content. Typically shown as the main text to click in the course outline when accessing the content."
-        },
-        "body": {
-            "type": "string",
-            "format": "BbML",
-            "example": "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-            "description": "The body text associated with this content. This field supports BbML; see <a target='_blank' href='https://docs.anthology.com/docs/rest-apis/learn/advanced/bbml.html'>here</a> for more information."
-        },
-        "description": {
-            "type": "string",
-            "description": "The short description of this content.\n\nThis field is not used in Classic courses.  For Ultra courses this is used to show information directly on the course outline.",
-            "maxLength": 750
-        },
-        "position": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The position of this content within its parent folder. Position values are zero-based (the first element has a position value of zero, not one). Default position is last in the list of child contents under the parent."
-        },
-        "launchInNewWindow": {
-            "type": "boolean",
-            "description": "Indicates whether the content is going to open in a new window.\n\n**Since**: 3800.10.0"
-        },
-        "reviewable": {
-            "type": "boolean",
-            "description": "Indicates whether Review Status is enabled for this content. Content items with review status enabled can be marked as reviewed by students in classic courses and content items with review status enabled in Ultra are either in a Forced Sequence or content that should be counted towards the progress tracking feature as of 3900.19 This can be used to track performance and in Adaptive Release rules to control the release of other content.\n\n**Since**: 3700.15.0"
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the content to students.",
-            "title": "blackboard.plugin.content.rest.publicapi.v1.ContentV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the content is currently available to students.  Instructors can always access the content.  If set to 'PartiallyVisible', the title will be available to students but the body will not.  Defaults to Yes.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| PartiallyVisible |  |\n",
-                    "enum": [
-                        "Yes",
-                        "No",
-                        "PartiallyVisible"
-                    ]
-                },
-                "allowGuests": {
-                    "type": "boolean",
-                    "description": "Whether this content is available to users with the 'guest' role. Defaults to true."
-                },
-                "allowObservers": {
-                    "type": "boolean",
-                    "description": "Whether or not \"observers\" are allowed access to this Content. Defaults to true.\n\n**Since**: 3900.31.0"
-                },
-                "adaptiveRelease": {
-                    "type": "object",
-                    "description": "Settings controlling adaptive release of the content to students.",
-                    "title": "blackboard.plugin.content.rest.publicapi.v1.ContentV1.Availability.AdaptiveRelease",
-                    "properties": {
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when this content will become available to students."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when this content will no longer be available to students."
-                        }
-                    }
-                }
-            }
-        },
-        "contentHandler": {
-            "description": "Extended settings specific to this content item's content handler.",
-            "$ref": "#/definitions/blackboard.platform.rest.publicapi.v1.content.ContentHandler"
-        },
-        "subtype": {
-            "type": "string",
-            "description": "Optional assessment subtype for further differentiation. For example, a test can have the subtype 'assignment' in Ultra, alongside AI conversations and knowledge checks, ensuring type-agnostic categorization."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.content.rest.publicapi.v1.Content",
-    "typeName": "BlackboardPluginContentRestPublicapiV1Content"
-},
     requestType: "ContentUpdateContentRequest",
     isMultipart: false,
     originalName: "updateContent",
@@ -661,8 +352,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "ContentGetContentChildrenRequest",
     isMultipart: false,
     originalName: "getContentChildren",
@@ -701,98 +390,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "parentId": {
-            "type": "string",
-            "description": "The ID of the content's parent.  Note that top-level contents do not have parents. The 'parentId' field is a writable field as of the Bb Learn 3200.6.0 release.  Specifying a new value in PATCH requests allows the Content object to be moved from one parent to another."
-        },
-        "title": {
-            "type": "string",
-            "description": "The title or name of this content. Typically shown as the main text to click in the course outline when accessing the content."
-        },
-        "body": {
-            "type": "string",
-            "format": "BbML",
-            "example": "<!-- {\"bbMLEditorVersion\":1} --><div data-bbid=\"bbml-editor-id_9c6a9556-80a5-496c-b10d-af2a9ab22d45\"> <h4>Header Large</h4>  <h5>Header Medium</h5>  <h6>Header Small</h6>  <p><strong>Bold&nbsp;</strong><em>Italic&nbsp;<span style=\"text-decoration: underline;\">Italic Underline</span></em></p> <ul>   <li><span style=\"text-decoration: underline;\"><em></em></span>Bullet 1</li>  <li>Bullet 2</li> </ul> <p>  <img src=\"@X@EmbeddedFile.requestUrlStub@X@bbcswebdav/xid-1217_1\">   <span>\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"</span> </p>  <p><span>&lt;braces test=\"values\" other=\"strange things\"&gt;</span></p> <p>Header Small</p> <ol>   <li>Number 1</li>   <li>Number 2</li> </ol>  <p>Just words followed by a formula</p>  <p><img align=\"middle\" alt=\"3 divided by 4 2 root of 7\" class=\"Wirisformula\" src=\"@X@EmbeddedFile.requestUrlStub@X@sessions/EA5F7FF3DF32D271D0E54AF0150D924A/anonymous/wiris/49728c9f5b4091622e2f4d183d857d35.png\" data-mathml=\"«math xmlns=¨http://www.w3.org/1998/Math/MathML¨»«mn»3«/mn»«mo»/«/mo»«mn»4«/mn»«mroot»«mn»7«/mn»«mn»2«/mn»«/mroot»«/math»\"></p> <p><a href=\"http://www.blackboard.com\">Blackboard</a></p> </div>",
-            "description": "The body text associated with this content. This field supports BbML; see <a target='_blank' href='https://docs.anthology.com/docs/rest-apis/learn/advanced/bbml.html'>here</a> for more information."
-        },
-        "description": {
-            "type": "string",
-            "description": "The short description of this content.\n\nThis field is not used in Classic courses.  For Ultra courses this is used to show information directly on the course outline.",
-            "maxLength": 750
-        },
-        "position": {
-            "type": "integer",
-            "format": "int32",
-            "description": "The position of this content within its parent folder. Position values are zero-based (the first element has a position value of zero, not one). Default position is last in the list of child contents under the parent."
-        },
-        "launchInNewWindow": {
-            "type": "boolean",
-            "description": "Indicates whether the content is going to open in a new window.\n\n**Since**: 3800.10.0"
-        },
-        "reviewable": {
-            "type": "boolean",
-            "description": "Indicates whether Review Status is enabled for this content. Content items with review status enabled can be marked as reviewed by students in classic courses and content items with review status enabled in Ultra are either in a Forced Sequence or content that should be counted towards the progress tracking feature as of 3900.19 This can be used to track performance and in Adaptive Release rules to control the release of other content.\n\n**Since**: 3700.15.0"
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the content to students.",
-            "title": "blackboard.plugin.content.rest.publicapi.v1.ContentV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the content is currently available to students.  Instructors can always access the content.  If set to 'PartiallyVisible', the title will be available to students but the body will not.  Defaults to Yes.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| PartiallyVisible |  |\n",
-                    "enum": [
-                        "Yes",
-                        "No",
-                        "PartiallyVisible"
-                    ]
-                },
-                "allowGuests": {
-                    "type": "boolean",
-                    "description": "Whether this content is available to users with the 'guest' role. Defaults to true."
-                },
-                "allowObservers": {
-                    "type": "boolean",
-                    "description": "Whether or not \"observers\" are allowed access to this Content. Defaults to true.\n\n**Since**: 3900.31.0"
-                },
-                "adaptiveRelease": {
-                    "type": "object",
-                    "description": "Settings controlling adaptive release of the content to students.",
-                    "title": "blackboard.plugin.content.rest.publicapi.v1.ContentV1.Availability.AdaptiveRelease",
-                    "properties": {
-                        "start": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when this content will become available to students."
-                        },
-                        "end": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "The date when this content will no longer be available to students."
-                        }
-                    }
-                }
-            }
-        },
-        "contentHandler": {
-            "description": "Extended settings specific to this content item's content handler.",
-            "$ref": "#/definitions/blackboard.platform.rest.publicapi.v1.content.ContentHandler"
-        },
-        "subtype": {
-            "type": "string",
-            "description": "Optional assessment subtype for further differentiation. For example, a test can have the subtype 'assignment' in Ultra, alongside AI conversations and knowledge checks, ensuring type-agnostic categorization."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.content.rest.publicapi.v1.ContentV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginContentRestPublicapiV1ContentV1"
-},
     requestType: "ContentCreateChildRequest",
     isMultipart: false,
     originalName: "createChild",
@@ -849,12 +446,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "ContentGetContentChildrenStateByIdRequest",
     isMultipart: false,
     originalName: "getContentChildrenStateById",
@@ -881,35 +472,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "contentId": {
-            "type": "string",
-            "description": "ID of the content to which this state belongs."
-        },
-        "userId": {
-            "type": "string",
-            "description": "ID of the user that this state is associated with."
-        },
-        "state": {
-            "type": "string",
-            "description": "Current state value.\n\nPossible values are:\n\n- None: student can't open this content item.\n- Unlocked: student is able to open the content item.\n- Started: student have opened the content item.\n- Completed: student have finished or submitted the content item.\n\n\n| Type      | Description\n | --------- | --------- |\n| None |  |\n| Unlocked |  |\n| Started |  |\n| Completed |  |\n",
-            "enum": [
-                "None",
-                "Unlocked",
-                "Started",
-                "Completed"
-            ]
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.content.State",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentState"
-},
     requestType: "ContentUpdateContentStateRequest",
     isMultipart: false,
     originalName: "updateContentState",
@@ -948,12 +510,6 @@ export const ContentMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.content.State",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentState"
-},
     requestType: "ContentGetContentStateByIdRequest",
     isMultipart: false,
     originalName: "getContentStateById",

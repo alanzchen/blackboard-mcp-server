@@ -77,21 +77,6 @@ export const RubricEvaluationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "RubricEvaluationsGetRubricEvaluationsRequest",
     isMultipart: false,
     originalName: "getRubricEvaluations",
@@ -166,21 +151,6 @@ export const RubricEvaluationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "RubricEvaluationsGetRubricEvaluations2Request",
     isMultipart: false,
     originalName: "getRubricEvaluations",
@@ -255,21 +225,6 @@ export const RubricEvaluationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "RubricEvaluationsGetRubricEvaluations3Request",
     isMultipart: false,
     originalName: "getRubricEvaluations",
@@ -308,37 +263,6 @@ export const RubricEvaluationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "evaluationEntity": {
-            "type": "object",
-            "description": "The evaluation entity which represents the content holding this rubric evaluation.",
-            "title": "blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationV1.EvaluationEntityTOPub",
-            "properties": {
-                "attemptId": {
-                    "type": "string"
-                },
-                "groupAttemptId": {
-                    "type": "string"
-                },
-                "questionAttemptId": {
-                    "type": "string"
-                }
-            }
-        },
-        "cells": {
-            "description": "List of the selected scores for this evaluation, each rubric cell evaluation should be related with a rubric definition cell and row.\n\nThe selected score could vary depending on the rubric type, as shown in examples. For example,\n\n- Numeric Rubrics, if selected score is 100, then the fraction would be numerator = 100 and denominator = 1.\n- Numeric Range Rubrics, selected score is the percentage of the max row value in 0 to 1 normalization, So if 80 is the max row points and selected score is 40, the fraction would be numerator = 50 and denominator = 100.\n- Percentage Rubrics, expects the values in 1 to 100 percent format, if selected percent is 40, the fraction would be numerator = 40 and denominator = 1.\n- Percentage Range Rubrics, expects the values in 1 to 100 percent format, if selected percent is 60, the fraction would be numerator = 60 and denominator = 1.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationCellV1>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "org.springframework.http.ResponseEntity<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationExpandV1>",
-    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardPluginRubricSpringRestPublicapiV1RubricEvaluationExpandV1"
-},
     requestType: "RubricEvaluationsCreateRubricEvaluationsRequest",
     isMultipart: false,
     originalName: "createRubricEvaluations",
@@ -389,12 +313,6 @@ export const RubricEvaluationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationExpand",
-    "typeName": "BlackboardPluginRubricSpringRestPublicapiV1RubricEvaluationExpand"
-},
     requestType: "RubricEvaluationsGetRubricEvaluationByIdRequest",
     isMultipart: false,
     originalName: "getRubricEvaluationById",
@@ -439,37 +357,6 @@ export const RubricEvaluationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "evaluationEntity": {
-            "type": "object",
-            "description": "The evaluation entity which represents the content holding this rubric evaluation.",
-            "title": "blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationV1.EvaluationEntityTOPub",
-            "properties": {
-                "attemptId": {
-                    "type": "string"
-                },
-                "groupAttemptId": {
-                    "type": "string"
-                },
-                "questionAttemptId": {
-                    "type": "string"
-                }
-            }
-        },
-        "cells": {
-            "description": "List of the selected scores for this evaluation, each rubric cell evaluation should be related with a rubric definition cell and row.\n\nThe selected score could vary depending on the rubric type, as shown in examples. For example,\n\n- Numeric Rubrics, if selected score is 100, then the fraction would be numerator = 100 and denominator = 1.\n- Numeric Range Rubrics, selected score is the percentage of the max row value in 0 to 1 normalization, So if 80 is the max row points and selected score is 40, the fraction would be numerator = 50 and denominator = 100.\n- Percentage Rubrics, expects the values in 1 to 100 percent format, if selected percent is 40, the fraction would be numerator = 40 and denominator = 1.\n- Percentage Range Rubrics, expects the values in 1 to 100 percent format, if selected percent is 60, the fraction would be numerator = 60 and denominator = 1.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationCellV1>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricEvaluationExpandV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginRubricSpringRestPublicapiV1RubricEvaluationExpandV1"
-},
     requestType: "RubricEvaluationsUpdateRubricEvaluationRequest",
     isMultipart: false,
     originalName: "updateRubricEvaluation",

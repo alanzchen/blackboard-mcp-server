@@ -77,12 +77,6 @@ export const RubricsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "RubricsGetRubricsRequest",
     isMultipart: false,
     originalName: "getRubrics",
@@ -109,48 +103,6 @@ export const RubricsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "Get the title for this rubric (Ex. 'Sample Rubric')"
-        },
-        "description": {
-            "type": "string",
-            "description": "Get the description for this rubric (Ex. 'A rubric for base evluation template')"
-        },
-        "rubricType": {
-            "type": "string",
-            "description": "Get the rubric type, alas Numeric or Percentage type. (Ex. 'Numeric', 'Percentage', 'Percentage Range', 'Numeric Range')\n\n\n| Type      | Description\n | --------- | --------- |\n| Numeric |  |\n| Nonnumeric |  |\n| NumericRange |  |\n| Percentage |  |\n| PercentageRange |  |\n",
-            "enum": [
-                "Numeric",
-                "Nonnumeric",
-                "NumericRange",
-                "Percentage",
-                "PercentageRange"
-            ]
-        },
-        "columns": {
-            "description": "Rubric Column Headers list.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricColumnV1>"
-        },
-        "rows": {
-            "description": "Rubric Row Criteria list.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricRowV1>"
-        },
-        "cells": {
-            "description": "Rubric Cells list.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricCellV1>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.rubric.spring.rest.publicapi.v1.ExtendedRubricDefinitionV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginRubricSpringRestPublicapiV1ExtendedRubricDefinitionV1"
-},
     requestType: "RubricsCreateRubricRequest",
     isMultipart: false,
     originalName: "createRubric",
@@ -189,12 +141,6 @@ export const RubricsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.rubric.spring.rest.publicapi.v1.ExtendedRubricDefinition",
-    "typeName": "BlackboardPluginRubricSpringRestPublicapiV1ExtendedRubricDefinition"
-},
     requestType: "RubricsGetRubricByIdRequest",
     isMultipart: false,
     originalName: "getRubricById",
@@ -227,8 +173,6 @@ export const RubricsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "RubricsDeleteRubricRequest",
     isMultipart: false,
     originalName: "deleteRubric",
@@ -261,48 +205,6 @@ export const RubricsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "Get the title for this rubric (Ex. 'Sample Rubric')"
-        },
-        "description": {
-            "type": "string",
-            "description": "Get the description for this rubric (Ex. 'A rubric for base evluation template')"
-        },
-        "rubricType": {
-            "type": "string",
-            "description": "Get the rubric type, alas Numeric or Percentage type. (Ex. 'Numeric', 'Percentage', 'Percentage Range', 'Numeric Range')\n\n\n| Type      | Description\n | --------- | --------- |\n| Numeric |  |\n| Nonnumeric |  |\n| NumericRange |  |\n| Percentage |  |\n| PercentageRange |  |\n",
-            "enum": [
-                "Numeric",
-                "Nonnumeric",
-                "NumericRange",
-                "Percentage",
-                "PercentageRange"
-            ]
-        },
-        "columns": {
-            "description": "Rubric Column Headers list.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricColumnV1>"
-        },
-        "rows": {
-            "description": "Rubric Row Criteria list.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricRowV1>"
-        },
-        "cells": {
-            "description": "Rubric Cells list.",
-            "$ref": "#/definitions/java.util.List<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricCellV1>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.rubric.spring.rest.publicapi.v1.ExtendedRubricDefinition",
-    "typeName": "BlackboardPluginRubricSpringRestPublicapiV1ExtendedRubricDefinition"
-},
     requestType: "RubricsUpdateRubricRequest",
     isMultipart: false,
     originalName: "updateRubric",

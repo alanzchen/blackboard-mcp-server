@@ -46,12 +46,6 @@ export const DataSourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "DataSourcesGetDataSourcesRequest",
     isMultipart: false,
     originalName: "getDataSources",
@@ -71,25 +65,6 @@ export const DataSourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "An externally-defined unique ID for the data source.\n\nFormerly known as 'batchUid'."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the data source."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.datasources.DataSourceV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1DatasourcesDataSourceV1"
-},
     requestType: "DataSourcesCreateDataSourceRequest",
     isMultipart: false,
     originalName: "createDataSource",
@@ -116,12 +91,6 @@ export const DataSourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.datasources.DataSource",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1DatasourcesDataSource"
-},
     requestType: "DataSourcesGetDataSourceRequest",
     isMultipart: false,
     originalName: "getDataSource",
@@ -148,8 +117,6 @@ export const DataSourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "DataSourcesDeleteDataSourceRequest",
     isMultipart: false,
     originalName: "deleteDataSource",
@@ -176,25 +143,6 @@ export const DataSourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "An externally-defined unique ID for the data source.\n\nFormerly known as 'batchUid'."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the data source."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.datasources.DataSource",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1DatasourcesDataSource"
-},
     requestType: "DataSourcesUpdateDataSourceRequest",
     isMultipart: false,
     originalName: "updateDataSource",

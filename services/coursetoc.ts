@@ -47,12 +47,6 @@ export const CourseTocMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseTocGetTocItemsRequest",
     isMultipart: false,
     originalName: "getTocItems",
@@ -85,25 +79,6 @@ export const CourseTocMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "allowGuests": {
-            "type": "boolean",
-            "description": "Whether or not Guests can view this ToC."
-        },
-        "allowObservers": {
-            "type": "boolean",
-            "description": "Whether or not Observers can view this ToC."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.courseToc.CourseToc",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1CourseTocCourseToc"
-},
     requestType: "CourseTocUpdateTocItemRequest",
     isMultipart: false,
     originalName: "updateTocItem",

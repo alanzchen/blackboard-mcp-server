@@ -40,12 +40,6 @@ export const PerformanceScaleMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "PerformanceScaleGetPerformanceScaleSettingsRequest",
     isMultipart: false,
     originalName: "getPerformanceScaleSettings",

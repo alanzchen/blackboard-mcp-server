@@ -58,12 +58,6 @@ export const RolesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "RolesGetCourseRolesRequest",
     isMultipart: false,
     originalName: "getCourseRoles",
@@ -90,12 +84,6 @@ export const RolesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.courseRoles.CourseRole",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1CourseRolesCourseRole"
-},
     requestType: "RolesGetCourseRoleRequest",
     isMultipart: false,
     originalName: "getCourseRole",
@@ -151,12 +139,6 @@ export const RolesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "RolesGetInstitutionRolesRequest",
     isMultipart: false,
     originalName: "getInstitutionRoles",
@@ -183,12 +165,6 @@ export const RolesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.portal.publicapi.v1.InstitutionRole",
-    "typeName": "BlackboardWebappsPortalPublicapiV1InstitutionRole"
-},
     requestType: "RolesGetInstitutionRoleRequest",
     isMultipart: false,
     originalName: "getInstitutionRole",
@@ -244,12 +220,6 @@ export const RolesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "RolesGetSystemRolesRequest",
     isMultipart: false,
     originalName: "getSystemRoles",
@@ -276,12 +246,6 @@ export const RolesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.systemRoles.SystemRole",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1SystemRolesSystemRole"
-},
     requestType: "RolesGetSystemRoleRequest",
     isMultipart: false,
     originalName: "getSystemRole",

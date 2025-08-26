@@ -40,12 +40,6 @@ export const CalendarMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CalendarGetCalendarsRequest",
     isMultipart: false,
     originalName: "getCalendars",
@@ -113,12 +107,6 @@ export const CalendarMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CalendarGetCalendarItemsRequest",
     isMultipart: false,
     originalName: "getCalendarItems",
@@ -138,94 +126,6 @@ export const CalendarMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "type": {
-            "type": "string",
-            "description": "The type of this Calendar Item.\n\n\n| Type      | Description\n | --------- | --------- |\n| Course |  |\n| GradebookColumn | Read only. |\n| Institution |  |\n| OfficeHours |  |\n| Personal |  |\n",
-            "enum": [
-                "Course",
-                "GradebookColumn",
-                "Institution",
-                "OfficeHours",
-                "Personal"
-            ]
-        },
-        "calendarId": {
-            "type": "string",
-            "description": "Calendar source identifier which indicates the calendar on which the calendar item was created. Examples of possible values : \"PERSONAL\", \"INSTITUTION\", and course id in the format of \"_3_1\"."
-        },
-        "title": {
-            "type": "string",
-            "description": "Title of the calendar item. Title length cannot exceed 255 characters."
-        },
-        "description": {
-            "type": "string",
-            "description": "Description of the calendar item."
-        },
-        "location": {
-            "type": "string",
-            "description": "Location of the calendar item and it cannot exceed 1024 characters."
-        },
-        "start": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Start date of the calendar item either in the past if the calendar item is for an event that's already started OR in the future if it's for an event to start in the future. This is always set and should occur before the end date."
-        },
-        "end": {
-            "type": "string",
-            "format": "date-time",
-            "description": "End date of the calendar item either in the past if the calendar item is for an event that's already end OR in the future if it's for an event to end in the future. This is always set and should occur after the start date."
-        },
-        "disableResizing": {
-            "type": "boolean",
-            "description": "Whether resizing of the calendar item should NOT be allowed."
-        },
-        "dynamicCalendarItemProps": {
-            "type": "object",
-            "description": "Extra calendar item properties if it is a GradebookColumn calendar item.",
-            "title": "blackboard.plugin.calendar.publicapi.v1.CalendarItemV1.DynamicCalendarItemPropsTOPub",
-            "readOnly": true,
-            "properties": {
-                "attemptable": {
-                    "type": "boolean",
-                    "description": "The dynamic calendar item can be attempted (can have attempts made against it) and the current user (in context) has permission/entitlement to grade attempts for the object represented by this calendar item."
-                },
-                "categoryId": {
-                    "type": "string",
-                    "description": "Returns the gradeableItem categoryId value .it is only set if the calendar event is dynamically created based on a single grade book column"
-                },
-                "dateRangeLimited": {
-                    "type": "boolean",
-                    "description": "The dynamic calendar item is only visible during a specific windows of time."
-                },
-                "eventType": {
-                    "type": "string",
-                    "description": "Returns a human readable string describing the type of calendar item represented (e.g. assignment, test, etc.)."
-                },
-                "gradable": {
-                    "type": "boolean",
-                    "description": "The dynamic calendar item can be graded and the current user (in context) has permission/entitlement to grade attempts for the object represented by this calendar item."
-                }
-            }
-        },
-        "recurrence": {
-            "description": "Recurring definition if the calendar item is a repeatable calendar item. This object must be defined for <code>OfficeHours</code> type calendar items.",
-            "$ref": "#/definitions/blackboard.plugin.calendar.publicapi.v1.CalendarItemRecurrence"
-        },
-        "ltiLaunchDeepLink": {
-            "description": "Learning Tools Interoperability (LTI) link definition if available. This object must be defined for <code>Course</code> type calendar item.",
-            "$ref": "#/definitions/blackboard.plugin.calendar.publicapi.v1.LTILaunchDeepLink"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.calendar.publicapi.v1.CalendarItemV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginCalendarPublicapiV1CalendarItemV1"
-},
     requestType: "CalendarCreateCalendarItemRequest",
     isMultipart: false,
     originalName: "createCalendarItem",
@@ -251,12 +151,6 @@ export const CalendarMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.calendar.publicapi.v1.CalendarItem",
-    "typeName": "BlackboardPluginCalendarPublicapiV1CalendarItem"
-},
     requestType: "CalendarGetCalendarItemRequest",
     isMultipart: false,
     originalName: "getCalendarItem",
@@ -282,8 +176,6 @@ export const CalendarMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CalendarDeleteCalendarItemRequest",
     isMultipart: false,
     originalName: "deleteCalendarItem",
@@ -309,8 +201,6 @@ export const CalendarMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CalendarUpdateCalendarItemRequest",
     isMultipart: false,
     originalName: "updateCalendarItem",

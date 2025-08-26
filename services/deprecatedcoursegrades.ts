@@ -53,12 +53,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "DeprecatedCourseGradesGetGradeColumnsRequest",
     isMultipart: false,
     originalName: "getGradeColumns",
@@ -85,129 +79,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "The externalId for this grade column"
-        },
-        "name": {
-            "type": "string",
-            "description": "The name of the grade column."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the grade column."
-        },
-        "externalGrade": {
-            "type": "boolean",
-            "description": "Whether this grade column is an external grade column."
-        },
-        "score": {
-            "type": "object",
-            "description": "Settings controlling the numerical scoring of this grade column.",
-            "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Score",
-            "properties": {
-                "possible": {
-                    "type": "number",
-                    "description": "The points possible for this grade column."
-                },
-                "decimalPlaces": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Decimal place precision used to display scores for this grade column.\n\n**Deprecated**: since 3200.10.0; no alternative exists since this field never fully functioned as described."
-                }
-            }
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling the availability/visibility of grade column data.",
-            "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether this grade column is available to students\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may view the grade column. |\n| No | Students may not view the grade column. |\n",
-                    "enum": [
-                        "Yes",
-                        "No"
-                    ]
-                }
-            }
-        },
-        "grading": {
-            "type": "object",
-            "description": "Settings controlling whether numerical and text grade values for this grade column are calculated, determined based on attempts, or manually entered.",
-            "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Grading",
-            "properties": {
-                "type": {
-                    "type": "string",
-                    "description": "The type of Grading settings for this Grade Column.\n\n\n| Type      | Description\n | --------- | --------- |\n| Attempts | Indicates score and grade values are determined based on user attempts |\n| Calculated | Indicates score and grade values are determined by applying a calculated formula. |\n| Manual | Indicates score and grade values are manually entered. |\n",
-                    "enum": [
-                        "Attempts",
-                        "Calculated",
-                        "Manual"
-                    ]
-                },
-                "due": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The date on which attempts are due for the grade column."
-                },
-                "attemptsAllowed": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Number of attempts allowed for the grade column."
-                },
-                "scoringModel": {
-                    "type": "string",
-                    "description": "The scoring model for the submitted grade column attempts.\n\n\n| Type      | Description\n | --------- | --------- |\n| Last |  |\n| Highest |  |\n| Lowest |  |\n| First |  |\n| Average |  |\n",
-                    "enum": [
-                        "Last",
-                        "Highest",
-                        "Lowest",
-                        "First",
-                        "Average"
-                    ]
-                },
-                "anonymousGrading": {
-                    "type": "object",
-                    "description": "Settings for anonymous grading",
-                    "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Grading.AnonymousGrading",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "description": "The type of AnonymousGrading settings for this Attempts based Grade Column.\n\n\n| Type      | Description\n | --------- | --------- |\n| None | Indicates anonymous grading is not enabled. |\n| AfterAllGraded | Indicates anonymized grades are released after all attempts have been graded. |\n| Date | Indicates anonymized grades are released after a specified release date. |\n",
-                            "enum": [
-                                "None",
-                                "AfterAllGraded",
-                                "Date"
-                            ]
-                        },
-                        "releaseAfter": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date after which grades are released from being anonymized, if AnonymousGrading type is 'Date'."
-                        }
-                    },
-                    "required": [
-                        "type"
-                    ]
-                }
-            },
-            "required": [
-                "anonymousGrading",
-                "type"
-            ]
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsGradebookPublicapiV1GradeColumnV1"
-},
     requestType: "DeprecatedCourseGradesCreateGradeColumnRequest",
     isMultipart: false,
     originalName: "createGradeColumn",
@@ -240,12 +111,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradeColumn",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1GradeColumn"
-},
     requestType: "DeprecatedCourseGradesGetGradeColumnRequest",
     isMultipart: false,
     originalName: "getGradeColumn",
@@ -271,8 +136,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "DeprecatedCourseGradesDeleteGradeColumnRequest",
     isMultipart: false,
     originalName: "deleteGradeColumn",
@@ -305,113 +168,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "The externalId for this grade column"
-        },
-        "name": {
-            "type": "string",
-            "description": "The name of the grade column."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the grade column."
-        },
-        "externalGrade": {
-            "type": "boolean",
-            "description": "Whether this grade column is an external grade column."
-        },
-        "score": {
-            "type": "object",
-            "description": "Settings controlling the numerical scoring of this grade column.",
-            "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Score",
-            "properties": {
-                "possible": {
-                    "type": "number",
-                    "description": "The points possible for this grade column."
-                },
-                "decimalPlaces": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Decimal place precision used to display scores for this grade column.\n\n**Deprecated**: since 3200.10.0; no alternative exists since this field never fully functioned as described."
-                }
-            }
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling the availability/visibility of grade column data.",
-            "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether this grade column is available to students\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may view the grade column. |\n| No | Students may not view the grade column. |\n",
-                    "enum": [
-                        "Yes",
-                        "No"
-                    ]
-                }
-            }
-        },
-        "grading": {
-            "type": "object",
-            "description": "Settings controlling whether numerical and text grade values for this grade column are calculated, determined based on attempts, or manually entered.",
-            "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Grading",
-            "properties": {
-                "due": {
-                    "type": "string",
-                    "format": "date-time",
-                    "description": "The date on which attempts are due for the grade column."
-                },
-                "attemptsAllowed": {
-                    "type": "integer",
-                    "format": "int32",
-                    "description": "Number of attempts allowed for the grade column."
-                },
-                "scoringModel": {
-                    "type": "string",
-                    "description": "The scoring model for the submitted grade column attempts.\n\n\n| Type      | Description\n | --------- | --------- |\n| Last |  |\n| Highest |  |\n| Lowest |  |\n| First |  |\n| Average |  |\n",
-                    "enum": [
-                        "Last",
-                        "Highest",
-                        "Lowest",
-                        "First",
-                        "Average"
-                    ]
-                },
-                "anonymousGrading": {
-                    "type": "object",
-                    "description": "Settings for anonymous grading",
-                    "title": "blackboard.webapps.gradebook.publicapi.v1.GradeColumnV1.Grading.AnonymousGrading",
-                    "properties": {
-                        "type": {
-                            "type": "string",
-                            "description": "The type of AnonymousGrading settings for this Attempts based Grade Column.\n\n\n| Type      | Description\n | --------- | --------- |\n| None | Indicates anonymous grading is not enabled. |\n| AfterAllGraded | Indicates anonymized grades are released after all attempts have been graded. |\n| Date | Indicates anonymized grades are released after a specified release date. |\n",
-                            "enum": [
-                                "None",
-                                "AfterAllGraded",
-                                "Date"
-                            ]
-                        },
-                        "releaseAfter": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date after which grades are released from being anonymized, if AnonymousGrading type is 'Date'."
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradeColumn",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1GradeColumn"
-},
     requestType: "DeprecatedCourseGradesUpdateGradeColumnRequest",
     isMultipart: false,
     originalName: "updateGradeColumn",
@@ -510,12 +266,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "DeprecatedCourseGradesGetColumnAttemptsRequest",
     isMultipart: false,
     originalName: "getColumnAttempts",
@@ -554,12 +304,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.Attempt",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1Attempt"
-},
     requestType: "DeprecatedCourseGradesGetColumnAttemptRequest",
     isMultipart: false,
     originalName: "getColumnAttempt",
@@ -604,8 +348,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "DeprecatedCourseGradesGetColumnGradesRequest",
     isMultipart: false,
     originalName: "getColumnGrades",
@@ -637,8 +379,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "DeprecatedCourseGradesGetColumnGradeRequest",
     isMultipart: false,
     originalName: "getColumnGrade",
@@ -677,37 +417,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "text": {
-            "type": "string",
-            "description": "The text representation of this grade."
-        },
-        "score": {
-            "type": "number",
-            "description": "The score associated with this grade."
-        },
-        "notes": {
-            "type": "string",
-            "description": "The instructor notes associated with this grade. This notes field is used for grades on manual grade columns.   That is, when column.grading.type = Manual.  It is also used when column.grading.type = Attempts and the grade has been manually overridden."
-        },
-        "feedback": {
-            "type": "string",
-            "description": "The instructor feedback associated with this grade.  This feedback is used for grades on manual grade columns.   That is, when column.grading.type = Manual.  It is also used when column.grading.type = Attempts and the grade has been manually overridden."
-        },
-        "exempt": {
-            "type": "boolean",
-            "description": "Whether the score associated with this grade is ignored when computing the course grade."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.Grade",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1Grade"
-},
     requestType: "DeprecatedCourseGradesUpdateColumnGradeRequest",
     isMultipart: false,
     originalName: "updateColumnGrade",
@@ -758,12 +467,6 @@ export const DeprecatedCourseGradesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "DeprecatedCourseGradesGetUserGradesRequest",
     isMultipart: false,
     originalName: "getUserGrades",

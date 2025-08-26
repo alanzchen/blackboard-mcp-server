@@ -53,12 +53,6 @@ export const RubricAssociationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "RubricAssociationsGetRubricAssociationsByColumnIdRequest",
     isMultipart: false,
     originalName: "getRubricAssociationsByColumnId",
@@ -115,21 +109,6 @@ export const RubricAssociationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "RubricAssociationsGetRubricAssociationsRequest",
     isMultipart: false,
     originalName: "getRubricAssociations",
@@ -162,52 +141,6 @@ export const RubricAssociationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "id": {
-            "type": "string",
-            "description": "Get the Id from this association (Ex. '_2_1')"
-        },
-        "rubricId": {
-            "type": "string",
-            "description": "Get the Id from the rubric which holds this association (Ex. '_3_1')"
-        },
-        "associationEntity": {
-            "type": "object",
-            "description": "Get the entity which represents the content holding this association. (Ex. '{   \"gradebookColumnId\": '_3_1' }')",
-            "title": "blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricAssociationV1.AssociationEntityTOPub",
-            "properties": {
-                "gradebookColumnId": {
-                    "type": "string"
-                },
-                "questionId": {
-                    "type": "string"
-                }
-            }
-        },
-        "usedForGrading": {
-            "type": "boolean",
-            "description": "Tells if rubric is being used for grading content. (Ex. true)"
-        },
-        "rubricVisibility": {
-            "type": "string",
-            "description": "States rubric's information and evalution visibility for students. (Ex. \"VisibleWithScores\") Possible values are:\n\n- Disabled  - VisibleWithScores  - VisibleWithoutScores  - VisibleAfterGrading \n\n\n| Type      | Description\n | --------- | --------- |\n| Disabled | Disabled: Implies that neither the rubric nor the rubric evaluation are visible to students. Default value for student visibility. |\n| VisibleWithScores | VisibleWithScores: Implies that the rubric and the rubric evaluation are always visible to students. |\n| VisibleWithoutScores | VisibleWithoutScores: Implies that the rubric is visible before and after grading. The rubric evaluation are not visible to students. |\n| VisibleAfterGrading | VisibleAfterGrading: Implies that the rubric is only visible after grading. The rubric evaluation is visible once is available. |\n",
-            "enum": [
-                "Disabled",
-                "VisibleWithScores",
-                "VisibleWithoutScores",
-                "VisibleAfterGrading"
-            ]
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricAssociationV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginRubricSpringRestPublicapiV1RubricAssociationV1"
-},
     requestType: "RubricAssociationsCreateRubricAssociationRequest",
     isMultipart: false,
     originalName: "createRubricAssociation",
@@ -246,12 +179,6 @@ export const RubricAssociationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricAssociation",
-    "typeName": "BlackboardPluginRubricSpringRestPublicapiV1RubricAssociation"
-},
     requestType: "RubricAssociationsGetRubricAssociationByIdRequest",
     isMultipart: false,
     originalName: "getRubricAssociationById",
@@ -296,8 +223,6 @@ export const RubricAssociationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "RubricAssociationsDeleteRubricAssociationRequest",
     isMultipart: false,
     originalName: "deleteRubricAssociation",
@@ -336,52 +261,6 @@ export const RubricAssociationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "id": {
-            "type": "string",
-            "description": "Get the Id from this association (Ex. '_2_1')"
-        },
-        "rubricId": {
-            "type": "string",
-            "description": "Get the Id from the rubric which holds this association (Ex. '_3_1')"
-        },
-        "associationEntity": {
-            "type": "object",
-            "description": "Get the entity which represents the content holding this association. (Ex. '{   \"gradebookColumnId\": '_3_1' }')",
-            "title": "blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricAssociationV1.AssociationEntityTOPub",
-            "properties": {
-                "gradebookColumnId": {
-                    "type": "string"
-                },
-                "questionId": {
-                    "type": "string"
-                }
-            }
-        },
-        "usedForGrading": {
-            "type": "boolean",
-            "description": "Tells if rubric is being used for grading content. (Ex. true)"
-        },
-        "rubricVisibility": {
-            "type": "string",
-            "description": "States rubric's information and evalution visibility for students. (Ex. \"VisibleWithScores\") Possible values are:\n\n- Disabled  - VisibleWithScores  - VisibleWithoutScores  - VisibleAfterGrading \n\n\n| Type      | Description\n | --------- | --------- |\n| Disabled | Disabled: Implies that neither the rubric nor the rubric evaluation are visible to students. Default value for student visibility. |\n| VisibleWithScores | VisibleWithScores: Implies that the rubric and the rubric evaluation are always visible to students. |\n| VisibleWithoutScores | VisibleWithoutScores: Implies that the rubric is visible before and after grading. The rubric evaluation are not visible to students. |\n| VisibleAfterGrading | VisibleAfterGrading: Implies that the rubric is only visible after grading. The rubric evaluation is visible once is available. |\n",
-            "enum": [
-                "Disabled",
-                "VisibleWithScores",
-                "VisibleWithoutScores",
-                "VisibleAfterGrading"
-            ]
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.rubric.spring.rest.publicapi.v1.RubricAssociationV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginRubricSpringRestPublicapiV1RubricAssociationV1"
-},
     requestType: "RubricAssociationsUpdateRubricAssociationRequest",
     isMultipart: false,
     originalName: "updateRubricAssociation",

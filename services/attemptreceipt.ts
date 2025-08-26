@@ -29,12 +29,6 @@ export const AttemptReceiptMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.AttemptReceipt",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1AttemptReceipt"
-},
     requestType: "AttemptReceiptGetAttemptReceiptRequest",
     isMultipart: false,
     originalName: "getAttemptReceipt",
@@ -67,12 +61,6 @@ export const AttemptReceiptMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.AttemptReceipt",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1AttemptReceipt"
-},
     requestType: "AttemptReceiptGetAttemptReceipt2Request",
     isMultipart: false,
     originalName: "getAttemptReceipt",

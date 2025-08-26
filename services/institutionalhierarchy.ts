@@ -53,12 +53,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetNodesForCourseRequest",
     isMultipart: false,
     originalName: "getNodesForCourse",
@@ -102,12 +96,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetNodesRequest",
     isMultipart: false,
     originalName: "getNodes",
@@ -127,36 +115,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "Node unique identifier",
-            "maxLength": 256
-        },
-        "title": {
-            "type": "string",
-            "description": "Node display name",
-            "maxLength": 256
-        },
-        "description": {
-            "type": "string",
-            "description": "Node description",
-            "maxLength": 1000
-        },
-        "parentId": {
-            "type": "string",
-            "description": "The ID of the Node parent in the database"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "org.springframework.http.ResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.NodeV1>",
-    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyNodeV1"
-},
     requestType: "InstitutionalHierarchyCreateNodeRequest",
     isMultipart: false,
     originalName: "createNode",
@@ -183,12 +141,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.Node",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyNode"
-},
     requestType: "InstitutionalHierarchyGetNodeRequest",
     isMultipart: false,
     originalName: "getNode",
@@ -208,8 +160,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "InstitutionalHierarchyDeleteNodeRequest",
     isMultipart: false,
     originalName: "deleteNode",
@@ -236,36 +186,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "Node unique identifier",
-            "maxLength": 256
-        },
-        "title": {
-            "type": "string",
-            "description": "Node display name",
-            "maxLength": 256
-        },
-        "description": {
-            "type": "string",
-            "description": "Node description",
-            "maxLength": 1000
-        },
-        "parentId": {
-            "type": "string",
-            "description": "The ID of the Node parent in the database"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "org.springframework.http.ResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.NodeV1>",
-    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyNodeV1"
-},
     requestType: "InstitutionalHierarchyUpdateNodeRequest",
     isMultipart: false,
     originalName: "updateNode",
@@ -316,12 +236,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetNodeChildrenRequest",
     isMultipart: false,
     originalName: "getNodeChildren",
@@ -348,36 +262,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "externalId": {
-            "type": "string",
-            "description": "Node unique identifier",
-            "maxLength": 256
-        },
-        "title": {
-            "type": "string",
-            "description": "Node display name",
-            "maxLength": 256
-        },
-        "description": {
-            "type": "string",
-            "description": "Node description",
-            "maxLength": 1000
-        },
-        "parentId": {
-            "type": "string",
-            "description": "The ID of the Node parent in the database"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "org.springframework.http.ResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.NodeV1>",
-    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyNodeV1"
-},
     requestType: "InstitutionalHierarchyCreateChildNodeRequest",
     isMultipart: false,
     originalName: "createChildNode",
@@ -434,12 +318,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetNodeCourseAssociationsRequest",
     isMultipart: false,
     originalName: "getNodeCourseAssociations",
@@ -472,21 +350,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "isPrimary": {
-            "type": "boolean",
-            "description": "Whether or not this association represents the primary node association of the course"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.HierarchyNodeCourseV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyHierarchyNodeCourseV1"
-},
     requestType: "InstitutionalHierarchyCreateNodeCourseAssociationRequest",
     isMultipart: false,
     originalName: "createNodeCourseAssociation",
@@ -512,8 +375,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "InstitutionalHierarchyDeleteNodeCourseAssociationRequest",
     isMultipart: false,
     originalName: "deleteNodeCourseAssociation",
@@ -546,21 +407,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "isPrimary": {
-            "type": "boolean",
-            "description": "Whether or not this association represents the primary node association of the course"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.HierarchyNodeCourse",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyHierarchyNodeCourse"
-},
     requestType: "InstitutionalHierarchyUpdateNodeCourseAssociationRequest",
     isMultipart: false,
     originalName: "updateNodeCourseAssociation",
@@ -611,12 +457,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetToolsRequest",
     isMultipart: false,
     originalName: "getTools",
@@ -661,29 +501,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "toolSettings": {
-            "description": "General Tool Settings.",
-            "$ref": "#/definitions/blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.SettingsAttribute"
-        },
-        "guestSettings": {
-            "description": "Tool Settings for a guest user.",
-            "$ref": "#/definitions/blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.SettingsAttribute"
-        },
-        "observerSettings": {
-            "description": "Tool Settings for an observer user.",
-            "$ref": "#/definitions/blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.SettingsAttribute"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.InstitutionalHierarchyToolV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyInstitutionalHierarchyToolV1"
-},
     requestType: "InstitutionalHierarchyPatchToolRequest",
     isMultipart: false,
     originalName: "patchTool",
@@ -734,12 +551,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetNodeUserAssociationsRequest",
     isMultipart: false,
     originalName: "getNodeUserAssociations",
@@ -772,12 +583,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.HierarchyNodeUserV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyHierarchyNodeUserV1"
-},
     requestType: "InstitutionalHierarchyCreateNodeUserAssociationRequest",
     isMultipart: false,
     originalName: "createNodeUserAssociation",
@@ -803,8 +608,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "InstitutionalHierarchyDeleteNodeUserAssociationRequest",
     isMultipart: false,
     originalName: "deleteNodeUserAssociation",
@@ -855,12 +658,6 @@ export const InstitutionalHierarchyMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyGetNodesForUserRequest",
     isMultipart: false,
     originalName: "getNodesForUser",

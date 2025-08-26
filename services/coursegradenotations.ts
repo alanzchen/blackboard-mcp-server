@@ -47,12 +47,6 @@ export const CourseGradeNotationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseGradeNotationsGetGradeNotationsRequest",
     isMultipart: false,
     originalName: "getGradeNotations",
@@ -79,25 +73,6 @@ export const CourseGradeNotationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "code": {
-            "type": "string",
-            "description": "The performance code associated with the grade notation."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the grade notation."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.gradebook.publicapi.v1.GradeNotationV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsGradebookPublicapiV1GradeNotationV1"
-},
     requestType: "CourseGradeNotationsCreateGradeNotationRequest",
     isMultipart: false,
     originalName: "createGradeNotation",
@@ -130,12 +105,6 @@ export const CourseGradeNotationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradeNotation",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1GradeNotation"
-},
     requestType: "CourseGradeNotationsGetGradeNotationRequest",
     isMultipart: false,
     originalName: "getGradeNotation",
@@ -161,8 +130,6 @@ export const CourseGradeNotationsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGradeNotationsDeleteGradeNotationRequest",
     isMultipart: false,
     originalName: "deleteGradeNotation",
@@ -195,25 +162,6 @@ export const CourseGradeNotationsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "code": {
-            "type": "string",
-            "description": "The performance code associated with the grade notation."
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the grade notation."
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradeNotation",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1GradeNotation"
-},
     requestType: "CourseGradeNotationsUpdateGradeNotationRequest",
     isMultipart: false,
     originalName: "updateGradeNotation",

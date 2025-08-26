@@ -59,12 +59,6 @@ export const InstitutionalHierarchyAdministratorsMethods: { [key: string]: ApiMe
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "InstitutionalHierarchyAdministratorsGetNodeAdminsRequest",
     isMultipart: false,
     originalName: "getNodeAdmins",
@@ -103,12 +97,6 @@ export const InstitutionalHierarchyAdministratorsMethods: { [key: string]: ApiMe
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.NodeAdmin",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyNodeAdmin"
-},
     requestType: "InstitutionalHierarchyAdministratorsGetNodeAdminRequest",
     isMultipart: false,
     originalName: "getNodeAdmin",
@@ -141,21 +129,6 @@ export const InstitutionalHierarchyAdministratorsMethods: { [key: string]: ApiMe
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "nodeRoles": {
-            "description": "List of roles the Admin User has within the Node.",
-            "$ref": "#/definitions/java.util.List<java.lang.String>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.institutionalhierarchy.NodeAdminV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1InstitutionalhierarchyNodeAdminV1"
-},
     requestType: "InstitutionalHierarchyAdministratorsSetNodeAdminAssociationRequest",
     isMultipart: false,
     originalName: "setNodeAdminAssociation",
@@ -181,8 +154,6 @@ export const InstitutionalHierarchyAdministratorsMethods: { [key: string]: ApiMe
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "InstitutionalHierarchyAdministratorsDeleteNodeAdminRequest",
     isMultipart: false,
     originalName: "deleteNodeAdmin",

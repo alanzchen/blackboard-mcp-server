@@ -40,12 +40,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "LtiGetDomainConfigsRequest",
     isMultipart: false,
     originalName: "getDomainConfigs",
@@ -58,93 +52,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
     path: "/learn/api/public/v1/lti/domains",
     pathParams: [],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "primaryDomain": {
-            "type": "string",
-            "description": "The primary domain name associated with this configuration."
-        },
-        "clientId": {
-            "type": "string",
-            "description": "The client id associated with this configuration. Only applicable for LTI versions 1.3+, excluding 2.0\n\n**Since**: 3600.0.0"
-        },
-        "key": {
-            "type": "string"
-        },
-        "secret": {
-            "type": "string"
-        },
-        "status": {
-            "type": "string",
-            "description": "Enum that indicates if the set of domains associated with this config can or cannot be linked to.\n\n\n| Type      | Description\n | --------- | --------- |\n| Approved |  |\n| Excluded |  |\n| NeedsApproval |   **Since**: 3300.9.0 |\n",
-            "enum": [
-                "Approved",
-                "Excluded",
-                "NeedsApproval"
-            ]
-        },
-        "sendUserDataType": {
-            "type": "string",
-            "description": "Enum indicating when user data can be sent to the LTI tool provider.\n\n\n| Type      | Description\n | --------- | --------- |\n| Never |  |\n| Sslonly |  |\n| Always |   **Since**: 3300.9.0 |\n",
-            "enum": [
-                "Never",
-                "Sslonly",
-                "Always"
-            ]
-        },
-        "sendRole": {
-            "type": "boolean",
-            "description": "Whether the user's role can be sent to the LTI tool provider."
-        },
-        "sendName": {
-            "type": "boolean",
-            "description": "Whether the user's name can be sent to the LTI tool provider."
-        },
-        "sendEmail": {
-            "type": "boolean",
-            "description": "Whether the user's email address can be sent to the LTI tool provider."
-        },
-        "useSplashScreen": {
-            "type": "boolean",
-            "description": "Whether a splash screen is shown before launching the LTI link.\n\nCannot be set to true if allowMembershipService is true."
-        },
-        "allowMembershipService": {
-            "type": "boolean",
-            "description": "Whether the Tool is allowed to call the LTI Names and Roles service and get the course memberships."
-        },
-        "allowGradesService": {
-            "type": "boolean",
-            "description": "Whether the Tool is allowed to call the LTI Assignment and Grades service and manage line items and grades.\n\n**Since**: 3600.0.0"
-        },
-        "publicKey": {
-            "type": "string",
-            "description": "The public key of the tool, if specified. It is optional and can be null\n\n**Since**: 3800.17.0"
-        },
-        "jwksUrl": {
-            "type": "string",
-            "description": "The JWKS URL of the tool, if specified. It is optional and can be null\n\n**Since**: 3800.17.0"
-        },
-        "customParameters": {
-            "description": "The custom parameters for the given domain.",
-            "$ref": "#/definitions/java.util.Map<java.lang.String,java.lang.String>"
-        },
-        "name": {
-            "type": "string",
-            "description": "The name of the domain configuration\n\n**Since**: 3900.23.0"
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the domain configuration\n\n**Since**: 3900.23.0"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.lti.LTIDomainConfigV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1LtiLTIDomainConfigV1"
-},
     requestType: "LtiCreateDomainConfigRequest",
     isMultipart: false,
     originalName: "createDomainConfig",
@@ -171,12 +78,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.lti.LTIDomainConfig",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1LtiLTIDomainConfig"
-},
     requestType: "LtiGetDomainConfigRequest",
     isMultipart: false,
     originalName: "getDomainConfig",
@@ -203,8 +104,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "LtiDeleteDomainConfigRequest",
     isMultipart: false,
     originalName: "deleteDomainConfig",
@@ -231,93 +130,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "primaryDomain": {
-            "type": "string",
-            "description": "The primary domain name associated with this configuration."
-        },
-        "clientId": {
-            "type": "string",
-            "description": "The client id associated with this configuration. Only applicable for LTI versions 1.3+, excluding 2.0\n\n**Since**: 3600.0.0"
-        },
-        "key": {
-            "type": "string"
-        },
-        "secret": {
-            "type": "string"
-        },
-        "status": {
-            "type": "string",
-            "description": "Enum that indicates if the set of domains associated with this config can or cannot be linked to.\n\n\n| Type      | Description\n | --------- | --------- |\n| Approved |  |\n| Excluded |  |\n| NeedsApproval |   **Since**: 3300.9.0 |\n",
-            "enum": [
-                "Approved",
-                "Excluded",
-                "NeedsApproval"
-            ]
-        },
-        "sendUserDataType": {
-            "type": "string",
-            "description": "Enum indicating when user data can be sent to the LTI tool provider.\n\n\n| Type      | Description\n | --------- | --------- |\n| Never |  |\n| Sslonly |  |\n| Always |   **Since**: 3300.9.0 |\n",
-            "enum": [
-                "Never",
-                "Sslonly",
-                "Always"
-            ]
-        },
-        "sendRole": {
-            "type": "boolean",
-            "description": "Whether the user's role can be sent to the LTI tool provider."
-        },
-        "sendName": {
-            "type": "boolean",
-            "description": "Whether the user's name can be sent to the LTI tool provider."
-        },
-        "sendEmail": {
-            "type": "boolean",
-            "description": "Whether the user's email address can be sent to the LTI tool provider."
-        },
-        "useSplashScreen": {
-            "type": "boolean",
-            "description": "Whether a splash screen is shown before launching the LTI link.\n\nCannot be set to true if allowMembershipService is true."
-        },
-        "allowMembershipService": {
-            "type": "boolean",
-            "description": "Whether the Tool is allowed to call the LTI Names and Roles service and get the course memberships."
-        },
-        "allowGradesService": {
-            "type": "boolean",
-            "description": "Whether the Tool is allowed to call the LTI Assignment and Grades service and manage line items and grades.\n\n**Since**: 3600.0.0"
-        },
-        "publicKey": {
-            "type": "string",
-            "description": "The public key of the tool, if specified. It is optional and can be null\n\n**Since**: 3800.17.0"
-        },
-        "jwksUrl": {
-            "type": "string",
-            "description": "The JWKS URL of the tool, if specified. It is optional and can be null\n\n**Since**: 3800.17.0"
-        },
-        "customParameters": {
-            "description": "The custom parameters for the given domain.",
-            "$ref": "#/definitions/java.util.Map<java.lang.String,java.lang.String>"
-        },
-        "name": {
-            "type": "string",
-            "description": "The name of the domain configuration\n\n**Since**: 3900.23.0"
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the domain configuration\n\n**Since**: 3900.23.0"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.lti.LTIDomainConfig",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1LtiLTIDomainConfig"
-},
     requestType: "LtiUpdateDomainConfigRequest",
     isMultipart: false,
     originalName: "updateDomainConfig",
@@ -403,12 +215,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "LtiGetPlacementsRequest",
     isMultipart: false,
     originalName: "getPlacements",
@@ -421,106 +227,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
     path: "/learn/api/public/v1/lti/placements",
     pathParams: [],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "The name of the placement. Not required to be unique. Maximum length of 50 characters, BAD_REQUEST error with message is returned if greater than 50 characters.",
-            "maxLength": 50
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the placement. Not required to be unique. Maximum length is 1000 characters, BAD_REQUEST error with message is returned if greater than 1000 characters.",
-            "maxLength": 1000
-        },
-        "iconUrl": {
-            "type": "string",
-            "description": "The URL of the icon for this placement, if any. Not required to be unique, must be a complete and valid URL. Maximum length is 255 characters, BAD_REQUEST error with message is returned if greater than 255 characters or incomplete URL.",
-            "maxLength": 255
-        },
-        "handle": {
-            "type": "string",
-            "description": "The handle that uniquely identifies this placement. Required to be unique. Maximum length is 32 characters, BAD_REQUEST error with message is returned if greater than 32 characters.",
-            "maxLength": 32
-        },
-        "type": {
-            "type": "string",
-            "description": "The type of placement.\n\n\n| Type      | Description\n | --------- | --------- |\n| Application | Application or Student Tool Placement |\n| ContentHandler | Content Type placement |\n| ContentItemMessage | Content-item Message placement (see IMSGlobal spec)  **Since**: 3300.5.0 |\n| System | System-level Tools |\n| Administrator | Administrator-level Tools  **Since**: 3400.1.0 |\n| UltraUI | Ultra-UI Extensions  **Since**: 3700.6.0 |\n| BaseNavigation | Base Navigation |\n| CourseNavigation | Course Navigation |\n| Proctoring | Proctoring  **Since**: 3900.10.0 |\n| CloudDocument | Cloud Document Type Placement  **Since**: 3900.34.0 |\n| AssetProcessor | Asset Processor Type Placement |\n| OpenBadgeProvider | OpenBadge Provider Type Placement |\n| Eulalaunch | EULA Launch Type Placement |\n",
-            "enum": [
-                "Application",
-                "ContentHandler",
-                "ContentItemMessage",
-                "System",
-                "Administrator",
-                "UltraUI",
-                "BaseNavigation",
-                "CourseNavigation",
-                "Proctoring",
-                "CloudDocument",
-                "AssetProcessor",
-                "OpenBadgeProvider",
-                "Eulalaunch"
-            ]
-        },
-        "url": {
-            "type": "string",
-            "description": "The URL of the tool provider. Not required to be unique, must be a complete and valid URL. Maximum length is 1024 characters, BAD_REQUEST error with message is returned if greater than 1024 characters or incomplete URL.",
-            "maxLength": 1024
-        },
-        "key": {
-            "type": "string"
-        },
-        "secret": {
-            "type": "string"
-        },
-        "authorId": {
-            "type": "string",
-            "description": "Id of the creator of the placement\n\n**Deprecated**: since 3900.0 not used"
-        },
-        "instructorCreated": {
-            "type": "boolean",
-            "description": "Whether an instructor created the placement or not (otherwise admin)\n\n**Deprecated**: since 3900.0 not used"
-        },
-        "allowStudents": {
-            "type": "boolean",
-            "description": "Whether the course tool is visible by students, or only to non-students (e.g. instructors). Defaults to true, allowing students to see the tool."
-        },
-        "allowGrading": {
-            "type": "boolean",
-            "description": "Whether this placement can accept grades from the tool provider and a grade column can be created for it. This only applies to {@link Type#ContentHandler} types. All others don't support grading and will be set to false."
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the placement.",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.lti.LTIPlacementV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the placement is available within the system.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n",
-                    "enum": [
-                        "Yes",
-                        "No"
-                    ]
-                }
-            }
-        },
-        "launchInNewWindow": {
-            "type": "boolean",
-            "description": "Whether this placement link should be opened in a new window or not."
-        },
-        "customParameters": {
-            "description": "Custom launch parameters for the tool.",
-            "$ref": "#/definitions/java.util.Map<java.lang.String,java.lang.String>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.lti.LTIPlacementV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1LtiLTIPlacementV1"
-},
     requestType: "LtiCreatePlacementRequest",
     isMultipart: false,
     originalName: "createPlacement",
@@ -547,12 +253,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.lti.LTIPlacement",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1LtiLTIPlacement"
-},
     requestType: "LtiGetPlacementRequest",
     isMultipart: false,
     originalName: "getPlacement",
@@ -579,8 +279,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "LtiDeletePlacementRequest",
     isMultipart: false,
     originalName: "deletePlacement",
@@ -607,82 +305,6 @@ export const LtiMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "The name of the placement. Not required to be unique. Maximum length of 50 characters, BAD_REQUEST error with message is returned if greater than 50 characters.",
-            "maxLength": 50
-        },
-        "description": {
-            "type": "string",
-            "description": "The description of the placement. Not required to be unique. Maximum length is 1000 characters, BAD_REQUEST error with message is returned if greater than 1000 characters.",
-            "maxLength": 1000
-        },
-        "iconUrl": {
-            "type": "string",
-            "description": "The URL of the icon for this placement, if any. Not required to be unique, must be a complete and valid URL. Maximum length is 255 characters, BAD_REQUEST error with message is returned if greater than 255 characters or incomplete URL.",
-            "maxLength": 255
-        },
-        "url": {
-            "type": "string",
-            "description": "The URL of the tool provider. Not required to be unique, must be a complete and valid URL. Maximum length is 1024 characters, BAD_REQUEST error with message is returned if greater than 1024 characters or incomplete URL.",
-            "maxLength": 1024
-        },
-        "key": {
-            "type": "string"
-        },
-        "secret": {
-            "type": "string"
-        },
-        "authorId": {
-            "type": "string",
-            "description": "Id of the creator of the placement\n\n**Deprecated**: since 3900.0 not used"
-        },
-        "instructorCreated": {
-            "type": "boolean",
-            "description": "Whether an instructor created the placement or not (otherwise admin)\n\n**Deprecated**: since 3900.0 not used"
-        },
-        "allowStudents": {
-            "type": "boolean",
-            "description": "Whether the course tool is visible by students, or only to non-students (e.g. instructors). Defaults to true, allowing students to see the tool."
-        },
-        "allowGrading": {
-            "type": "boolean",
-            "description": "Whether this placement can accept grades from the tool provider and a grade column can be created for it. This only applies to {@link Type#ContentHandler} types. All others don't support grading and will be set to false."
-        },
-        "availability": {
-            "type": "object",
-            "description": "Settings controlling availability of the placement.",
-            "title": "blackboard.webapps.blackboard.publicapi.v1.lti.LTIPlacementV1.Availability",
-            "properties": {
-                "available": {
-                    "type": "string",
-                    "description": "Whether the placement is available within the system.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n",
-                    "enum": [
-                        "Yes",
-                        "No"
-                    ]
-                }
-            }
-        },
-        "launchInNewWindow": {
-            "type": "boolean",
-            "description": "Whether this placement link should be opened in a new window or not."
-        },
-        "customParameters": {
-            "description": "Custom launch parameters for the tool.",
-            "$ref": "#/definitions/java.util.Map<java.lang.String,java.lang.String>"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.lti.LTIPlacement",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1LtiLTIPlacement"
-},
     requestType: "LtiUpdatePlacementRequest",
     isMultipart: false,
     originalName: "updatePlacement",

@@ -53,12 +53,6 @@ export const SISLogsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "SISLogsGetSisLogsByDataSetUidRequest",
     isMultipart: false,
     originalName: "getSisLogsByDataSetUid",

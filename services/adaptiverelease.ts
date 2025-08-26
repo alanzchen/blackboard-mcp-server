@@ -59,21 +59,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "AdaptiveReleaseGetRulesRequest",
     isMultipart: false,
     originalName: "getRules",
@@ -112,22 +97,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "Title given to the adaptive release rule",
-            "maxLength": 100
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseRuleV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseRuleV1"
-},
     requestType: "AdaptiveReleaseCreateRuleRequest",
     isMultipart: false,
     originalName: "createRule",
@@ -166,12 +135,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseRule",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseRule"
-},
     requestType: "AdaptiveReleaseGetRuleRequest",
     isMultipart: false,
     originalName: "getRule",
@@ -204,8 +167,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "AdaptiveReleaseDeleteRuleRequest",
     isMultipart: false,
     originalName: "deleteRule",
@@ -244,22 +205,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "title": {
-            "type": "string",
-            "description": "Title given to the adaptive release rule",
-            "maxLength": 100
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseRule",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseRule"
-},
     requestType: "AdaptiveReleaseUpdateRuleRequest",
     isMultipart: false,
     originalName: "updateRule",
@@ -316,21 +261,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {
-        "statusCode": {
-            "readOnly": true,
-            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
-        },
-        "statusCodeValue": {
-            "readOnly": true,
-            "$ref": "#/definitions/int"
-        }
-    },
-    "description": ""
-},
     requestType: "AdaptiveReleaseGetCriteriaRequest",
     isMultipart: false,
     originalName: "getCriteria",
@@ -362,16 +292,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseRuleCriteriaV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseRuleCriteriaV1"
-},
     requestType: "AdaptiveReleaseCreateAdaptiveReleaseRuleCriteriaRequest",
     isMultipart: false,
     originalName: "createAdaptiveReleaseRuleCriteria",
@@ -409,12 +329,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseRuleCriteria",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseRuleCriteria"
-},
     requestType: "AdaptiveReleaseGetAdaptiveReleaseRuleCriterionRequest",
     isMultipart: false,
     originalName: "getAdaptiveReleaseRuleCriterion",
@@ -452,8 +366,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "AdaptiveReleaseDeleteAdaptiveReleaseRuleCriterionRequest",
     isMultipart: false,
     originalName: "deleteAdaptiveReleaseRuleCriterion",
@@ -491,16 +403,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseRuleCriteria",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseRuleCriteria"
-},
     requestType: "AdaptiveReleaseUpdateAdaptiveReleaseRuleCriterionRequest",
     isMultipart: false,
     originalName: "updateAdaptiveReleaseRuleCriterion",
@@ -569,12 +471,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "AdaptiveReleaseGetAdaptiveReleaseAclGroupPredicatesRequest",
     isMultipart: false,
     originalName: "getAdaptiveReleaseAclGroupPredicates",
@@ -612,16 +508,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "AdaptiveReleaseSetGroupPredicateListRequest",
     isMultipart: false,
     originalName: "setGroupPredicateList",
@@ -665,12 +551,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "org.springframework.http.ResponseEntity<blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseACLGroupPredicateV1>",
-    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseACLGroupPredicateV1"
-},
     requestType: "AdaptiveReleaseCreateGroupPredicateRequest",
     isMultipart: false,
     originalName: "createGroupPredicate",
@@ -714,8 +594,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "AdaptiveReleaseDeleteGroupPredicateRequest",
     isMultipart: false,
     originalName: "deleteGroupPredicate",
@@ -784,12 +662,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "AdaptiveReleaseGetAdaptiveReleaseAclUserPredicatesRequest",
     isMultipart: false,
     originalName: "getAdaptiveReleaseAclUserPredicates",
@@ -827,16 +699,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "AdaptiveReleaseSetAdaptiveReleaseAclUsersPredicatesListRequest",
     isMultipart: false,
     originalName: "setAdaptiveReleaseAclUsersPredicatesList",
@@ -880,12 +742,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.adaptiveRelease.AdaptiveReleaseACLUserPredicateV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1AdaptiveReleaseAdaptiveReleaseACLUserPredicateV1"
-},
     requestType: "AdaptiveReleaseCreateAdaptiveReleaseAclUserPredicateRequest",
     isMultipart: false,
     originalName: "createAdaptiveReleaseAclUserPredicate",
@@ -929,8 +785,6 @@ export const AdaptiveReleaseMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "AdaptiveReleaseDeleteAclUserPredicateRequest",
     isMultipart: false,
     originalName: "deleteAclUserPredicate",

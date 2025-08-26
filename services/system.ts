@@ -22,12 +22,6 @@ export const SystemMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.system.SystemInfo",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1SystemSystemInfo"
-},
     requestType: "SystemGetInfoRequest",
     isMultipart: false,
     originalName: "getInfo",
@@ -40,8 +34,6 @@ export const SystemMethods: { [key: string]: ApiMethodInfo } = {
     path: "/learn/api/public/v1/system/policies/privacy",
     pathParams: [],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "SystemGetPoliciesRequest",
     isMultipart: false,
     originalName: "getPolicies",
@@ -68,12 +60,6 @@ export const SystemMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.system.SystemTask",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1SystemSystemTask"
-},
     requestType: "SystemGetSystemTaskRequest",
     isMultipart: false,
     originalName: "getSystemTask",
@@ -86,12 +72,6 @@ export const SystemMethods: { [key: string]: ApiMethodInfo } = {
     path: "/learn/api/public/v1/system/version",
     pathParams: [],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.blackboard.publicapi.v1.system.VersionInfo",
-    "typeName": "BlackboardWebappsBlackboardPublicapiV1SystemVersionInfo"
-},
     requestType: "SystemGetVersionRequest",
     isMultipart: false,
     originalName: "getVersion",

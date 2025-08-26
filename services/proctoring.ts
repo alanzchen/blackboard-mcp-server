@@ -46,12 +46,6 @@ export const ProctoringMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "ProctoringGetProctoringServicesRequest",
     isMultipart: false,
     originalName: "getProctoringServices",
@@ -78,12 +72,6 @@ export const ProctoringMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.plugin.assessment.publicapi.v1.proctoring.ProctoringService",
-    "typeName": "BlackboardPluginAssessmentPublicapiV1ProctoringProctoringService"
-},
     requestType: "ProctoringGetProctoringServiceRequest",
     isMultipart: false,
     originalName: "getProctoringService",

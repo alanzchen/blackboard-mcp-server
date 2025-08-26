@@ -46,12 +46,6 @@ export const SessionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "SessionsGetLoginAsSessionsRequest",
     isMultipart: false,
     originalName: "getLoginAsSessions",
@@ -95,12 +89,6 @@ export const SessionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "SessionsGetActiveSessionsRequest",
     isMultipart: false,
     originalName: "getActiveSessions",

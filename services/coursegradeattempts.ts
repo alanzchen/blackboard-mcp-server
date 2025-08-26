@@ -53,12 +53,6 @@ export const CourseGradeAttemptsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseGradeAttemptsGetAttemptFileMetaDataListRequest",
     isMultipart: false,
     originalName: "getAttemptFileMetaDataList",
@@ -91,27 +85,6 @@ export const CourseGradeAttemptsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
-    requestBodySchema: {
-    "type": "object",
-    "properties": {
-        "name": {
-            "type": "string",
-            "description": "The name of the file which has been attached to an Attempt including the file extension."
-        },
-        "uploadId": {
-            "type": "string"
-        },
-        "resourceId": {
-            "type": "string"
-        }
-    },
-    "description": ""
-},
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.gradebook.publicapi.v1.AttemptFileV1>",
-    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsGradebookPublicapiV1AttemptFileV1"
-},
     requestType: "CourseGradeAttemptsAttachFileRequest",
     isMultipart: false,
     originalName: "attachFile",
@@ -143,12 +116,6 @@ export const CourseGradeAttemptsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "org.springframework.http.ResponseEntity<blackboard.webapps.gradebook.publicapi.v1.AttemptFileV1>",
-    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardWebappsGradebookPublicapiV1AttemptFileV1"
-},
     requestType: "CourseGradeAttemptsGetAttemptFileMetaDataRequest",
     isMultipart: false,
     originalName: "getAttemptFileMetaData",
@@ -180,8 +147,6 @@ export const CourseGradeAttemptsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGradeAttemptsDeleteAttachmentRequest",
     isMultipart: false,
     originalName: "deleteAttachment",
@@ -213,8 +178,6 @@ export const CourseGradeAttemptsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
-    requestBodySchema: null,
-    responseSchema: null,
     requestType: "CourseGradeAttemptsDownloadRequest",
     isMultipart: false,
     originalName: "download",

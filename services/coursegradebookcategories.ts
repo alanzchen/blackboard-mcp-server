@@ -41,12 +41,6 @@ export const CourseGradebookCategoriesMethods: { [key: string]: ApiMethodInfo } 
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "object",
-    "properties": {},
-    "description": ""
-},
     requestType: "CourseGradebookCategoriesGetGradebookCategoriesRequest",
     isMultipart: false,
     originalName: "getGradebookCategories",
@@ -79,12 +73,6 @@ export const CourseGradebookCategoriesMethods: { [key: string]: ApiMethodInfo } 
         "required": false
     }
 ],
-    requestBodySchema: null,
-    responseSchema: {
-    "type": "reference",
-    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradebookCategory",
-    "typeName": "BlackboardWebappsGradebookPublicapiV1GradebookCategory"
-},
     requestType: "CourseGradebookCategoriesGetGradebookCategoryRequest",
     isMultipart: false,
     originalName: "getGradebookCategory",

@@ -170,9 +170,9 @@ function generateApiMap(swagger) {
 
 function generateOperationId(method, path) {
   // Convert path to camelCase operation name
-  // e.g., GET /learn/api/public/v1/oauth2/token -> getOauth2Token
-  const pathParts = path.split('/').filter(part => part && !part.includes('{') && !part.startsWith('v'));
-  const resourceParts = pathParts.slice(4); // Skip /learn/api/public/v1
+  // e.g., GET /learn/api/public/v3/courses -> getCourses
+  const pathParts = path.split('/').filter(part => part && !part.includes('{'));
+  const resourceParts = pathParts.slice(4); // Skip /learn/api/public/v3 (or v1, v2, etc.)
   
   if (resourceParts.length === 0) {
     return method;
@@ -189,19 +189,101 @@ function generateOperationId(method, path) {
   return methodPrefix + resourceName.charAt(0).toUpperCase() + resourceName.slice(1);
 }
 
+// Helper functions from service generator to ensure consistent naming
+function tagToClassName(tag) {
+  return tag
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('')
+    .replace(/[^a-zA-Z0-9]/g, '');
+}
+
+function operationIdToMethodName(operationId, summary) {
+  if (operationId) {
+    // Remove common prefixes and convert to camelCase
+    const cleaned = operationId
+      .replace(/^(get|post|put|delete|patch)_?/i, '')
+      .replace(/_/g, ' ')
+      .replace(/([A-Z])/g, ' $1')
+      .trim()
+      .split(' ')
+      .map((word, index) => 
+        index === 0 
+          ? word.toLowerCase() 
+          : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      )
+      .join('');
+    return cleaned;
+  }
+  
+  if (summary) {
+    return summary
+      .replace(/[^a-zA-Z0-9\s]/g, '')
+      .split(' ')
+      .map((word, index) => 
+        index === 0 
+          ? word.toLowerCase() 
+          : word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+      )
+      .join('');
+  }
+  
+  return 'unknownMethod';
+}
+
+function ensureUniqueMethodName(methodName, existingNames) {
+  let uniqueName = methodName;
+  let counter = 2;
+  
+  while (existingNames.has(uniqueName)) {
+    uniqueName = `${methodName}${counter}`;
+    counter++;
+  }
+  
+  existingNames.add(uniqueName);
+  return uniqueName;
+}
+
+function generateRequestTypeName(tag, methodName) {
+  const className = tagToClassName(tag);
+  const capitalizedMethod = methodName.charAt(0).toUpperCase() + methodName.slice(1);
+  return `${className}${capitalizedMethod}Request`;
+}
+
 function generateTypeMap(swagger) {
   const typeMap = {};
   const definitions = swagger.definitions || swagger.components?.schemas || {};
 
-  // Generate request types for each endpoint
+  // Generate request types for each endpoint using the same logic as service generator
   const paths = swagger.paths || {};
+  
+  // Group endpoints by tag to ensure consistent naming
+  const endpointsByTag = {};
   
   Object.entries(paths).forEach(([pathUrl, pathData]) => {
     Object.entries(pathData).forEach(([method, endpointData]) => {
       if (typeof endpointData !== 'object') return;
       
-      const operationId = endpointData.operationId || generateOperationId(method, pathUrl);
-      const requestTypeName = `${operationId}Request`;
+      const tags = endpointData.tags || ['General'];
+      const tag = tags[0]; // Use first tag as primary category
+      
+      if (!endpointsByTag[tag]) {
+        endpointsByTag[tag] = { endpoints: [], methodNames: new Set() };
+      }
+      
+      const operationId = endpointData.operationId;
+      let methodName;
+      
+      if (operationId) {
+        methodName = operationIdToMethodName(operationId, endpointData.summary);
+      } else {
+        // No operationId, use summary (matching service generator behavior)
+        methodName = operationIdToMethodName(null, endpointData.summary);
+      }
+      
+      methodName = ensureUniqueMethodName(methodName, endpointsByTag[tag].methodNames);
+      
+      const requestTypeName = generateRequestTypeName(tag, methodName);
       const typeDefinitions = [];
       
       // Create main request type
@@ -274,6 +356,14 @@ function generateTypeMap(swagger) {
       });
       
       typeMap[requestTypeName] = typeDefinitions;
+      
+      endpointsByTag[tag].endpoints.push({
+        pathUrl,
+        method,
+        endpointData,
+        methodName,
+        requestTypeName
+      });
     });
   });
 

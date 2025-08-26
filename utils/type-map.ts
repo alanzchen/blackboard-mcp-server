@@ -40,9 +40,9 @@ interface TypeMap {
  * Type map for all Blackboard Learn API request types
  */
 export const typeMap: TypeMap = {
-  "GetAuthorizationcodeRequest": [
+  "OauthAuthorizationCodeRequest": [
     {
-      "name": "GetAuthorizationcodeRequest",
+      "name": "OauthAuthorizationCodeRequest",
       "properties": [
         {
           "name": "code_challenge",
@@ -68,9 +68,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostTokenRequest": [
+  "OauthRequestTokenRequest": [
     {
-      "name": "PostTokenRequest",
+      "name": "OauthRequestTokenRequest",
       "properties": [
         {
           "name": "redirect_uri",
@@ -103,15 +103,15 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetTokeninfoRequest": [
+  "OauthGetTokenInfoRequest": [
     {
-      "name": "GetTokeninfoRequest",
+      "name": "OauthGetTokenInfoRequest",
       "properties": []
     }
   ],
-  "GetContentsAdaptivereleaseRulesRequest": [
+  "AdaptiveReleaseGetRulesRequest": [
     {
-      "name": "GetContentsAdaptivereleaseRulesRequest",
+      "name": "AdaptiveReleaseGetRulesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -128,18 +128,18 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "ruleId",
+          "name": "sort",
           "type": "string",
-          "description": "Path parameter: ruleId",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.23.0",
           "readOnly": false,
-          "required": true
+          "required": false
         }
       ]
     }
   ],
-  "PostContentsAdaptivereleaseRulesRequest": [
+  "AdaptiveReleaseCreateRuleRequest": [
     {
-      "name": "PostContentsAdaptivereleaseRulesRequest",
+      "name": "AdaptiveReleaseCreateRuleRequest",
       "properties": [
         {
           "name": "courseId",
@@ -165,9 +165,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteContentsAdaptivereleaseRulesRequest": [
+  "AdaptiveReleaseGetRuleRequest": [
     {
-      "name": "DeleteContentsAdaptivereleaseRulesRequest",
+      "name": "AdaptiveReleaseGetRuleRequest",
       "properties": [
         {
           "name": "courseId",
@@ -193,9 +193,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchContentsAdaptivereleaseRulesRequest": [
+  "AdaptiveReleaseDeleteRuleRequest": [
     {
-      "name": "PatchContentsAdaptivereleaseRulesRequest",
+      "name": "AdaptiveReleaseDeleteRuleRequest",
       "properties": [
         {
           "name": "courseId",
@@ -221,9 +221,37 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsAdaptivereleaseRulesCriteriaRequest": [
+  "AdaptiveReleaseUpdateRuleRequest": [
     {
-      "name": "GetContentsAdaptivereleaseRulesCriteriaRequest",
+      "name": "AdaptiveReleaseUpdateRuleRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "ruleId",
+          "type": "string",
+          "description": "Path parameter: ruleId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AdaptiveReleaseGetCriteriaRequest": [
+    {
+      "name": "AdaptiveReleaseGetCriteriaRequest",
       "properties": [
         {
           "name": "courseId",
@@ -247,18 +275,18 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "criterionId",
+          "name": "sort",
           "type": "string",
-          "description": "Path parameter: criterionId",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.23.0",
           "readOnly": false,
-          "required": true
+          "required": false
         }
       ]
     }
   ],
-  "PostContentsAdaptivereleaseRulesCriteriaRequest": [
+  "AdaptiveReleaseCreateAdaptiveReleaseRuleCriteriaRequest": [
     {
-      "name": "PostContentsAdaptivereleaseRulesCriteriaRequest",
+      "name": "AdaptiveReleaseCreateAdaptiveReleaseRuleCriteriaRequest",
       "properties": [
         {
           "name": "courseId",
@@ -291,9 +319,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteContentsAdaptivereleaseRulesCriteriaRequest": [
+  "AdaptiveReleaseGetAdaptiveReleaseRuleCriterionRequest": [
     {
-      "name": "DeleteContentsAdaptivereleaseRulesCriteriaRequest",
+      "name": "AdaptiveReleaseGetAdaptiveReleaseRuleCriterionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -326,9 +354,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchContentsAdaptivereleaseRulesCriteriaRequest": [
+  "AdaptiveReleaseDeleteAdaptiveReleaseRuleCriterionRequest": [
     {
-      "name": "PatchContentsAdaptivereleaseRulesCriteriaRequest",
+      "name": "AdaptiveReleaseDeleteAdaptiveReleaseRuleCriterionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -361,9 +389,44 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsAdaptivereleaseRulesCriteriaGroupsRequest": [
+  "AdaptiveReleaseUpdateAdaptiveReleaseRuleCriterionRequest": [
     {
-      "name": "GetContentsAdaptivereleaseRulesCriteriaGroupsRequest",
+      "name": "AdaptiveReleaseUpdateAdaptiveReleaseRuleCriterionRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "ruleId",
+          "type": "string",
+          "description": "Path parameter: ruleId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "criterionId",
+          "type": "string",
+          "description": "Path parameter: criterionId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AdaptiveReleaseGetAdaptiveReleaseAclGroupPredicatesRequest": [
+    {
+      "name": "AdaptiveReleaseGetAdaptiveReleaseAclGroupPredicatesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -403,9 +466,51 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutContentsAdaptivereleaseRulesCriteriaGroupsRequest": [
+  "AdaptiveReleaseSetGroupPredicateListRequest": [
     {
-      "name": "PutContentsAdaptivereleaseRulesCriteriaGroupsRequest",
+      "name": "AdaptiveReleaseSetGroupPredicateListRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "ruleId",
+          "type": "string",
+          "description": "Path parameter: ruleId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "criterionId",
+          "type": "string",
+          "description": "Path parameter: criterionId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AdaptiveReleaseCreateGroupPredicateRequest": [
+    {
+      "name": "AdaptiveReleaseCreateGroupPredicateRequest",
       "properties": [
         {
           "name": "courseId",
@@ -452,9 +557,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteContentsAdaptivereleaseRulesCriteriaGroupsRequest": [
+  "AdaptiveReleaseDeleteGroupPredicateRequest": [
     {
-      "name": "DeleteContentsAdaptivereleaseRulesCriteriaGroupsRequest",
+      "name": "AdaptiveReleaseDeleteGroupPredicateRequest",
       "properties": [
         {
           "name": "courseId",
@@ -494,9 +599,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsAdaptivereleaseRulesCriteriaUsersRequest": [
+  "AdaptiveReleaseGetAdaptiveReleaseAclUserPredicatesRequest": [
     {
-      "name": "GetContentsAdaptivereleaseRulesCriteriaUsersRequest",
+      "name": "AdaptiveReleaseGetAdaptiveReleaseAclUserPredicatesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -536,9 +641,51 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutContentsAdaptivereleaseRulesCriteriaUsersRequest": [
+  "AdaptiveReleaseSetAdaptiveReleaseAclUsersPredicatesListRequest": [
     {
-      "name": "PutContentsAdaptivereleaseRulesCriteriaUsersRequest",
+      "name": "AdaptiveReleaseSetAdaptiveReleaseAclUsersPredicatesListRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "ruleId",
+          "type": "string",
+          "description": "Path parameter: ruleId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "criterionId",
+          "type": "string",
+          "description": "Path parameter: criterionId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AdaptiveReleaseCreateAdaptiveReleaseAclUserPredicateRequest": [
+    {
+      "name": "AdaptiveReleaseCreateAdaptiveReleaseAclUserPredicateRequest",
       "properties": [
         {
           "name": "courseId",
@@ -585,9 +732,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteContentsAdaptivereleaseRulesCriteriaUsersRequest": [
+  "AdaptiveReleaseDeleteAclUserPredicateRequest": [
     {
-      "name": "DeleteContentsAdaptivereleaseRulesCriteriaUsersRequest",
+      "name": "AdaptiveReleaseDeleteAclUserPredicateRequest",
       "properties": [
         {
           "name": "courseId",
@@ -627,23 +774,121 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "getRequest": [
+  "AnnouncementsGetAnnouncementsRequest": [
     {
-      "name": "getRequest",
+      "name": "AnnouncementsGetAnnouncementsRequest",
       "properties": [
         {
-          "name": "courseId",
+          "name": "creatorUserId",
           "type": "string",
-          "description": "Path parameter: courseId",
+          "description": "Search for announcements with creator user id equal to this value.\n\n**Since**: 3900.89.0.",
           "readOnly": false,
-          "required": true
+          "required": false
+        },
+        {
+          "name": "creatorUsername",
+          "type": "string",
+          "description": "Search for announcements with creator username equal to this value.\n\n**Since**: 3900.89.0.",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for announcements with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdUntil",
+          "type": "string",
+          "description": "Search announcements with created date less than or equal to this value. 'createdCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for announcements with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedUntil",
+          "type": "string",
+          "description": "Search announcements with modified date less than or equal to this value. 'modifiedCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for announcements with a title like the provided value.\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "startDateUntil",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "startDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'startDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "endDateUntil",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "endDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'endDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
         }
       ]
     }
   ],
-  "postRequest": [
+  "AnnouncementsCreateAnnouncementRequest": [
     {
-      "name": "postRequest",
+      "name": "AnnouncementsCreateAnnouncementRequest",
       "properties": [
         {
           "name": "body",
@@ -655,37 +900,65 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "deleteRequest": [
+  "AnnouncementsGetAnnouncementRequest": [
     {
-      "name": "deleteRequest",
+      "name": "AnnouncementsGetAnnouncementRequest",
       "properties": [
         {
-          "name": "courseId",
+          "name": "announcementId",
           "type": "string",
-          "description": "Path parameter: courseId",
+          "description": "Path parameter: announcementId",
           "readOnly": false,
           "required": true
         }
       ]
     }
   ],
-  "patchRequest": [
+  "AnnouncementsDeleteAnnouncementRequest": [
     {
-      "name": "patchRequest",
+      "name": "AnnouncementsDeleteAnnouncementRequest",
       "properties": [
         {
-          "name": "courseId",
+          "name": "announcementId",
           "type": "string",
-          "description": "Path parameter: courseId",
+          "description": "Path parameter: announcementId",
           "readOnly": false,
           "required": true
         }
       ]
     }
   ],
-  "GetAttemptreceiptsRequest": [
+  "AnnouncementsUpdateAnnouncementRequest": [
     {
-      "name": "GetAttemptreceiptsRequest",
+      "name": "AnnouncementsUpdateAnnouncementRequest",
+      "properties": [
+        {
+          "name": "announcementId",
+          "type": "string",
+          "description": "Path parameter: announcementId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttemptReceiptGetAttemptReceiptRequest": [
+    {
+      "name": "AttemptReceiptGetAttemptReceiptRequest",
+      "properties": [
+        {
+          "name": "attemptReceiptId",
+          "type": "string",
+          "description": "Path parameter: attemptReceiptId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttemptReceiptGetAttemptReceipt2Request": [
+    {
+      "name": "AttemptReceiptGetAttemptReceipt2Request",
       "properties": [
         {
           "name": "courseId",
@@ -704,9 +977,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetMeetingsRequest": [
+  "AttendanceGetCourseMeetingsRequest": [
     {
-      "name": "GetMeetingsRequest",
+      "name": "AttendanceGetCourseMeetingsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -714,20 +987,13 @@ export const typeMap: TypeMap = {
           "description": "Path parameter: courseId",
           "readOnly": false,
           "required": true
-        },
-        {
-          "name": "meetingId",
-          "type": "string",
-          "description": "Path parameter: meetingId",
-          "readOnly": false,
-          "required": true
         }
       ]
     }
   ],
-  "PostMeetingsRequest": [
+  "AttendanceCreateCourseMeetingRequest": [
     {
-      "name": "PostMeetingsRequest",
+      "name": "AttendanceCreateCourseMeetingRequest",
       "properties": [
         {
           "name": "courseId",
@@ -746,30 +1012,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteMeetingsRequest": [
+  "AttendanceDeleteAllMeetingsInCourseRequest": [
     {
-      "name": "DeleteMeetingsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "meetingId",
-          "type": "string",
-          "description": "Path parameter: meetingId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "GetMeetingsDownloadurlRequest": [
-    {
-      "name": "GetMeetingsDownloadurlRequest",
+      "name": "AttendanceDeleteAllMeetingsInCourseRequest",
       "properties": [
         {
           "name": "courseId",
@@ -781,9 +1026,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetMeetingsUsersRequest": [
+  "AttendanceGenerateAttendanceDataDownloadUrlRequest": [
     {
-      "name": "GetMeetingsUsersRequest",
+      "name": "AttendanceGenerateAttendanceDataDownloadUrlRequest",
       "properties": [
         {
           "name": "courseId",
@@ -791,55 +1036,13 @@ export const typeMap: TypeMap = {
           "description": "Path parameter: courseId",
           "readOnly": false,
           "required": true
-        },
-        {
-          "name": "meetingId",
-          "type": "string",
-          "description": "Path parameter: meetingId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "userId",
-          "type": "string",
-          "description": "Path parameter: userId",
-          "readOnly": false,
-          "required": true
         }
       ]
     }
   ],
-  "DeleteMeetingsUsersRequest": [
+  "AttendanceGetAttendanceRecordsByUserIdRequest": [
     {
-      "name": "DeleteMeetingsUsersRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "meetingId",
-          "type": "string",
-          "description": "Path parameter: meetingId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "userId",
-          "type": "string",
-          "description": "Path parameter: userId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteMeetingsUsersAllRequest": [
-    {
-      "name": "DeleteMeetingsUsersAllRequest",
+      "name": "AttendanceGetAttendanceRecordsByUserIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -858,9 +1061,51 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchMeetingsRequest": [
+  "AttendanceDeleteAllAttendanceRecordsByCourseAndUserIdRequest": [
     {
-      "name": "PatchMeetingsRequest",
+      "name": "AttendanceDeleteAllAttendanceRecordsByCourseAndUserIdRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceDeleteAllAttendanceByUserIdRequest": [
+    {
+      "name": "AttendanceDeleteAllAttendanceByUserIdRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceGetCourseMeetingRequest": [
+    {
+      "name": "AttendanceGetCourseMeetingRequest",
       "properties": [
         {
           "name": "courseId",
@@ -879,9 +1124,72 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostMeetingsUsersRequest": [
+  "AttendanceDeleteCourseMeetingRequest": [
     {
-      "name": "PostMeetingsUsersRequest",
+      "name": "AttendanceDeleteCourseMeetingRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": "Path parameter: meetingId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceUpdateCourseMeetingRequest": [
+    {
+      "name": "AttendanceUpdateCourseMeetingRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": "Path parameter: meetingId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceGetAttendanceRecordsByMeetingIdRequest": [
+    {
+      "name": "AttendanceGetAttendanceRecordsByMeetingIdRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": "Path parameter: meetingId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceCreateAttendanceRecordRequest": [
+    {
+      "name": "AttendanceCreateAttendanceRecordRequest",
       "properties": [
         {
           "name": "courseId",
@@ -907,9 +1215,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostMeetingsUsersBulkRequest": [
+  "AttendanceDeleteAllRecordsInMeetingRequest": [
     {
-      "name": "PostMeetingsUsersBulkRequest",
+      "name": "AttendanceDeleteAllRecordsInMeetingRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": "Path parameter: meetingId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceUpdateAttendanceRecordsRequest": [
+    {
+      "name": "AttendanceUpdateAttendanceRecordsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -935,9 +1264,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchMeetingsUsersRequest": [
+  "AttendanceGetAttendanceRecordRequest": [
     {
-      "name": "PatchMeetingsUsersRequest",
+      "name": "AttendanceGetAttendanceRecordRequest",
       "properties": [
         {
           "name": "courseId",
@@ -963,9 +1292,127 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetItemsRequest": [
+  "AttendanceDeleteAttendanceRecordRequest": [
     {
-      "name": "GetItemsRequest",
+      "name": "AttendanceDeleteAttendanceRecordRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": "Path parameter: meetingId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "AttendanceUpdateAttendanceRecordRequest": [
+    {
+      "name": "AttendanceUpdateAttendanceRecordRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": "Path parameter: meetingId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CalendarGetCalendarsRequest": [
+    {
+      "name": "CalendarGetCalendarsRequest",
+      "properties": []
+    }
+  ],
+  "CalendarGetCalendarItemsRequest": [
+    {
+      "name": "CalendarGetCalendarItemsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Specifies only calendar items associated with 'courseId' are to be returned. NOTE: This is the course.id, not the course.courseId\n\n**Since**: 3400.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Specifies only calendar items with the given type.\n\n**Since**: 3400.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Course |  |\n| GradebookColumn | Read only. |\n| Institution |  |\n| OfficeHours |  |\n| Personal |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "since",
+          "type": "string",
+          "description": "Specifies only calendar items after the 'since' date (inclusive) are to be returned. Maximum of 16 weeks after the 'since' date will be returned. ISO-8601 date-time format is expected: [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh:mm]]\n\n**Since**: 3400.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "until",
+          "type": "string",
+          "description": "Specifies only calendar items before the 'until' date (inclusive) are to be returned. Maximum of 16 weeks prior to the 'until' date will be returned. ISO-8601 date-time format is expected: [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh:mm]]\n\n**Since**: 3400.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),start\" Supported fields are:\n\n- id\n- calendarId\n- title\n- start\n- end\n- modified\n\n**Since**: 3400.9.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CalendarCreateCalendarItemRequest": [
+    {
+      "name": "CalendarCreateCalendarItemRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CalendarGetCalendarItemRequest": [
+    {
+      "name": "CalendarGetCalendarItemRequest",
       "properties": [
         {
           "name": "calendarItemType",
@@ -984,23 +1431,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostItemsRequest": [
+  "CalendarDeleteCalendarItemRequest": [
     {
-      "name": "PostItemsRequest",
-      "properties": [
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteItemsRequest": [
-    {
-      "name": "DeleteItemsRequest",
+      "name": "CalendarDeleteCalendarItemRequest",
       "properties": [
         {
           "name": "calendarItemType",
@@ -1019,9 +1452,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchItemsRequest": [
+  "CalendarUpdateCalendarItemRequest": [
     {
-      "name": "PatchItemsRequest",
+      "name": "CalendarUpdateCalendarItemRequest",
       "properties": [
         {
           "name": "calendarItemType",
@@ -1040,9 +1473,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostGradebookColumnsExceptionsRequest": [
+  "ColumnExceptionsGetExceptionsByIdsRequest": [
     {
-      "name": "PostGradebookColumnsExceptionsRequest",
+      "name": "ColumnExceptionsGetExceptionsByIdsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1068,72 +1501,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsExceptionsUsersRequest": [
+  "ColumnExceptionsGetUserExceptionRequest": [
     {
-      "name": "GetGradebookColumnsExceptionsUsersRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "columnId",
-          "type": "string",
-          "description": "Path parameter: columnId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "userId",
-          "type": "string",
-          "description": "Path parameter: userId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PutGradebookColumnsExceptionsUsersRequest": [
-    {
-      "name": "PutGradebookColumnsExceptionsUsersRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "columnId",
-          "type": "string",
-          "description": "Path parameter: columnId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "userId",
-          "type": "string",
-          "description": "Path parameter: userId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteGradebookColumnsExceptionsUsersRequest": [
-    {
-      "name": "DeleteGradebookColumnsExceptionsUsersRequest",
+      "name": "ColumnExceptionsGetUserExceptionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1159,9 +1529,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsRequest": [
+  "ColumnExceptionsPutExceptionsRequest": [
     {
-      "name": "GetContentsRequest",
+      "name": "ColumnExceptionsPutExceptionsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1171,18 +1541,130 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "contentId",
+          "name": "columnId",
           "type": "string",
-          "description": "Path parameter: contentId",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
           "readOnly": false,
           "required": true
         }
       ]
     }
   ],
-  "PostContentsRequest": [
+  "ColumnExceptionsDeleteUserExceptionRequest": [
     {
-      "name": "PostContentsRequest",
+      "name": "ColumnExceptionsDeleteUserExceptionRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentGetContentsRequest": [
+    {
+      "name": "ContentGetContentsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "recursive",
+          "type": "boolean",
+          "description": "Search for child content recursively.  A value of 'true' indicates that search results should include all content descendants within the hierarchy of the specified parent.  A value of 'false' indicates results should be limited to immediate children only.  Not setting this field defaults to 'false' behavior; only including immediate children.\n\n**Since**: 3100.2.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for content title. Will return all Content items whose title contains the supplied search value.\n\n**Since**: 3900.10.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "contentHandler",
+          "type": "string",
+          "description": "Search for the specific content handler.  Not setting this field will return all content handlers.\n\n**Since**: 3400.5.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for contents with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3700.1.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.1.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for contents with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3700.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "reviewable",
+          "type": "boolean",
+          "description": "Search contents by whether they are reviewable or not.\n\n**Since**: 3700.15.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "ContentCreateContentRequest": [
+    {
+      "name": "ContentCreateContentRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1201,9 +1683,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostContentsCreateassignmentRequest": [
+  "ContentCreateAssignmentRequest": [
     {
-      "name": "PostContentsCreateassignmentRequest",
+      "name": "ContentCreateAssignmentRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1222,9 +1704,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteContentsRequest": [
+  "ContentGetContentRequest": [
     {
-      "name": "DeleteContentsRequest",
+      "name": "ContentGetContentRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1243,9 +1725,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchContentsRequest": [
+  "ContentDeleteContentRequest": [
     {
-      "name": "PatchContentsRequest",
+      "name": "ContentDeleteContentRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1264,9 +1746,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsChildrenRequest": [
+  "ContentUpdateContentRequest": [
     {
-      "name": "GetContentsChildrenRequest",
+      "name": "ContentUpdateContentRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentGetContentChildrenRequest": [
+    {
+      "name": "ContentGetContentChildrenRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1341,9 +1844,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostContentsChildrenRequest": [
+  "ContentCreateChildRequest": [
     {
-      "name": "PostContentsChildrenRequest",
+      "name": "ContentCreateChildRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1369,9 +1872,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsChildrenStatesRequest": [
+  "ContentGetContentChildrenStateByIdRequest": [
     {
-      "name": "GetContentsChildrenStatesRequest",
+      "name": "ContentGetContentChildrenStateByIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1397,9 +1900,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchContentsStatesRequest": [
+  "ContentUpdateContentStateRequest": [
     {
-      "name": "PatchContentsStatesRequest",
+      "name": "ContentUpdateContentStateRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1418,9 +1921,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsStatesRequest": [
+  "ContentGetContentStateByIdRequest": [
     {
-      "name": "GetContentsStatesRequest",
+      "name": "ContentGetContentStateByIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1446,9 +1949,401 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetResourcesRequest": [
+  "ContentCollectionResourcesGetResourcesRequest": [
     {
-      "name": "GetResourcesRequest",
+      "name": "ContentCollectionResourcesGetResourcesRequest",
+      "properties": [
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search by 'modified' date. Can be used along with 'modifiedCompare'.\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search by 'created' date. Can be used along with 'createdCompare'.\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'modified', When not specified, it will perform as 'greaterOrEqual' by default if 'modified' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'created', When not specified, it will perform as 'greaterOrEqual' by default if 'created' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "integer",
+          "description": "Search by file 'size'. Can be used along 'sizeCompare'. If specified, no folders will be retrieved.\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "creatorId",
+          "type": "string",
+          "description": "Search files by 'creatorId'\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sizeCompare",
+          "type": "string",
+          "description": "Search operator to be applied to 'size', When not specified, it will perform as 'equals' by default if 'size' is specified. Must be one of the following:\n\n- equals - optional\n- notEquals\n- greaterOrEqual\n- greaterThan\n- lessOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| greaterOrEqual |  |\n| greaterThan |  |\n| lessOrEqual |  |\n| lessThan |  |\n",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "ContentCollectionResourcesGetContentCollectionResourceRequest": [
+    {
+      "name": "ContentCollectionResourcesGetContentCollectionResourceRequest",
+      "properties": [
+        {
+          "name": "resourceId",
+          "type": "string",
+          "description": "Path parameter: resourceId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentCollectionResourcesGetResourceChildrenRequest": [
+    {
+      "name": "ContentCollectionResourcesGetResourceChildrenRequest",
+      "properties": [
+        {
+          "name": "resourceId",
+          "type": "string",
+          "description": "Path parameter: resourceId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search by 'modified' date. Can be used along with 'modifiedCompare'.\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search by 'created' date. Can be used along with 'createdCompare'.\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'modified', When not specified, it will perform as 'greaterOrEqual' by default if 'modified' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'created', When not specified, it will perform as 'greaterOrEqual' by default if 'created' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "size",
+          "type": "integer",
+          "description": "Search by file 'size'. Can be used along 'sizeCompare'. If specified, no folders will be retrieved.\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "creatorId",
+          "type": "string",
+          "description": "Search files by 'creatorId'\n\n**Since**: 3900.41.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sizeCompare",
+          "type": "string",
+          "description": "Search operator to be applied to 'size', When not specified, it will perform as 'equals' by default if 'size' is specified. Must be one of the following:\n\n- equals - optional\n- notEquals\n- greaterOrEqual\n- greaterThan\n- lessOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| greaterOrEqual |  |\n| greaterThan |  |\n| lessOrEqual |  |\n| lessThan |  |\n",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "ContentFileAttachmentsGetFileAttachmentsRequest": [
+    {
+      "name": "ContentFileAttachmentsGetFileAttachmentsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentFileAttachmentsCreateFileAttachmentRequest": [
+    {
+      "name": "ContentFileAttachmentsCreateFileAttachmentRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentFileAttachmentsGetFileAttachmentRequest": [
+    {
+      "name": "ContentFileAttachmentsGetFileAttachmentRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "attachmentId",
+          "type": "string",
+          "description": "Path parameter: attachmentId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentFileAttachmentsDeleteFileAttachmentRequest": [
+    {
+      "name": "ContentFileAttachmentsDeleteFileAttachmentRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "attachmentId",
+          "type": "string",
+          "description": "Path parameter: attachmentId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentFileAttachmentsDownloadRequest": [
+    {
+      "name": "ContentFileAttachmentsDownloadRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "attachmentId",
+          "type": "string",
+          "description": "Path parameter: attachmentId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentGroupAssignmentsGetContentGroupsRequest": [
+    {
+      "name": "ContentGroupAssignmentsGetContentGroupsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentGroupAssignmentsGetContentGroupRequest": [
+    {
+      "name": "ContentGroupAssignmentsGetContentGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentGroupAssignmentsCreateContentGroupRequest": [
+    {
+      "name": "ContentGroupAssignmentsCreateContentGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentGroupAssignmentsDeleteContentGroupRequest": [
+    {
+      "name": "ContentGroupAssignmentsDeleteContentGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Path parameter: contentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentResourcesGetTopLevelCourseResourcesRequest": [
+    {
+      "name": "ContentResourcesGetTopLevelCourseResourcesRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "ContentResourcesGetCourseResourceRequest": [
+    {
+      "name": "ContentResourcesGetCourseResourceRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1467,9 +2362,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetResourcesChildrenRequest": [
+  "ContentResourcesGetCourseResourceChildrenRequest": [
     {
-      "name": "GetResourcesChildrenRequest",
+      "name": "ContentResourcesGetCourseResourceChildrenRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1488,212 +2383,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetContentsAttachmentsRequest": [
+  "ContentReviewGetReviewStatusRequest": [
     {
-      "name": "GetContentsAttachmentsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "attachmentId",
-          "type": "string",
-          "description": "Path parameter: attachmentId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PostContentsAttachmentsRequest": [
-    {
-      "name": "PostContentsAttachmentsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteContentsAttachmentsRequest": [
-    {
-      "name": "DeleteContentsAttachmentsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "attachmentId",
-          "type": "string",
-          "description": "Path parameter: attachmentId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "GetContentsAttachmentsDownloadRequest": [
-    {
-      "name": "GetContentsAttachmentsDownloadRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "attachmentId",
-          "type": "string",
-          "description": "Path parameter: attachmentId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "GetContentsGroupsRequest": [
-    {
-      "name": "GetContentsGroupsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "groupId",
-          "type": "string",
-          "description": "Path parameter: groupId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PutContentsGroupsRequest": [
-    {
-      "name": "PutContentsGroupsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "groupId",
-          "type": "string",
-          "description": "Path parameter: groupId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteContentsGroupsRequest": [
-    {
-      "name": "DeleteContentsGroupsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "contentId",
-          "type": "string",
-          "description": "Path parameter: contentId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "groupId",
-          "type": "string",
-          "description": "Path parameter: groupId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "GetContentsUsersReviewstatusRequest": [
-    {
-      "name": "GetContentsUsersReviewstatusRequest",
+      "name": "ContentReviewGetReviewStatusRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1719,9 +2411,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchContentsUsersReviewstatusRequest": [
+  "ContentReviewUpdateReviewStatusRequest": [
     {
-      "name": "PatchContentsUsersReviewstatusRequest",
+      "name": "ContentReviewUpdateReviewStatusRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1747,9 +2439,163 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetAnnouncementsRequest": [
+  "CourseAnnouncementsGetAnnouncementsRequest": [
     {
-      "name": "GetAnnouncementsRequest",
+      "name": "CourseAnnouncementsGetAnnouncementsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "creatorUserId",
+          "type": "string",
+          "description": "Search for announcements with creator user id equal to this value.\n\n**Since**: 3900.89.0.",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "creatorUsername",
+          "type": "string",
+          "description": "Search for announcements with creator username equal to this value.\n\n**Since**: 3900.89.0.",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for announcements with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdUntil",
+          "type": "string",
+          "description": "Search announcements with created date less than or equal to this value. 'createdCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for announcements with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedUntil",
+          "type": "string",
+          "description": "Search announcements with modified date less than or equal to this value. 'modifiedCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for announcements with a title like the provided value.\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "startDateUntil",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "startDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'startDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "endDateUntil",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "endDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'endDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),created\" Supported fields are:\n\n- title\n- modified\n\n**Since**: 3500.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>studentReadCount</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseAnnouncementsCreateAnnouncementRequest": [
+    {
+      "name": "CourseAnnouncementsCreateAnnouncementRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseAnnouncementsGetAnnouncementRequest": [
+    {
+      "name": "CourseAnnouncementsGetAnnouncementRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1775,30 +2621,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostAnnouncementsRequest": [
+  "CourseAnnouncementsDeleteAnnouncementRequest": [
     {
-      "name": "PostAnnouncementsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteAnnouncementsRequest": [
-    {
-      "name": "DeleteAnnouncementsRequest",
+      "name": "CourseAnnouncementsDeleteAnnouncementRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1817,9 +2642,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchAnnouncementsRequest": [
+  "CourseAnnouncementsUpdateAnnouncementRequest": [
     {
-      "name": "PatchAnnouncementsRequest",
+      "name": "CourseAnnouncementsUpdateAnnouncementRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1838,9 +2663,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetAssessmentsQuestionsRequest": [
+  "CourseAssessmentsGetQuestionsRequest": [
     {
-      "name": "GetAssessmentsQuestionsRequest",
+      "name": "CourseAssessmentsGetQuestionsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1855,20 +2680,13 @@ export const typeMap: TypeMap = {
           "description": "Path parameter: assessmentId",
           "readOnly": false,
           "required": true
-        },
-        {
-          "name": "questionId",
-          "type": "string",
-          "description": "Path parameter: questionId",
-          "readOnly": false,
-          "required": true
         }
       ]
     }
   ],
-  "PostAssessmentsQuestionsRequest": [
+  "CourseAssessmentsCreateQuestionRequest": [
     {
-      "name": "PostAssessmentsQuestionsRequest",
+      "name": "CourseAssessmentsCreateQuestionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1894,9 +2712,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteAssessmentsQuestionsRequest": [
+  "CourseAssessmentsGetQuestionByIdRequest": [
     {
-      "name": "DeleteAssessmentsQuestionsRequest",
+      "name": "CourseAssessmentsGetQuestionByIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1922,9 +2740,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchAssessmentsQuestionsRequest": [
+  "CourseAssessmentsDeleteQuestionRequest": [
     {
-      "name": "PatchAssessmentsQuestionsRequest",
+      "name": "CourseAssessmentsDeleteQuestionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1950,9 +2768,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetCategoriesRequest": [
+  "CourseAssessmentsUpdateQuestionRequest": [
     {
-      "name": "GetCategoriesRequest",
+      "name": "CourseAssessmentsUpdateQuestionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -1962,18 +2780,95 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "expand",
+          "name": "assessmentId",
           "type": "string",
-          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>category</li></ul>",
+          "description": "Path parameter: assessmentId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": "Path parameter: questionId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseCategoriesGetCategoriesRequest": [
+    {
+      "name": "CourseCategoriesGetCategoriesRequest",
+      "properties": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": "Path parameter: categoryType",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),start\" Supported fields are:\n\n- id\n- categoryId\n- title\n- available\n- created\n\n**Since**: 3700.6.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for categories with titles that contain this value.\n\n**Since**: 3700.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Search for categories with category IDs that contain this value.\n\n**Since**: 3700.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for categories with a created date relative to this value.\n\n**Since**: 3700.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for categories with a data source id matching this value.\n\n**Since**: 3700.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "frontPage",
+          "type": "boolean",
+          "description": "Search for categories with a front page indicator matching this value.\n\n**Since**: 3700.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "available",
+          "type": "boolean",
+          "description": "Search for categories with availability matching this value.\n\n**Since**: 3700.9.0",
           "readOnly": false,
           "required": false
         }
       ]
     }
   ],
-  "PostCategoriesRequest": [
+  "CourseCategoriesCreateCategoryRequest": [
     {
-      "name": "PostCategoriesRequest",
+      "name": "CourseCategoriesCreateCategoryRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -1992,9 +2887,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteCategoriesRequest": [
+  "CourseCategoriesGetCategoryRequest": [
     {
-      "name": "DeleteCategoriesRequest",
+      "name": "CourseCategoriesGetCategoryRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -2013,9 +2908,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchCategoriesRequest": [
+  "CourseCategoriesDeleteCategoryRequest": [
     {
-      "name": "PatchCategoriesRequest",
+      "name": "CourseCategoriesDeleteCategoryRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -2034,9 +2929,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetCategoriesCoursesRequest": [
+  "CourseCategoriesUpdateCategoryRequest": [
     {
-      "name": "GetCategoriesCoursesRequest",
+      "name": "CourseCategoriesUpdateCategoryRequest",
+      "properties": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": "Path parameter: categoryType",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Path parameter: categoryId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseCategoriesGetMembershipsRequest": [
+    {
+      "name": "CourseCategoriesGetMembershipsRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -2062,9 +2978,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutCategoriesCoursesRequest": [
+  "CourseCategoriesCreateMembershipRequest": [
     {
-      "name": "PutCategoriesCoursesRequest",
+      "name": "CourseCategoriesCreateMembershipRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -2097,9 +3013,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteCategoriesCoursesRequest": [
+  "CourseCategoriesDeleteMembershipRequest": [
     {
-      "name": "DeleteCategoriesCoursesRequest",
+      "name": "CourseCategoriesDeleteMembershipRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -2125,9 +3041,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetCategoriesChildrenRequest": [
+  "CourseCategoriesGetChildCategoriesRequest": [
     {
-      "name": "GetCategoriesChildrenRequest",
+      "name": "CourseCategoriesGetChildCategoriesRequest",
       "properties": [
         {
           "name": "categoryType",
@@ -2202,9 +3118,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookAttemptsFilesRequest": [
+  "CourseCategoriesGetMemberships2Request": [
     {
-      "name": "GetGradebookAttemptsFilesRequest",
+      "name": "CourseCategoriesGetMemberships2Request",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>category</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGradeAttemptsGetAttemptFileMetaDataListRequest": [
+    {
+      "name": "CourseGradeAttemptsGetAttemptFileMetaDataListRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2219,20 +3156,13 @@ export const typeMap: TypeMap = {
           "description": "Path parameter: attemptId",
           "readOnly": false,
           "required": true
-        },
-        {
-          "name": "attemptFileId",
-          "type": "string",
-          "description": "Path parameter: attemptFileId",
-          "readOnly": false,
-          "required": true
         }
       ]
     }
   ],
-  "PostGradebookAttemptsFilesRequest": [
+  "CourseGradeAttemptsAttachFileRequest": [
     {
-      "name": "PostGradebookAttemptsFilesRequest",
+      "name": "CourseGradeAttemptsAttachFileRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2258,9 +3188,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGradebookAttemptsFilesRequest": [
+  "CourseGradeAttemptsGetAttemptFileMetaDataRequest": [
     {
-      "name": "DeleteGradebookAttemptsFilesRequest",
+      "name": "CourseGradeAttemptsGetAttemptFileMetaDataRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2286,9 +3216,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookAttemptsFilesDownloadRequest": [
+  "CourseGradeAttemptsDeleteAttachmentRequest": [
     {
-      "name": "GetGradebookAttemptsFilesDownloadRequest",
+      "name": "CourseGradeAttemptsDeleteAttachmentRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2314,9 +3244,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookGradenotationsRequest": [
+  "CourseGradeAttemptsDownloadRequest": [
     {
-      "name": "GetGradebookGradenotationsRequest",
+      "name": "CourseGradeAttemptsDownloadRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2326,18 +3256,39 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "gradeNotationId",
+          "name": "attemptId",
           "type": "string",
-          "description": "Path parameter: gradeNotationId",
+          "description": "Path parameter: attemptId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "attemptFileId",
+          "type": "string",
+          "description": "Path parameter: attemptFileId",
           "readOnly": false,
           "required": true
         }
       ]
     }
   ],
-  "PostGradebookGradenotationsRequest": [
+  "CourseGradeNotationsGetGradeNotationsRequest": [
     {
-      "name": "PostGradebookGradenotationsRequest",
+      "name": "CourseGradeNotationsGetGradeNotationsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradeNotationsCreateGradeNotationRequest": [
+    {
+      "name": "CourseGradeNotationsCreateGradeNotationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2356,9 +3307,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGradebookGradenotationsRequest": [
+  "CourseGradeNotationsGetGradeNotationRequest": [
     {
-      "name": "DeleteGradebookGradenotationsRequest",
+      "name": "CourseGradeNotationsGetGradeNotationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2377,9 +3328,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchGradebookGradenotationsRequest": [
+  "CourseGradeNotationsDeleteGradeNotationRequest": [
     {
-      "name": "PatchGradebookGradenotationsRequest",
+      "name": "CourseGradeNotationsDeleteGradeNotationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2398,9 +3349,44 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookCategoriesRequest": [
+  "CourseGradeNotationsUpdateGradeNotationRequest": [
     {
-      "name": "GetGradebookCategoriesRequest",
+      "name": "CourseGradeNotationsUpdateGradeNotationRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "gradeNotationId",
+          "type": "string",
+          "description": "Path parameter: gradeNotationId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradebookCategoriesGetGradebookCategoriesRequest": [
+    {
+      "name": "CourseGradebookCategoriesGetGradebookCategoriesRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradebookCategoriesGetGradebookCategoryRequest": [
+    {
+      "name": "CourseGradebookCategoriesGetGradebookCategoryRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2419,9 +3405,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsGroupattemptsRequest": [
+  "CourseGradesGetColumnGroupAttemptsRequest": [
     {
-      "name": "GetGradebookColumnsGroupattemptsRequest",
+      "name": "CourseGradesGetColumnGroupAttemptsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2438,18 +3424,74 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "groupAttemptId",
+          "name": "groupId",
           "type": "string",
-          "description": "Path parameter: groupAttemptId",
+          "description": "Search for grade column group attempts submitted by this group. This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                                    |\n |------------|--------------------------------------------|\n | primary    | _123_1                                     |\n | externalId | externalId:915c7567d76d444abf1eed56aad3beb5|\n \n\n**Since**: 3100.10.0",
           "readOnly": false,
-          "required": true
+          "required": false
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for group column attempts submitted by this user.\n\n**Since**: 3900.98.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for attempts with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3900.98.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3900.98.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for attempts with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3900.98.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3900.98.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptDate",
+          "type": "string",
+          "description": "Search for attempts with attempt date relative to this value. 'attemptDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.98.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'attemptDate' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3900.98.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptStatuses",
+          "type": "string",
+          "description": "Search for grade column attempts with one of these statuses.\n\n**Since**: 3900.121.0\n\n\n| Type      | Description\n | --------- | --------- |\n| NotAttempted | none of the students in a group has submitted an attempt; applies only to group assessments |\n| Abandoned |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| InProgress | attempt activity has commenced, but has not been submitted for grading |\n| Suspended |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| Canceled |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| NeedsGrading | attempt has been submitted for grading, but has not been fully graded |\n| Completed | a grade has been entered for the attempt |\n| InMoreProgress | attempt has been graded, but more student activity occurred after the grade was entered; applies only to collaborative tools such as discussions |\n| NeedsMoreGrading | additional student activity occurring after a grade was entered requires that the attempt be regraded; applies only to collaborative tools such as discussions |\n",
+          "readOnly": false,
+          "required": false
         }
       ]
     }
   ],
-  "PostGradebookColumnsGroupattemptsRequest": [
+  "CourseGradesCreateColumnGroupAttemptRequest": [
     {
-      "name": "PostGradebookColumnsGroupattemptsRequest",
+      "name": "CourseGradesCreateColumnGroupAttemptRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2475,9 +3517,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGradebookColumnsGroupattemptsRequest": [
+  "CourseGradesGetColumnGroupAttemptRequest": [
     {
-      "name": "DeleteGradebookColumnsGroupattemptsRequest",
+      "name": "CourseGradesGetColumnGroupAttemptRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2503,9 +3545,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchGradebookColumnsGroupattemptsRequest": [
+  "CourseGradesDeleteColumnGroupAttemptRequest": [
     {
-      "name": "PatchGradebookColumnsGroupattemptsRequest",
+      "name": "CourseGradesDeleteColumnGroupAttemptRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2531,9 +3573,37 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsLogsRequest": [
+  "CourseGradesUpdateColumnGroupAttemptRequest": [
     {
-      "name": "GetGradebookColumnsLogsRequest",
+      "name": "CourseGradesUpdateColumnGroupAttemptRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupAttemptId",
+          "type": "string",
+          "description": "Path parameter: groupAttemptId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesGetCourseGradebookLogsByGradebookColumnIdRequest": [
+    {
+      "name": "CourseGradesGetCourseGradebookLogsByGradebookColumnIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2559,9 +3629,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookLogsRequest": [
+  "CourseGradesGetCourseGradebookLogsRequest": [
     {
-      "name": "GetGradebookLogsRequest",
+      "name": "CourseGradesGetCourseGradebookLogsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2580,9 +3650,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookSchemasRequest": [
+  "CourseGradesGetGradeSchemasRequest": [
     {
-      "name": "GetGradebookSchemasRequest",
+      "name": "CourseGradesGetGradeSchemasRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2590,104 +3660,13 @@ export const typeMap: TypeMap = {
           "description": "Path parameter: courseId",
           "readOnly": false,
           "required": true
-        },
-        {
-          "name": "schemaId",
-          "type": "string",
-          "description": "Path parameter: schemaId",
-          "readOnly": false,
-          "required": true
         }
       ]
     }
   ],
-  "PostGradebookSchemasRequest": [
+  "CourseGradesCreateGradeSchemaRequest": [
     {
-      "name": "PostGradebookSchemasRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteGradebookSchemasRequest": [
-    {
-      "name": "DeleteGradebookSchemasRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "schemaId",
-          "type": "string",
-          "description": "Path parameter: schemaId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PatchGradebookSchemasRequest": [
-    {
-      "name": "PatchGradebookSchemasRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "schemaId",
-          "type": "string",
-          "description": "Path parameter: schemaId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "GetGradebookColumnsRequest": [
-    {
-      "name": "GetGradebookColumnsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "columnId",
-          "type": "string",
-          "description": "Path parameter: columnId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PostGradebookColumnsRequest": [
-    {
-      "name": "PostGradebookColumnsRequest",
+      "name": "CourseGradesCreateGradeSchemaRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2706,9 +3685,198 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGradebookColumnsRequest": [
+  "CourseGradesGetGradeSchemaRequest": [
     {
-      "name": "DeleteGradebookColumnsRequest",
+      "name": "CourseGradesGetGradeSchemaRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "schemaId",
+          "type": "string",
+          "description": "Path parameter: schemaId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesDeleteGradeSchemaRequest": [
+    {
+      "name": "CourseGradesDeleteGradeSchemaRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "schemaId",
+          "type": "string",
+          "description": "Path parameter: schemaId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesUpdateGradeSchemaRequest": [
+    {
+      "name": "CourseGradesUpdateGradeSchemaRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "schemaId",
+          "type": "string",
+          "description": "Path parameter: schemaId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesGetGradeColumnsRequest": [
+    {
+      "name": "CourseGradesGetGradeColumnsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Search for grade columns associated with this content item.\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "description": "The 'displayName' value to use as search criteria.\n\nCurrently only supports 'contains' searches.\n\n**Since**: 3300.2.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The 'name' value to use as search criteria.\n\nCurrently only supports 'contains' searches.\n\n**Since**: 3900.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "gradebookCategoryId",
+          "type": "ref",
+          "description": "Search for grade columns associated with the 'gradebookCategoryId'.\n\ncomma-delimited list of the gradebook category ids.\n\n**Since**: 3900.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for grade columns with a created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3900.76.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.76.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for grade columns with a modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3900.76.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.76.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>rubricAssociations</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGradesCreateGradeColumnRequest": [
+    {
+      "name": "CourseGradesCreateGradeColumnRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesGetGradeColumnRequest": [
+    {
+      "name": "CourseGradesGetGradeColumnRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>rubricAssociations</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGradesDeleteGradeColumnRequest": [
+    {
+      "name": "CourseGradesDeleteGradeColumnRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2727,9 +3895,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchGradebookColumnsRequest": [
+  "CourseGradesUpdateGradeColumnRequest": [
     {
-      "name": "PatchGradebookColumnsRequest",
+      "name": "CourseGradesUpdateGradeColumnRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2748,9 +3916,114 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsAttemptsRequest": [
+  "CourseGradesGetColumnAttemptsRequest": [
     {
-      "name": "GetGradebookColumnsAttemptsRequest",
+      "name": "CourseGradesGetColumnAttemptsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for grade column attempts submitted by this user. This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | externalId | externalId:jsmith                     |\n | userName   | userName:jsmith                       |\n | uuid       | uuid:915c7567d76d444abf1eed56aad3beb5 |\n \n\n**Since**: 3100.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptStatuses",
+          "type": "string",
+          "description": "Search for grade column attempts with one of these statuses.\n\n**Since**: 3100.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| NotAttempted | none of the students in a group has submitted an attempt; applies only to group assessments |\n| Abandoned |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| InProgress | attempt activity has commenced, but has not been submitted for grading |\n| Suspended |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| Canceled |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| NeedsGrading | attempt has been submitted for grading, but has not been fully graded |\n| Completed | a grade has been entered for the attempt |\n| InMoreProgress | attempt has been graded, but more student activity occurred after the grade was entered; applies only to collaborative tools such as discussions |\n| NeedsMoreGrading | additional student activity occurring after a grade was entered requires that the attempt be regraded; applies only to collaborative tools such as discussions |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for attempts with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for attempts with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptDate",
+          "type": "string",
+          "description": "Search for attempts with attempt date relative to this value. 'attemptDateCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'attemptDate' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGradesCreateColumnAttemptRequest": [
+    {
+      "name": "CourseGradesCreateColumnAttemptRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesGetColumnAttemptRequest": [
+    {
+      "name": "CourseGradesGetColumnAttemptRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2776,37 +4049,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostGradebookColumnsAttemptsRequest": [
+  "CourseGradesUpdateColumnAttemptRequest": [
     {
-      "name": "PostGradebookColumnsAttemptsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "columnId",
-          "type": "string",
-          "description": "Path parameter: columnId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PatchGradebookColumnsAttemptsRequest": [
-    {
-      "name": "PatchGradebookColumnsAttemptsRequest",
+      "name": "CourseGradesUpdateColumnAttemptRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2832,9 +4077,93 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsUsersRequest": [
+  "CourseGradesGetColumnGradesRequest": [
     {
-      "name": "GetGradebookColumnsUsersRequest",
+      "name": "CourseGradesGetColumnGradesRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "changeIndex",
+          "type": "integer",
+          "description": "Retrieve only items modified after the given change index.\n\n**Since**: 3300.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "includeUnpostedGrades",
+          "type": "boolean",
+          "description": "If true, calculated columns exposed in the response will be processed such that any unposted grades are included in their calculations. If false, only posted grades will be included in calculations. Entitlements course.gradebook-grades.VIEW, course.gradebook.MODIFY and course.gradebook-grades.EXECUTE are required to use this parameter.\n\n**Since**: 3800.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "firstRelevantDate",
+          "type": "string",
+          "description": "Set the search criteria to the search value of the firstRelevantDate.\n\n**Since**: 3900.78.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "firstRelevantDateCompare",
+          "type": "string",
+          "description": "Assign the compare value to the search criteria, and it works along with the firstRelevantDate. Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastRelevantDate",
+          "type": "string",
+          "description": "Set the search criteria to the search value of the lastRelevantDate.\n\n**Since**: 3900.78.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastRelevantDateCompare",
+          "type": "string",
+          "description": "Assign the compare value to the search criteria, and it works along with the lastRelevantDate. Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGradesGetColumnGradeLastChangedRequest": [
+    {
+      "name": "CourseGradesGetColumnGradeLastChangedRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradesGetColumnGradeRequest": [
+    {
+      "name": "CourseGradesGetColumnGradeRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2860,30 +4189,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsUsersLastchangedRequest": [
+  "CourseGradesUpdateColumnGradeRequest": [
     {
-      "name": "GetGradebookColumnsUsersLastchangedRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "columnId",
-          "type": "string",
-          "description": "Path parameter: columnId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PatchGradebookColumnsUsersRequest": [
-    {
-      "name": "PatchGradebookColumnsUsersRequest",
+      "name": "CourseGradesUpdateColumnGradeRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2909,9 +4217,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookUsersRequest": [
+  "CourseGradesGetUserGradesRequest": [
     {
-      "name": "GetGradebookUsersRequest",
+      "name": "CourseGradesGetUserGradesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2926,13 +4234,83 @@ export const typeMap: TypeMap = {
           "description": "Path parameter: userId",
           "readOnly": false,
           "required": true
+        },
+        {
+          "name": "firstRelevantDate",
+          "type": "string",
+          "description": "Search for grades with a firstRelevantDate date relative to this value. 'firstRelevantDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.78.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "firstRelevantDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'firstRelevantDate' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastRelevantDate",
+          "type": "string",
+          "description": "Search for grades with a lastRelevantDate date relative to this value. 'lastRelevantDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.78.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastRelevantDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastRelevantDate' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
         }
       ]
     }
   ],
-  "GetGradebookPeriodsRequest": [
+  "CourseGradingPeriodsGetGradingPeriodsRequest": [
     {
-      "name": "GetGradebookPeriodsRequest",
+      "name": "CourseGradingPeriodsGetGradingPeriodsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties,  with an optional \"(desc)\" or \"(asc)\" suffix to request an ascending or descending sort for that property. e.g. \"title(desc),description\" Supported fields are:\n\n- id\n- title\n- position\n- dateMode\n- description\n\n**Since**: 3300.2.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGradingPeriodsCreateGradingPeriodRequest": [
+    {
+      "name": "CourseGradingPeriodsCreateGradingPeriodRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGradingPeriodsGetGradingPeriodRequest": [
+    {
+      "name": "CourseGradingPeriodsGetGradingPeriodRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2951,30 +4329,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostGradebookPeriodsRequest": [
+  "CourseGradingPeriodsDeleteGradingPeriodRequest": [
     {
-      "name": "PostGradebookPeriodsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteGradebookPeriodsRequest": [
-    {
-      "name": "DeleteGradebookPeriodsRequest",
+      "name": "CourseGradingPeriodsDeleteGradingPeriodRequest",
       "properties": [
         {
           "name": "courseId",
@@ -2993,9 +4350,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchGradebookPeriodsRequest": [
+  "CourseGradingPeriodsUpdateGradingPeriodRequest": [
     {
-      "name": "PatchGradebookPeriodsRequest",
+      "name": "CourseGradingPeriodsUpdateGradingPeriodRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3014,9 +4371,37 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGroupsUsersRequest": [
+  "CourseGroupUsersGetGroupMembershipsRequest": [
     {
-      "name": "GetGroupsUsersRequest",
+      "name": "CourseGroupUsersGetGroupMembershipsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseGroupUsersGetGroupMembershipRequest": [
+    {
+      "name": "CourseGroupUsersGetGroupMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3042,9 +4427,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutGroupsUsersRequest": [
+  "CourseGroupUsersCreateGroupMembershipRequest": [
     {
-      "name": "PutGroupsUsersRequest",
+      "name": "CourseGroupUsersCreateGroupMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3077,9 +4462,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGroupsUsersRequest": [
+  "CourseGroupUsersDeleteGroupMembershipRequest": [
     {
-      "name": "DeleteGroupsUsersRequest",
+      "name": "CourseGroupUsersDeleteGroupMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3105,9 +4490,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGroupsRequest": [
+  "CourseGroupsGetGroupsRequest": [
     {
-      "name": "GetGroupsRequest",
+      "name": "CourseGroupsGetGroupsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3117,18 +4502,81 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "groupId",
+          "name": "name",
           "type": "string",
-          "description": "Path parameter: groupId",
+          "description": "The group 'name' value to use as search criteria.  See also: nameCompare.\n\n**Since**: 3900.10.0",
           "readOnly": false,
-          "required": true
+          "required": false
+        },
+        {
+          "name": "nameCompare",
+          "type": "string",
+          "description": "Used alongside the 'name' search parameter.\n\nDefaults to StartsWith if not specified.\n\n**Since**: 3900.10.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| contains |  |\n| notContains |  |\n| startsWith |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "inGroupSet",
+          "type": "boolean",
+          "description": "Indicates whether only groups in a GroupSet (or groups NOT in a GroupSet) should be included\n\n**Since**: 3900.10.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for groups with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for groups with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "nonEmptyGroupSets",
+          "type": "boolean",
+          "description": "Search group sets whose student count is greater than 0.\n\n**Since**: 3900.71.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "onlyAvailableGroupSets",
+          "type": "boolean",
+          "description": "Search only group sets that are available.\n\n**Since**: 3900.71.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0",
+          "readOnly": false,
+          "required": false
         }
       ]
     }
   ],
-  "PostGroupsRequest": [
+  "CourseGroupsCreateGroupRequest": [
     {
-      "name": "PostGroupsRequest",
+      "name": "CourseGroupsCreateGroupRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3147,9 +4595,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGroupsSetsRequest": [
+  "CourseGroupsGetGroupSetsRequest": [
     {
-      "name": "GetGroupsSetsRequest",
+      "name": "CourseGroupsGetGroupSetsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3159,18 +4607,74 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "groupId",
+          "name": "name",
           "type": "string",
-          "description": "Path parameter: groupId",
+          "description": "The group 'name' value to use as search criteria.  See also: nameCompare.\n\n**Since**: 3900.10.0",
           "readOnly": false,
-          "required": true
+          "required": false
+        },
+        {
+          "name": "nameCompare",
+          "type": "string",
+          "description": "Used alongside the 'name' search parameter.\n\nDefaults to StartsWith if not specified.\n\n**Since**: 3900.10.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| contains |  |\n| notContains |  |\n| startsWith |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for groups with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for groups with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "nonEmptyGroupSets",
+          "type": "boolean",
+          "description": "Search group sets whose student count is greater than 0.\n\n**Since**: 3900.71.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "onlyAvailableGroupSets",
+          "type": "boolean",
+          "description": "Search only group sets that are available.\n\n**Since**: 3900.71.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0",
+          "readOnly": false,
+          "required": false
         }
       ]
     }
   ],
-  "PostGroupsSetsRequest": [
+  "CourseGroupsCreateGroupSetRequest": [
     {
-      "name": "PostGroupsSetsRequest",
+      "name": "CourseGroupsCreateGroupSetRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3189,9 +4693,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGroupsSetsRequest": [
+  "CourseGroupsGetGroupSetRequest": [
     {
-      "name": "DeleteGroupsSetsRequest",
+      "name": "CourseGroupsGetGroupSetRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3210,9 +4714,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchGroupsSetsRequest": [
+  "CourseGroupsDeleteGroupSetRequest": [
     {
-      "name": "PatchGroupsSetsRequest",
+      "name": "CourseGroupsDeleteGroupSetRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3231,9 +4735,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGroupsSetsGroupsRequest": [
+  "CourseGroupsUpdateGroupSetRequest": [
     {
-      "name": "GetGroupsSetsGroupsRequest",
+      "name": "CourseGroupsUpdateGroupSetRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseGroupsGetGroupSetChildrenRequest": [
+    {
+      "name": "CourseGroupsGetGroupSetChildrenRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3315,9 +4840,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostGroupsSetsGroupsRequest": [
+  "CourseGroupsCreateGroupSetChildRequest": [
     {
-      "name": "PostGroupsSetsGroupsRequest",
+      "name": "CourseGroupsCreateGroupSetChildRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3343,9 +4868,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteGroupsRequest": [
+  "CourseGroupsGetGroupRequest": [
     {
-      "name": "DeleteGroupsRequest",
+      "name": "CourseGroupsGetGroupRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3364,9 +4889,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchGroupsRequest": [
+  "CourseGroupsDeleteGroupRequest": [
     {
-      "name": "PatchGroupsRequest",
+      "name": "CourseGroupsDeleteGroupRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3385,9 +4910,121 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetUsersRequest": [
+  "CourseGroupsUpdateGroupRequest": [
     {
-      "name": "GetUsersRequest",
+      "name": "CourseGroupsUpdateGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseMembershipsGetCourseMembershipsRequest": [
+    {
+      "name": "CourseMembershipsGetCourseMembershipsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "description": "Search for memberships with a course role id that matches this value.\n\n**Since**: 3500.5.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for memberships with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for memberships with a modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for memberships with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastAccessed",
+          "type": "string",
+          "description": "Search for memberships with a last accessed date relative to this value.  'lastAccessedCompare' may also be sent to control search behavior.\n\n**Since**: 3300.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastAccessedCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastAccessed' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3300.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"created(desc)\" Supported fields are:\n\n- created\n- lastAccessed (Since 3300.9.0)\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CourseMembershipsGetMembershipRequest": [
+    {
+      "name": "CourseMembershipsGetMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3413,9 +5050,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutUsersRequest": [
+  "CourseMembershipsCreateMembershipRequest": [
     {
-      "name": "PutUsersRequest",
+      "name": "CourseMembershipsCreateMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3441,9 +5078,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteUsersRequest": [
+  "CourseMembershipsDeleteMembershipRequest": [
     {
-      "name": "DeleteUsersRequest",
+      "name": "CourseMembershipsDeleteMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3462,9 +5099,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchUsersRequest": [
+  "CourseMembershipsUpdateMembershipRequest": [
     {
-      "name": "PatchUsersRequest",
+      "name": "CourseMembershipsUpdateMembershipRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3483,9 +5120,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetCoursesRequest": [
+  "CourseMembershipsGetUserMembershipsRequest": [
     {
-      "name": "GetCoursesRequest",
+      "name": "CourseMembershipsGetUserMembershipsRequest",
       "properties": [
         {
           "name": "userId",
@@ -3574,9 +5211,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetMessagesRequest": [
+  "CourseMessagesGetMessagesRequest": [
     {
-      "name": "GetMessagesRequest",
+      "name": "CourseMessagesGetMessagesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3602,9 +5239,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostMessagesRequest": [
+  "CourseMessagesCreateMessageRequest": [
     {
-      "name": "PostMessagesRequest",
+      "name": "CourseMessagesCreateMessageRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3623,9 +5260,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetMessagesFoldersRequest": [
+  "CourseMessagesGetFoldersRequest": [
     {
-      "name": "GetMessagesFoldersRequest",
+      "name": "CourseMessagesGetFoldersRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3637,30 +5274,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteMessagesRequest": [
+  "CourseMessagesDeleteMessageRequest": [
     {
-      "name": "DeleteMessagesRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "messageId",
-          "type": "string",
-          "description": "Path parameter: messageId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PatchMessagesRequest": [
-    {
-      "name": "PatchMessagesRequest",
+      "name": "CourseMessagesDeleteMessageRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3679,9 +5295,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetMessagesParticipantsRequest": [
+  "CourseMessagesUpdateMessageRequest": [
     {
-      "name": "GetMessagesParticipantsRequest",
+      "name": "CourseMessagesUpdateMessageRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": "Path parameter: messageId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CourseMessagesGetMessageParticipantsRequest": [
+    {
+      "name": "CourseMessagesGetMessageParticipantsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3721,9 +5358,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetTocitemsRequest": [
+  "CourseTocGetTocItemsRequest": [
     {
-      "name": "GetTocitemsRequest",
+      "name": "CourseTocGetTocItemsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3735,9 +5372,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchTocitemsRequest": [
+  "CourseTocUpdateTocItemRequest": [
     {
-      "name": "PatchTocitemsRequest",
+      "name": "CourseTocUpdateTocItemRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3756,51 +5393,58 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetChildrenRequest": [
+  "CoursesGetCourseChildrenRequest": [
     {
-      "name": "GetChildrenRequest",
+      "name": "CoursesGetCourseChildrenRequest",
       "properties": [
         {
-          "name": "goalId",
+          "name": "courseId",
           "type": "string",
-          "description": "Path parameter: goalId",
+          "description": "Path parameter: courseId",
           "readOnly": false,
           "required": true
         },
         {
-          "name": "categoryId",
+          "name": "expand",
           "type": "string",
-          "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0",
-          "readOnly": false,
-          "required": false
-        },
-        {
-          "name": "goalSetId",
-          "type": "string",
-          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0",
-          "readOnly": false,
-          "required": false
-        },
-        {
-          "name": "type",
-          "type": "string",
-          "description": "Optional search criteria parameter to filter by goal type.\n\n**Since**: 3900.53.0",
-          "readOnly": false,
-          "required": false
-        },
-        {
-          "name": "sort",
-          "type": "string",
-          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.53.0",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>childCourse</li></ul>",
           "readOnly": false,
           "required": false
         }
       ]
     }
   ],
-  "PutChildrenRequest": [
+  "CoursesGetChildRequest": [
     {
-      "name": "PutChildrenRequest",
+      "name": "CoursesGetChildRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "childCourseId",
+          "type": "string",
+          "description": "Path parameter: childCourseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>childCourse</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CoursesAddChildCourseRequest": [
+    {
+      "name": "CoursesAddChildCourseRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3826,9 +5470,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteChildrenRequest": [
+  "CoursesRemoveChildCourseRequest": [
     {
-      "name": "DeleteChildrenRequest",
+      "name": "CoursesRemoveChildCourseRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3854,9 +5498,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetCrosslistsetRequest": [
+  "CoursesGetCrossListSetRequest": [
     {
-      "name": "GetCrosslistsetRequest",
+      "name": "CoursesGetCrossListSetRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3868,10 +5512,17 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetTasksRequest": [
+  "CoursesGetTaskRequest": [
     {
-      "name": "GetTasksRequest",
+      "name": "CoursesGetTaskRequest",
       "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
         {
           "name": "taskId",
           "type": "string",
@@ -3882,9 +5533,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostCopyRequest": [
+  "CoursesCopyCourseRequest": [
     {
-      "name": "PostCopyRequest",
+      "name": "CoursesCopyCourseRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3903,9 +5554,232 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetDiscussionsRequest": [
+  "CoursesGetCoursesRequest": [
     {
-      "name": "GetDiscussionsRequest",
+      "name": "CoursesGetCoursesRequest",
+      "properties": [
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for courses with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3500.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for courses with courseId properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for courses with name properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Search for courses with description properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for courses with externalId properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for courses with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "allowGuests",
+          "type": "boolean",
+          "description": "Search for courses which are configured to allow/disallow guest access, based on input.  Default: n/a (return courses regardless of guests allowed)\n\n**Since**: 3200.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Defaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for courses with availability.available properties that contain this value.\n\n**Since**: 3000.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for courses with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Search for courses with this termId.  This may optionally be the term's externalId using the syntax \"externalId:spring2015\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "organization",
+          "type": "boolean",
+          "description": "Search for courses by organization flag.  A value of 'true' indicates that search results should be limited to only Organizations.  A value of 'false' indicates results should be limited to Courses.  Not setting this field indicates that both Courses and Organizations should be returned.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc),created\" Supported fields are:\n\n- courseId\n- name\n- externalId\n- created\n- modified\n\n**Since**: 3400.8.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "CoursesCreateCourseRequest": [
+    {
+      "name": "CoursesCreateCourseRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CoursesGetCourseRequest": [
+    {
+      "name": "CoursesGetCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CoursesDeleteCourseRequest": [
+    {
+      "name": "CoursesDeleteCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "CoursesUpdateCourseRequest": [
+    {
+      "name": "CoursesUpdateCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DataSourcesGetDataSourcesRequest": [
+    {
+      "name": "DataSourcesGetDataSourcesRequest",
+      "properties": []
+    }
+  ],
+  "DataSourcesCreateDataSourceRequest": [
+    {
+      "name": "DataSourcesCreateDataSourceRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DataSourcesGetDataSourceRequest": [
+    {
+      "name": "DataSourcesGetDataSourceRequest",
+      "properties": [
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Path parameter: dataSourceId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DataSourcesDeleteDataSourceRequest": [
+    {
+      "name": "DataSourcesDeleteDataSourceRequest",
+      "properties": [
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Path parameter: dataSourceId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DataSourcesUpdateDataSourceRequest": [
+    {
+      "name": "DataSourcesUpdateDataSourceRequest",
+      "properties": [
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Path parameter: dataSourceId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DiscussionsGetDiscussionsRequest": [
+    {
+      "name": "DiscussionsGetDiscussionsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3915,18 +5789,32 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "discussionId",
+          "name": "sort",
           "type": "string",
-          "description": "Path parameter: discussionId",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),available\" Supported fields are:\n\n- id\n- title\n- available\n- gradable\n- createdDate\n- modifiedDate\n- gradebookColumnId\n\n**Since**: 3900.19.0",
           "readOnly": false,
-          "required": true
+          "required": false
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for forums with title properties that contain this value.  Search is case-insensitive.\n\n**Since**: 3900.25.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "gradable",
+          "type": "boolean",
+          "description": "Search for forums which are configured to be gradable or not, based on input.\n\n**Since**: 3900.25.0",
+          "readOnly": false,
+          "required": false
         }
       ]
     }
   ],
-  "PostDiscussionsRequest": [
+  "DiscussionsCreateDiscussionRequest": [
     {
-      "name": "PostDiscussionsRequest",
+      "name": "DiscussionsCreateDiscussionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3945,9 +5833,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchDiscussionsRequest": [
+  "DiscussionsGetDiscussionRequest": [
     {
-      "name": "PatchDiscussionsRequest",
+      "name": "DiscussionsGetDiscussionRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3966,9 +5854,30 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetDiscussionsGroupsRequest": [
+  "DiscussionsUpdateDiscussionRequest": [
     {
-      "name": "GetDiscussionsGroupsRequest",
+      "name": "DiscussionsUpdateDiscussionRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "discussionId",
+          "type": "string",
+          "description": "Path parameter: discussionId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DiscussionsGetDiscussionGroupsRequest": [
+    {
+      "name": "DiscussionsGetDiscussionGroupsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -3994,9 +5903,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutDiscussionsGroupsRequest": [
+  "DiscussionsCreateDiscussionGroupAssociationRequest": [
     {
-      "name": "PutDiscussionsGroupsRequest",
+      "name": "DiscussionsCreateDiscussionGroupAssociationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4029,9 +5938,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetDiscussionsMessagesRequest": [
+  "DiscussionsGetDiscussionMessagesRequest": [
     {
-      "name": "GetDiscussionsMessagesRequest",
+      "name": "DiscussionsGetDiscussionMessagesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4141,9 +6050,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostDiscussionsMessagesRequest": [
+  "DiscussionsCreateMessageRequest": [
     {
-      "name": "PostDiscussionsMessagesRequest",
+      "name": "DiscussionsCreateMessageRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4169,9 +6078,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteDiscussionsMessagesRequest": [
+  "DiscussionsDeleteMessageRequest": [
     {
-      "name": "DeleteDiscussionsMessagesRequest",
+      "name": "DiscussionsDeleteMessageRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4204,9 +6113,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchDiscussionsMessagesRequest": [
+  "DiscussionsUpdateMessageRequest": [
     {
-      "name": "PatchDiscussionsMessagesRequest",
+      "name": "DiscussionsUpdateMessageRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4232,9 +6141,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetDiscussionsMessagesRepliesRequest": [
+  "DiscussionsGetMessageRepliesRequest": [
     {
-      "name": "GetDiscussionsMessagesRepliesRequest",
+      "name": "DiscussionsGetMessageRepliesRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4351,9 +6260,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostDiscussionsMessagesRepliesRequest": [
+  "DiscussionsCreateMessageReplyRequest": [
     {
-      "name": "PostDiscussionsMessagesRepliesRequest",
+      "name": "DiscussionsCreateMessageReplyRequest",
       "properties": [
         {
           "name": "courseId",
@@ -4386,9 +6295,288 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetAlignmentsRequest": [
+  "GoalsGetCourseGoalAlignmentsRequest": [
     {
-      "name": "GetAlignmentsRequest",
+      "name": "GoalsGetCourseGoalAlignmentsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "goalId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "blogId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by blog id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by course content id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "discussionId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by discussion id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "gradebookColumnId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by gradebook column id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by message/thread id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by assessment/question id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "resourceId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by resource id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "reference",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by reference.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "rubricRowId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by rubric row id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "rubricId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by rubric id.\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by type.\n\n**Since**: 3900.62.00\n\n\n| Type      | Description\n | --------- | --------- |\n| Blog | Blog Content Type |\n| CourseContent | Course Content Type |\n| ContentCollectionResource | Content Collection Resourse Type |\n| Discussion | Discussion Content Type |\n| DiscussionThread | Message/Thread Content Type |\n| Assessment | Assessment/Question Content Type |\n| GradebookColumn | Gradebook Column Content Type |\n| RubricRow | Rubric Row Content Type |\n| Rubric | Rubric Content Type |\n| Other | Other Content Type |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n- goalId\n\n**Since**: 3900.62.00",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "GoalsGetGoalsRequest": [
+    {
+      "name": "GoalsGetGoalsRequest",
+      "properties": [
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal type.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "GoalsGetGoalSetsRequest": [
+    {
+      "name": "GoalsGetGoalSetsRequest",
+      "properties": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "GoalsGetTypesRequest": [
+    {
+      "name": "GoalsGetTypesRequest",
+      "properties": []
+    }
+  ],
+  "GoalsGetGoalSetByIdRequest": [
+    {
+      "name": "GoalsGetGoalSetByIdRequest",
+      "properties": [
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Path parameter: goalSetId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "GoalsGetCategoriesRequest": [
+    {
+      "name": "GoalsGetCategoriesRequest",
+      "properties": [
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Path parameter: goalSetId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "GoalsGetGoalSetCategoryByIdRequest": [
+    {
+      "name": "GoalsGetGoalSetCategoryByIdRequest",
+      "properties": [
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Path parameter: goalSetId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "goalSetCategoryId",
+          "type": "string",
+          "description": "Path parameter: goalSetCategoryId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "GoalsGetGoalsFromSetAndCategoryRequest": [
+    {
+      "name": "GoalsGetGoalsFromSetAndCategoryRequest",
+      "properties": [
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "goalSetCategoryId",
+          "type": "string",
+          "description": "Path parameter: goalSetCategoryId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "recursive",
+          "type": "boolean",
+          "description": "Search for child goals recursively. A value of 'true' return all top-level goals and any descendant goals. A value of 'false', only top-level goals are returned and this is the default behavior.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal type.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "GoalsGetGoalByIdRequest": [
+    {
+      "name": "GoalsGetGoalByIdRequest",
+      "properties": [
+        {
+          "name": "goalId",
+          "type": "string",
+          "description": "Path parameter: goalId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>category</li><li>goalSet</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "GoalsGetGoalAlignmentsRequest": [
+    {
+      "name": "GoalsGetGoalAlignmentsRequest",
       "properties": [
         {
           "name": "goalId",
@@ -4491,76 +6679,28 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetSetsRequest": [
+  "GoalsGetChildrenGoalsRequest": [
     {
-      "name": "GetSetsRequest",
+      "name": "GoalsGetChildrenGoalsRequest",
       "properties": [
         {
-          "name": "goalSetId",
+          "name": "goalId",
           "type": "string",
-          "description": "Path parameter: goalSetId",
+          "description": "Path parameter: goalId",
           "readOnly": false,
           "required": true
-        }
-      ]
-    }
-  ],
-  "GetSetsTypesRequest": [
-    {
-      "name": "GetSetsTypesRequest",
-      "properties": []
-    }
-  ],
-  "GetSetsCategoriesRequest": [
-    {
-      "name": "GetSetsCategoriesRequest",
-      "properties": [
-        {
-          "name": "goalSetId",
-          "type": "string",
-          "description": "Path parameter: goalSetId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "goalSetCategoryId",
-          "type": "string",
-          "description": "Path parameter: goalSetCategoryId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "GetSetsCategoriesGoalsRequest": [
-    {
-      "name": "GetSetsCategoriesGoalsRequest",
-      "properties": [
-        {
-          "name": "goalSetId",
-          "type": "string",
-          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "goalSetCategoryId",
-          "type": "string",
-          "description": "Path parameter: goalSetCategoryId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "recursive",
-          "type": "boolean",
-          "description": "Search for child goals recursively. A value of 'true' return all top-level goals and any descendant goals. A value of 'false', only top-level goals are returned and this is the default behavior.\n\n**Since**: 3900.53.0",
-          "readOnly": false,
-          "required": false
         },
         {
           "name": "categoryId",
           "type": "string",
           "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0",
           "readOnly": false,
           "required": false
         },
@@ -4581,14 +6721,14 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetNodesRequest": [
+  "InstitutionalHierarchyGetNodesForCourseRequest": [
     {
-      "name": "GetNodesRequest",
+      "name": "InstitutionalHierarchyGetNodesForCourseRequest",
       "properties": [
         {
-          "name": "userId",
+          "name": "courseId",
           "type": "string",
-          "description": "Path parameter: userId",
+          "description": "Path parameter: courseId",
           "readOnly": false,
           "required": true
         },
@@ -4602,9 +6742,23 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostNodesRequest": [
+  "InstitutionalHierarchyGetNodesRequest": [
     {
-      "name": "PostNodesRequest",
+      "name": "InstitutionalHierarchyGetNodesRequest",
+      "properties": [
+        {
+          "name": "recursive",
+          "type": "boolean",
+          "description": "Search Institutional Hierarchy Nodes recursively. If true, returns all descendant nodes of the specified Node. If false, only immediate children are returned (defualt: false)\n\n**Since**: 3800.14.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "InstitutionalHierarchyCreateNodeRequest": [
+    {
+      "name": "InstitutionalHierarchyCreateNodeRequest",
       "properties": [
         {
           "name": "body",
@@ -4616,9 +6770,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteNodesRequest": [
+  "InstitutionalHierarchyGetNodeRequest": [
     {
-      "name": "DeleteNodesRequest",
+      "name": "InstitutionalHierarchyGetNodeRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4630,9 +6784,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchNodesRequest": [
+  "InstitutionalHierarchyDeleteNodeRequest": [
     {
-      "name": "PatchNodesRequest",
+      "name": "InstitutionalHierarchyDeleteNodeRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4644,9 +6798,23 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetNodesChildrenRequest": [
+  "InstitutionalHierarchyUpdateNodeRequest": [
     {
-      "name": "GetNodesChildrenRequest",
+      "name": "InstitutionalHierarchyUpdateNodeRequest",
+      "properties": [
+        {
+          "name": "nodeId",
+          "type": "string",
+          "description": "Path parameter: nodeId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "InstitutionalHierarchyGetNodeChildrenRequest": [
+    {
+      "name": "InstitutionalHierarchyGetNodeChildrenRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4665,9 +6833,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostNodesChildrenRequest": [
+  "InstitutionalHierarchyCreateChildNodeRequest": [
     {
-      "name": "PostNodesChildrenRequest",
+      "name": "InstitutionalHierarchyCreateChildNodeRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4686,9 +6854,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetNodesCoursesRequest": [
+  "InstitutionalHierarchyGetNodeCourseAssociationsRequest": [
     {
-      "name": "GetNodesCoursesRequest",
+      "name": "InstitutionalHierarchyGetNodeCourseAssociationsRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4707,9 +6875,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutNodesCoursesRequest": [
+  "InstitutionalHierarchyCreateNodeCourseAssociationRequest": [
     {
-      "name": "PutNodesCoursesRequest",
+      "name": "InstitutionalHierarchyCreateNodeCourseAssociationRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4735,9 +6903,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteNodesCoursesRequest": [
+  "InstitutionalHierarchyDeleteNodeCourseAssociationRequest": [
     {
-      "name": "DeleteNodesCoursesRequest",
+      "name": "InstitutionalHierarchyDeleteNodeCourseAssociationRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4756,9 +6924,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchNodesCoursesRequest": [
+  "InstitutionalHierarchyUpdateNodeCourseAssociationRequest": [
     {
-      "name": "PatchNodesCoursesRequest",
+      "name": "InstitutionalHierarchyUpdateNodeCourseAssociationRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4777,9 +6945,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetNodesToolsRequest": [
+  "InstitutionalHierarchyGetToolsRequest": [
     {
-      "name": "GetNodesToolsRequest",
+      "name": "InstitutionalHierarchyGetToolsRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4798,9 +6966,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchNodesToolsRequest": [
+  "InstitutionalHierarchyPatchToolRequest": [
     {
-      "name": "PatchNodesToolsRequest",
+      "name": "InstitutionalHierarchyPatchToolRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4833,9 +7001,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetNodesUsersRequest": [
+  "InstitutionalHierarchyGetNodeUserAssociationsRequest": [
     {
-      "name": "GetNodesUsersRequest",
+      "name": "InstitutionalHierarchyGetNodeUserAssociationsRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4854,9 +7022,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutNodesUsersRequest": [
+  "InstitutionalHierarchyCreateNodeUserAssociationRequest": [
     {
-      "name": "PutNodesUsersRequest",
+      "name": "InstitutionalHierarchyCreateNodeUserAssociationRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4882,9 +7050,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteNodesUsersRequest": [
+  "InstitutionalHierarchyDeleteNodeUserAssociationRequest": [
     {
-      "name": "DeleteNodesUsersRequest",
+      "name": "InstitutionalHierarchyDeleteNodeUserAssociationRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4903,9 +7071,58 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetNodesAdminsRequest": [
+  "InstitutionalHierarchyGetNodesForUserRequest": [
     {
-      "name": "GetNodesAdminsRequest",
+      "name": "InstitutionalHierarchyGetNodesForUserRequest",
+      "properties": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>node</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "InstitutionalHierarchyAdministratorsGetNodeAdminsRequest": [
+    {
+      "name": "InstitutionalHierarchyAdministratorsGetNodeAdminsRequest",
+      "properties": [
+        {
+          "name": "nodeId",
+          "type": "string",
+          "description": "Path parameter: nodeId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- userId\n\n**Since**: 3900.37.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "InstitutionalHierarchyAdministratorsGetNodeAdminRequest": [
+    {
+      "name": "InstitutionalHierarchyAdministratorsGetNodeAdminRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4931,9 +7148,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutNodesAdminsRequest": [
+  "InstitutionalHierarchyAdministratorsSetNodeAdminAssociationRequest": [
     {
-      "name": "PutNodesAdminsRequest",
+      "name": "InstitutionalHierarchyAdministratorsSetNodeAdminAssociationRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4959,9 +7176,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteNodesAdminsRequest": [
+  "InstitutionalHierarchyAdministratorsDeleteNodeAdminRequest": [
     {
-      "name": "DeleteNodesAdminsRequest",
+      "name": "InstitutionalHierarchyAdministratorsDeleteNodeAdminRequest",
       "properties": [
         {
           "name": "nodeId",
@@ -4980,23 +7197,15 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetDomainsRequest": [
+  "LtiGetDomainConfigsRequest": [
     {
-      "name": "GetDomainsRequest",
-      "properties": [
-        {
-          "name": "domainId",
-          "type": "string",
-          "description": "Path parameter: domainId",
-          "readOnly": false,
-          "required": true
-        }
-      ]
+      "name": "LtiGetDomainConfigsRequest",
+      "properties": []
     }
   ],
-  "PostDomainsRequest": [
+  "LtiCreateDomainConfigRequest": [
     {
-      "name": "PostDomainsRequest",
+      "name": "LtiCreateDomainConfigRequest",
       "properties": [
         {
           "name": "body",
@@ -5008,9 +7217,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteDomainsRequest": [
+  "LtiGetDomainConfigRequest": [
     {
-      "name": "DeleteDomainsRequest",
+      "name": "LtiGetDomainConfigRequest",
       "properties": [
         {
           "name": "domainId",
@@ -5022,9 +7231,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchDomainsRequest": [
+  "LtiDeleteDomainConfigRequest": [
     {
-      "name": "PatchDomainsRequest",
+      "name": "LtiDeleteDomainConfigRequest",
       "properties": [
         {
           "name": "domainId",
@@ -5036,23 +7245,86 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetPlacementsRequest": [
+  "LtiUpdateDomainConfigRequest": [
     {
-      "name": "GetPlacementsRequest",
+      "name": "LtiUpdateDomainConfigRequest",
       "properties": [
         {
-          "name": "placementId",
+          "name": "domainId",
           "type": "string",
-          "description": "Path parameter: placementId",
+          "description": "Path parameter: domainId",
           "readOnly": false,
           "required": true
         }
       ]
     }
   ],
-  "PostPlacementsRequest": [
+  "LtiGetPlacementsRequest": [
     {
-      "name": "PostPlacementsRequest",
+      "name": "LtiGetPlacementsRequest",
+      "properties": [
+        {
+          "name": "handle",
+          "type": "string",
+          "description": "Search for placements with handle properties that contain this value.\n\n**Since**: 3200.12.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for placements with name properties that contain this value.\n\n**Since**: 3200.12.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Search for placements with type properties that contain this value.\n\n**Since**: 3200.12.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Application | Application or Student Tool Placement |\n| ContentHandler | Content Type placement |\n| ContentItemMessage | Content-item Message placement (see IMSGlobal spec)  **Since**: 3300.5.0 |\n| System | System-level Tools |\n| Administrator | Administrator-level Tools  **Since**: 3400.1.0 |\n| UltraUI | Ultra-UI Extensions  **Since**: 3700.6.0 |\n| BaseNavigation | Base Navigation |\n| CourseNavigation | Course Navigation |\n| Proctoring | Proctoring  **Since**: 3900.10.0 |\n| CloudDocument | Cloud Document Type Placement  **Since**: 3900.34.0 |\n| AssetProcessor | Asset Processor Type Placement |\n| OpenBadgeProvider | OpenBadge Provider Type Placement |\n| Eulalaunch | EULA Launch Type Placement |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "authorId",
+          "type": "string",
+          "description": "Search for placements with author ID properties that contain this value.\n\n**Since**: 3200.12.0\n\n**Deprecated**: since 3900.0.0; Field was never used and has been removed",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for LTI placements that are available for this course. Note this only applies to Application, ContentHandler, and ContentItemMessage types currently\n\n**Since**: 3900.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "domainId",
+          "type": "string",
+          "description": "Search for LTI placements that are associated to a specific domainId\n\n**Since**: 3900.46.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for placements with a specific availability value\n\n**Since**: 3900.46.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\"\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "LtiCreatePlacementRequest": [
+    {
+      "name": "LtiCreatePlacementRequest",
       "properties": [
         {
           "name": "body",
@@ -5064,9 +7336,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeletePlacementsRequest": [
+  "LtiGetPlacementRequest": [
     {
-      "name": "DeletePlacementsRequest",
+      "name": "LtiGetPlacementRequest",
       "properties": [
         {
           "name": "placementId",
@@ -5078,9 +7350,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchPlacementsRequest": [
+  "LtiDeletePlacementRequest": [
     {
-      "name": "PatchPlacementsRequest",
+      "name": "LtiDeletePlacementRequest",
       "properties": [
         {
           "name": "placementId",
@@ -5092,9 +7364,23 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetPerformanceContentreviewstatusRequest": [
+  "LtiUpdatePlacementRequest": [
     {
-      "name": "GetPerformanceContentreviewstatusRequest",
+      "name": "LtiUpdatePlacementRequest",
+      "properties": [
+        {
+          "name": "placementId",
+          "type": "string",
+          "description": "Path parameter: placementId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "PerformanceDashboardGetReviewStatusByCourseIdRequest": [
+    {
+      "name": "PerformanceDashboardGetReviewStatusByCourseIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5113,15 +7399,21 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetSettingsGoalperformanceScaleRequest": [
+  "PerformanceScaleGetPerformanceScaleSettingsRequest": [
     {
-      "name": "GetSettingsGoalperformanceScaleRequest",
+      "name": "PerformanceScaleGetPerformanceScaleSettingsRequest",
       "properties": []
     }
   ],
-  "GetServicesRequest": [
+  "ProctoringGetProctoringServicesRequest": [
     {
-      "name": "GetServicesRequest",
+      "name": "ProctoringGetProctoringServicesRequest",
+      "properties": []
+    }
+  ],
+  "ProctoringGetProctoringServiceRequest": [
+    {
+      "name": "ProctoringGetProctoringServiceRequest",
       "properties": [
         {
           "name": "proctoringServiceId",
@@ -5133,9 +7425,183 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsRubricsAssociationsRequest": [
+  "PronounsGetPronounsRequest": [
     {
-      "name": "GetGradebookColumnsRubricsAssociationsRequest",
+      "name": "PronounsGetPronounsRequest",
+      "properties": []
+    }
+  ],
+  "PronounsCreatePronounRequest": [
+    {
+      "name": "PronounsCreatePronounRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "PronounsDeletePronounRequest": [
+    {
+      "name": "PronounsDeletePronounRequest",
+      "properties": [
+        {
+          "name": "pronounId",
+          "type": "string",
+          "description": "Path parameter: pronounId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "PronounsUpdatePronounRequest": [
+    {
+      "name": "PronounsUpdatePronounRequest",
+      "properties": [
+        {
+          "name": "pronounId",
+          "type": "string",
+          "description": "Path parameter: pronounId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RolesGetCourseRolesRequest": [
+    {
+      "name": "RolesGetCourseRolesRequest",
+      "properties": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\"\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "custom",
+          "type": "boolean",
+          "description": "Search course roles by whether they are a custom or system generated course role.\n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "Search course roles using their roleId's.  Any course role with a roleId that contains the given string will be returned.  The search is case insensitive.\n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "RolesGetCourseRoleRequest": [
+    {
+      "name": "RolesGetCourseRoleRequest",
+      "properties": [
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "The course role ID.  This may be the primary ID, or the roleId. The suffix \":custom\" will be appended to the roleId of a custom course role if that roleId conflicts with the roleId of a system generated course role.  For example, if a custom role roleId is specified as \"Student\" then the roleId will actually be \"Student:custom\" since there is already a system generated course role with the roleId of \"Student\".  \n\n | ID type    | Examples                                                   |\n |------------|------------------------------------------------------------|\n | primary    | _123_1                                                     |\n | roleId     | roleId:Student, roleId:MyCustomRole, roleId:Student:custom |\n \n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RolesGetInstitutionRolesRequest": [
+    {
+      "name": "RolesGetInstitutionRolesRequest",
+      "properties": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"roleId(desc)\" Supported fields are:\n\n- roleId\n- custom\n\n**Since**: 3300.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "Search for institution roles with roleId properties that contain this value.\n\n**Since**: 3300.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "custom",
+          "type": "boolean",
+          "description": "Search for institution roles by custom flag.  A value of 'true' indicates that search results should be limited to only custom roles.  A value of 'false' indicates results should be limited to built-in roles.  Not setting this field indicates that all institution roles should be returned.\n\n**Since**: 3300.4.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "RolesGetInstitutionRoleRequest": [
+    {
+      "name": "RolesGetInstitutionRoleRequest",
+      "properties": [
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "The institution role ID.  This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | roleId     | roleId:STUDENT                        |\n \n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RolesGetSystemRolesRequest": [
+    {
+      "name": "RolesGetSystemRolesRequest",
+      "properties": [
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "Search for system roles with roleId\n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "custom",
+          "type": "boolean",
+          "description": "Search for system roles by custom flag.  A value of 'true' indicates that search results should be limited to only custom roles.  A value of 'false' indicates results should be limited to built-in roles.  Not setting this field indicates that all system roles should be returned.\n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"roleId(desc)\"\n\nSupported fields are:\n\n<ul - roleId\n- custom\n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "RolesGetSystemRoleRequest": [
+    {
+      "name": "RolesGetSystemRoleRequest",
+      "properties": [
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "The System Role ID.  This may be the primary ID, or the secondary roleId type. The suffix \":custom\" will be appended to the roleId of a custom system role if that roleId conflicts with the roleId of a system generated role.  For example, if a custom role roleId is specified as \"Guest\" then the roleId will actually be \"Guest:custom\" since there is already a system generated role with the roleId of \"Guest\". \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | roleId     | roleId:column1                        |\n \n\n**Since**: 3300.5.0",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RubricAssociationsGetRubricAssociationsByColumnIdRequest": [
+    {
+      "name": "RubricAssociationsGetRubricAssociationsByColumnIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5154,9 +7620,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetRubricsAssociationsRequest": [
+  "RubricAssociationsGetRubricAssociationsRequest": [
     {
-      "name": "GetRubricsAssociationsRequest",
+      "name": "RubricAssociationsGetRubricAssociationsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5173,18 +7639,18 @@ export const typeMap: TypeMap = {
           "required": true
         },
         {
-          "name": "rubricAssociationId",
+          "name": "sort",
           "type": "string",
-          "description": "Path parameter: rubricAssociationId",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\"\n\n**Since**: 3100.0.0",
           "readOnly": false,
-          "required": true
+          "required": false
         }
       ]
     }
   ],
-  "PostRubricsAssociationsRequest": [
+  "RubricAssociationsCreateRubricAssociationRequest": [
     {
-      "name": "PostRubricsAssociationsRequest",
+      "name": "RubricAssociationsCreateRubricAssociationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5210,9 +7676,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteRubricsAssociationsRequest": [
+  "RubricAssociationsGetRubricAssociationByIdRequest": [
     {
-      "name": "DeleteRubricsAssociationsRequest",
+      "name": "RubricAssociationsGetRubricAssociationByIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5238,9 +7704,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchRubricsAssociationsRequest": [
+  "RubricAssociationsDeleteRubricAssociationRequest": [
     {
-      "name": "PatchRubricsAssociationsRequest",
+      "name": "RubricAssociationsDeleteRubricAssociationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5266,9 +7732,37 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsAttemptsRubricEvaluationsRequest": [
+  "RubricAssociationsUpdateRubricAssociationRequest": [
     {
-      "name": "GetGradebookColumnsAttemptsRubricEvaluationsRequest",
+      "name": "RubricAssociationsUpdateRubricAssociationRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "rubricId",
+          "type": "string",
+          "description": "Path parameter: rubricId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "rubricAssociationId",
+          "type": "string",
+          "description": "Path parameter: rubricAssociationId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RubricEvaluationsGetRubricEvaluationsRequest": [
+    {
+      "name": "RubricEvaluationsGetRubricEvaluationsRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5301,9 +7795,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetGradebookColumnsGroupattemptsRubricEvaluationsRequest": [
+  "RubricEvaluationsGetRubricEvaluations2Request": [
     {
-      "name": "GetGradebookColumnsGroupattemptsRubricEvaluationsRequest",
+      "name": "RubricEvaluationsGetRubricEvaluations2Request",
       "properties": [
         {
           "name": "courseId",
@@ -5336,9 +7830,79 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetRubricsAssociationsEvaluationsRequest": [
+  "RubricEvaluationsGetRubricEvaluations3Request": [
     {
-      "name": "GetRubricsAssociationsEvaluationsRequest",
+      "name": "RubricEvaluationsGetRubricEvaluations3Request",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "rubricId",
+          "type": "string",
+          "description": "Path parameter: rubricId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "rubricAssociationId",
+          "type": "string",
+          "description": "Path parameter: rubricAssociationId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.69.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "RubricEvaluationsCreateRubricEvaluationsRequest": [
+    {
+      "name": "RubricEvaluationsCreateRubricEvaluationsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "rubricId",
+          "type": "string",
+          "description": "Path parameter: rubricId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "rubricAssociationId",
+          "type": "string",
+          "description": "Path parameter: rubricAssociationId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RubricEvaluationsGetRubricEvaluationByIdRequest": [
+    {
+      "name": "RubricEvaluationsGetRubricEvaluationByIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5378,44 +7942,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostRubricsAssociationsEvaluationsRequest": [
+  "RubricEvaluationsUpdateRubricEvaluationRequest": [
     {
-      "name": "PostRubricsAssociationsEvaluationsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "rubricId",
-          "type": "string",
-          "description": "Path parameter: rubricId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "rubricAssociationId",
-          "type": "string",
-          "description": "Path parameter: rubricAssociationId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "PatchRubricsAssociationsEvaluationsRequest": [
-    {
-      "name": "PatchRubricsAssociationsEvaluationsRequest",
+      "name": "RubricEvaluationsUpdateRubricEvaluationRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5448,9 +7977,44 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetRubricsRequest": [
+  "RubricsGetRubricsRequest": [
     {
-      "name": "GetRubricsRequest",
+      "name": "RubricsGetRubricsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RubricsCreateRubricRequest": [
+    {
+      "name": "RubricsCreateRubricRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "RubricsGetRubricByIdRequest": [
+    {
+      "name": "RubricsGetRubricByIdRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5476,30 +8040,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PostRubricsRequest": [
+  "RubricsDeleteRubricRequest": [
     {
-      "name": "PostRubricsRequest",
-      "properties": [
-        {
-          "name": "courseId",
-          "type": "string",
-          "description": "Path parameter: courseId",
-          "readOnly": false,
-          "required": true
-        },
-        {
-          "name": "body",
-          "type": "object",
-          "description": "Request body data",
-          "readOnly": false,
-          "required": true
-        }
-      ]
-    }
-  ],
-  "DeleteRubricsRequest": [
-    {
-      "name": "DeleteRubricsRequest",
+      "name": "RubricsDeleteRubricRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5518,9 +8061,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PatchRubricsRequest": [
+  "RubricsUpdateRubricRequest": [
     {
-      "name": "PatchRubricsRequest",
+      "name": "RubricsUpdateRubricRequest",
       "properties": [
         {
           "name": "courseId",
@@ -5539,23 +8082,29 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetSessionsRequest": [
+  "SessionsGetLoginAsSessionsRequest": [
     {
-      "name": "GetSessionsRequest",
+      "name": "SessionsGetLoginAsSessionsRequest",
+      "properties": []
+    }
+  ],
+  "SessionsGetActiveSessionsRequest": [
+    {
+      "name": "SessionsGetActiveSessionsRequest",
       "properties": [
         {
-          "name": "userId",
+          "name": "expand",
           "type": "string",
-          "description": "Path parameter: userId",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>",
           "readOnly": false,
-          "required": true
+          "required": false
         }
       ]
     }
   ],
-  "GetSisDatasetsRequest": [
+  "SISLogsGetSisLogsByDataSetUidRequest": [
     {
-      "name": "GetSisDatasetsRequest",
+      "name": "SISLogsGetSisLogsByDataSetUidRequest",
       "properties": [
         {
           "name": "id",
@@ -5567,27 +8116,264 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetInfoRequest": [
+  "SystemGetInfoRequest": [
     {
-      "name": "GetInfoRequest",
+      "name": "SystemGetInfoRequest",
       "properties": []
     }
   ],
-  "GetPoliciesPrivacyRequest": [
+  "SystemGetPoliciesRequest": [
     {
-      "name": "GetPoliciesPrivacyRequest",
+      "name": "SystemGetPoliciesRequest",
       "properties": []
     }
   ],
-  "GetSettingsRequest": [
+  "SystemGetSystemTaskRequest": [
     {
-      "name": "GetSettingsRequest",
+      "name": "SystemGetSystemTaskRequest",
+      "properties": [
+        {
+          "name": "taskId",
+          "type": "string",
+          "description": "Path parameter: taskId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "SystemGetVersionRequest": [
+    {
+      "name": "SystemGetVersionRequest",
       "properties": []
     }
   ],
-  "GetAvatarRequest": [
+  "TermsGetTermsRequest": [
     {
-      "name": "GetAvatarRequest",
+      "name": "TermsGetTermsRequest",
+      "properties": [
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for term with externalId properties that contain this value.\n\n**Since**: 3100.6.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for term with this dataSourceId.\n\n**Since**: 3100.6.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.6.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the term and the courses it contains. |\n| No | Students may not access the term or the courses it contains. |\n",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "TermsCreateTermRequest": [
+    {
+      "name": "TermsCreateTermRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "TermsGetTermRequest": [
+    {
+      "name": "TermsGetTermRequest",
+      "properties": [
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Path parameter: termId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "TermsDeleteTermRequest": [
+    {
+      "name": "TermsDeleteTermRequest",
+      "properties": [
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Path parameter: termId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "TermsUpdateTermRequest": [
+    {
+      "name": "TermsUpdateTermRequest",
+      "properties": [
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Path parameter: termId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UploadsUploadRequest": [
+    {
+      "name": "UploadsUploadRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UploadsGetSettingsRequest": [
+    {
+      "name": "UploadsGetSettingsRequest",
+      "properties": []
+    }
+  ],
+  "UsersGetUsersRequest": [
+    {
+      "name": "UsersGetUsersRequest",
+      "properties": [
+        {
+          "name": "userName",
+          "type": "string",
+          "description": "Search for users with userName properties that contain this value.\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for users with externalId properties that contain this value.\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for users with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for users with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3700.1.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastLogin",
+          "type": "string",
+          "description": "Search for users with a last login date relative to this value.  'lastLoginCompare' may also be sent to control search behavior. A user who has never logged in would have a null last login date.  This is not considered to be greater than, less than, or equal to a valid date. Such users will be filtered out any time this filter is used.\n\n**Since**: 3900.9.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3000.11.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "lastLoginCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastLoginDate' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for users with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "institutionRoleIds",
+          "type": "ref",
+          "description": "Search for users with the specified institutionRoleIds.  This may be a comma separated list of institution role ids.\n\n**Since**: 3900.61.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "name.family",
+          "type": "string",
+          "description": "Search for users with name.family properties that contain this value.\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "description": "Search for users with the specified studentId.\n\n**Since**: 3900.80.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "contact.email",
+          "type": "string",
+          "description": "Search for users with the specified contact.email value. Only users with the entitlement \"system.user.properties.MODIFY\" are allowed to filter by this attribute, the query parameter is ignored otherwise.\n\n**Since**: 3900.80.00",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\" Supported fields are:\n\n- userName\n- name.family\n- externalId\n- dataSourceId\n- created\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "UsersCreateUserRequest": [
+    {
+      "name": "UsersCreateUserRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UsersGetUserRequest": [
+    {
+      "name": "UsersGetUserRequest",
       "properties": [
         {
           "name": "userId",
@@ -5599,9 +8385,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetObserveesRequest": [
+  "UsersDeleteUserRequest": [
     {
-      "name": "GetObserveesRequest",
+      "name": "UsersDeleteUserRequest",
       "properties": [
         {
           "name": "userId",
@@ -5613,9 +8399,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetObserversRequest": [
+  "UsersUpdateUserRequest": [
     {
-      "name": "GetObserversRequest",
+      "name": "UsersUpdateUserRequest",
       "properties": [
         {
           "name": "userId",
@@ -5627,9 +8413,51 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "PutObserversRequest": [
+  "UsersGetUserAvatarRequest": [
     {
-      "name": "PutObserversRequest",
+      "name": "UsersGetUserAvatarRequest",
+      "properties": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UsersGetObserveesRequest": [
+    {
+      "name": "UsersGetObserveesRequest",
+      "properties": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UsersGetObserversRequest": [
+    {
+      "name": "UsersGetObserversRequest",
+      "properties": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UsersCreateObserverRequest": [
+    {
+      "name": "UsersCreateObserverRequest",
       "properties": [
         {
           "name": "userId",
@@ -5655,9 +8483,9 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "DeleteObserversRequest": [
+  "UsersDeleteObserverRequest": [
     {
-      "name": "DeleteObserversRequest",
+      "name": "UsersDeleteObserverRequest",
       "properties": [
         {
           "name": "userId",
@@ -5676,14 +8504,882 @@ export const typeMap: TypeMap = {
       ]
     }
   ],
-  "GetPronunciationaudioRequest": [
+  "UsersGetUserPronunciationAudioRequest": [
     {
-      "name": "GetPronunciationaudioRequest",
+      "name": "UsersGetUserPronunciationAudioRequest",
       "properties": [
         {
           "name": "userId",
           "type": "string",
           "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "UsersGetCurrentActiveUserByIdRequest": [
+    {
+      "name": "UsersGetCurrentActiveUserByIdRequest",
+      "properties": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetGradeColumnsRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetGradeColumnsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Search for grade columns associated with this content item.\n\n**Since**: 3000.11.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesCreateGradeColumnRequest": [
+    {
+      "name": "DeprecatedCourseGradesCreateGradeColumnRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetGradeColumnRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetGradeColumnRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesDeleteGradeColumnRequest": [
+    {
+      "name": "DeprecatedCourseGradesDeleteGradeColumnRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesUpdateGradeColumnRequest": [
+    {
+      "name": "DeprecatedCourseGradesUpdateGradeColumnRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetColumnAttemptsRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetColumnAttemptsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for grade column attempts submitted by this user. This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | externalId | externalId:jsmith                     |\n | userName   | userName:jsmith                       |\n | uuid       | uuid:915c7567d76d444abf1eed56aad3beb5 |\n \n\n**Since**: 3100.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptStatuses",
+          "type": "string",
+          "description": "Search for grade column attempts with one of these statuses.\n\n**Since**: 3100.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| NotAttempted | none of the students in a group has submitted an attempt; applies only to group assessments |\n| Abandoned |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| InProgress | attempt activity has commenced, but has not been submitted for grading |\n| Suspended |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| Canceled |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| NeedsGrading | attempt has been submitted for grading, but has not been fully graded |\n| Completed | a grade has been entered for the attempt |\n| InMoreProgress | attempt has been graded, but more student activity occurred after the grade was entered; applies only to collaborative tools such as discussions |\n| NeedsMoreGrading | additional student activity occurring after a grade was entered requires that the attempt be regraded; applies only to collaborative tools such as discussions |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for attempts with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for attempts with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptDate",
+          "type": "string",
+          "description": "Search for attempts with attempt date relative to this value. 'attemptDateCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "attemptDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'attemptDate' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetColumnAttemptRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetColumnAttemptRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": "Path parameter: attemptId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetColumnGradesRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetColumnGradesRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetColumnGradeRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetColumnGradeRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesUpdateColumnGradeRequest": [
+    {
+      "name": "DeprecatedCourseGradesUpdateColumnGradeRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": "Path parameter: columnId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGradesGetUserGradesRequest": [
+    {
+      "name": "DeprecatedCourseGradesGetUserGradesRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupUsersGetGroupMembershipsRequest": [
+    {
+      "name": "DeprecatedCourseGroupUsersGetGroupMembershipsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupUsersGetGroupMembershipRequest": [
+    {
+      "name": "DeprecatedCourseGroupUsersGetGroupMembershipRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupUsersCreateGroupMembershipRequest": [
+    {
+      "name": "DeprecatedCourseGroupUsersCreateGroupMembershipRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupUsersDeleteGroupMembershipRequest": [
+    {
+      "name": "DeprecatedCourseGroupUsersDeleteGroupMembershipRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Path parameter: userId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupsGetGroupsRequest": [
+    {
+      "name": "DeprecatedCourseGroupsGetGroupsRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupsCreateGroupRequest": [
+    {
+      "name": "DeprecatedCourseGroupsCreateGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupsGetGroupRequest": [
+    {
+      "name": "DeprecatedCourseGroupsGetGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupsDeleteGroupRequest": [
+    {
+      "name": "DeprecatedCourseGroupsDeleteGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCourseGroupsUpdateGroupRequest": [
+    {
+      "name": "DeprecatedCourseGroupsUpdateGroupRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Path parameter: groupId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesGetCoursesRequest": [
+    {
+      "name": "DeprecatedCoursesGetCoursesRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for courses with courseId properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for courses with name properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Search for courses with description properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for courses with externalId properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for courses with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "allowGuests",
+          "type": "boolean",
+          "description": "Search for courses which are configured to allow/disallow guest access, based on input.  Default: n/a (return courses regardless of guests allowed)\n\n**Since**: 3200.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Defaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for courses with availability.available properties that contain this value.\n\n**Since**: 3000.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for courses with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Search for courses with this termId.  This may optionally be the term's externalId using the syntax \"externalId:spring2015\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "organization",
+          "type": "boolean",
+          "description": "Search for courses by organization flag.  A value of 'true' indicates that search results should be limited to only Organizations.  A value of 'false' indicates results should be limited to Courses.  Not setting this field indicates that both Courses and Organizations should be returned.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc),created\" Supported fields are:\n\n- courseId\n- name\n- externalId\n- created\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesCreateCourseRequest": [
+    {
+      "name": "DeprecatedCoursesCreateCourseRequest",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesGetCourseRequest": [
+    {
+      "name": "DeprecatedCoursesGetCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesDeleteCourseRequest": [
+    {
+      "name": "DeprecatedCoursesDeleteCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesUpdateCourseRequest": [
+    {
+      "name": "DeprecatedCoursesUpdateCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesCopyCourseRequest": [
+    {
+      "name": "DeprecatedCoursesCopyCourseRequest",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        },
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesGetCourses2Request": [
+    {
+      "name": "DeprecatedCoursesGetCourses2Request",
+      "properties": [
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for courses with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.4.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3500.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for courses with courseId properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for courses with name properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Search for courses with description properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for courses with externalId properties that contain this value.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for courses with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "allowGuests",
+          "type": "boolean",
+          "description": "Search for courses which are configured to allow/disallow guest access, based on input.  Default: n/a (return courses regardless of guests allowed)\n\n**Since**: 3200.3.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Defaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for courses with availability.available properties that contain this value.\n\n**Since**: 3000.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for courses with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Search for courses with this termId.  This may optionally be the term's externalId using the syntax \"externalId:spring2015\".\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "organization",
+          "type": "boolean",
+          "description": "Search for courses by organization flag.  A value of 'true' indicates that search results should be limited to only Organizations.  A value of 'false' indicates results should be limited to Courses.  Not setting this field indicates that both Courses and Organizations should be returned.\n\n**Since**: 3100.0.0",
+          "readOnly": false,
+          "required": false
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc),created\" Supported fields are:\n\n- courseId\n- name\n- externalId\n- created\n- modified\n\n**Since**: 3400.8.0",
+          "readOnly": false,
+          "required": false
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesCreateCourse2Request": [
+    {
+      "name": "DeprecatedCoursesCreateCourse2Request",
+      "properties": [
+        {
+          "name": "body",
+          "type": "object",
+          "description": "Request body data",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesGetCourse2Request": [
+    {
+      "name": "DeprecatedCoursesGetCourse2Request",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesDeleteCourse2Request": [
+    {
+      "name": "DeprecatedCoursesDeleteCourse2Request",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
+          "readOnly": false,
+          "required": true
+        }
+      ]
+    }
+  ],
+  "DeprecatedCoursesUpdateCourse2Request": [
+    {
+      "name": "DeprecatedCoursesUpdateCourse2Request",
+      "properties": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Path parameter: courseId",
           "readOnly": false,
           "required": true
         }

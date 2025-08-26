@@ -1,50 +1,35 @@
 import { ApiInfo, ApiEndpoint } from '../api-types.js';
 
 /**
- * API map for all Square API endpoints
+ * API map for all Blackboard Learn API endpoints
  */
 export const apiMap: ApiInfo[] = [
   {
     "api": {
-      "name": "Apple Pay",
-      "description": "\nThe Apple Pay APIs provides an easy way for platform developers\nto bulk activate Web Apple Pay with Square for merchants using their platform.\n\nFor more information, see the following guides:\n- [Web Payments SDK](https://developer.squareup.com/docs/web-payments/apple-pay)\n- [In-App Payments SDK](https://developer.squareup.com/docs/in-app-payments-sdk/add-digital-wallets/apple-pay)"
+      "name": "Oauth",
+      "description": "Blackboard Learn oauth API provides endpoints for managing oauth related operations."
     },
     "endpoint": {
-      "name": "RegisterDomain",
-      "description": "A validation\nis performed on this domain by Apple to ensure that it is properly set up as\nan Apple Pay enabled domain.\n\nThis endpoint provides an easy way for platform developers to bulk activate\nApple Pay on the Web with Square for merchants using their platform.\n\nNote: You will need to host a valid domain verification file on your domain to support Apple Pay.  The\ncurrent version of this file is always available at https://app.squareup.com/digital-wallets/apple-pay/apple-developer-merchantid-domain-association,\nand should be hosted at `.well_known/apple-developer-merchantid-domain-association` on your\ndomain.  This file is subject to change; we strongly recommend checking for updates regularly and avoiding\nlong-lived caches that might not keep in sync with the correct file version.\n\nTo learn more about the Web Payments SDK and how to add Apple Pay, see [Take an Apple Pay Payment](https://developer.squareup.com/docs/web-payments/apple-pay).",
-      "method": "post",
-      "path": "/v2/apple-pay/domains",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bank Accounts",
-      "description": "\nThe Bank Accounts API allows you to get basic details about a seller's bank account, such as the\nlast few digits of the account number and the routing number. It can be paired with the Payouts API to understand the\npattern of deposits and withdrawals from a seller's bank account.\n\nFor more information, see the following guides:\n - [Bank Accounts](https://developer.squareup.com/docs/bank-accounts-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "ListBankAccounts",
+      "name": "GetOauth2Authorizationcode",
+      "description": "Requests an OAuth 2 authorization code. Use of PKCE standard is optional, but highly recommended.\n\n**Since**: 3200.7.0",
       "method": "get",
-      "path": "/v2/bank-accounts",
+      "path": "/learn/api/public/v1/oauth2/authorizationcode",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "cursor",
+          "name": "code_challenge",
           "type": "string",
-          "description": "The pagination cursor returned by a previous call to this endpoint.\nUse it in the next `ListBankAccounts` request to retrieve the next set \nof results.\n\nSee the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information."
+          "description": "A code challenge to verify credentials along with the granted authorization code. It is used with the PKCE standard.\n\n**Since**: 3700.4.0"
         },
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "Upper limit on the number of bank accounts to return in the response. \nCurrently, 1000 is the largest supported limit. You can specify a limit \nof up to 1000 bank accounts. This is also the default limit."
+          "name": "code_challenge_method",
+          "type": "string",
+          "description": "This is the method used to verify the code challenge using the PKCE standard. Blackboard only supports s256 as the code challenge method.\n\n**Since**: 3700.4.0"
         },
         {
-          "name": "location_id",
+          "name": "one_time_session_token",
           "type": "string",
-          "description": "Location ID. You can specify this optional filter \nto retrieve only the linked bank accounts belonging to a specific location."
+          "description": "Token used to retrieve the session that generated this Oauth2 Code request. Used when session cookies are not sent due to privacy settings of the browser.\n\n**Since**: 3900.13.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -53,67 +38,30 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Bank Accounts",
-      "description": "\nThe Bank Accounts API allows you to get basic details about a seller's bank account, such as the\nlast few digits of the account number and the routing number. It can be paired with the Payouts API to understand the\npattern of deposits and withdrawals from a seller's bank account.\n\nFor more information, see the following guides:\n - [Bank Accounts](https://developer.squareup.com/docs/bank-accounts-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Oauth",
+      "description": "Blackboard Learn oauth API provides endpoints for managing oauth related operations."
     },
     "endpoint": {
-      "name": "GetBankAccountByV1Id",
-      "method": "get",
-      "path": "/v2/bank-accounts/by-v1-id/{v1_bank_account_id}",
-      "pathParameters": [
-        {
-          "name": "v1_bank_account_id",
-          "type": "string",
-          "description": "Connect V1 ID of the desired `BankAccount`. For more information, see \n[Retrieve a bank account by using an ID issued by V1 Bank Accounts API](https://developer.squareup.com/docs/bank-accounts-api#retrieve-a-bank-account-by-using-an-id-issued-by-v1-bank-accounts-api)."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bank Accounts",
-      "description": "\nThe Bank Accounts API allows you to get basic details about a seller's bank account, such as the\nlast few digits of the account number and the routing number. It can be paired with the Payouts API to understand the\npattern of deposits and withdrawals from a seller's bank account.\n\nFor more information, see the following guides:\n - [Bank Accounts](https://developer.squareup.com/docs/bank-accounts-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "GetBankAccount",
-      "method": "get",
-      "path": "/v2/bank-accounts/{bank_account_id}",
-      "pathParameters": [
-        {
-          "name": "bank_account_id",
-          "type": "string",
-          "description": "Square-issued ID of the desired `BankAccount`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "ListBookingCustomAttributeDefinitions",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/bookings/custom-attribute-definitions",
+      "name": "PostOauth2Token",
+      "description": "Requests an OAuth 2 access token.\n\n**Since**: 2015.11.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/oauth2/token",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
+          "name": "redirect_uri",
+          "type": "string",
+          "description": "The redirectUri to send the end user to once an access token response is made in Oauth2 Authorization Code Workflow\n\n**Since**: 3200.7.0"
         },
         {
-          "name": "cursor",
+          "name": "refresh_token",
           "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
+          "description": "The refresh token granted for use by an application in Oauth2 Refresh Token Workflow\n\n**Since**: 3200.7.0"
+        },
+        {
+          "name": "code_verifier",
+          "type": "string",
+          "description": "The code_verifier to be passed along with authorization code if PKCE standard was used to grant the authorization code.\n\n**Since**: 3700.4.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -122,14 +70,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Oauth",
+      "description": "Blackboard Learn oauth API provides endpoints for managing oauth related operations."
     },
     "endpoint": {
-      "name": "CreateBookingCustomAttributeDefinition",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
-      "method": "post",
-      "path": "/v2/bookings/custom-attribute-definitions",
+      "name": "GetOauth2Tokeninfo",
+      "description": "Requests an OAuth 2 access token info.\n\n**Since**: 3700.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/oauth2/tokeninfo",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -138,86 +86,74 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "DeleteBookingCustomAttributeDefinition",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
+      "name": "GetCoursesContentsAdaptivereleaseRules",
+      "description": "Get all the adaptive release rules associated with the given content in the specified course. Users with all the following entitlements may access this resource:\n\n- course.adaptiverelease.VIEW\nThe requesting user must also be enrolled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.23.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.23.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesContentsAdaptivereleaseRules",
+      "description": "Create a new adaptive release rule with the given title. Users with all the following entitlements may access this resource:\n\n- course.content.availability.MODIFY\n- course.adaptiverelease.CREATE\nThe requesting user must also be enrolled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.23.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules",
+      "pathParameters": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsAdaptivereleaseRules",
+      "description": "Get the adaptive release rule associated with the given content in the specified course corresponding to the rule id. Users with all the following entitlements may access this resource:\n\n- course.adaptiverelease.VIEW\nThe requesting user must also be enrolled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.23.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesContentsAdaptivereleaseRules",
+      "description": "Delete an adaptive release rule. Users with all the following entitlements may access this resource:\n\n- course.content.availability.MODIFY\n- course.adaptiverelease.DELETE\n\n**Since**: 3900.28.0",
       "method": "delete",
-      "path": "/v2/bookings/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveBookingCustomAttributeDefinition",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/bookings/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to retrieve. If the requesting application\nis not the definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute definition, which is used for strongly consistent\nreads to guarantee that you receive the most up-to-date data. When included in the request,\nSquare returns the specified version or a higher version if one exists. If the specified version\nis higher than the current version, Square returns a `BAD_REQUEST` error."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "UpdateBookingCustomAttributeDefinition",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
-      "method": "put",
-      "path": "/v2/bookings/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "BulkDeleteBookingCustomAttributes",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
-      "method": "post",
-      "path": "/v2/bookings/custom-attributes/bulk-delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -226,14 +162,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "BulkUpsertBookingCustomAttributes",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
-      "method": "post",
-      "path": "/v2/bookings/custom-attributes/bulk-upsert",
+      "name": "PatchCoursesContentsAdaptivereleaseRules",
+      "description": "Updates an adaptive release rule. Users with all the following entitlements may update this resource:\n\n- course.content.availability.MODIFY\n- course.adaptiverelease.MODIFY\nThe requesting user must also be enrolled in the course, or have the system.course.MODIFY entitlement in order to update adaptive release rules.\n\n**Since**: 3900.28.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -242,36 +178,20 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "ListBookingCustomAttributes",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
+      "name": "GetCoursesContentsAdaptivereleaseRulesCriteria",
+      "description": "Get the criteria list from the adaptive release rule associated with the given content in the specified course corresponding to the rule id Users with all of the following entitlements may access this resource:\n\n- course.content.VIEW\n- course.adaptiverelease.VIEW\nNote: ACL criteria is not fully supported by this API.\n\n**Since**: 3900.23.0",
       "method": "get",
-      "path": "/v2/bookings/{booking_id}/custom-attributes",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the target [booking](entity:Booking)."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria",
+      "pathParameters": [],
       "queryParameters": [
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "cursor",
+          "name": "sort",
           "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request. For more\ninformation, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "with_definitions",
-          "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each\ncustom attribute. Set this parameter to `true` to get the name and description of each custom\nattribute, information about the data type, or other definition details. The default value is `false`."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.23.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -280,26 +200,47 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "DeleteBookingCustomAttribute",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
+      "name": "PostCoursesContentsAdaptivereleaseRulesCriteria",
+      "description": "Create a new adaptive release rule criteria. Users with the following entitlements may create resources. For each criteria type the corresponding entitlement is checked:\n\n- course.adaptiverelease.CREATE\n- course.content.availability.MODIFY\n- course.adaptiverelease.acl.CREATE\n- course.adaptiverelease.dates.CREATE\n- course.adaptiverelease.performance.CREATE\nNote: ACL criteria is not fully supported by this API.\n\n**Since**: 3900.23.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsAdaptivereleaseRulesCriteria",
+      "description": "Get a single criterion by the specified Id, from the adaptive release rule associated to the given content Users with all of the following entitlements may access this resource:\n\n- course.content.VIEW\n- course.adaptiverelease.VIEW\nNote: ACL criteria is not fully supported by this API.\n\n**Since**: 3900.23.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesContentsAdaptivereleaseRulesCriteria",
+      "description": "Delete a single criterion by the specified Id, from the adaptive release rule associated to the given content. Users with the following entitlements may delete the resource:\n\n- system.course.MODIFY\n- course.adaptiverelease.DELETE\n- course.content.availability.MODIFY\nUser may need one of the following entitlements depending on the criterion being deleted:\n\n- course.adaptiverelease.acl.DELETE\n- course.adaptiverelease.dates.DELETE\n- course.adaptiverelease.performance.DELETE\n\n**Since**: 3900.28.0",
       "method": "delete",
-      "path": "/v2/bookings/{booking_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the target [booking](entity:Booking)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to delete. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -307,36 +248,36 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "RetrieveBookingCustomAttribute",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
+      "name": "PatchCoursesContentsAdaptivereleaseRulesCriteria",
+      "description": "Update a single criterion by the specified Id, from the adaptive release rule associated to the given content. Users with the following entitlements may update the resource:\n\n- system.course.MODIFY\n- course.adaptiverelease.MODIFY\n- course.content.availability.MODIFY\nUser may need one of the following entitlements depending on the criterion being updated:\n\n- course.adaptiverelease.acl.MODIFY\n- course.adaptiverelease.dates.MODIFY\n- course.adaptiverelease.performance.MODIFY\nFor updating criteria of type {@link GradeCompletedCriteria}, user may need any one of the following entitlements:\n\n- course.gradebook-metadata.VIEW\n- course.gradebook.MODIFY\nDateRange and DateRange criteria will behave differently if any of the range defining values are set to null, explicitly. For GradeRange criteria:\n\n- If maxScore is set to null, it will be understood as 'minScore or higher'.\n- minScore cannot be set to null, regardless of maxScore's value.\nFor DateRange criteria:\n\n- If startDate is set to null, it will be understood as 'before endDate'.\n- If endDate is set to null, it will be understood as 'after startDate'.\n- At least one date must be valid.\n\n**Since**: 3900.28.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsAdaptivereleaseRulesCriteriaGroups",
+      "description": "Retrieve the list of groups included in the specified Membership criterion. Users with all the following entitlements may access this resource:\n\n- course.content.VIEW\n- course.adaptiverelease.VIEW\nThe requesting user must also be enroled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.32.0",
       "method": "get",
-      "path": "/v2/bookings/{booking_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the target [booking](entity:Booking)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to retrieve. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/groups",
+      "pathParameters": [],
       "queryParameters": [
         {
-          "name": "with_definition",
-          "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of\nthe custom attribute. Set this parameter to `true` to get the name and description of the custom\nattribute, information about the data type, or other definition details. The default value is `false`."
-        },
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute, which is used for strongly consistent reads to\nguarantee that you receive the most up-to-date data. When included in the request, Square\nreturns the specified version or a higher version if one exists. If the specified version is\nhigher than the current version, Square returns a `BAD_REQUEST` error."
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"groupId(desc)\" Supported fields are:\n\n- groupId\n\n**Since**: 3900.32.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -345,93 +286,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Booking Custom Attributes",
-      "description": "\nUse the Booking Custom Attributes API to create and manage custom attributes for bookings to store properties or \nmetadata to support seller-specific customizations of and extensions to the `Booking` object. \n\nFor more information, see the following guides: \n - [Booking Custom Attributes](https://developer.squareup.com/docs/booking-custom-attributes-api/overview).\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "UpsertBookingCustomAttribute",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
+      "name": "PutCoursesContentsAdaptivereleaseRulesCriteriaGroups",
+      "description": "Sets the list of group predicates associated with this criterion. The list must not exceed a size of 100. Groups not included in this list will be removed. Groups which are in the list and already associated will remain unchanged. A new association will be created for Groups which are in this list but not associated with the criterion. Users with all the following entitlements may access this resource:\n\n- course.adaptiverelease.acl.modify\nNote: The specified criterion must be of type Memberships.\n\n**Since**: 3900.34.0",
       "method": "put",
-      "path": "/v2/bookings/{booking_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the target [booking](entity:Booking)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to create or update. This key must match the `key` of a\ncustom attribute definition in the Square seller account. If the requesting application is not\nthe definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "ListBookings",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/bookings",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results per page to return in a paged response."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results."
-        },
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The [customer](entity:Customer) for whom to retrieve bookings. If this is not set, bookings for all customers are retrieved."
-        },
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "The team member for whom to retrieve bookings. If this is not set, bookings of all members are retrieved."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The location for which to retrieve bookings. If this is not set, all locations' bookings are retrieved."
-        },
-        {
-          "name": "start_at_min",
-          "type": "string",
-          "description": "The RFC 3339 timestamp specifying the earliest of the start time. If this is not set, the current time is used.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        },
-        {
-          "name": "start_at_max",
-          "type": "string",
-          "description": "The RFC 3339 timestamp specifying the latest of the start time. If this is not set, the time of 31 days after `start_at_min` is used.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "CreateBooking",
-      "description": "The required input must include the following:\n- `Booking.location_id`\n- `Booking.start_at`\n- `Booking.AppointmentSegment.team_member_id`\n- `Booking.AppointmentSegment.service_variation_id`\n- `Booking.AppointmentSegment.service_variation_version`\n\nTo call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
-      "method": "post",
-      "path": "/v2/bookings",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/groups",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -440,287 +302,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "SearchAvailability",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
-      "method": "post",
-      "path": "/v2/bookings/availability/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "BulkRetrieveBookings",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
-      "method": "post",
-      "path": "/v2/bookings/bulk-retrieve",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveBusinessBookingProfile",
-      "method": "get",
-      "path": "/v2/bookings/business-booking-profile",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "ListLocationBookingProfiles",
-      "method": "get",
-      "path": "/v2/bookings/location-booking-profiles",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a paged response."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveLocationBookingProfile",
-      "method": "get",
-      "path": "/v2/bookings/location-booking-profiles/{location_id}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location to retrieve the booking profile."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "ListTeamMemberBookingProfiles",
-      "method": "get",
-      "path": "/v2/bookings/team-member-booking-profiles",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "bookable_only",
-          "type": "boolean",
-          "description": "Indicates whether to include only bookable team members in the returned result (`true`) or not (`false`)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a paged response."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The pagination cursor from the preceding response to return the next page of the results. Do not set this when retrieving the first page of the results."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "Indicates whether to include only team members enabled at the given location in the returned result."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "BulkRetrieveTeamMemberBookingProfiles",
-      "method": "post",
-      "path": "/v2/bookings/team-member-booking-profiles/bulk-retrieve",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveTeamMemberBookingProfile",
-      "method": "get",
-      "path": "/v2/bookings/team-member-booking-profiles/{team_member_id}",
-      "pathParameters": [
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "The ID of the team member to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveBooking",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_READ` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_READ` and `APPOINTMENTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/bookings/{booking_id}",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the [Booking](entity:Booking) object representing the to-be-retrieved booking."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "UpdateBooking",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
+      "name": "PutCoursesContentsAdaptivereleaseRulesCriteriaGroups",
+      "description": "Create an association between the specified group and Membership criterion. A single criterion can hold up to a maximum of 100 group associations. Users with all the following entitlements may access this resource:\n\n- course.adaptiverelease.acl.modify\nNote: The specified criterion must be of type Memberships.\n\n**Since**: 3900.32.0",
       "method": "put",
-      "path": "/v2/bookings/{booking_id}",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the [Booking](entity:Booking) object representing the to-be-updated booking."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Bookings",
-      "description": "\nThe Bookings API allows you to create, retrieve, update, and cancel appointments online. When used with other Square APIs (such as the Locations API, Team API, Catalog API, and Customers API), the Bookings API lets you create online-booking applications for users to book services provided by Square sellers.   \n\n\n## Why Use the Bookings API?\nThe Bookings API simplifies the scheduling process for Square sellers and their customers. By integrating with Square’s broader ecosystem, it offers a robust solution for managing appointments. Key Bookings API benefits include:\n\n\n* Comprehensive calendar control for sellers, with permissions that allow flexibility in creating bookings.\n* Streamlined buyer-level operations with secure and limited access.\n* Compatibility with Square’s Appointments subscription plans, offering additional features and functionality.\n* Custom attributes to personalize the booking experience.\n* Seamless integration with other Square APIs, such as [Customers API](https://developer.squareup.com/docs/customers-api/what-it-does), [Locations API](https://developer.squareup.com/docs/locations-api), [Team API](https://developer.squareup.com/docs/team/overview), and [Catalog API](https://developer.squareup.com/docs/catalog-api/what-it-does).\n\n\nFor more information, see the following guides:\n - [Bookings API Guide](https://developer.squareup.com/docs/bookings-api/what-it-is)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "CancelBooking",
-      "description": "To call this endpoint with buyer-level permissions, set `APPOINTMENTS_WRITE` for the OAuth scope.\nTo call this endpoint with seller-level permissions, set `APPOINTMENTS_ALL_WRITE` and `APPOINTMENTS_WRITE` for the OAuth scope.\n\nFor calls to this endpoint with seller-level permissions to succeed, the seller must have subscribed to *Appointments Plus*\nor *Appointments Premium*.",
-      "method": "post",
-      "path": "/v2/bookings/{booking_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "booking_id",
-          "type": "string",
-          "description": "The ID of the [Booking](entity:Booking) object representing the to-be-cancelled booking."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Cards",
-      "description": "\nYou can use the [CreateCard](/reference/square/cards-api/create-card) endpoint to save a credit or debit card to a Square account.\nDevelopers can integrate the Cards API in their application to let Square sellers:\n\n- **Save a card that can be charged by any Square seller who uses your application.** Your application specifies the organization access token in the `CreateCard` request.\n- **Save a card that can be charged by a single Square seller.**  Your application specifies the access token of the specific seller account in the `CreateCard` request.\n\nThe Cards API also supports other endpoints to manage the cards.\n\nFor more information, see the following guides:\n - [Cards](https://developer.squareup.com/docs/cards-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListCards",
-      "description": "A max of 25 cards will be returned.",
-      "method": "get",
-      "path": "/v2/cards",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this to retrieve the next set of results for your original query.\n\nSee [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information."
-        },
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "Limit results to cards associated with the customer supplied.\nBy default, all cards owned by the merchant are returned."
-        },
-        {
-          "name": "include_disabled",
-          "type": "boolean",
-          "description": "Includes disabled cards.\nBy default, all enabled cards owned by the merchant are returned."
-        },
-        {
-          "name": "reference_id",
-          "type": "string",
-          "description": "Limit results to cards associated with the reference_id supplied."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "Sorts the returned list by when the card was created with the specified order.\nThis field defaults to ASC."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Cards",
-      "description": "\nYou can use the [CreateCard](/reference/square/cards-api/create-card) endpoint to save a credit or debit card to a Square account.\nDevelopers can integrate the Cards API in their application to let Square sellers:\n\n- **Save a card that can be charged by any Square seller who uses your application.** Your application specifies the organization access token in the `CreateCard` request.\n- **Save a card that can be charged by a single Square seller.**  Your application specifies the access token of the specific seller account in the `CreateCard` request.\n\nThe Cards API also supports other endpoints to manage the cards.\n\nFor more information, see the following guides:\n - [Cards](https://developer.squareup.com/docs/cards-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateCard",
-      "method": "post",
-      "path": "/v2/cards",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/groups/{groupId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -729,324 +318,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Cards",
-      "description": "\nYou can use the [CreateCard](/reference/square/cards-api/create-card) endpoint to save a credit or debit card to a Square account.\nDevelopers can integrate the Cards API in their application to let Square sellers:\n\n- **Save a card that can be charged by any Square seller who uses your application.** Your application specifies the organization access token in the `CreateCard` request.\n- **Save a card that can be charged by a single Square seller.**  Your application specifies the access token of the specific seller account in the `CreateCard` request.\n\nThe Cards API also supports other endpoints to manage the cards.\n\nFor more information, see the following guides:\n - [Cards](https://developer.squareup.com/docs/cards-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "RetrieveCard",
-      "method": "get",
-      "path": "/v2/cards/{card_id}",
-      "pathParameters": [
-        {
-          "name": "card_id",
-          "type": "string",
-          "description": "Unique ID for the desired Card."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Cards",
-      "description": "\nYou can use the [CreateCard](/reference/square/cards-api/create-card) endpoint to save a credit or debit card to a Square account.\nDevelopers can integrate the Cards API in their application to let Square sellers:\n\n- **Save a card that can be charged by any Square seller who uses your application.** Your application specifies the organization access token in the `CreateCard` request.\n- **Save a card that can be charged by a single Square seller.**  Your application specifies the access token of the specific seller account in the `CreateCard` request.\n\nThe Cards API also supports other endpoints to manage the cards.\n\nFor more information, see the following guides:\n - [Cards](https://developer.squareup.com/docs/cards-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DisableCard",
-      "description": "Disabling an already disabled card is allowed but has no effect.",
-      "method": "post",
-      "path": "/v2/cards/{card_id}/disable",
-      "pathParameters": [
-        {
-          "name": "card_id",
-          "type": "string",
-          "description": "Unique ID for the desired Card."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Cash Drawers",
-      "description": "\nCash drawer shifts track cash transactions so that the total money in the cash drawers can be reconciled for a\nspecific period of time (a cash drawer shift), for a particular device, in a particular location. The Cash Drawer Shifts API\nenables you to list and retrieve information about cash drawer shifts.\n\nFor more information, see the following guide:\n - [Cash Drawer Shifts](https://developer.squareup.com/docs/cashdrawershift-api/reporting)"
-    },
-    "endpoint": {
-      "name": "ListCashDrawerShifts",
-      "method": "get",
-      "path": "/v2/cash-drawers/shifts",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location to query for a list of cash drawer shifts."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which cash drawer shifts are listed in the response,\nbased on their opened_at field. Default value: ASC"
-        },
-        {
-          "name": "begin_time",
-          "type": "string",
-          "description": "The inclusive start time of the query on opened_at, in ISO 8601 format."
-        },
-        {
-          "name": "end_time",
-          "type": "string",
-          "description": "The exclusive end date of the query on opened_at, in ISO 8601 format."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "Number of cash drawer shift events in a page of results (200 by\ndefault, 1000 max)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "Opaque cursor for fetching the next page of results."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Cash Drawers",
-      "description": "\nCash drawer shifts track cash transactions so that the total money in the cash drawers can be reconciled for a\nspecific period of time (a cash drawer shift), for a particular device, in a particular location. The Cash Drawer Shifts API\nenables you to list and retrieve information about cash drawer shifts.\n\nFor more information, see the following guide:\n - [Cash Drawer Shifts](https://developer.squareup.com/docs/cashdrawershift-api/reporting)"
-    },
-    "endpoint": {
-      "name": "RetrieveCashDrawerShift",
-      "description": "See\n[ListCashDrawerShiftEvents](api-endpoint:CashDrawers-ListCashDrawerShiftEvents) for a list of cash drawer shift events.",
-      "method": "get",
-      "path": "/v2/cash-drawers/shifts/{shift_id}",
-      "pathParameters": [
-        {
-          "name": "shift_id",
-          "type": "string",
-          "description": "The shift ID."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location to retrieve cash drawer shifts from."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Cash Drawers",
-      "description": "\nCash drawer shifts track cash transactions so that the total money in the cash drawers can be reconciled for a\nspecific period of time (a cash drawer shift), for a particular device, in a particular location. The Cash Drawer Shifts API\nenables you to list and retrieve information about cash drawer shifts.\n\nFor more information, see the following guide:\n - [Cash Drawer Shifts](https://developer.squareup.com/docs/cashdrawershift-api/reporting)"
-    },
-    "endpoint": {
-      "name": "ListCashDrawerShiftEvents",
-      "method": "get",
-      "path": "/v2/cash-drawers/shifts/{shift_id}/events",
-      "pathParameters": [
-        {
-          "name": "shift_id",
-          "type": "string",
-          "description": "The shift ID."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location to list cash drawer shifts for."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "Number of resources to be returned in a page of results (200 by\ndefault, 1000 max)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "Opaque cursor for fetching the next page of results."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BatchDeleteCatalogObjects",
-      "description": "Deletion is a cascading event such that all children of the\ntargeted object are also deleted. For example, deleting a CatalogItem will\nalso delete all of its [CatalogItemVariation](entity:CatalogItemVariation)\nchildren.\n\n`BatchDeleteCatalogObjects` succeeds even if only a portion of the targeted\nIDs can be deleted. The response will only include IDs that were\nactually deleted.\n\nTo ensure consistency, only one delete request is processed at a time per seller account.\nWhile one (batch or non-batch) delete request is being processed, other (batched and non-batched)\ndelete requests are rejected with the `429` error code.",
-      "method": "post",
-      "path": "/v2/catalog/batch-delete",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BatchRetrieveCatalogObjects",
-      "description": "Each [CatalogItem](entity:CatalogItem) returned in the set includes all of its\nchild information including: all of its\n[CatalogItemVariation](entity:CatalogItemVariation) objects, references to\nits [CatalogModifierList](entity:CatalogModifierList) objects, and the ids of\nany [CatalogTax](entity:CatalogTax) objects that apply to it.",
-      "method": "post",
-      "path": "/v2/catalog/batch-retrieve",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BatchUpsertCatalogObjects",
-      "description": "The target objects are grouped into batches and each batch is\ninserted/updated in an all-or-nothing manner. If an object within a batch is\nmalformed in some way, or violates a database constraint, the entire batch\ncontaining that item will be disregarded. However, other batches in the same\nrequest may still succeed. Each batch may contain up to 1,000 objects, and\nbatches will be processed in order as long as the total object count for the\nrequest (items, variations, modifier lists, discounts, and taxes) is no more\nthan 10,000.\n\nTo ensure consistency, only one update request is processed at a time per seller account.\nWhile one (batch or non-batch) update request is being processed, other (batched and non-batched)\nupdate requests are rejected with the `429` error code.",
-      "method": "post",
-      "path": "/v2/catalog/batch-upsert",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateCatalogImage",
-      "description": "The resulting `CatalogImage` is unattached to any `CatalogObject` if the `object_id`\nis not specified.\n\nThis `CreateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in\nJPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.",
-      "method": "post",
-      "path": "/v2/catalog/images",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": true
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateCatalogImage",
-      "description": "This `UpdateCatalogImage` endpoint accepts HTTP multipart/form-data requests with a JSON part and an image file part in\nJPEG, PJPEG, PNG, or GIF format. The maximum file size is 15MB.",
-      "method": "put",
-      "path": "/v2/catalog/images/{image_id}",
-      "pathParameters": [
-        {
-          "name": "image_id",
-          "type": "string",
-          "description": "The ID of the `CatalogImage` object to update the encapsulated image file."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": true
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CatalogInfo",
-      "method": "get",
-      "path": "/v2/catalog/info",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListCatalog",
-      "description": "The `types` parameter is specified as a comma-separated list of the [CatalogObjectType](entity:CatalogObjectType) values,\nfor example, \"`ITEM`, `ITEM_VARIATION`, `MODIFIER`, `MODIFIER_LIST`, `CATEGORY`, `DISCOUNT`, `TAX`, `IMAGE`\".\n\n__Important:__ ListCatalog does not return deleted catalog items. To retrieve\ndeleted catalog items, use [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)\nand set the `include_deleted_objects` attribute value to `true`.",
-      "method": "get",
-      "path": "/v2/catalog/list",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The pagination cursor returned in the previous response. Leave unset for an initial request.\nThe page size is currently set to be 100.\nSee [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information."
-        },
-        {
-          "name": "types",
-          "type": "string",
-          "description": "An optional case-insensitive, comma-separated list of object types to retrieve.\n\nThe valid values are defined in the [CatalogObjectType](entity:CatalogObjectType) enum, for example,\n`ITEM`, `ITEM_VARIATION`, `CATEGORY`, `DISCOUNT`, `TAX`,\n`MODIFIER`, `MODIFIER_LIST`, `IMAGE`, etc.\n\nIf this is unspecified, the operation returns objects of all the top level types at the version\nof the Square API used to make the request. Object types that are nested onto other object types\nare not included in the defaults.\n\nAt the current API version the default object types are:\nITEM, CATEGORY, TAX, DISCOUNT, MODIFIER_LIST, \nPRICING_RULE, PRODUCT_SET, TIME_PERIOD, MEASUREMENT_UNIT,\nSUBSCRIPTION_PLAN, ITEM_OPTION, CUSTOM_ATTRIBUTE_DEFINITION, QUICK_AMOUNT_SETTINGS."
-        },
-        {
-          "name": "catalog_version",
-          "type": "integer",
-          "description": "The specific version of the catalog objects to be included in the response.\nThis allows you to retrieve historical versions of objects. The specified version value is matched against\nthe [CatalogObject](entity:CatalogObject)s' `version` attribute.  If not included, results will be from the\ncurrent version of the catalog."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpsertCatalogObject",
-      "description": "To ensure consistency, only one update request is processed at a time per seller account.\nWhile one (batch or non-batch) update request is being processed, other (batched and non-batched)\nupdate requests are rejected with the `429` error code.",
-      "method": "post",
-      "path": "/v2/catalog/object",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteCatalogObject",
-      "description": "Deletion is a cascading event such that all children of the targeted object\nare also deleted. For example, deleting a [CatalogItem](entity:CatalogItem)\nwill also delete all of its\n[CatalogItemVariation](entity:CatalogItemVariation) children.\n\nTo ensure consistency, only one delete request is processed at a time per seller account.\nWhile one (batch or non-batch) delete request is being processed, other (batched and non-batched)\ndelete requests are rejected with the `429` error code.",
+      "name": "DeleteCoursesContentsAdaptivereleaseRulesCriteriaGroups",
+      "description": "Delete the association between the specified group and Membership criterion. Users with all the following entitlements may access this resource:\n\n- course.adaptiverelease.acl.modify\nNote: The specified criterion must be of type Memberships.\n\n**Since**: 3900.32.0",
       "method": "delete",
-      "path": "/v2/catalog/object/{object_id}",
-      "pathParameters": [
-        {
-          "name": "object_id",
-          "type": "string",
-          "description": "The ID of the catalog object to be deleted. When an object is deleted, other\nobjects in the graph that depend on that object will be deleted as well (for example, deleting a\ncatalog item will delete its catalog item variations)."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/groups/{groupId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -1054,196 +334,20 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "RetrieveCatalogObject",
-      "description": "The returned\nobject includes all of the relevant [CatalogItem](entity:CatalogItem)\ninformation including: [CatalogItemVariation](entity:CatalogItemVariation)\nchildren, references to its\n[CatalogModifierList](entity:CatalogModifierList) objects, and the ids of\nany [CatalogTax](entity:CatalogTax) objects that apply to it.",
+      "name": "GetCoursesContentsAdaptivereleaseRulesCriteriaUsers",
+      "description": "Retrieve a list of users who are included in the specified Membership criterion. Users with all the following entitlements may access this resource:\n\n- course.content.VIEW\n- course.adaptiverelease.VIEW\nThe requesting user must also be enroled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.32.0",
       "method": "get",
-      "path": "/v2/catalog/object/{object_id}",
-      "pathParameters": [
-        {
-          "name": "object_id",
-          "type": "string",
-          "description": "The object ID of any type of catalog objects to be retrieved."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "include_related_objects",
-          "type": "boolean",
-          "description": "If `true`, the response will include additional objects that are related to the\nrequested objects. Related objects are defined as any objects referenced by ID by the results in the `objects` field\nof the response. These objects are put in the `related_objects` field. Setting this to `true` is\nhelpful when the objects are needed for immediate display to a user.\nThis process only goes one level deep. Objects referenced by the related objects will not be included. For example,\n\nif the `objects` field of the response contains a CatalogItem, its associated\nCatalogCategory objects, CatalogTax objects, CatalogImage objects and\nCatalogModifierLists will be returned in the `related_objects` field of the\nresponse. If the `objects` field of the response contains a CatalogItemVariation,\nits parent CatalogItem will be returned in the `related_objects` field of\nthe response.\n\nDefault value: `false`"
-        },
-        {
-          "name": "catalog_version",
-          "type": "integer",
-          "description": "Requests objects as of a specific version of the catalog. This allows you to retrieve historical\nversions of objects. The value to retrieve a specific version of an object can be found\nin the version field of [CatalogObject](entity:CatalogObject)s. If not included, results will\nbe from the current version of the catalog."
-        },
-        {
-          "name": "include_category_path_to_root",
-          "type": "boolean",
-          "description": "Specifies whether or not to include the `path_to_root` list for each returned category instance. The `path_to_root` list consists\nof `CategoryPathToRootNode` objects and specifies the path that starts with the immediate parent category of the returned category\nand ends with its root category. If the returned category is a top-level category, the `path_to_root` list is empty and is not returned\nin the response payload."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchCatalogObjects",
-      "description": "This (`SearchCatalogObjects`) endpoint differs from the [SearchCatalogItems](api-endpoint:Catalog-SearchCatalogItems)\nendpoint in the following aspects:\n\n- `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.\n- `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.\n- `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.\n- The both endpoints have different call conventions, including the query filter formats.",
-      "method": "post",
-      "path": "/v2/catalog/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchCatalogItems",
-      "description": "This (`SearchCatalogItems`) endpoint differs from the [SearchCatalogObjects](api-endpoint:Catalog-SearchCatalogObjects)\nendpoint in the following aspects:\n\n- `SearchCatalogItems` can only search for items or item variations, whereas `SearchCatalogObjects` can search for any type of catalog objects.\n- `SearchCatalogItems` supports the custom attribute query filters to return items or item variations that contain custom attribute values, where `SearchCatalogObjects` does not.\n- `SearchCatalogItems` does not support the `include_deleted_objects` filter to search for deleted items or item variations, whereas `SearchCatalogObjects` does.\n- The both endpoints use different call conventions, including the query filter formats.",
-      "method": "post",
-      "path": "/v2/catalog/search-catalog-items",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateItemModifierLists",
-      "method": "post",
-      "path": "/v2/catalog/update-item-modifier-lists",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Catalog",
-      "description": "\nThe Catalog API allows you to programmatically catalog products or services, including items, variations, categories, discounts, taxes, modifiers, and more.\n\nFor more information, see the following guides:\n - [Catalog](https://developer.squareup.com/docs/catalog-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateItemTaxes",
-      "method": "post",
-      "path": "/v2/catalog/update-item-taxes",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveLocationSettings",
-      "method": "get",
-      "path": "/v2/online-checkout/location-settings/{location_id}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location for which to retrieve settings."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateLocationSettings",
-      "method": "put",
-      "path": "/v2/online-checkout/location-settings/{location_id}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location for which to retrieve settings."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveMerchantSettings",
-      "method": "get",
-      "path": "/v2/online-checkout/merchant-settings",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateMerchantSettings",
-      "method": "put",
-      "path": "/v2/online-checkout/merchant-settings",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
-    },
-    "endpoint": {
-      "name": "ListPaymentLinks",
-      "method": "get",
-      "path": "/v2/online-checkout/payment-links",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/users",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "cursor",
+          "name": "sort",
           "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nIf a cursor is not provided, the endpoint returns the first page of the results.\nFor more  information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "A limit on the number of results to return per page. The limit is advisory and\nthe implementation might return more or less results. If the supplied limit is negative, zero, or\ngreater than the maximum limit of 1000, it is ignored.\n\nDefault value: `100`"
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"userId(desc)\" Supported fields are:\n\n- userId\n\n**Since**: 3900.32.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -1252,14 +356,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "CreatePaymentLink",
-      "description": "Applications can share the resulting payment link with their buyer to pay for goods and services.",
-      "method": "post",
-      "path": "/v2/online-checkout/payment-links",
+      "name": "PutCoursesContentsAdaptivereleaseRulesCriteriaUsers",
+      "description": "Sets the list of user predicates associated with the specified criterion. Users not included in this list will be removed. Users which are in this list and associated with the criterion will remain unchanged. Users which are in this list but not associated with the criterion will be added. Users with all the following entitlements may use this endpoint:\n\n- course.adaptiverelease.acl.modify\nThe specified users must be enroled in the course with a role that is neither \"Guest\" nor treated as \"Instructor\". The requesting user must also be enroled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.34.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/users",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -1268,20 +372,31 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
     },
     "endpoint": {
-      "name": "DeletePaymentLink",
+      "name": "PutCoursesContentsAdaptivereleaseRulesCriteriaUsers",
+      "description": "Create an association between the specified user and Membership criterion. A single criterion can hold up to a maximum of 100 user associations. Users with all the following entitlements may access this resource:\n\n- course.adaptiverelease.acl.modify\nThe specified user must be enroled in the course with a role that is neither \"Guest\" nor treated as \"Instructor\". The requesting user must also be enroled in the course, or have the system.course.MODIFY entitlement.\n\n**Since**: 3900.32.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Adaptive release",
+      "description": "Blackboard Learn adaptive release API provides endpoints for managing adaptive release related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesContentsAdaptivereleaseRulesCriteriaUsers",
+      "description": "Delete association between user and Membership criterion. The following entitlements are required\n\n- course.adaptiverelease.acl.modify\n\n**Since**: 3900.32.0",
       "method": "delete",
-      "path": "/v2/online-checkout/payment-links/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The ID of the payment link to delete."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/adaptiveRelease/rules/{ruleId}/criteria/{criterionId}/users/{userId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -1289,68 +404,90 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
+      "name": "Announcements",
+      "description": "Blackboard Learn announcements API provides endpoints for managing announcements related operations."
     },
     "endpoint": {
-      "name": "RetrievePaymentLink",
+      "name": "GetAnnouncements",
+      "description": "Return a list of System Announcements. Users with the 'system.announcements.VIEW' entitlement can view 'available' System Announcements. Users with the 'system.announcements.admin.VIEW' entitlement can view 'available' &amp; 'unavailable' System Announcements.\n\n**Since**: 3100.7.0",
       "method": "get",
-      "path": "/v2/online-checkout/payment-links/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The ID of link to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Checkout",
-      "description": "\nWith the Square Checkout API, your customers can pay for a purchase through a simple, Square-hosted checkout page. It can be integrated into any payments workflow with minimal coding. \n\nYou can create and configure your checkout page through a `CreatePaymentLink` request, specifying the accepted payment methods and checkout options like tipping and custom fields.  You can also configure a URL for customers to be redirected to once they complete their purchase. \n\nFirst time Square developers should utilize the payment link endpoints to create, update, retrieve, and list checkout pages. \n\nFor more information, see the following guide:\n - [Checkout](https://developer.squareup.com/docs/checkout-api-overview)"
-    },
-    "endpoint": {
-      "name": "UpdatePaymentLink",
-      "description": "You can update the `payment_link` fields such as\n`description`, `checkout_options`, and  `pre_populated_data`.\nYou cannot update other fields such as the `order_id`, `version`, `URL`, or `timestamp` field.",
-      "method": "put",
-      "path": "/v2/online-checkout/payment-links/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The ID of the payment link to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListCustomerCustomAttributeDefinitions",
-      "description": "When all response pages are retrieved, the results include all custom attribute definitions\nthat are visible to the requesting application, including those that are created by other\napplications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that\nseller-defined custom attributes (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/customers/custom-attribute-definitions",
+      "path": "/learn/api/public/v1/announcements",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
+          "name": "creatorUserId",
+          "type": "string",
+          "description": "Search for announcements with creator user id equal to this value.\n\n**Since**: 3900.89.0."
         },
         {
-          "name": "cursor",
+          "name": "creatorUsername",
           "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
+          "description": "Search for announcements with creator username equal to this value.\n\n**Since**: 3900.89.0."
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for announcements with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "createdUntil",
+          "type": "string",
+          "description": "Search announcements with created date less than or equal to this value. 'createdCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for announcements with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "modifiedUntil",
+          "type": "string",
+          "description": "Search announcements with modified date less than or equal to this value. 'modifiedCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for announcements with a title like the provided value.\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "startDateUntil",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "startDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'startDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "endDateUntil",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "endDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'endDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -1359,14 +496,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Announcements",
+      "description": "Blackboard Learn announcements API provides endpoints for managing announcements related operations."
     },
     "endpoint": {
-      "name": "CreateCustomerCustomAttributeDefinition",
-      "description": "Use this endpoint to define a custom attribute that can be associated with customer profiles.\n\nA custom attribute definition specifies the `key`, `visibility`, `schema`, and other properties\nfor a custom attribute. After the definition is created, you can call\n[UpsertCustomerCustomAttribute](api-endpoint:CustomerCustomAttributes-UpsertCustomerCustomAttribute) or\n[BulkUpsertCustomerCustomAttributes](api-endpoint:CustomerCustomAttributes-BulkUpsertCustomerCustomAttributes)\nto set the custom attribute for customer profiles in the seller's Customer Directory.\n\nSellers can view all custom attributes in exported customer data, including those set to\n`VISIBILITY_HIDDEN`.",
+      "name": "PostAnnouncements",
+      "description": "Create a System Announcement. Users with the 'system.announcements.CREATE' entitlement can create System Announcements.\n\n**Since**: 3100.7.0",
       "method": "post",
-      "path": "/v2/customers/custom-attribute-definitions",
+      "path": "/learn/api/public/v1/announcements",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -1375,19 +512,41 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Announcements",
+      "description": "Blackboard Learn announcements API provides endpoints for managing announcements related operations."
     },
     "endpoint": {
-      "name": "DeleteCustomerCustomAttributeDefinition",
-      "description": "Deleting a custom attribute definition also deletes the corresponding custom attribute from\nall customer profiles in the seller's Customer Directory.\n\nOnly the definition owner can delete a custom attribute definition.",
+      "name": "GetAnnouncements",
+      "description": "Get a System Announcement. Users with the 'system.announcements.VIEW' entitlement can view 'available' System Announcements. Users with the 'system.announcements.admin.VIEW' entitlement can view 'available' &amp; 'unavailable' System Announcements.\n\n**Since**: 3100.7.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/announcements/{announcementId}",
+      "pathParameters": [
+        {
+          "name": "announcementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Announcements",
+      "description": "Blackboard Learn announcements API provides endpoints for managing announcements related operations."
+    },
+    "endpoint": {
+      "name": "DeleteAnnouncements",
+      "description": "Delete a System Announcement. Users with the 'system.announcements.DELETE' entitlement can delete System Announcements.\n\n**Since**: 3100.7.0",
       "method": "delete",
-      "path": "/v2/customers/custom-attribute-definitions/{key}",
+      "path": "/learn/api/public/v1/announcements/{announcementId}",
       "pathParameters": [
         {
-          "name": "key",
+          "name": "announcementId",
           "type": "string",
-          "description": "The key of the custom attribute definition to delete."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -1397,47 +556,41 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Announcements",
+      "description": "Blackboard Learn announcements API provides endpoints for managing announcements related operations."
     },
     "endpoint": {
-      "name": "RetrieveCustomerCustomAttributeDefinition",
-      "description": "To retrieve a custom attribute definition created by another application, the `visibility`\nsetting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "PatchAnnouncements",
+      "description": "Update a System Announcement. Users with the 'system.announcements.MODIFY' entitlement can update System Announcements.\n\n**Since**: 3100.7.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/announcements/{announcementId}",
+      "pathParameters": [
+        {
+          "name": "announcementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Attempt receipt",
+      "description": "Blackboard Learn attempt receipt API provides endpoints for managing attempt receipt related operations."
+    },
+    "endpoint": {
+      "name": "GetAttemptreceipts",
+      "description": "Get the attempt receipt associated with the @param attemptReceiptIdParam\n\nUsers with all the following entitlements may access this resource:\n\n- GradebookEntitlement.ViewAttempts\n\n**Since**: 3900.37.0",
       "method": "get",
-      "path": "/v2/customers/custom-attribute-definitions/{key}",
+      "path": "/learn/api/public/v1/attemptReceipts/{attemptReceiptId}",
       "pathParameters": [
         {
-          "name": "key",
+          "name": "attemptReceiptId",
           "type": "string",
-          "description": "The key of the custom attribute definition to retrieve. If the requesting application\nis not the definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute definition, which is used for strongly consistent\nreads to guarantee that you receive the most up-to-date data. When included in the request,\nSquare returns the specified version or a higher version if one exists. If the specified version\nis higher than the current version, Square returns a `BAD_REQUEST` error."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateCustomerCustomAttributeDefinition",
-      "description": "Use this endpoint to update the following fields: `name`, `description`, `visibility`, or the\n`schema` for a `Selection` data type.\n\nOnly the definition owner can update a custom attribute definition. Note that sellers can view\nall custom attributes in exported customer data, including those set to `VISIBILITY_HIDDEN`.",
-      "method": "put",
-      "path": "/v2/customers/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to update."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -1447,14 +600,41 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attempt receipt",
+      "description": "Blackboard Learn attempt receipt API provides endpoints for managing attempt receipt related operations."
     },
     "endpoint": {
-      "name": "BulkUpsertCustomerCustomAttributes",
-      "description": "Use this endpoint to set the value of one or more custom attributes for one or more customer profiles.\nA custom attribute is based on a custom attribute definition in a Square seller account, which is\ncreated using the [CreateCustomerCustomAttributeDefinition](api-endpoint:CustomerCustomAttributes-CreateCustomerCustomAttributeDefinition) endpoint.\n\nThis `BulkUpsertCustomerCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert\nrequests and returns a map of individual upsert responses. Each upsert request has a unique ID\nand provides a customer ID and custom attribute. Each upsert response is returned with the ID\nof the corresponding request.\n\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/customers/custom-attributes/bulk-upsert",
+      "name": "GetCoursesAttemptreceipts",
+      "description": "Get the attempt receipt associated with the @param attemptReceiptIdParam If the attempt receipt is not found in the current course but exists in another course, the response will still include an attempt receipt with information the user is allowed to see relative to that course.\n\nUsers with the following entitlement may access this resource:\n\n- {@code GradebookEntitlement.ViewAttempts}\n\n**Since**: 3900.113.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/attemptReceipts/{attemptReceiptId}",
+      "pathParameters": [
+        {
+          "name": "attemptReceiptId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesMeetings",
+      "description": "Returns a list of course meetings for a given course id.\n\nThe \"course.attendance.VIEW\" entitlement is required to view a Course Meeting.\n\n**Since**: 3500.7.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -1463,170 +643,30 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "ListCustomerCustomAttributes",
-      "description": "You can use the `with_definitions` query parameter to also retrieve custom attribute definitions\nin the same call.\n\nWhen all response pages are retrieved, the results include all custom attributes that are\nvisible to the requesting application, including those that are owned by other applications\nand set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/customers/{customer_id}/custom-attributes",
-      "pathParameters": [
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The ID of the target [customer profile](entity:Customer)."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request. For more\ninformation, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "with_definitions",
-          "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each\ncustom attribute. Set this parameter to `true` to get the name and description of each custom\nattribute, information about the data type, or other definition details. The default value is `false`."
-        }
-      ],
+      "name": "PostCoursesMeetings",
+      "description": "Creates a new Course Meeting within the provided Course/Organization Id. An attendance grade book column will automatically be generated if one does not exist.\n\nThe \"course.attendance.CREATE\" entitlement is required to create a Course Meeting.\n\n**Since**: 3500.7.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings",
+      "pathParameters": [],
+      "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "DeleteCustomerCustomAttribute",
-      "description": "To delete a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "DeleteCoursesMeetings",
+      "description": "Deletes all course meetings in the course for the given course Id.\n\nThe 'course.attendance.DELETE' entitlement is required to delete Course Meetings.\n\n**Since**: 3500.7.0",
       "method": "delete",
-      "path": "/v2/customers/{customer_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The ID of the target [customer profile](entity:Customer)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to delete. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveCustomerCustomAttribute",
-      "description": "You can use the `with_definition` query parameter to also retrieve the custom attribute definition\nin the same call.\n\nTo retrieve a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/customers/{customer_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The ID of the target [customer profile](entity:Customer)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to retrieve. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "with_definition",
-          "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of\nthe custom attribute. Set this parameter to `true` to get the name and description of the custom\nattribute, information about the data type, or other definition details. The default value is `false`."
-        },
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute, which is used for strongly consistent reads to\nguarantee that you receive the most up-to-date data. When included in the request, Square\nreturns the specified version or a higher version if one exists. If the specified version is\nhigher than the current version, Square returns a `BAD_REQUEST` error."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Custom Attributes",
-      "description": "\nUse the Customer Custom Attributes API to create and manage custom attributes for customer profiles. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for customer profiles in the seller's Customer Directory.\n\nFor more information, see the following guides:\n - [Customer Custom Attributes](https://developer.squareup.com/docs/customer-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpsertCustomerCustomAttribute",
-      "description": "Use this endpoint to set the value of a custom attribute for a specified customer profile.\nA custom attribute is based on a custom attribute definition in a Square seller account, which\nis created using the [CreateCustomerCustomAttributeDefinition](api-endpoint:CustomerCustomAttributes-CreateCustomerCustomAttributeDefinition) endpoint.\n\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/customers/{customer_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The ID of the target [customer profile](entity:Customer)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to create or update. This key must match the `key` of a\ncustom attribute definition in the Square seller account. If the requesting application is not\nthe definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Groups",
-      "description": "\nThe Customer Groups API lets you create and manage customer groups to provide targeted promotions or take other customized actions based on group membership. For example, you can create Weekly, Monthly, and Quarterly customer groups and add customers to them based on their preferences to receive marketing promotions on a weekly, monthly, and quarterly basis. You can then use the information to manage your marketing email schedule. \n\nYou can use the Customer Groups API to retrieve and manage customer groups. You can use the Customers API to add customers to and remove customers from groups and search for customers based on group membership.\n\nFor more information, see the following guide:\n - [Customer Groups](https://developer.squareup.com/docs/customer-groups-api/what-it-does)"
-    },
-    "endpoint": {
-      "name": "ListCustomerGroups",
-      "method": "get",
-      "path": "/v2/customers/groups",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for your original query.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.\nIf the limit is less than 1 or greater than 50, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 50.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Groups",
-      "description": "\nThe Customer Groups API lets you create and manage customer groups to provide targeted promotions or take other customized actions based on group membership. For example, you can create Weekly, Monthly, and Quarterly customer groups and add customers to them based on their preferences to receive marketing promotions on a weekly, monthly, and quarterly basis. You can then use the information to manage your marketing email schedule. \n\nYou can use the Customer Groups API to retrieve and manage customer groups. You can use the Customers API to add customers to and remove customers from groups and search for customers based on group membership.\n\nFor more information, see the following guide:\n - [Customer Groups](https://developer.squareup.com/docs/customer-groups-api/what-it-does)"
-    },
-    "endpoint": {
-      "name": "CreateCustomerGroup",
-      "description": "The request must include the `name` value of the group.",
-      "method": "post",
-      "path": "/v2/customers/groups",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -1635,166 +675,46 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customer Groups",
-      "description": "\nThe Customer Groups API lets you create and manage customer groups to provide targeted promotions or take other customized actions based on group membership. For example, you can create Weekly, Monthly, and Quarterly customer groups and add customers to them based on their preferences to receive marketing promotions on a weekly, monthly, and quarterly basis. You can then use the information to manage your marketing email schedule. \n\nYou can use the Customer Groups API to retrieve and manage customer groups. You can use the Customers API to add customers to and remove customers from groups and search for customers based on group membership.\n\nFor more information, see the following guide:\n - [Customer Groups](https://developer.squareup.com/docs/customer-groups-api/what-it-does)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "DeleteCustomerGroup",
+      "name": "GetCoursesMeetingsDownloadurl",
+      "description": "Generate Download URL for Attendance Data.\n\nThe \"course.attendance.CREATE\" entitlement is required to generate download URL for attendance data.\n\n**Since**: ????",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/downloadUrl",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesMeetingsUsers",
+      "description": "Returns a list of All Attendance Meeting records for a given user id (where the student participates and the user making the request has access to), regardless of courses and meetings.\n\nThe \"course.attendance.VIEW\" entitlement is required to view a Course Meeting attendance. <b>* Please notice that result list is not filtered by Course Id, courseId parameter in the URL is needed for permissions and entitlement check.</b>\n\n**Since**: 3500.7.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesMeetingsUsers",
+      "description": "Deletes all attendance records for the user in specific course.\n\nThe 'course.attendance.DELETE' entitlement is required to delete attendance records.\n\n**Since**: 3500.7.0",
       "method": "delete",
-      "path": "/v2/customers/groups/{group_id}",
-      "pathParameters": [
-        {
-          "name": "group_id",
-          "type": "string",
-          "description": "The ID of the customer group to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Groups",
-      "description": "\nThe Customer Groups API lets you create and manage customer groups to provide targeted promotions or take other customized actions based on group membership. For example, you can create Weekly, Monthly, and Quarterly customer groups and add customers to them based on their preferences to receive marketing promotions on a weekly, monthly, and quarterly basis. You can then use the information to manage your marketing email schedule. \n\nYou can use the Customer Groups API to retrieve and manage customer groups. You can use the Customers API to add customers to and remove customers from groups and search for customers based on group membership.\n\nFor more information, see the following guide:\n - [Customer Groups](https://developer.squareup.com/docs/customer-groups-api/what-it-does)"
-    },
-    "endpoint": {
-      "name": "RetrieveCustomerGroup",
-      "method": "get",
-      "path": "/v2/customers/groups/{group_id}",
-      "pathParameters": [
-        {
-          "name": "group_id",
-          "type": "string",
-          "description": "The ID of the customer group to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Groups",
-      "description": "\nThe Customer Groups API lets you create and manage customer groups to provide targeted promotions or take other customized actions based on group membership. For example, you can create Weekly, Monthly, and Quarterly customer groups and add customers to them based on their preferences to receive marketing promotions on a weekly, monthly, and quarterly basis. You can then use the information to manage your marketing email schedule. \n\nYou can use the Customer Groups API to retrieve and manage customer groups. You can use the Customers API to add customers to and remove customers from groups and search for customers based on group membership.\n\nFor more information, see the following guide:\n - [Customer Groups](https://developer.squareup.com/docs/customer-groups-api/what-it-does)"
-    },
-    "endpoint": {
-      "name": "UpdateCustomerGroup",
-      "method": "put",
-      "path": "/v2/customers/groups/{group_id}",
-      "pathParameters": [
-        {
-          "name": "group_id",
-          "type": "string",
-          "description": "The ID of the customer group to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Segments",
-      "description": "\nThe Customer Segments API lets you retrieve information about the segments defined for a business. Square sellers can create customer segments in the Seller Dashboard or Point of Sale by defining filters for the segment. For example, a segment can include customers who have visited more than 10 times. Customers are automatically added to and removed from the segment over time based on this criterion. \n\nYou can inspect the customer's `segment_ids` property to determine which segments a customer belongs to. Then, you can use the Customer Segments API to retrieve basic details about each segment, such as the segment name and the time when it was created.\n\nFor more information, see the following guide:\n - [Customer Segments](https://developer.squareup.com/docs/customer-segments-api/what-it-does)"
-    },
-    "endpoint": {
-      "name": "ListCustomerSegments",
-      "method": "get",
-      "path": "/v2/customers/segments",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by previous calls to `ListCustomerSegments`.\nThis cursor is used to retrieve the next set of query results.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.\nIf the specified limit is less than 1 or greater than 50, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 50.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customer Segments",
-      "description": "\nThe Customer Segments API lets you retrieve information about the segments defined for a business. Square sellers can create customer segments in the Seller Dashboard or Point of Sale by defining filters for the segment. For example, a segment can include customers who have visited more than 10 times. Customers are automatically added to and removed from the segment over time based on this criterion. \n\nYou can inspect the customer's `segment_ids` property to determine which segments a customer belongs to. Then, you can use the Customer Segments API to retrieve basic details about each segment, such as the segment name and the time when it was created.\n\nFor more information, see the following guide:\n - [Customer Segments](https://developer.squareup.com/docs/customer-segments-api/what-it-does)"
-    },
-    "endpoint": {
-      "name": "RetrieveCustomerSegment",
-      "method": "get",
-      "path": "/v2/customers/segments/{segment_id}",
-      "pathParameters": [
-        {
-          "name": "segment_id",
-          "type": "string",
-          "description": "The Square-issued ID of the customer segment."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListCustomers",
-      "description": "Under normal operating conditions, newly created or updated customer profiles become available\nfor the listing operation in well under 30 seconds. Occasionally, propagation of the new or updated\nprofiles can take closer to one minute or longer, especially during network incidents and outages.",
-      "method": "get",
-      "path": "/v2/customers",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for your original query.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single page. This limit is advisory. The response might contain more or fewer results.\nIf the specified limit is less than 1 or greater than 100, Square returns a `400 VALUE_TOO_LOW` or `400 VALUE_TOO_HIGH` error. The default value is 100.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "sort_field",
-          "type": "string",
-          "description": "Indicates how customers should be sorted.\n\nThe default value is `DEFAULT`."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "Indicates whether customers should be sorted in ascending (`ASC`) or\ndescending (`DESC`) order.\n\nThe default value is `ASC`."
-        },
-        {
-          "name": "count",
-          "type": "boolean",
-          "description": "Indicates whether to return the total count of customers in the `count` field of the response.\n\nThe default value is `false`."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateCustomer",
-      "description": "You must provide at least one of the following values in your request to this\nendpoint:\n\n- `given_name`\n- `family_name`\n- `company_name`\n- `email_address`\n- `phone_number`",
-      "method": "post",
-      "path": "/v2/customers",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/users/{userId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -1803,126 +723,35 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "BulkCreateCustomers",
-      "description": "This endpoint takes a map of individual create requests and returns a map of responses.\n\nYou must provide at least one of the following values in each create request:\n\n- `given_name`\n- `family_name`\n- `company_name`\n- `email_address`\n- `phone_number`",
-      "method": "post",
-      "path": "/v2/customers/bulk-create",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkDeleteCustomers",
-      "description": "The endpoint takes a list of customer IDs and returns a map of responses.",
-      "method": "post",
-      "path": "/v2/customers/bulk-delete",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkRetrieveCustomers",
-      "description": "This endpoint takes a list of customer IDs and returns a map of responses.",
-      "method": "post",
-      "path": "/v2/customers/bulk-retrieve",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkUpdateCustomers",
-      "description": "This endpoint takes a map of individual update requests and returns a map of responses.",
-      "method": "post",
-      "path": "/v2/customers/bulk-update",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchCustomers",
-      "description": "Calling `SearchCustomers` without any explicit query filter returns all\ncustomer profiles ordered alphabetically based on `given_name` and\n`family_name`.\n\nUnder normal operating conditions, newly created or updated customer profiles become available\nfor the search operation in well under 30 seconds. Occasionally, propagation of the new or updated\nprofiles can take closer to one minute or longer, especially during network incidents and outages.",
-      "method": "post",
-      "path": "/v2/customers/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteCustomer",
-      "description": "To delete a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.",
+      "name": "DeleteCoursesMeetingsUsersAll",
+      "description": "Deletes All Attendance Meeting records for a given user id (where the student participates and the user making the request has access to). It will delete meeting attendance regardless of course.\n\nThe 'course.attendance.DELETE' entitlement is required to delete attendance records. <b>* Please notice that delete operation here is not filtered by Course Id, courseId parameter in the URL is needed for permissions and entitlement check.</b>\n\n**Since**: 3500.7.0",
       "method": "delete",
-      "path": "/v2/customers/{customer_id}",
-      "pathParameters": [
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The ID of the customer to delete."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the customer profile.\n\nAs a best practice, you should include this parameter to enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency) control.  For more information, see [Delete a customer profile](https://developer.squareup.com/docs/customers-api/use-the-api/keep-records#delete-customer-profile)."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/users/{userId}/all",
+      "pathParameters": [],
+      "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "RetrieveCustomer",
+      "name": "GetCoursesMeetings",
+      "description": "Returns a Course Meeting for the given meeting Id.\n\nThe \"course.attendance.VIEW\" entitlement is required to view a Course Meeting.\n\n**Since**: 3500.7.0",
       "method": "get",
-      "path": "/v2/customers/{customer_id}",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}",
       "pathParameters": [
         {
-          "name": "customer_id",
+          "name": "meetingId",
           "type": "string",
-          "description": "The ID of the customer to retrieve."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -1932,46 +761,19 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "UpdateCustomer",
-      "description": "This endpoint supports sparse updates, so only new or changed fields are required in the request.\nTo add or update a field, specify the new value. To remove a field, specify `null`.\n\nTo update a customer profile that was created by merging existing profiles, you must use the ID of the newly created profile.",
-      "method": "put",
-      "path": "/v2/customers/{customer_id}",
-      "pathParameters": [
-        {
-          "name": "customer_id",
-          "type": "string",
-          "description": "The ID of the customer to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RemoveGroupFromCustomer",
-      "description": "The customer is identified by the `customer_id` value\nand the customer group is identified by the `group_id` value.",
+      "name": "DeleteCoursesMeetings",
+      "description": "Delete the Course Meeting for the given course meeting Id.\n\nThe 'course.attendance.DELETE' entitlement is required to delete Course Meetings.\n\n**Since**: 3500.7.0",
       "method": "delete",
-      "path": "/v2/customers/{customer_id}/groups/{group_id}",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}",
       "pathParameters": [
         {
-          "name": "customer_id",
+          "name": "meetingId",
           "type": "string",
-          "description": "The ID of the customer to remove from the group."
-        },
-        {
-          "name": "group_id",
-          "type": "string",
-          "description": "The ID of the customer group to remove the customer from."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -1981,24 +783,19 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Customers",
-      "description": "\nThe Customers API enables you to create and manage customer profiles, as well as search for customers based on various criteria (including customer group membership). You can also use the API to sync contacts between your CRM system and Square.\n\nFor more information, see the following guides:\n - [Customers](https://developer.squareup.com/docs/customers-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "AddGroupToCustomer",
-      "description": "The customer is identified by the `customer_id` value\nand the customer group is identified by the `group_id` value.",
-      "method": "put",
-      "path": "/v2/customers/{customer_id}/groups/{group_id}",
+      "name": "PatchCoursesMeetings",
+      "description": "Update the Course Meeting for the given Course/Organization.\n\nThe \"course.attendance.MODIFY\" entitlement is required to update a Course Meeting. The \"course.attendance.VIEW\" entitlement is required to view a Course Meeting.\n\n**Since**: 3500.7.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}",
       "pathParameters": [
         {
-          "name": "customer_id",
+          "name": "meetingId",
           "type": "string",
-          "description": "The ID of the customer to add to a group."
-        },
-        {
-          "name": "group_id",
-          "type": "string",
-          "description": "The ID of the customer group to add the customer to."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -2008,106 +805,41 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Devices",
-      "description": "\nFor more information, see the following guides:\n - [Devices](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "ListDevices",
-      "description": "Currently, only Terminal API\ndevices are supported.",
+      "name": "GetCoursesMeetingsUsers",
+      "description": "Returns a list of Course Meeting Attendance for a given meeting id.\n\nThe \"course.attendance.VIEW\" entitlement is required to view a Course Meeting attendance.\n\n**Since**: 3500.7.0",
       "method": "get",
-      "path": "/v2/devices",
-      "pathParameters": [],
-      "queryParameters": [
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users",
+      "pathParameters": [
         {
-          "name": "cursor",
+          "name": "meetingId",
           "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nSee [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination) for more information."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which results are listed.\n- `ASC` - Oldest to newest.\n- `DESC` - Newest to oldest (default)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The number of results to return in a single page."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "If present, only returns devices at the target location."
+          "description": ""
         }
       ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Devices",
-      "description": "\nFor more information, see the following guides:\n - [Devices](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListDeviceCodes",
-      "method": "get",
-      "path": "/v2/devices/codes",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this to retrieve the next set of results for your original query.\n\nSee [Paginating results](https://developer.squareup.com/docs/working-with-apis/pagination) for more information."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "If specified, only returns DeviceCodes of the specified location.\nReturns DeviceCodes of all locations if empty."
-        },
-        {
-          "name": "product_type",
-          "type": "string",
-          "description": "If specified, only returns DeviceCodes targeting the specified product type.\nReturns DeviceCodes of all product types if empty."
-        },
-        {
-          "name": "status",
-          "type": "string",
-          "description": "If specified, returns DeviceCodes with the specified statuses.\nReturns DeviceCodes of status `PAIRED` and `UNPAIRED` if empty."
-        }
-      ],
+      "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Devices",
-      "description": "\nFor more information, see the following guides:\n - [Devices](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "CreateDeviceCode",
+      "name": "PostCoursesMeetingsUsers",
+      "description": "Creates a new Course Meeting Attendance within the provided Course/Organization Id.\n\nThe \"course.attendance.CREATE\" entitlement is required to create a Course Meeting Attendance.\n\n**Since**: 3500.7.0",
       "method": "post",
-      "path": "/v2/devices/codes",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Devices",
-      "description": "\nFor more information, see the following guides:\n - [Devices](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetDeviceCode",
-      "method": "get",
-      "path": "/v2/devices/codes/{id}",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users",
       "pathParameters": [
         {
-          "name": "id",
+          "name": "meetingId",
           "type": "string",
-          "description": "The unique identifier for the device code."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -2117,189 +849,19 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Devices",
-      "description": "\nFor more information, see the following guides:\n - [Devices](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "GetDevice",
-      "method": "get",
-      "path": "/v2/devices/{device_id}",
-      "pathParameters": [
-        {
-          "name": "device_id",
-          "type": "string",
-          "description": "The unique ID for the desired `Device`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListDisputes",
-      "method": "get",
-      "path": "/v2/disputes",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "states",
-          "type": "string",
-          "description": "The dispute states used to filter the result. If not specified, the endpoint returns all disputes."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location for which to return a list of disputes.\nIf not specified, the endpoint returns disputes associated with all locations."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveDispute",
-      "method": "get",
-      "path": "/v2/disputes/{dispute_id}",
-      "pathParameters": [
-        {
-          "name": "dispute_id",
-          "type": "string",
-          "description": "The ID of the dispute you want more details about."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "AcceptDispute",
-      "description": "Square returns the disputed amount to the cardholder and\nupdates the dispute state to ACCEPTED.\n\nSquare debits the disputed amount from the seller’s Square account. If the Square account\ndoes not have sufficient funds, Square debits the associated bank account.",
-      "method": "post",
-      "path": "/v2/disputes/{dispute_id}/accept",
-      "pathParameters": [
-        {
-          "name": "dispute_id",
-          "type": "string",
-          "description": "The ID of the dispute you want to accept."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListDisputeEvidence",
-      "method": "get",
-      "path": "/v2/disputes/{dispute_id}/evidence",
-      "pathParameters": [
-        {
-          "name": "dispute_id",
-          "type": "string",
-          "description": "The ID of the dispute."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateDisputeEvidenceFile",
-      "description": "The endpoint accepts HTTP\nmultipart/form-data file uploads in HEIC, HEIF, JPEG, PDF, PNG, and TIFF formats.",
-      "method": "post",
-      "path": "/v2/disputes/{dispute_id}/evidence-files",
-      "pathParameters": [
-        {
-          "name": "dispute_id",
-          "type": "string",
-          "description": "The ID of the dispute for which you want to upload evidence."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateDisputeEvidenceText",
-      "method": "post",
-      "path": "/v2/disputes/{dispute_id}/evidence-text",
-      "pathParameters": [
-        {
-          "name": "dispute_id",
-          "type": "string",
-          "description": "The ID of the dispute for which you want to upload evidence."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteDisputeEvidence",
-      "description": "Square does not send the bank any evidence that is removed.",
+      "name": "DeleteCoursesMeetingsUsers",
+      "description": "Deletes all attendance records in the course meeting for a given meeting Id.\n\nThe 'course.attendance.DELETE' entitlement is required to delete attendance records.\n\n**Since**: 3500.7.0",
       "method": "delete",
-      "path": "/v2/disputes/{dispute_id}/evidence/{evidence_id}",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users",
       "pathParameters": [
         {
-          "name": "dispute_id",
+          "name": "meetingId",
           "type": "string",
-          "description": "The ID of the dispute from which you want to remove evidence."
-        },
-        {
-          "name": "evidence_id",
-          "type": "string",
-          "description": "The ID of the evidence you want to remove."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -2309,46 +871,19 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "RetrieveDisputeEvidence",
-      "description": "You must maintain a copy of any evidence uploaded if you want to reference it later. Evidence cannot be downloaded after you upload it.",
-      "method": "get",
-      "path": "/v2/disputes/{dispute_id}/evidence/{evidence_id}",
-      "pathParameters": [
-        {
-          "name": "dispute_id",
-          "type": "string",
-          "description": "The ID of the dispute from which you want to retrieve evidence metadata."
-        },
-        {
-          "name": "evidence_id",
-          "type": "string",
-          "description": "The ID of the evidence to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Disputes",
-      "description": "\nA seller has the following options to process a dispute:\n\n- Accept the dispute using the [AcceptDispute](/reference/square/disputes-api/accept-dispute) endpoint. Square returns the disputed amount from the account balance of the Square account.\n- Challenge the dispute using the [SubmitEvidence](/reference/square/disputes-api/submit-evidence) endpoint. If the payment was valid, you can contest the disputed payment.\nYou submit supporting evidence you have about the transaction, such as receipts, invoices, email correspondence, proof of delivery, or photos.\nYou upload evidence using the [CreateDisputeEvidenceFile](/reference/square/disputes-api/create-dispute-evidence-file) endpoint.\n\nThe Disputes API also supports other endpoints useful in dispute management.\n\nFor more information, see the following guides:\n - [Disputes](https://developer.squareup.com/docs/disputes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SubmitEvidence",
-      "description": "The evidence submitted by this endpoint includes evidence uploaded\nusing the [CreateDisputeEvidenceFile](api-endpoint:Disputes-CreateDisputeEvidenceFile) and\n[CreateDisputeEvidenceText](api-endpoint:Disputes-CreateDisputeEvidenceText) endpoints and\nevidence automatically provided by Square, when available. Evidence cannot be removed from\na dispute after submission.",
+      "name": "PostCoursesMeetingsUsersBulk",
+      "description": "Creates or updates attendance records for the meeting for all users in the course.\n\nUser required both of the entitlements below. If the user does not have the required entitlements,no records are created or modified.  Entitlement | User Access ------------|-----------  course.attendance.CREATE | Create Course/Organization Course Meeting Attendance course.attendance.MODIFY | Update Course/Organization Meeting Attendance\n\n**Since**: 3500.7.0",
       "method": "post",
-      "path": "/v2/disputes/{dispute_id}/submit-evidence",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users/bulk",
       "pathParameters": [
         {
-          "name": "dispute_id",
+          "name": "meetingId",
           "type": "string",
-          "description": "The ID of the dispute for which you want to submit evidence."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -2358,123 +893,122 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Events",
-      "description": "\nIf you don't need a real-time response to data changes or need a disaster recovery or reconciliation mechanism for missed webhook events (caused by server outages, misconfigured webhook subscriptions, network errors, and other events), you can use the Events API instead of webhook subscriptions managed manually or through the Webhook Subscriptions API.\n\nBecause Square events are owned by the application and not any one seller, you cannot use OAuth access tokens with the Events API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see:\n - [Events API](https://developer.squareup.com/docs/events-api/overview) \n"
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
     },
     "endpoint": {
-      "name": "SearchEvents",
-      "method": "post",
-      "path": "/v2/events",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Events",
-      "description": "\nIf you don't need a real-time response to data changes or need a disaster recovery or reconciliation mechanism for missed webhook events (caused by server outages, misconfigured webhook subscriptions, network errors, and other events), you can use the Events API instead of webhook subscriptions managed manually or through the Webhook Subscriptions API.\n\nBecause Square events are owned by the application and not any one seller, you cannot use OAuth access tokens with the Events API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see:\n - [Events API](https://developer.squareup.com/docs/events-api/overview) \n"
-    },
-    "endpoint": {
-      "name": "DisableEvents",
-      "description": "All events are disabled by default. You must enable events to make them searchable.\nDisabling events for a specific time period prevents them from being searchable, even if you re-enable them later.",
-      "method": "put",
-      "path": "/v2/events/disable",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Events",
-      "description": "\nIf you don't need a real-time response to data changes or need a disaster recovery or reconciliation mechanism for missed webhook events (caused by server outages, misconfigured webhook subscriptions, network errors, and other events), you can use the Events API instead of webhook subscriptions managed manually or through the Webhook Subscriptions API.\n\nBecause Square events are owned by the application and not any one seller, you cannot use OAuth access tokens with the Events API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see:\n - [Events API](https://developer.squareup.com/docs/events-api/overview) \n"
-    },
-    "endpoint": {
-      "name": "EnableEvents",
-      "description": "Only events that occur while in the enabled state are searchable.",
-      "method": "put",
-      "path": "/v2/events/enable",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Events",
-      "description": "\nIf you don't need a real-time response to data changes or need a disaster recovery or reconciliation mechanism for missed webhook events (caused by server outages, misconfigured webhook subscriptions, network errors, and other events), you can use the Events API instead of webhook subscriptions managed manually or through the Webhook Subscriptions API.\n\nBecause Square events are owned by the application and not any one seller, you cannot use OAuth access tokens with the Events API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see:\n - [Events API](https://developer.squareup.com/docs/events-api/overview) \n"
-    },
-    "endpoint": {
-      "name": "ListEventTypes",
+      "name": "GetCoursesMeetingsUsers",
+      "description": "Returns a Course Meeting Attendance information for the given meeting and user Id.\n\nThe \"course.attendance.VIEW\" entitlement is required to view a Course Meeting Attendance.\n\n**Since**: 3500.7.0",
       "method": "get",
-      "path": "/v2/events/types",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users/{userId}",
+      "pathParameters": [
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesMeetingsUsers",
+      "description": "Delete attendance record for meeting.It will delete meeting attendance within a course meeting.\n\nThe 'course.attendance.DELETE' entitlement is required to delete Attendance Record.\n\n**Since**: 3500.7.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users/{userId}",
+      "pathParameters": [
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Attendance",
+      "description": "Blackboard Learn attendance API provides endpoints for managing attendance related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesMeetingsUsers",
+      "description": "Update the Course Meeting Attendance data for the given Course/Organization.\n\nThe \"course.attendance.MODIFY\" entitlement is required to update a Course Meeting Attendance. The \"course.attendance.VIEW\" entitlement is required to view a Course Meeting attendance.\n\n**Since**: 3500.7.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/meetings/{meetingId}/users/{userId}",
+      "pathParameters": [
+        {
+          "name": "meetingId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Calendar",
+      "description": "Blackboard Learn calendar API provides endpoints for managing calendar related operations."
+    },
+    "endpoint": {
+      "name": "GetCalendars",
+      "description": "Get the list of calendars. This endpoint will return all calendars viewable by the user. All users can request a list of calendars viewable to them.\n\n**Since**: 3400.9.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/calendars",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Calendar",
+      "description": "Blackboard Learn calendar API provides endpoints for managing calendar related operations."
+    },
+    "endpoint": {
+      "name": "GetCalendarsItems",
+      "description": "Get the list of calendar items. This endpoint will return all types of CalendarItems viewable by the user unless a specific <code>type</code> is specified as a query parameter.\n\nIf <code>since</code> and <code>since</code> are not provided this endpoint will default to the upcoming two week timeframe from now. </p>\n\nIf only <code>since</code> is provided this endpoint will default the <code>until</code> parameter two weeks after <code>since</code>. </p>\n\nIf only <code>until</code> is provided this endpoint will default the <code>since</code> parameter two prior to <code>until</code>. </p>\n\nMaximum timespan between <code>since</code> and <code>until</code> is 16 weeks. </p>\n\nCalendarItems of type <code>GradebookColumn</code> are a representation of a specific gradable item and therefore read-only. Modifications to GradebookColumn items performed via the Gradebook Column endpoints will be reflected in the CalendarItems endpoints. </p>\n\nThe CalendarItem <code>id</code> can be used as the <code>columnId</code> on the Gradebook Column endpoints found here: <code>/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}</code>. </p> Example requests:\n\n- <code>GET ../items?since=2018-01-01T00:00:00.000Z&until2018-02-01T00:00:00.000Z // all calendar items for a given timeframe</code>\n- <code>GET ../items?since=2018-01-01T00:00:00.000Z&until2018-02-01T00:00:00.000Z&courseId=_123_1 // all calendar items for a given course (including Course, OfficeHours, GradebookColumn types)</code>\n- <code>GET ../items?since=2018-01-01T00:00:00.000Z&until2018-02-01T00:00:00.000Z&courseId=_123_1&type=GradebookColumn // all GradebookColumn items for a course</code>\n- <code>GET ../items?since=2018-01-01T00:00:00.000Z&until2018-02-01T00:00:00.000Z&courseId=_123_1&type=OfficeHours // all OfficeHours for a course</code>\n- <code>GET ../items?since=2018-01-01T00:00:00.000Z&until2018-02-01T00:00:00.000Z&type=GradebookColumn // all gradebook columns due within the given timeframe</code>\n- <code>GET ../items?since=2018-01-01T00:00:00.000Z&until2018-02-01T00:00:00.000Z&type=OfficeHours // all OfficeHours available to current user for a given timeframe</code>\nThe following must be true in order to view the following calendar item types:\n\n- Institution\n-\n\n- All users can view Institution calendar items\n\n- Personal\n-\n\n- Any user may view their own calendar items, but not other user's calendar items\n\n- Course\n-\n\n- The user must have the 'course.calendar.VIEW' entitlement\n- The course calendar must be enabled for the course the calendar item is associated with\n\n- GradebookColumn\n-\n\n- The user must be enrolled in the course or have either the    *       `course.gradebook-metadata.VIEW` or `course.gradebook.MODIFY` entitlement\n- The user must have the 'course.calendar.VIEW' entitlement\n- The course calendar must be enabled for the course the GradebookColumn is associated with\n\n- OfficeHours\n-\n\n- If the OfficeHours are created for a course calendar (calendarId = a course id) the user must be enrolled in the course\n- If the OfficeHours are created for a all courses (calendarId = PERSONAL) the user must be enrolled in any course that the user owning the OfficeHours is also enrolled in\n- In either case above the course calendar must be enabled\n\n</p>\n\n**Since**: 3400.9.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/calendars/items",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "api_version",
+          "name": "courseId",
           "type": "string",
-          "description": "The API version for which to list event types. Setting this field overrides the default version used by the application."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Gift Card Activities",
-      "description": "\nUse the Gift Card Activities API to create activities for a Square gift card (such as activating or reloading the gift card) and to track gift card activities. The Gift Card Activities API is used with the [Gift Cards API](https://developer.squareup.com/reference/square/gift-cards-api) to manage the gift card program for a Square seller.\n\nFor more information, see the following guides:\n - [Gift Card Activities](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListGiftCardActivities",
-      "description": "By default, you get gift card activities for all\ngift cards in the seller's account. You can optionally specify query parameters to\nfilter the list. For example, you can get a list of gift card activities for a gift card,\nfor all gift cards in a specific region, or for activities within a time window.",
-      "method": "get",
-      "path": "/v2/gift-cards/activities",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "gift_card_id",
-          "type": "string",
-          "description": "If a gift card ID is provided, the endpoint returns activities related \nto the specified gift card. Otherwise, the endpoint returns all gift card activities for \nthe seller."
+          "description": "Specifies only calendar items associated with 'courseId' are to be returned. NOTE: This is the course.id, not the course.courseId\n\n**Since**: 3400.9.0"
         },
         {
           "name": "type",
           "type": "string",
-          "description": "If a [type](entity:GiftCardActivityType) is provided, the endpoint returns gift card activities of the specified type. \nOtherwise, the endpoint returns all types of gift card activities."
+          "description": "Specifies only calendar items with the given type.\n\n**Since**: 3400.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Course |  |\n| GradebookColumn | Read only. |\n| Institution |  |\n| OfficeHours |  |\n| Personal |  |\n"
         },
         {
-          "name": "location_id",
+          "name": "since",
           "type": "string",
-          "description": "If a location ID is provided, the endpoint returns gift card activities for the specified location. \nOtherwise, the endpoint returns gift card activities for all locations."
+          "description": "Specifies only calendar items after the 'since' date (inclusive) are to be returned. Maximum of 16 weeks after the 'since' date will be returned. ISO-8601 date-time format is expected: [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh:mm]]\n\n**Since**: 3400.9.0"
         },
         {
-          "name": "begin_time",
+          "name": "until",
           "type": "string",
-          "description": "The timestamp for the beginning of the reporting period, in RFC 3339 format.\nThis start time is inclusive. The default value is the current time minus one year.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
+          "description": "Specifies only calendar items before the 'until' date (inclusive) are to be returned. Maximum of 16 weeks prior to the 'until' date will be returned. ISO-8601 date-time format is expected: [yyyy-MM-dd|yyyyMMdd][T(hh:mm[:ss[.sss]]|hhmm[ss[.sss]])]?[Z|[+-]hh:mm]]\n\n**Since**: 3400.9.0"
         },
         {
-          "name": "end_time",
+          "name": "sort",
           "type": "string",
-          "description": "The timestamp for the end of the reporting period, in RFC 3339 format.\nThis end time is inclusive. The default value is the current time.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "If a limit is provided, the endpoint returns the specified number \nof results (or fewer) per page. The maximum value is 100. The default value is 50.\nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nIf a cursor is not provided, the endpoint returns the first page of the results.\nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which the endpoint returns the activities, based on `created_at`.\n- `ASC` - Oldest to newest.\n- `DESC` - Newest to oldest (default)."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),start\" Supported fields are:\n\n- id\n- calendarId\n- title\n- start\n- end\n- modified\n\n**Since**: 3400.9.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -2483,14 +1017,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Gift Card Activities",
-      "description": "\nUse the Gift Card Activities API to create activities for a Square gift card (such as activating or reloading the gift card) and to track gift card activities. The Gift Card Activities API is used with the [Gift Cards API](https://developer.squareup.com/reference/square/gift-cards-api) to manage the gift card program for a Square seller.\n\nFor more information, see the following guides:\n - [Gift Card Activities](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Calendar",
+      "description": "Blackboard Learn calendar API provides endpoints for managing calendar related operations."
     },
     "endpoint": {
-      "name": "CreateGiftCardActivity",
-      "description": "For example, create an `ACTIVATE` activity to activate a gift card with an initial balance before first use.",
+      "name": "PostCalendarsItems",
+      "description": "\n\nCreate a calendar item. Calendar items may be single or recurring. </p>\n\nCalendarItems of type <code>OfficeHours</code> will be assigned to the current user. </p> The following must be true in order to create a calendar item:\n\n- Institution\n-\n\n- The user must have the 'system.calendar-item.EXECUTE' entitlement\n\n- Personal\n-\n\n- Any user may create their own calendar items\n\n- Course\n-\n\n- The user may be enrolled or unenrolled in the course\n- The user must have the 'course.calendar-entry.CREATE' entitlement\n- The course calendar must be enabled for the specified course\n\n- GradebookColumn\n-\n\n- GradebookColumns must be created using the Gradebook API endpoint: <code>POST /learn/api/public/v2/courses/{courseId}/gradebook/columns</code>\n\n- OfficeHours\n-\n\n- The user must have the 'course.calendar-entry.CREATE' entitlement\n- If calendarId = a course id the user may be enrolled or unenrolled in the course but should have the 'course.calendar-entry.CREATE' entitlement and the calendar must be enabled to create event\n- Note: To create for all enrolled courses calendarId must be set to PERSONAL\n\nIf the course calendar includes LTI deep link definition  it will be included in the calendar item. </p>\n\n**Since**: 3400.9.0",
       "method": "post",
-      "path": "/v2/gift-cards/activities",
+      "path": "/learn/api/public/v1/calendars/items",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -2499,40 +1033,4150 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Calendar",
+      "description": "Blackboard Learn calendar API provides endpoints for managing calendar related operations."
     },
     "endpoint": {
-      "name": "ListGiftCards",
-      "description": "You can specify optional filters to retrieve \na subset of the gift cards. Results are sorted by `created_at` in ascending order.",
+      "name": "GetCalendarsItems",
+      "description": "\n\nGet a course calendar item. </p>\n\nCalendarItems of type <code>GradebookColumn</code> are a representation of a specific gradable item and therefore read-only. Modifications to GradebookColumn items performed via the Gradebook Column endpoints will be reflected in the CalendarItems endpoints. </p>\n\nThe CalendarItem <code>id</code> can be used as the <code>columnId</code> on the Gradebook Column endpoints found here: <code>/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}</code>. </p> The following must be true in order to view the following calendar items types:\n\n- Institution\n-\n\n- All users can view Institution calendar items\n\n- Personal\n-\n\n- Any user may view their own calendar items, but not other user's calendar items\n\n- Course\n-\n\n- The user must have the 'course.calendar.VIEW' entitlement\n- The course calendar must be enabled for the course the calendar item is associated with\n\n- GradebookColumn\n-\n\n- The user must be enrolled in the course OR they must have either the       `course.gradebook-metadata.VIEW` or `course.gradebook.MODIFY` entitlement\n- The user must have the 'course.calendar.VIEW' entitlement\n- The course calendar must be enabled for the course the GradebookColumn is associated with\n\n- OfficeHours\n-\n\n- If the OfficeHours are created for a course calendar (calendarId = a course id) the user must be enrolled in the course\n- If the OfficeHours are created for a all courses (calendarId = PERSONAL) the user must be enrolled in any course that the user owning the OfficeHours is also enrolled in\n- In either case above the course calendar must be enabled\n\n**Since**: 3400.9.0",
       "method": "get",
-      "path": "/v2/gift-cards",
+      "path": "/learn/api/public/v1/calendars/items/{calendarItemType}/{calendarItemId}",
+      "pathParameters": [
+        {
+          "name": "calendarItemType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "calendarItemId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Calendar",
+      "description": "Blackboard Learn calendar API provides endpoints for managing calendar related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCalendarsItems",
+      "description": "\n\nDelete a calendar item or series. </p> The following must be true in order to delete a calendar item:\n\n- Institution\n-\n\n- The user must have the 'system.calendar-item.EXECUTE' entitlement\n\n- Personal\n-\n\n- Any user may delete their own calendar items\n\n- Course\n-\n\n- The user may be enrolled or unenrolled in the course\n- The user must have the 'course.calendar.VIEW' entitlement\n- The user must have the 'course.calendar-entry.DELETE' entitlement\n- The course calendar must be enabled for the specified course\n\n- GradebookColumn\n-\n\n- GradebookColumns must be deleted using the Gradebook API endpoint: <code>DELETE /learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}</code>\n\n- OfficeHours\n-\n\n- The user must have the 'course.calendar-entry.MODIFY' entitlement\n- The user must own the calendarItem\n- The calendar must be enabled if the calendarItem is associated with a course calendar.\n\n**Since**: 3400.9.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/calendars/items/{calendarItemType}/{calendarItemId}",
+      "pathParameters": [
+        {
+          "name": "calendarItemType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "calendarItemId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Calendar",
+      "description": "Blackboard Learn calendar API provides endpoints for managing calendar related operations."
+    },
+    "endpoint": {
+      "name": "PatchCalendarsItems",
+      "description": "\n\nUpdate a calendar item or series. </p>\n\nWhen updating the series the existing CalendarItems will be removed and a new set of CalendarItems will be created. This is the same behavior as experienced via the UI. </p> The following must be true in order to update a calendar item:\n\n- Institution\n-\n\n- The user must have the 'system.calendar-item.EXECUTE' entitlement\n\n- Personal\n-\n\n- Any user may update their own calendar items\n\n- Course\n-\n\n- The user may be enrolled or unenrolled in the course\n- The user must have the 'course.calendar-entry.MODIFY' entitlement\n- The user must have the 'course.calendar.VIEW' entitlement\n- The course calendar must be enabled for the specified course\n\n- GradebookColumn\n-\n\n- GradebookColumns must be updated using the Gradebook API endpoint: <code>PATCH /learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}</code>\n\n- OfficeHours\n-\n\n- The user must have the 'course.calendar-entry.MODIFY' entitlement\n- If calendarId = a course id the user may be enrolled or unenrolled in the course but should have the 'course.calendar-entry.MODIFY' entitlement  and the calendar must be enabled\n\nIf the course calendar includes LTI deep link definition  it will be updated in the calendar item.\n\n**Since**: 3400.9.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/calendars/items/{calendarItemType}/{calendarItemId}",
+      "pathParameters": [
+        {
+          "name": "calendarItemType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "calendarItemId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Column exceptions",
+      "description": "Blackboard Learn column exceptions API provides endpoints for managing column exceptions related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookColumnsExceptions",
+      "description": "Returns a paged list of all user exceptions associated with the course and gradebook column. The entitlement(course.gradebook-item.exceptions.VIEW) and be enrolled to the course is needed. </pre>\n\n**Since**: 3900.103.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/exceptions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Column exceptions",
+      "description": "Blackboard Learn column exceptions API provides endpoints for managing column exceptions related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsExceptionsUsers",
+      "description": "Returns specific user exception associated with the course and gradebook column. The entitlement(course.gradebook-item.exceptions.VIEW) and be enrolled to the course is needed. </pre>\n\n**Since**: 3900.103.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/exceptions/users/{userId}",
+      "pathParameters": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Column exceptions",
+      "description": "Blackboard Learn column exceptions API provides endpoints for managing column exceptions related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesGradebookColumnsExceptionsUsers",
+      "description": "Creates/updates an exception associated with the course and gradable item for a user The entitlement(course.gradebook-item.exceptions.MODIFY) is checked.\n\n**Since**: 3900.103.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/exceptions/users/{userId}",
+      "pathParameters": [
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Column exceptions",
+      "description": "Blackboard Learn column exceptions API provides endpoints for managing column exceptions related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookColumnsExceptionsUsers",
+      "description": "Deletes an exception associated with the course and gradable item for a user. The entitlement(course.gradebook-item.exceptions.MODIFY) is checked.\n\n**Since**: 3900.103.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/exceptions/users/{userId}",
+      "pathParameters": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContents",
+      "description": "List top-level content items in a course.\n\nUsers with at least one of the following entitlements may access any content item:\n\n- course.adaptiverelease.CREATE\n- course.adaptiverelease.DELETE\n- course.adaptiverelease.MODIFY\n- course.adaptiverelease.VIEW\n- course.configure-areas.EXECUTE\n- course.content-item.copy.EXECUTE\n- course.content.DELETE\n- course.content.MODIFY\n- course.learningstandards.alignment.CREATE\n- course.performance.dashboard.VIEW\n</p>\n\nFor other users, permission to view the content item will depend on the availability settings of the course and  the content item.  The following fields will be filtered out:\n\n- availability.available\n- availability.allowGuests\n- availability.adaptiveRelease\n</p>\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents",
       "pathParameters": [],
       "queryParameters": [
+        {
+          "name": "recursive",
+          "type": "boolean",
+          "description": "Search for child content recursively.  A value of 'true' indicates that search results should include all content descendants within the hierarchy of the specified parent.  A value of 'false' indicates results should be limited to immediate children only.  Not setting this field defaults to 'false' behavior; only including immediate children.\n\n**Since**: 3100.2.0"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for content title. Will return all Content items whose title contains the supplied search value.\n\n**Since**: 3900.10.0"
+        },
+        {
+          "name": "contentHandler",
+          "type": "string",
+          "description": "Search for the specific content handler.  Not setting this field will return all content handlers.\n\n**Since**: 3400.5.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for contents with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3700.1.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.1.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for contents with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3700.4.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "reviewable",
+          "type": "boolean",
+          "description": "Search contents by whether they are reviewable or not.\n\n**Since**: 3700.15.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesContents",
+      "description": "Create a new top-level content item. Currently only folders may be created as top-level content items in a Classic course. For Ultra courses any content item is allowed and will be placed under the ROOT folder. Entitlement \"course.content.CREATE\" required to create Course Content.\n\n**Since**: 3000.7.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesContentsCreateassignment",
+      "description": "Create assignment content, grade column and file attachments in one POST. Any files specified with assignment creation must be previously uploaded using the uploads endpoint. Ultra courses supported since 3300.9.0 Classic courses supported since 3400.9.0 </p> For Ultra courses, this will create:\n\n- A content item with a contentHandler.id = resource/x-bb-asmt-test-link\n- A gradebook column with contentId = id of the new content\n- In the new Ultra assignment, instructions are saved as assignment instructions only, unlike in the old Ultra assignment where instructions were created as presentation questions.\n</p> The following entitlements are required to create an assignment in Ultra:\n\n- course.content.CREATE\n- course.assessment.CREATE\n- course.content.assessment.deploy.EXECUTE\n- course.gradebook.MODIFY\n- course.assessment.MODIFY, if instructions or files are specified\n</p> For Classic courses, this will create:\n\n- A content item with contentHandler.id = resource/x-bb-assignment\n- A gradebook column with contentId = id of the new content\n- A file attachment for each given file attachment id\nThe following entitlements are required to create a Classic assignment:\n\n- course.content.CREATE\n- course.gradebook.MODIFY\n- course.content.MODIFY, if files are specified\n</p>\n\n**Since**: 3300.9.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/createAssignment",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContents",
+      "description": "Load a specific content item from a course.\n\nUsers with at least one of the following entitlements may access any content item:\n\n- course.adaptiverelease.CREATE\n- course.adaptiverelease.DELETE\n- course.adaptiverelease.MODIFY\n- course.adaptiverelease.VIEW\n- course.configure-areas.EXECUTE\n- course.content-item.copy.EXECUTE\n- course.content.DELETE\n- course.content.MODIFY\n- course.learningstandards.alignment.CREATE\n- course.performance.dashboard.VIEW\n</p>\n\nFor other users, permission to view the content item will depend on the availability settings of the course and the content item.  The following fields will be filtered out:\n\n- availability.available\n- availability.allowGuests\n- availability.adaptiveRelease\nInclude includeInActivityTracking to define if the content should be included in the activity tracking. By default, this value is true so the content will be included in the activity tracking. </p>\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesContents",
+      "description": "Delete a content item.\n\nThe 'course.content.DELETE' entitlement is required.\n\n**Since**: 3000.1.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesContents",
+      "description": "Update a content item.\n\nThe 'course.content.MODIFY' entitlement is required.\n\n**Since**: 3000.1.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsChildren",
+      "description": "List all child content items directly beneath another content item.  This is only valid for content items that are allowed to have children (e.g. Folders).\n\nUsers with at least one of the following entitlements may access all child contents from a content item:\n\n- course.adaptiverelease.CREATE\n- course.adaptiverelease.DELETE\n- course.adaptiverelease.MODIFY\n- course.adaptiverelease.VIEW\n- course.configure-areas.EXECUTE\n- course.content-item.copy.EXECUTE\n- course.content.DELETE\n- course.content.MODIFY\n- course.learningstandards.alignment.CREATE\n- course.performance.dashboard.VIEW\nIn any of the following cases, the user may also get the child contents from a content item.\n\n- The user has a role in the course other than guest or observer, and doesn't have any of the previously mentioned entitlements.\n- The user has the role of observer, and both the course and the underlying content allow observer access.\n- The user accesses the course as guest, both the course and the underlying content allow guest access, further, the course content menu allows guest access as well for the original courses.\n</p>\n\nFor other users, permission to view the content item will depend on the availability settings of the course and  the content item. The following fields will be filtered out:\n\n- availability.available\n- availability.allowGuests\n- availability.adaptiveRelease\nInclude includeInActivityTracking to define if the content should be included in the activity tracking.  By default, this value is true so the content will be included in the activity tracking. </p>\n\nUsage of userMessageState field into expand, is only legal with a limit up to 10 items, a protection was set so that users can request the field  setting a limit &lt;= 10. In all the other cases, status BAD_REQUEST (400) will be returns to the client. </p>\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/children",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "recursive",
+          "type": "boolean",
+          "description": "Search for child content recursively.  A value of 'true' indicates that search results should include all content descendants within the hierarchy of the specified parent.  A value of 'false' indicates results should be limited to immediate children only.  Not setting this field defaults to 'false' behavior; only including immediate children.\n\n**Since**: 3100.2.0"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for content title. Will return all Content items whose title contains the supplied search value.\n\n**Since**: 3900.10.0"
+        },
+        {
+          "name": "contentHandler",
+          "type": "string",
+          "description": "Search for the specific content handler.  Not setting this field will return all content handlers.\n\n**Since**: 3400.5.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for contents with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3700.1.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.1.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for contents with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3700.4.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "reviewable",
+          "type": "boolean",
+          "description": "Search contents by whether they are reviewable or not.\n\n**Since**: 3700.15.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesContentsChildren",
+      "description": "Create a new child content item beneath an existing content item.  This is only valid for content items that are allowed to have children (e.g. Folders). Entitlement \"course.content.CREATE\" required to create Course Content.\n\n**Since**: 3000.1.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/children",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsChildrenStates",
+      "description": "Gets the progress tracking states of a content parent's children. Content refers to the individual elements within an Ultra course and, the term children refers to the items that are contained within a parent content item. This endpoint only supports Ultra courses.\n\nAn authenticated user can see the progress tracking status on the children if they either own the content, or if the user have any of the following entitlements:\n\n- course.progress.information.VIEW\n- course.content.designer.VIEW\n- course.content.MODIFY\n- course.content.DELETE\n</p>\n\n**Since**: 3900.112.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/children/states/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesContentsStates",
+      "description": "Updates the progress tracking state for a non-participatory content. This endpoint only supports Ultra courses.\n\nThe user must be a student of the course.\n\n**Since**: 3900.112.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/states",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content",
+      "description": "Blackboard Learn content API provides endpoints for managing content related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsStates",
+      "description": "Gets the user progress tracking state for the requested content. This endpoint only supports Ultra courses.\n\nThe authenticated user can see his/her own progress tracking state of the requested content or Users with the following entitlement may access any progress tracking state item:\n\n- course.progress.information.VIEW\n</p>\n\n**Since**: 3900.112.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/states/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content collection resources",
+      "description": "Blackboard Learn content collection resources API provides endpoints for managing content collection resources related operations."
+    },
+    "endpoint": {
+      "name": "GetContentcollectionResources",
+      "description": "Get the top-level content collection folders.\n\nUsers with the entitlement 'bbcms.cs.filesystem.REST.VIEW' or filesystem access can use this endpoint.\n\n**Since**: 3900.41.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/contentCollection/resources",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search by 'modified' date. Can be used along with 'modifiedCompare'.\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search by 'created' date. Can be used along with 'createdCompare'.\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'modified', When not specified, it will perform as 'greaterOrEqual' by default if 'modified' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'created', When not specified, it will perform as 'greaterOrEqual' by default if 'created' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "size",
+          "type": "integer",
+          "description": "Search by file 'size'. Can be used along 'sizeCompare'. If specified, no folders will be retrieved.\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "creatorId",
+          "type": "string",
+          "description": "Search files by 'creatorId'\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "sizeCompare",
+          "type": "string",
+          "description": "Search operator to be applied to 'size', When not specified, it will perform as 'equals' by default if 'size' is specified. Must be one of the following:\n\n- equals - optional\n- notEquals\n- greaterOrEqual\n- greaterThan\n- lessOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| greaterOrEqual |  |\n| greaterThan |  |\n| lessOrEqual |  |\n| lessThan |  |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content collection resources",
+      "description": "Blackboard Learn content collection resources API provides endpoints for managing content collection resources related operations."
+    },
+    "endpoint": {
+      "name": "GetContentcollectionResources",
+      "description": "Retrieves a content collection resource by id.\n\nResource objects only returned if the requesting User has been granted 'Read' permission on the Resource, or the User has the 'bbcms.cs.fileSystem.REST.VIEW' entitlement.\n\n**Since**: 3900.41.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/contentCollection/resources/{resourceId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content collection resources",
+      "description": "Blackboard Learn content collection resources API provides endpoints for managing content collection resources related operations."
+    },
+    "endpoint": {
+      "name": "GetContentcollectionResourcesChildren",
+      "description": "Get the direct children resources of the specified content collection resource. The specified resource must be a folder.\n\nUsers with the entitlement 'bbcms.cs.filesystem.REST.VIEW' or filesystem access can use this endpoint.\n\n**Since**: 3900.41.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/contentCollection/resources/{resourceId}/children",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search by 'modified' date. Can be used along with 'modifiedCompare'.\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search by 'created' date. Can be used along with 'createdCompare'.\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'modified', When not specified, it will perform as 'greaterOrEqual' by default if 'modified' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Search criteria to be applied to 'created', When not specified, it will perform as 'greaterOrEqual' by default if 'created' contains a valid date. Must be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "size",
+          "type": "integer",
+          "description": "Search by file 'size'. Can be used along 'sizeCompare'. If specified, no folders will be retrieved.\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "creatorId",
+          "type": "string",
+          "description": "Search files by 'creatorId'\n\n**Since**: 3900.41.0"
+        },
+        {
+          "name": "sizeCompare",
+          "type": "string",
+          "description": "Search operator to be applied to 'size', When not specified, it will perform as 'equals' by default if 'size' is specified. Must be one of the following:\n\n- equals - optional\n- notEquals\n- greaterOrEqual\n- greaterThan\n- lessOrEqual\n- lessThan\n\n**Since**: 3900.41.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| greaterOrEqual |  |\n| greaterThan |  |\n| lessOrEqual |  |\n| lessThan |  |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content file attachments",
+      "description": "Blackboard Learn content file attachments API provides endpoints for managing content file attachments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsAttachments",
+      "description": "Get the file attachment meta data associated to the Content Item\n\nSupported Content Item Types: Content File (resource/x-bb-file), Document (resource/x-bb-document), Classic Assignment (resource/x-bb-assignment) (Since 3400.9.0) for a Classic Course\n\n**Since**: 3200.8.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/attachments",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content file attachments",
+      "description": "Blackboard Learn content file attachments API provides endpoints for managing content file attachments related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesContentsAttachments",
+      "description": "Attach an uploaded file to a Content item.\n\nSupported Content Item Types: Content File (resource/x-bb-file), Document (resource/x-bb-document), Classic Assignment (resource/x-bb-assignment) for a Classic Course\n\n**Since**: 3400.9.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/attachments",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content file attachments",
+      "description": "Blackboard Learn content file attachments API provides endpoints for managing content file attachments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsAttachments",
+      "description": "Get the file attachment meta data by an attachment ID\n\nSupported Content Item Types: Content File (resource/x-bb-file), Document (resource/x-bb-document), Classic Assignment(resource/x-bb-assignment) (Since 3400.9.0) for a Classic Course\n\n**Since**: 3200.8.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/attachments/{attachmentId}",
+      "pathParameters": [
+        {
+          "name": "attachmentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content file attachments",
+      "description": "Blackboard Learn content file attachments API provides endpoints for managing content file attachments related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesContentsAttachments",
+      "description": "Delete file attachment meta data by attachment ID\n\nSupported Content Item Types: Content File (resource/x-bb-file), Document (resource/x-bb-document), Classic Assignment(resource/x-bb-assignment) for a Classic Course\n\n**Since**: 3400.9.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/attachments/{attachmentId}",
+      "pathParameters": [
+        {
+          "name": "attachmentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content file attachments",
+      "description": "Blackboard Learn content file attachments API provides endpoints for managing content file attachments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsAttachmentsDownload",
+      "description": "Download the contents of a Content Item.\n\nSupported Content Item Types: Content File (resource/x-bb-file), Document (resource/x-bb-document), Classic Assignment (resource/x-bb-assignment) (Since 3400.9.0) for a Classic Course\n\n**Since**: 3200.8.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/attachments/{attachmentId}/download",
+      "pathParameters": [
+        {
+          "name": "attachmentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content group assignments",
+      "description": "Blackboard Learn content group assignments API provides endpoints for managing content group assignments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsGroups",
+      "description": "Returns a list of content group associations for the specified content.\n\nCallers not enrolled in the course must have at least one of the following entitlements:\n\n- course.content.designer.VIEW  Callers enrolled in the course will only be able to see Groups that are available to them.\n\n**Since**: 3100.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/groups",
+      "pathParameters": [
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content group assignments",
+      "description": "Blackboard Learn content group assignments API provides endpoints for managing content group assignments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsGroups",
+      "description": "Returns a content group association for the specified content and group.\n\nCallers not enrolled in the course must have at least one of the following entitlements:\n\n- course.content.designer.VIEW  Callers enrolled in the course will only be able to see Groups that are available to them.\n\n**Since**: 3100.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/groups/{groupId}",
+      "pathParameters": [
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content group assignments",
+      "description": "Blackboard Learn content group assignments API provides endpoints for managing content group assignments related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesContentsGroups",
+      "description": "Creates a content group association.\n\nCallers not enrolled in the course must have at least one of the following entitlements:\n\n- course.content.MODIFY  If the content is going to be accessed in Ultra, the following rules should be followed by the caller:\n\n- If the group is part of a set, all groups with the set should be associated with the content. - The content should be associated exclusively to individual groups or groups within a set, but not both.\n\n**Since**: 3100.5.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/groups/{groupId}",
+      "pathParameters": [
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content group assignments",
+      "description": "Blackboard Learn content group assignments API provides endpoints for managing content group assignments related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesContentsGroups",
+      "description": "Deletes a content group association.\n\nIndividual Groups without Content association are not supported in Ultra. Groups existing in this state have undefined behavior, and may be removed.  In Ultra courses, for best performance, immediately either delete the associated group, or associated it with a new Content item.\n\nIf the content is going to be accessed in Ultra, and the group being removed is part of a group set, then the caller should ensure that all groups within that set are removed from the content.\n\nRequired entitlements:\n\n- course.content.DELETE\n\n**Since**: 3100.5.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/groups/{groupId}",
+      "pathParameters": [
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content resources",
+      "description": "Blackboard Learn content resources API provides endpoints for managing content resources related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesResources",
+      "description": "Returns a list of the top-level course resources.\n\nUsers with the 'bbcms.cs.fileSystem.REST.VIEW' entitlement can view all resources.\n\nAll other users can view resources for which they have been granted the 'Read' permission.\n\n**Since**: 3700.12.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/resources",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content resources",
+      "description": "Blackboard Learn content resources API provides endpoints for managing content resources related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesResources",
+      "description": "Loads a Course Resource by Id.\n\nUsers with the 'bbcms.cs.fileSystem.REST.VIEW' entitlement can view all resources.\n\nAll other users can view resources for which they have been granted the 'Read' permission.\n\n**Since**: 3700.13.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/resources/{resourceId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content resources",
+      "description": "Blackboard Learn content resources API provides endpoints for managing content resources related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesResourcesChildren",
+      "description": "Returns a list of Course Resources that are children of the specified Resource.\n\nUsers with the 'bbcms.cs.fileSystem.REST.VIEW' entitlement can view all resources.\n\nAll other users can view resources for which they have been granted the 'Read' permission.\n\n**Since**: 3700.13.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/resources/{resourceId}/children",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content review",
+      "description": "Blackboard Learn content review API provides endpoints for managing content review related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesContentsUsersReviewstatus",
+      "description": "Obtain the review status for a content item. This endpoint will only fetch the reviewStatus if the corresponding content was previously marked as reviewable.\n\n**Since**: 3700.16.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/users/{userId}/reviewStatus",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Content review",
+      "description": "Blackboard Learn content review API provides endpoints for managing content review related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesContentsUsersReviewstatus",
+      "description": "Update the review status for a content item. This endpoint will only update the reviewStatus if the corresponding content was previously marked as reviewable. Updating a content's review status to be reviewed is allowed in an Ultra course but updating a content item as unreviewed is not allowed in an Ultra course starting in 3900.19.0\n\n**Since**: 3700.16.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/contents/{contentId}/users/{userId}/reviewStatus",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course announcements",
+      "description": "Blackboard Learn course announcements API provides endpoints for managing course announcements related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesAnnouncements",
+      "description": "Return a list of Course Announcements. Users with the 'course.announcements.VIEW' entitlement can view 'available' Course Announcements. Users with the 'course.announcements.VIEW' &amp; 'course.announcements.MODIFY' entitlement can view 'available' &amp; 'unavailable' Course Announcements.\n\nThe response supports the <code>expand=readCount</code> query parameter. When specified, each announcement in the result will include the <code>readCount</code> field, indicating the number of users who have viewed the announcement. For draft announcements or when read tracking is disabled, the <code>readCount</code> field will be set to <code>-1</code>. </p>\n\n**Since**: 3500.3.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/announcements",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "creatorUserId",
+          "type": "string",
+          "description": "Search for announcements with creator user id equal to this value.\n\n**Since**: 3900.89.0."
+        },
+        {
+          "name": "creatorUsername",
+          "type": "string",
+          "description": "Search for announcements with creator username equal to this value.\n\n**Since**: 3900.89.0."
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for announcements with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "createdUntil",
+          "type": "string",
+          "description": "Search announcements with created date less than or equal to this value. 'createdCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for announcements with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "modifiedUntil",
+          "type": "string",
+          "description": "Search announcements with modified date less than or equal to this value. 'modifiedCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3500.3.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for announcements with a title like the provided value.\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "startDate",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "startDateUntil",
+          "type": "string",
+          "description": "Search announcements with start date relative to this value. 'startAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "startDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'startDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "endDate",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "endDateUntil",
+          "type": "string",
+          "description": "Search announcements with end date relative to this value. 'endAnnouncementsDateCompare' needs to be set to 'between' to perform the search correctly.\n\n**Since**: 3900.92.0"
+        },
+        {
+          "name": "endDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'endDate' search parameter. Defaults to greaterOrEqual if not specified. 'lessThan', 'between' are also accepted values.\n\n**Since**: 3900.92.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n| between |  |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),created\" Supported fields are:\n\n- title\n- modified\n\n**Since**: 3500.3.0"
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>studentReadCount</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course announcements",
+      "description": "Blackboard Learn course announcements API provides endpoints for managing course announcements related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesAnnouncements",
+      "description": "Create a Course Announcement. Users with the 'course.announcements.CREATE' and 'course.announcements.VIEW' entitlements can create Course Announcements.\n\n**Since**: 3500.3.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/announcements",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course announcements",
+      "description": "Blackboard Learn course announcements API provides endpoints for managing course announcements related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesAnnouncements",
+      "description": "Get a Course Announcement. Users with the 'course.announcements.VIEW' entitlement can view 'available' Course Announcements. Users with the 'course.announcements.VIEW' &amp; 'course.announcements.MODIFY' entitlement can view 'available' &amp; 'unavailable' Course Announcements.\n\n**Since**: 3500.3.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/announcements/{announcementId}",
+      "pathParameters": [
+        {
+          "name": "announcementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>studentReadCount</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course announcements",
+      "description": "Blackboard Learn course announcements API provides endpoints for managing course announcements related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesAnnouncements",
+      "description": "Delete a Course Announcement. Users with the 'course.announcements.DELETE' and 'course.announcements.VIEW' entitlements can delete Course Announcements.\n\n**Since**: 3500.3.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/announcements/{announcementId}",
+      "pathParameters": [
+        {
+          "name": "announcementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course announcements",
+      "description": "Blackboard Learn course announcements API provides endpoints for managing course announcements related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesAnnouncements",
+      "description": "Update a Course Announcement. Users with the 'course.announcements.MODIFY' and 'course.announcements.VIEW' entitlements can update Course Announcements.\n\n**Since**: 3500.3.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/announcements/{announcementId}",
+      "pathParameters": [
+        {
+          "name": "announcementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course assessments",
+      "description": "Blackboard Learn course assessments API provides endpoints for managing course assessments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesAssessmentsQuestions",
+      "description": "Get the list of questions for an Ultra Assessment.\n\nEither 'course.assessment.CREATE' or 'course.assessment.MODIFY' entitlement is needed to view questions. If the assessment has the external submissions setting enabled, then either the 'course.assessment.VIEW' or 'course.assessment.EXECUTE' entitlement is needed to view questions, and only presentation questions are returned.\n\n**Since**: 3300.9.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/assessments/{assessmentId}/questions",
+      "pathParameters": [
+        {
+          "name": "assessmentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course assessments",
+      "description": "Blackboard Learn course assessments API provides endpoints for managing course assessments related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesAssessmentsQuestions",
+      "description": "Creates a question for an Ultra Assessment.\n\nThe 'course.assessment.MODIFY' entitlement is needed to create a question.\n\n**Since**: 3300.9.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/assessments/{assessmentId}/questions",
+      "pathParameters": [
+        {
+          "name": "assessmentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course assessments",
+      "description": "Blackboard Learn course assessments API provides endpoints for managing course assessments related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesAssessmentsQuestions",
+      "description": "Get a question by Id from an Ultra Assessment.\n\nEither 'course.assessment.CREATE' or 'course.assessment.MODIFY' entitlement is needed to view a question.\n\n**Since**: 3300.9.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/assessments/{assessmentId}/questions/{questionId}",
+      "pathParameters": [
+        {
+          "name": "assessmentId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course assessments",
+      "description": "Blackboard Learn course assessments API provides endpoints for managing course assessments related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesAssessmentsQuestions",
+      "description": "Delete a question, specified by Id, from an Ultra Assessment.\n\nThe 'course.assessment.DELETE' entitlement is needed to perform the operation.\n\n**Since**: 3300.9.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/assessments/{assessmentId}/questions/{questionId}",
+      "pathParameters": [
+        {
+          "name": "assessmentId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course assessments",
+      "description": "Blackboard Learn course assessments API provides endpoints for managing course assessments related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesAssessmentsQuestions",
+      "description": "Update a Presentation Question, specified by Id, from an Ultra Assessment.\n\nThe 'course.assessment.MODIFY' entitlement is needed to perform the operation.\n\n**Since**: 3300.9.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/assessments/{assessmentId}/questions/{questionId}",
+      "pathParameters": [
+        {
+          "name": "assessmentId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCatalogCategories",
+      "description": "Returns a list of categories of the provided type (course or organization)\n\nEntitlement system.course-categories.VIEW required\n\nUsers with entitlement \"system.course.categories.MODIFY\" for course categories, or \"system.org.categories.MODIFY\" for organization categories can view all fields and all categories.\n\nUsers with system.course-categories.VIEW but not the corresponding MODIFY entitlements have read access to all properties except:\n\n- restricted\n- institutionRoleIds\nIn addition, users without the corresponding MODIFY entitlement have access to a restricted category only if their institution role matches one of the roles in the institutionRoleIds list for that category.\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),start\" Supported fields are:\n\n- id\n- categoryId\n- title\n- available\n- created\n\n**Since**: 3700.6.0"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for categories with titles that contain this value.\n\n**Since**: 3700.8.0"
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Search for categories with category IDs that contain this value.\n\n**Since**: 3700.8.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for categories with a created date relative to this value.\n\n**Since**: 3700.8.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for categories with a data source id matching this value.\n\n**Since**: 3700.9.0"
+        },
+        {
+          "name": "frontPage",
+          "type": "boolean",
+          "description": "Search for categories with a front page indicator matching this value.\n\n**Since**: 3700.9.0"
+        },
+        {
+          "name": "available",
+          "type": "boolean",
+          "description": "Search for categories with availability matching this value.\n\n**Since**: 3700.9.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "PostCatalogCategories",
+      "description": "Creates a new category of the provided type as defined in the request body\n\nEntitlement system.course.categories.MODIFY required to create course categories Entitlement system.org.categories.MODIFY required to create organization categories\n\n**Since**: 3600.0.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCatalogCategories",
+      "description": "Returns the category corresponding the provided type (course or organization) and ID\n\nEntitlement system.course-categories.VIEW required\n\nUsers with entitlement \"system.course.categories.MODIFY\" for course categories, or \"system.org.categories.MODIFY\" for organization categories can view all fields and all categories.\n\nUsers with system.course-categories.VIEW but not the corresponding MODIFY entitlements have read access to all properties except:\n\n- restricted\n- institutionRoleIds\nIn addition, users without the corresponding MODIFY entitlement have access to a restricted category only if their institution role matches one of the roles in the institutionRoleIds list for that category.\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{categoryId}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCatalogCategories",
+      "description": "Deletes the category corresponding to the provided type and id\n\nEntitlement system.course.categories.MODIFY required to delete a course category Entitlement system.org.categories.MODIFY required to delete an organization category\n\n**Since**: 3600.0.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{categoryId}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "PatchCatalogCategories",
+      "description": "Updates the category corresponding to the provided type and id.\n\nEntitlement system.course.categories.MODIFY required to modify course categories Entitlement system.org.categories.MODIFY required to modify organization categories\n\n**Since**: 3600.0.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{categoryId}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCatalogCategoriesCourses",
+      "description": "Get courses associated with the provided category. Entitlement system.course-categories.VIEW required\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{categoryId}/courses",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>course</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "PutCatalogCategoriesCourses",
+      "description": "Creates a category/course association. The course defined by courseId must match the categoryType.\n\nThe 'admin.course.categorize.MODIFY' entitlement is needed for course associations The 'admin.org.categorize.MODIFY' entitlement is needed for organization associations\n\n**Since**: 3600.0.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{categoryId}/courses/{courseId}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCatalogCategoriesCourses",
+      "description": "Deletes a category/course association\n\nThe 'admin.course.categorize.MODIFY' entitlement is needed for course associations The 'admin.org.categorize.MODIFY' entitlement is needed for organization associations\n\n**Since**: 3600.0.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{categoryId}/courses/{courseId}",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCatalogCategoriesChildren",
+      "description": "Returns a list of categories which are children of the category corresponding to the provided type (course or organization) and Id\n\nEntitlement system.course-categories.VIEW required\n\nUsers with entitlement \"system.course.categories.MODIFY\" for course categories, or \"system.org.categories.MODIFY\" for organization categories can view all fields and all categories.\n\nUsers with system.course-categories.VIEW but not the corresponding MODIFY entitlements have read access to all properties except:\n\n- restricted\n- institutionRoleIds\nIn addition, users without the corresponding MODIFY entitlement have access to a restricted category only if their institution role matches one of the roles in the institutionRoleIds list for that category.\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/catalog/categories/{categoryType}/{parentId}/children",
+      "pathParameters": [
+        {
+          "name": "categoryType",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "parentId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),start\" Supported fields are:\n\n- id\n- categoryId\n- title\n- available\n- created\n\n**Since**: 3700.6.0"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for categories with titles that contain this value.\n\n**Since**: 3700.8.0"
+        },
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Search for categories with category IDs that contain this value.\n\n**Since**: 3700.8.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for categories with a created date relative to this value.\n\n**Since**: 3700.8.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3700.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for categories with a data source id matching this value.\n\n**Since**: 3700.9.0"
+        },
+        {
+          "name": "frontPage",
+          "type": "boolean",
+          "description": "Search for categories with a front page indicator matching this value.\n\n**Since**: 3700.9.0"
+        },
+        {
+          "name": "available",
+          "type": "boolean",
+          "description": "Search for categories with availability matching this value.\n\n**Since**: 3700.9.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course categories",
+      "description": "Blackboard Learn course categories API provides endpoints for managing course categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesCategories",
+      "description": "Get categories associated with the provided course. Entitlement system.course-categories.VIEW required\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/categories",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>category</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade attempts",
+      "description": "Blackboard Learn course grade attempts API provides endpoints for managing course grade attempts related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookAttemptsFiles",
+      "description": "Get the list of file metadata for a Student Submission associated to the course and attempt.\n\n- Id\n- Name\n\n**Since**: 3400.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/attempts/{attemptId}/files",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade attempts",
+      "description": "Blackboard Learn course grade attempts API provides endpoints for managing course grade attempts related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookAttemptsFiles",
+      "description": "\n\nAttach a file to an Attempt for a Student Submission. Currently only supports Classic/9.1 Course Assignments. </p>\n\n**Since**: 3500.7.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/attempts/{attemptId}/files",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade attempts",
+      "description": "Blackboard Learn course grade attempts API provides endpoints for managing course grade attempts related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookAttemptsFiles",
+      "description": "Get the file metadata for a Student Submission associated to the course and attempt.\n\n- Id\n- Name\n\n**Since**: 3400.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/attempts/{attemptId}/files/{attemptFileId}",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "attemptFileId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade attempts",
+      "description": "Blackboard Learn course grade attempts API provides endpoints for managing course grade attempts related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookAttemptsFiles",
+      "description": "Delete the file for a Student Submission associated to an attempt.\n\nThe student who owns the file can delete it while the attempt is in progress.\n\n**Since**: 3500.2.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/attempts/{attemptId}/files/{attemptFileId}",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "attemptFileId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade attempts",
+      "description": "Blackboard Learn course grade attempts API provides endpoints for managing course grade attempts related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookAttemptsFilesDownload",
+      "description": "Download the contents of the file for a Student Submission.\n\n**Since**: 3400.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/attempts/{attemptId}/files/{attemptFileId}/download",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "attemptFileId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade notations",
+      "description": "Blackboard Learn course grade notations API provides endpoints for managing course grade notations related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookGradenotations",
+      "description": "Returns a list of grade notations.\n\n**Since**: 3200.13.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/gradeNotations",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade notations",
+      "description": "Blackboard Learn course grade notations API provides endpoints for managing course grade notations related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookGradenotations",
+      "description": "Create a grade notation on this course.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3200.13.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/gradeNotations",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade notations",
+      "description": "Blackboard Learn course grade notations API provides endpoints for managing course grade notations related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookGradenotations",
+      "description": "Returns a specific grade notation.\n\n**Since**: 3200.13.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/gradeNotations/{gradeNotationId}",
+      "pathParameters": [
+        {
+          "name": "gradeNotationId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade notations",
+      "description": "Blackboard Learn course grade notations API provides endpoints for managing course grade notations related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookGradenotations",
+      "description": "Delete a specific grade notation.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3200.13.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/gradeNotations/{gradeNotationId}",
+      "pathParameters": [
+        {
+          "name": "gradeNotationId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grade notations",
+      "description": "Blackboard Learn course grade notations API provides endpoints for managing course grade notations related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookGradenotations",
+      "description": "Update a grade notation on this course.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3200.14.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/gradeNotations/{gradeNotationId}",
+      "pathParameters": [
+        {
+          "name": "gradeNotationId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course gradebook categories",
+      "description": "Blackboard Learn course gradebook categories API provides endpoints for managing course gradebook categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookCategories",
+      "description": "Returns a list of gradebook categories in a particular course.\n\nUsers with entitlements 'course.gradebook.MODIFY' or 'course.user.grades.VIEW', or users enrolled in the specified course can retrieve the list of gradebook categories.\n\n**Since**: 3400.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/categories",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course gradebook categories",
+      "description": "Blackboard Learn course gradebook categories API provides endpoints for managing course gradebook categories related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookCategories",
+      "description": "Returns the details of a gradebook category\n\nUsers with entitlements 'course.gradebook.MODIFY' or 'course.user.grades.VIEW', or users enrolled in the specified course can retrieve gradebook category details.\n\n**Since**: 3400.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/categories/{categoryId}",
+      "pathParameters": [
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsGroupattempts",
+      "description": "Returns a list of Group Attempts for the specified Course and Column. Group Attempts with a 'NeedsGrading' status will be filtered out if they are associated with a 'Manual' Grade Column.\n\nUser must have the following entitlement in order to view group attempts.\n\n- {@code course.gradebook.attempts.VIEW}\n- {@code course.gradebook-grades.VIEW}\n- {@code course.gradebook-grades.EXECUTE}\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.98.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/groupAttempts",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Search for grade column group attempts submitted by this group. This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                                    |\n |------------|--------------------------------------------|\n | primary    | _123_1                                     |\n | externalId | externalId:915c7567d76d444abf1eed56aad3beb5|\n \n\n**Since**: 3100.10.0"
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for group column attempts submitted by this user.\n\n**Since**: 3900.98.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for attempts with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3900.98.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3900.98.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for attempts with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3900.98.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3900.98.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "attemptDate",
+          "type": "string",
+          "description": "Search for attempts with attempt date relative to this value. 'attemptDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.98.0"
+        },
+        {
+          "name": "attemptDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'attemptDate' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3900.98.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "attemptStatuses",
+          "type": "string",
+          "description": "Search for grade column attempts with one of these statuses.\n\n**Since**: 3900.121.0\n\n\n| Type      | Description\n | --------- | --------- |\n| NotAttempted | none of the students in a group has submitted an attempt; applies only to group assessments |\n| Abandoned |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| InProgress | attempt activity has commenced, but has not been submitted for grading |\n| Suspended |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| Canceled |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| NeedsGrading | attempt has been submitted for grading, but has not been fully graded |\n| Completed | a grade has been entered for the attempt |\n| InMoreProgress | attempt has been graded, but more student activity occurred after the grade was entered; applies only to collaborative tools such as discussions |\n| NeedsMoreGrading | additional student activity occurring after a grade was entered requires that the attempt be regraded; applies only to collaborative tools such as discussions |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookColumnsGroupattempts",
+      "description": "Creates a Group Attempt for the specified Course and grade column.\n\nUser must have the following entitlement in order to create a group attempt.\n\n- {@code course.gradebook-grades.EXECUTE}\n- {@code course.gradebook.MODIFY}\n- {@code course.assessment.MODIFY}\n\n**Since**: 3900.98.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/groupAttempts",
+      "pathParameters": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsGroupattempts",
+      "description": "Return a Group Attempt for the specified Course & Group Attempt Id. Users with the 'course.gradebook.MODIFY' entitlement can view Group Attempts for the specified Course and Column. If user does not have 'course.gradebook.MODIFY' entitlement, then they can view the GroupAttempt if: [1] User is a member of the Group Attempt's Group [2] User is in set of Users who have made a submission for this Group Attempt (excluding Group members who were not a member at the time of submission)\n\n**Since**: 3900.98.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/groupAttempts/{groupAttemptId}",
+      "pathParameters": [
+        {
+          "name": "groupAttemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookColumnsGroupattempts",
+      "description": "Deletes a group attempt for a given course.\n\nUser must have the following entitlements in order to delete the group attempt in a course.\n\n- {@code course.assessment.MODIFY}\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.98.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/groupAttempts/{groupAttemptId}",
+      "pathParameters": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "groupAttemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookColumnsGroupattempts",
+      "description": "Update an existing group Attempt on a Grade Column. </p> Students can only modify the groupSubmission, groupComments and status of their own attempt if the status is InProgress. Moving status to NeedsGrading is the equivalent of submitting the attempt. </p>\n\nNot enrolled users with the required entitlements are only able to submit the attempt (change status to NeedsGrading). Required entitlements:\n\n- {@code course.gradebook.MODIFY}\n- {@code course.assessment.MODIFY}\n</p>\n\n**Since**: 3900.98.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/groupAttempts/{groupAttemptId}",
+      "pathParameters": [
+        {
+          "name": "groupAttemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsLogs",
+      "description": "Returns a list of log entries related to the provided Gradebook Column.\n\nUser must have the following entitlements in order to see the provided course's GradebookLog.\n\n- {@code course.gradebook-grades.VIEW}\n- {@code course.gradebook.MODIFY}\n- {@code course.gradebook-grades.EXECUTE}\n\n**Since**: 3900.71.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/logs",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n- gradebookColumnId\n- logged\n\n**Since**: 3900.71.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookLogs",
+      "description": "Returns a list of Gradebook Logs for a given course ID.\n\nUser must have the following entitlements in order to see the provided course's GradebookLog.\n\n- {@code course.gradebook-grades.VIEW}\n- {@code course.gradebook.MODIFY}\n- {@code course.gradebook-grades.EXECUTE}\n\n**Since**: 3900.71.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/logs",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n- gradebookColumnId\n- logged\n\n**Since**: 3900.71.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookSchemas",
+      "description": "Returns a list of grade schemas associated with the specified course.\n\nUsers with entitlements 'course.gradebook.MODIFY' or 'course.user.grades.VIEW', or users enrolled in the specified course can retrieve grade schema details.\n\nA subset of the schema properties are available to enrolled users without the 'course.gradebook.MODIFY' entitlement:\n\n- id\n- scaleType\n\n**Since**: 3300.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/schemas",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookSchemas",
+      "description": "Create a Tabular Grade Schema on this course. Currently only supports Classic/9.1 Courses.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3300.2.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/schemas",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookSchemas",
+      "description": "Loads the grade schema associated with the specified course and schema Id.\n\nUsers with entitlements 'course.gradebook.MODIFY' or 'course.user.grades.VIEW', or users enrolled in the specified course can retrieve the grade schema details.\n\nA subset of the schema properties are available to enrolled users without the 'course.gradebook.MODIFY' entitlement:\n\n- id\n- scaleType\n\n**Since**: 3300.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/schemas/{schemaId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookSchemas",
+      "description": "Deletes the grade schema associated with the specified course and schema Id.\n\nRequires entitlement 'course.gradebook.MODIFY'\n\nGrade schemas in Ultra courses may not be deleted\n\nA schema must be removable (not in-use, and either tabular or user-created) to be deleted\n\n**Since**: 3300.2.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/schemas/{schemaId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookSchemas",
+      "description": "\n\nUpdates the grade schema associated with the specified course and schema Id. </p>\n\nRequires entitlement 'course.gradebook.MODIFY' </p>\n\nA schema must have a scaleType of Tabular to be updated </p>\n\nIf updating the symbols field, the following criteria must be true:\n\n- All symbols for the schema must be included. Any existing symbols not included in the patch will be deleted.\n- There must be at least 1 symbol for schemas associated with Classic courses, and 2 for Ultra courses.\n- When sorted descending by lowerBound, The lowerBound of a symbol must be equal to the upperBound of the following symbol.  In other words,      there should be no gaps or overlaps between the symbols.\n- The lowerBound, upperBound and absoluteValue of all symbols must be nonnegative.\n- The text field must be unique for each symbol in a schema.\n- The lowerBound and upperBound fields must have a maximum of 3 digits after the decimal point.\n- The absoluteValue field must have a maximum of 3 digits after the decimal point for Classic courses, and 4 for Ultra courses.-  -  </p>\n\n**Since**: 3300.2.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/schemas/{schemaId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumns",
+      "description": "Returns a list of grade columns.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed. Alternatively, student users may view the grade columns if they are enrolled in the course, and the mygrade tool is available in the course, and the columns are visible to the student. Observers may view grade columns if course access is allowed for observers and the associated observee is a student that satisfies all conditions required by a student user to view grade columns.\n\nStudent or observer users may view a limited subset of grade column fields:\n\n- id\n- name\n- displayName\n- description\n- externalGrade\n- contentId\n- score.possible\n- scoreProviderHandle\n- grading.type\n- grading.due\n- grading.attemptsAllowed\n- grading.scoringModel\n- formula\n- availability.available\n- learningOutcome.signature\n\n**Since**: 3200.10.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Search for grade columns associated with this content item.\n\n**Since**: 3000.11.0"
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "description": "The 'displayName' value to use as search criteria.\n\nCurrently only supports 'contains' searches.\n\n**Since**: 3300.2.0"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The 'name' value to use as search criteria.\n\nCurrently only supports 'contains' searches.\n\n**Since**: 3900.11.0"
+        },
+        {
+          "name": "gradebookCategoryId",
+          "type": "ref",
+          "description": "Search for grade columns associated with the 'gradebookCategoryId'.\n\ncomma-delimited list of the gradebook category ids.\n\n**Since**: 3900.11.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for grade columns with a created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3900.76.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.76.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for grade columns with a modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3900.76.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.76.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>rubricAssociations</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookColumns",
+      "description": "Create a manual grade column. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3200.10.0",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumns",
+      "description": "Loads a specific grade column.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed. Alternatively, student users may view the grade column if they are enrolled in the course, and the mygrade tool is available in the course, and the column is visible to the student. Observers may view the grade column if course access is allowed for observers and the associated observee is a student that satisfies all conditions required by a student user to view grade columns.\n\nStudent or observer users may view a limited subset of grade column fields:\n\n- id\n- name\n- description\n- externalGrade\n- contentId\n- score.possible\n- grading.type\n- grading.due\n- grading.attemptsAllowed\n- grading.scoringModel\n- formula\n- availability.available\n\n**Since**: 3200.10.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>rubricAssociations</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookColumns",
+      "description": "Delete a specific grade column. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3200.10.0",
+      "method": "delete",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookColumns",
+      "description": "Update a manual grade column. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3200.10.0",
+      "method": "patch",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsAttempts",
+      "description": "Returns a list of attempts associated with the specified grade column.\n\nThe 'course.gradebook.MODIFY' entitlement is needed to view column attempts. Alternatively, if the 'userId' query parameter is specified, and the user making the request matches the specified 'userId', then the user may view his/her own attempt.  When querying an anonymous grade column, if the release criteria has not yet been met, then the 'userId' attribute will not be populated for the returned column attempts.  If the release criteria has not been met and the 'userId' query parameter is specified, a 403 response is returned, unless the requesting user matches the specified 'userId' value.\n\nA subset of attempt properties are available to a student when requesting his or her own attempts:\n\n- id\n- userId\n- groupAttemptId\n- status\n- displayGrade.scaleType\n- displayGrade.score\n- displayGrade.text\n- groupOverride\n- feedback\n- studentComments\n- studentSubmission\n- exempt\n- created\n\nWhen this endpoint is called by the API Gateway User, the response will only contain attributes visible to a Grader. If an Attempt is InProgress, then a Student's submission & comments would not be visible to the API Gateway User. If an Attempt is NeedsGrading, then a Student's submission & comments are visible to the API Gateway User. </p> If the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure taking is enabled, and the attempt status is InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\nIf the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure reviewing is enabled, and the attempt status is not InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/attempts",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for grade column attempts submitted by this user. This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | externalId | externalId:jsmith                     |\n | userName   | userName:jsmith                       |\n | uuid       | uuid:915c7567d76d444abf1eed56aad3beb5 |\n \n\n**Since**: 3100.4.0"
+        },
+        {
+          "name": "attemptStatuses",
+          "type": "string",
+          "description": "Search for grade column attempts with one of these statuses.\n\n**Since**: 3100.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| NotAttempted | none of the students in a group has submitted an attempt; applies only to group assessments |\n| Abandoned |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| InProgress | attempt activity has commenced, but has not been submitted for grading |\n| Suspended |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| Canceled |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| NeedsGrading | attempt has been submitted for grading, but has not been fully graded |\n| Completed | a grade has been entered for the attempt |\n| InMoreProgress | attempt has been graded, but more student activity occurred after the grade was entered; applies only to collaborative tools such as discussions |\n| NeedsMoreGrading | additional student activity occurring after a grade was entered requires that the attempt be regraded; applies only to collaborative tools such as discussions |\n"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for attempts with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for attempts with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "attemptDate",
+          "type": "string",
+          "description": "Search for attempts with attempt date relative to this value. 'attemptDateCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0"
+        },
+        {
+          "name": "attemptDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'attemptDate' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookColumnsAttempts",
+      "description": "Create an Attempt on the specified Grade Column. Currently supports Classic and Ultra Course Assignments. Student attributes (studentSubmission & studentComments) can only be specified by Student Users. Grader attributes (text, score, notes & feedback, attemptDate) can only be specified by Grader Users. Graders must have the entitlement \"course.gradebook.MODIFY\" for the course.  Graders are allowed to create attempts that contain \"studentSubmission\" text on behalf of a student if the authenticated application for this request has the \"course.attempt.nonowner.SUBMIT\" entitlement and the attempt has a \"status\" of NeedsGrading. </p> If the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure taking is enabled, then the caller must be in a secure browser in order to create the attempt.\n\n**Since**: 3300.12.0",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/attempts",
+      "pathParameters": [
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsAttempts",
+      "description": "Loads the grade column attempt for the specified id.\n\nThe 'course.gradebook.MODIFY' entitlement is needed to view an attempt. Alternatively, if the user making the request is also the user associated with the attempt grade, then the user may view his/her own attempt.  When accessing an anonymous grade column attempt, if the release criteria has not yet been met, then the 'userId' attribute will not be populated for the returned attempt.\n\nA subset of attempt properties are available to a student when requesting his or her own attempt:\n\n- id\n- userId\n- groupAttemptId\n- status\n- displayGrade.scaleType\n- displayGrade.score\n- displayGrade.text\n- groupOverride\n- feedback\n- studentComments\n- studentSubmission\n- exempt\n- created\n\nWhen this endpoint is called by the API Gateway User, the response will only contain attributes visible to a Grader. If an Attempt is InProgress, then a Student's submission & comments would not be visible to the API Gateway User. If an Attempt is NeedsGrading, then a Student's submission & comments are visible to the API Gateway User. </p> If the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure taking is enabled, and the attempt status is InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\nIf the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure reviewing is enabled, and the attempt status is not InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/attempts/{attemptId}",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookColumnsAttempts",
+      "description": "Update an existing Attempt on a Grade Column. </p> Students can only modify the studentSubmission, studentComments and status of their own attempt if the status is InProgress. The status can only be set to NeedsGrading.  Doing so is the equivalent of submitting the attempt. </p> Instructors can modify all mutable fields but studentSubmission and studentComments as long as the status is not InProgress. Setting the status to Complete is the equivalent of posting a graded attempt.  The \"course.gradebook.MODIFY\" entitlement is required to update score, text, notes, feedback and set the status to Complete. </p> If the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure taking is enabled, then the caller must be in a secure browser in order to create the attempt. Classic course support since 3500.2.0\n\n**Since**: 3300.12.0",
+      "method": "patch",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/attempts/{attemptId}",
+      "pathParameters": [
+        {
+          "name": "columnId",
+          "type": "string",
+          "description": ""
+        },
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsUsers",
+      "description": "Returns a list of grades associated with the specified grade column. By default, this operation does not include 'ReadyToPost' grades when returning grade details for calculated grade columns. This can be changed by setting the query parameter \"includeUnpostedGrades\" to true. The columns considered as 'ReadyToPost' are those which have a grade associated but have the status NEEDS_GRADING. By default, grade details for disabled memberships will not be included while returning. The query parameter \"includeDisabledMemberships\" has to be set to true to return grade details of disabled memberships.\n\nUsers with entitlement 'course.gradebook.MODIFY' can retrieve grades for any or all enrolled users. Requests for grades in a columns whose attempts are not visible to instructors will return with a status of \"403 - Forbidden.\"\n\nEnrolled users without the 'course.gradebook.MODIFY' entitlement may only view their own grade; such users cannot retrieve grades of other users.  A request for the grade in a columns that has been hidden from students in the gradebook will return with a status \"403 - Forbidden.\".  A subset of grade properties are available to a student when requesting his or her own grades:\n\n- userId\n- columnId\n- status\n- displayGrade\n- exempt\n- feedback\n- changeIndex\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/users",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "changeIndex",
+          "type": "integer",
+          "description": "Retrieve only items modified after the given change index.\n\n**Since**: 3300.4.0"
+        },
+        {
+          "name": "includeUnpostedGrades",
+          "type": "boolean",
+          "description": "If true, calculated columns exposed in the response will be processed such that any unposted grades are included in their calculations. If false, only posted grades will be included in calculations. Entitlements course.gradebook-grades.VIEW, course.gradebook.MODIFY and course.gradebook-grades.EXECUTE are required to use this parameter.\n\n**Since**: 3800.4.0"
+        },
+        {
+          "name": "firstRelevantDate",
+          "type": "string",
+          "description": "Set the search criteria to the search value of the firstRelevantDate.\n\n**Since**: 3900.78.0"
+        },
+        {
+          "name": "firstRelevantDateCompare",
+          "type": "string",
+          "description": "Assign the compare value to the search criteria, and it works along with the firstRelevantDate. Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "lastRelevantDate",
+          "type": "string",
+          "description": "Set the search criteria to the search value of the lastRelevantDate.\n\n**Since**: 3900.78.0"
+        },
+        {
+          "name": "lastRelevantDateCompare",
+          "type": "string",
+          "description": "Assign the compare value to the search criteria, and it works along with the lastRelevantDate. Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsUsersLastchanged",
+      "description": "Loads the grade column grade with the maximum change index. This change index can be used to determine the relative order in which the grades were created and/or updated. This operation does not include 'ReadyToPost' grades when determining the maximum change index grade.\n\nUsers with entitlement 'course.gradebook.MODIFY' can retrieve grades for any or all enrolled users. Requests for grades in a columns whose attempts are not visible to instructors will return with a status of \"403 - Forbidden.\"\n\nEnrolled users without the 'course.gradebook.MODIFY' entitlement may only view their own grade; such users cannot retrieve grades of other users. A request for the grade in a columns that has been hidden from students in the gradebook will return with a status \"403 - Forbidden.\".\n\n**Since**: 3300.4.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/users/lastChanged",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsUsers",
+      "description": "Loads the grade column grade for a specific user.  If grade details have yet to be entered for the specified user, then no grade details will be included in the returned grade object.  This operation does not include 'ReadyToPost' grades when returning grade details for calculated grade columns.\n\nUsers with entitlement 'course.gradebook.MODIFY' can retrieve grades for any or all enrolled users. Requests for grades in a columns whose attempts are not visible to instructors will return with a status of \"403 - Forbidden.\"\n\nEnrolled users without the 'course.gradebook.MODIFY' entitlement may only view their own grade; such users cannot retrieve grades of other users.  A request for the grade in a columns that has been hidden from students in the gradebook will return with a status \"403 - Forbidden.\".  A subset of grade properties are available to a student when requesting his or her own grades:\n\n- userId\n- columnId\n- status\n- displayGrade\n- exempt\n- feedback\n- changeIndex\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookColumnsUsers",
+      "description": "Update the grade column grade for a specific user, including the text grade, score, instructor notes and feedback, and exempt status.  When updating text grade or score, the resulting grade is always marked as 'Posted'.  This end-point, currently, does not support marking the grade as 'ReadyToPost'.  Grade overrides may be cleared by either specifying the 'score' attribute as null, or the 'text'; attribute as null, '', or '-' in the body of the request. The entitlement 'course.gradebook.MODIFY' is required to perform this operation.\n\n**Since**: 3300.0.0",
+      "method": "patch",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/columns/{columnId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grades",
+      "description": "Blackboard Learn course grades API provides endpoints for managing course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookUsers",
+      "description": "Loads the course grades for a specific user.\n\nUsers with entitlement \"course.gradebook.MODIFY\" have read access to all the properties of the collection results.\n\nUsers without entitlement \"course.gradebook.MODIFY\" requesting grades for themselves (i.e., userId = current user id) have read access to a restricted subset of properties of the collections result. These are the properties available to a student when requesting his or her own grades:\n\n- userId\n- columnId\n- status\n- text\n- score\n- exempt\n- feedback\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/gradebook/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "firstRelevantDate",
+          "type": "string",
+          "description": "Search for grades with a firstRelevantDate date relative to this value. 'firstRelevantDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.78.0"
+        },
+        {
+          "name": "firstRelevantDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'firstRelevantDate' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "lastRelevantDate",
+          "type": "string",
+          "description": "Search for grades with a lastRelevantDate date relative to this value. 'lastRelevantDateCompare' may also be sent to control search behavior.\n\n**Since**: 3900.78.0"
+        },
+        {
+          "name": "lastRelevantDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastRelevantDate' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.78.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grading periods",
+      "description": "Blackboard Learn course grading periods API provides endpoints for managing course grading periods related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookPeriods",
+      "description": "Returns a list of grading periods.\n\nThe entitlement \"course.gradebook.MODIFY\" or \"course.gradebook-metadata.VIEW\" is needed. Note that grading period Ids may be visible on GradableItems based on GradableItem (column / assignment) entitlement restrictions.\n\nThis endpoint supports paging, sorting, and the filtering of fields returned on result object.\n\n**Since**: 3300.3.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/periods",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties,  with an optional \"(desc)\" or \"(asc)\" suffix to request an ascending or descending sort for that property. e.g. \"title(desc),description\" Supported fields are:\n\n- id\n- title\n- position\n- dateMode\n- description\n\n**Since**: 3300.2.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grading periods",
+      "description": "Blackboard Learn course grading periods API provides endpoints for managing course grading periods related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookPeriods",
+      "description": "Create a grading period.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed.\n\nThis endpoint supports the filtering of fields returned on result object.\n\nThis endpoint has an optional request parameter \"associate\", which will default false. If associate=true, then when the period is updated all assignments in this course  with a due date within the bounds of the grading period's start and end dates (if set)  will associate themselves to the updated grading period.\n\n**Since**: 3300.3.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/periods",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grading periods",
+      "description": "Blackboard Learn course grading periods API provides endpoints for managing course grading periods related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookPeriods",
+      "description": "Returns a specific grading period.\n\nThe entitlement \"course.gradebook.MODIFY\" or \"course.gradebook-metadata.VIEW\" is needed. Note that grading period Ids may be visible on GradableItems based on GradableItem (column / assignment) entitlement restrictions.\n\nThis endpoint supports the filtering of fields returned on result object.\n\n**Since**: 3300.3.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/periods/{periodId}",
+      "pathParameters": [
+        {
+          "name": "periodId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grading periods",
+      "description": "Blackboard Learn course grading periods API provides endpoints for managing course grading periods related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookPeriods",
+      "description": "Delete a specific grading period. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3300.3.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/periods/{periodId}",
+      "pathParameters": [
+        {
+          "name": "periodId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course grading periods",
+      "description": "Blackboard Learn course grading periods API provides endpoints for managing course grading periods related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookPeriods",
+      "description": "Update a grading period. The entitlement \"course.gradebook.MODIFY\" is needed.\n\nThis endpoint supports the filtering of fields returned on result object.\n\nThis endpoint has an optional request parameter \"associate\", which will default false. If associate=true, then when the period is updated all assignments in this course  with a due date within the bounds of the grading period's start and end dates (if set)  will associate themselves to the updated grading period.\n\n**Since**: 3300.3.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/periods/{periodId}",
+      "pathParameters": [
+        {
+          "name": "periodId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course group users",
+      "description": "Blackboard Learn course group users API provides endpoints for managing course group users related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsUsers",
+      "description": "Returns a list of group memberships objects for the specified group.\n\nCallers not enrolled in the group must have at least one of the following entitlements:\n\n- course.group.VIEW\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}/users",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course group users",
+      "description": "Blackboard Learn course group users API provides endpoints for managing course group users related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsUsers",
+      "description": "Loads a group membership in the specified group.\n\nCallers not enrolled in the group must have at least one of the following entitlements:\n\n- course.group.VIEW\n\n**Since**: 3600.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course group users",
+      "description": "Blackboard Learn course group users API provides endpoints for managing course group users related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesGroupsUsers",
+      "description": "Creates a group membership in the specified group for the user. For Ultra if the user is already enrolled in another group of the same content item (of the group he wishes to enroll) previously to creating the new membership the previous one is deleted (Move operation). If the conditions for the join operation are not fullfilled the operation will be canceled and a 409 Conflict error returned with a message specifying the reason.\n\nMinimal entitlements required:\n\n- course.group-user.manage.EXECUTE\n\n**Since**: 3600.0.0",
+      "method": "put",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course group users",
+      "description": "Blackboard Learn course group users API provides endpoints for managing course group users related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGroupsUsers",
+      "description": "Deletes a group from the specified course.\n\nRequired entitlements:\n\n- course.group-user.manage.EXECUTE\n\n**Since**: 3600.0.0",
+      "method": "delete",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroups",
+      "description": "Returns a list of all top-level groups in the specified course.\n\nCallers with the following entitlement can view all groups in the course:\n\n- course.groups.VIEW\nCallers enrolled in course can view all groups they're enrolled in, and all self-enrollment groups\n\n**Since**: 3800.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The group 'name' value to use as search criteria.  See also: nameCompare.\n\n**Since**: 3900.10.0"
+        },
+        {
+          "name": "nameCompare",
+          "type": "string",
+          "description": "Used alongside the 'name' search parameter.\n\nDefaults to StartsWith if not specified.\n\n**Since**: 3900.10.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| contains |  |\n| notContains |  |\n| startsWith |  |\n"
+        },
+        {
+          "name": "inGroupSet",
+          "type": "boolean",
+          "description": "Indicates whether only groups in a GroupSet (or groups NOT in a GroupSet) should be included\n\n**Since**: 3900.10.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for groups with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for groups with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "nonEmptyGroupSets",
+          "type": "boolean",
+          "description": "Search group sets whose student count is greater than 0.\n\n**Since**: 3900.71.0"
+        },
+        {
+          "name": "onlyAvailableGroupSets",
+          "type": "boolean",
+          "description": "Search only group sets that are available.\n\n**Since**: 3900.71.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGroups",
+      "description": "Creates a group in the specified course.\n\nFor Ultra Courses, Individual Groups are only supported when associated with a Content Item. To avoid undefined behavior, groups created this way in Ultra courses should be linked to Content Items via the Create Content Group endpoint as soon as possible after creation.\n\nIndividual Groups without Content association cannot be copied to Ultra courses, and will be removed as part of the Course Conversion process if converted to Ultra.\n\nCallers must have the following entitlement:\n\n- 'course.groups.CREATE'\n\n**Since**: 3800.6.0",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsSets",
+      "description": "Returns a list of all groupsets\n\nCallers not enrolled in the course must have the following entitlement:\n\n- course.groups.VIEW\n- course.groups.admin.VIEW\n\n**Since**: 3800.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The group 'name' value to use as search criteria.  See also: nameCompare.\n\n**Since**: 3900.10.0"
+        },
+        {
+          "name": "nameCompare",
+          "type": "string",
+          "description": "Used alongside the 'name' search parameter.\n\nDefaults to StartsWith if not specified.\n\n**Since**: 3900.10.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| contains |  |\n| notContains |  |\n| startsWith |  |\n"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for groups with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for groups with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "nonEmptyGroupSets",
+          "type": "boolean",
+          "description": "Search group sets whose student count is greater than 0.\n\n**Since**: 3900.71.0"
+        },
+        {
+          "name": "onlyAvailableGroupSets",
+          "type": "boolean",
+          "description": "Search only group sets that are available.\n\n**Since**: 3900.71.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGroupsSets",
+      "description": "Creates a groupset in the specified course.\n\nCallers must have the following entitlement:\n\n- 'course.groups.CREATE'\n\n**Since**: 3800.6.0",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsSets",
+      "description": "Loads a groupset in the specified course.\n\nUsers calling this end point should meet at least one of these entitlement checks.\n\n- course.groups.VIEW\n- course.groups.admin.VIEW\n\n**Since**: 3800.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGroupsSets",
+      "description": "Deletes a groupset from the specified course.\n\nRequired entitlements:\n\n- course.group.DELETE\n\n**Since**: 3800.6.0",
+      "method": "delete",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGroupsSets",
+      "description": "Updates a groupset in the specified course.\n\nMinimal entitlements required:\n\n- course.group.MODIFY\n\n**Since**: 3800.6.0",
+      "method": "patch",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsSetsGroups",
+      "description": "Returns a list of all groups within a groupset\n\nCallers not enrolled in the group must have the following entitlement:\n\n- course.groups.VIEW\n\n**Since**: 3800.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets/{groupId}/groups",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "name",
+          "type": "string",
+          "description": "The group 'name' value to use as search criteria.  See also: nameCompare.\n\n**Since**: 3900.10.0"
+        },
+        {
+          "name": "nameCompare",
+          "type": "string",
+          "description": "Used alongside the 'name' search parameter.\n\nDefaults to StartsWith if not specified.\n\n**Since**: 3900.10.0\n\n\n| Type      | Description\n | --------- | --------- |\n| equals |  |\n| notEquals |  |\n| contains |  |\n| notContains |  |\n| startsWith |  |\n"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for groups with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for groups with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.8.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter.\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.8.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "nonEmptyGroupSets",
+          "type": "boolean",
+          "description": "Search group sets whose student count is greater than 0.\n\n**Since**: 3900.71.0"
+        },
+        {
+          "name": "onlyAvailableGroupSets",
+          "type": "boolean",
+          "description": "Search only group sets that are available.\n\n**Since**: 3900.71.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGroupsSetsGroups",
+      "description": "Creates a group within a groupset.\n\nCallers must have the following entitlement:\n\n- 'course.groups.CREATE'\n\n**Since**: 3800.6.0",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/sets/{groupId}/groups",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroups",
+      "description": "Loads a group in the specified course.\n\nCallers not enrolled in the course must have the following entitlement:\n\n- course.groups.VIEW\n\n**Since**: 3800.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGroups",
+      "description": "Deletes a groupset from the specified course.\n\nRequired entitlements:\n\n- course.group.DELETE\n\n**Since**: 3800.6.0",
+      "method": "delete",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course groups",
+      "description": "Blackboard Learn course groups API provides endpoints for managing course groups related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGroups",
+      "description": "Updates a group in the specified course.\n\nMinimal entitlements required:\n\n- course.group.MODIFY\n\n**Since**: 3800.6.0",
+      "method": "patch",
+      "path": "/learn/api/public/v2/courses/{courseId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course memberships",
+      "description": "Blackboard Learn course memberships API provides endpoints for managing course memberships related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesUsers",
+      "description": "Returns a list of user memberships for the specified course or organization.\n\nCallers not enrolled in the course must have at least one of the following entitlements:\n\n- For courses: 'course.user.VIEW', 'system.user.course.enrollment.VIEW', or 'system.courseuserlist.VIEW'\n- For organizations: 'course.user.VIEW', 'system.user.org.enrollment.VIEW', or 'system.orguserlist.VIEW'\nCallers enrolled in the course will only be able to see memberships that are available and that have opted to be included in the course roster.\n\nFor callers enrolled in the course as well as those with the 'course.user.VIEW' entitlement, system fields such as externalId and dataSourceId will not be visible.\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/users",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "role",
+          "type": "string",
+          "description": "Search for memberships with a course role id that matches this value.\n\n**Since**: 3500.5.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for memberships with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for memberships with a modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.9.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for memberships with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "lastAccessed",
+          "type": "string",
+          "description": "Search for memberships with a last accessed date relative to this value.  'lastAccessedCompare' may also be sent to control search behavior.\n\n**Since**: 3300.9.0"
+        },
+        {
+          "name": "lastAccessedCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastAccessed' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3300.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"created(desc)\" Supported fields are:\n\n- created\n- lastAccessed (Since 3300.9.0)\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course memberships",
+      "description": "Blackboard Learn course memberships API provides endpoints for managing course memberships related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesUsers",
+      "description": "Loads a user membership in the specified course.\n\nEntitlement and field visibility rules are the same as those when loading the memberships collection.\n\n**Since**: 2015.11.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course memberships",
+      "description": "Blackboard Learn course memberships API provides endpoints for managing course memberships related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesUsers",
+      "description": "Creates a user membership in the specified course.\n\nMinimal entitlements required:\n\n- For courses: 'system.enrollment.CREATE' with 'system.user.VIEW' or just 'course.user-enroll.EXECUTE' - For organizations: 'org.enrollment.CREATE' with 'system.user.VIEW' or just 'course.user-enroll.EXECUTE' - For courses or organizations that have enabled self enrollment: 'system.generic.VIEW'\nIf 'system.enrollment.CREATE' or 'org.enrollment.CREATE' are present, the user must be in the same domain as the logged on user.\n\nBy default courseRoleId is Student and availability.available is Yes.  Providing different values for these fields requires extra entitlements:\n\n- For courses: 'course.user-role.MODIFY' or 'course.user.MODIFY'\n- For organizations: 'course.user-role.MODIFY' or 'org.user.MODIFY'\n\n**Since**: 2015.11.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course memberships",
+      "description": "Blackboard Learn course memberships API provides endpoints for managing course memberships related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesUsers",
+      "description": "Deletes a user membership from the specified course.\n\nRequired entitlements:\n\n- For courses: 'system.enrollment.DELETE' or 'course.user.DELETE'\n- For organizations: 'system.enrollment.DELETE' or 'org.enrollment.DELETE'\n\n**Since**: 2015.11.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course memberships",
+      "description": "Blackboard Learn course memberships API provides endpoints for managing course memberships related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesUsers",
+      "description": "Updates a user membership in the specified course. \n\n | Field                  | Entitlements Required                                                                    |\n |------------------------|------------------------------------------------------------------------------------------|\n | dataSourceId           | 'course.user.MODIFY' or 'org.user.MODIFY'                                                |\n | childCourseId          | 'course.user.MODIFY' or 'org.user.MODIFY'                                                |\n | courseRoleId           | 'course.user.MODIFY', 'org.user.MODIFY', or 'course.user-role.MODIFY'                    |\n | availability.available | 'course.user.MODIFY', 'org.user.MODIFY', or 'course.course-availability.MODIFY'          |\n | displayOrder           | 'course.user.MODIFY', 'org.user.MODIFY', or 'course.user-role.primary-instructor.MODIFY' |\n \n\nIn addition, callers must have standard view entitlements to receive a response.  Without view entitlements the operation will be performed but an empty result object will be returned.\n\n**Since**: 2015.11.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course memberships",
+      "description": "Blackboard Learn course memberships API provides endpoints for managing course memberships related operations."
+    },
+    "endpoint": {
+      "name": "GetUsersCourses",
+      "description": "Returns a list of course and organization memberships for the specified user.\n\nUsers can always view their own memberships.  Callers viewing the memberships of another user require at least one of the following entitlements:\n\n- 'system.user.course.enrollment.VIEW' allows callers to see course memberships\n- 'system.user.org.enrollment.VIEW' allows callers to see organization memberships\n\n**Since**: 2015.11.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}/courses",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "role",
+          "type": "string",
+          "description": "Search for memberships with a course role id that matches this value.\n\n**Since**: 3500.5.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for memberships with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for memberships with a modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.9.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3800.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for memberships with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "lastAccessed",
+          "type": "string",
+          "description": "Search for memberships with a last accessed date relative to this value.  'lastAccessedCompare' may also be sent to control search behavior.\n\n**Since**: 3300.9.0"
+        },
+        {
+          "name": "lastAccessedCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastAccessed' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3300.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"created(desc)\" Supported fields are:\n\n- created\n- lastAccessed (Since 3300.9.0)\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>course</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course messages",
+      "description": "Blackboard Learn course messages API provides endpoints for managing course messages related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesMessages",
+      "description": "Retrieve all the messages for a course by specified folder. This endpoint currently supports only Original courses.\n\nThe \"course.message.VIEW\" entitlement is required to view Course Messages.\n\n**Since**: 3900.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/messages",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"isRead(desc),start\" Supported fields are:\n\n- isRead\n- postedDate\n\n**Since**: 3900.2.0"
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>sender</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course messages",
+      "description": "Blackboard Learn course messages API provides endpoints for managing course messages related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesMessages",
+      "description": "Creates a new Course Message. This endpoint currently supports only Original courses.\n\nThe \"course.message.CREATE\" entitlement is required to create or reply a course message\n\n**Since**: 3900.2.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/messages",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course messages",
+      "description": "Blackboard Learn course messages API provides endpoints for managing course messages related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesMessagesFolders",
+      "description": "Retrieve all the folders for a course. This endpoint currently supports only Original courses.\n\nThe \"course.message.VIEW\" entitlement is required to view a Course Message folders.\n\n**Since**: 3900.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/messages/folders",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course messages",
+      "description": "Blackboard Learn course messages API provides endpoints for managing course messages related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesMessages",
+      "description": "Delete a message.\n\nThe 'course.message.DELETE' entitlement is required to delete the message.\n\n**Since**: 3900.2.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/messages/{messageId}",
+      "pathParameters": [
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course messages",
+      "description": "Blackboard Learn course messages API provides endpoints for managing course messages related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesMessages",
+      "description": "Update the read status of the message. This endpoint currently supports only Original courses.\n\n**Since**: 3900.2.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/messages/{messageId}",
+      "pathParameters": [
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course messages",
+      "description": "Blackboard Learn course messages API provides endpoints for managing course messages related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesMessagesParticipants",
+      "description": "Retrieve all participants for the specified message.\n\nThe \"course.message.VIEW\" entitlement is required to view a Course Message participants.\n\n**Since**: 3900.2.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/messages/{messageId}/participants",
+      "pathParameters": [
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [
+        {
+          "name": "participationType",
+          "type": "string",
+          "description": "Search the participation type\n\n**Since**: 3800.20.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"PARTICIPATION_TYPE(desc),start\" Supported fields are:\n\n- participationType\n\n**Since**: 3900.2.0"
+        },
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course toc",
+      "description": "Blackboard Learn course toc API provides endpoints for managing course toc related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesTocitems",
+      "description": "Returns a list of Course TOC entries associated to a course.\n\nEntitlement course.configure-areas.EXECUTE required\n\n**Since**: 3900.31.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/tocItems",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Course toc",
+      "description": "Blackboard Learn course toc API provides endpoints for managing course toc related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesTocitems",
+      "description": "Updates a specific TOC entry. Only allowGuests and allowObservers flags are modifiable, the remaining fields are read-only. User should keep in mind that in order to modify such TOC fields, Course's allowGuest and allowObservers configuration must be enabled. Also, if user wants to update a TOC register's allowGuest flag and TOC is associated to a CONTENT or APPLICATION target type, Course Tool Settings must have allowGuests flag enabled. If user wants to update a TOC register's allowObserver flag and TOC is associated to an APPLICATION target type, Course Tool Settings must have allowObservers flag enabled.\n\nEntitlement course.configure-areas.EXECUTE required\n\n**Since**: 3900.31.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/tocItems/{tocId}",
+      "pathParameters": [
+        {
+          "name": "tocId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesChildren",
+      "description": "Returns a list of course cross-listings.\n\nThe 'system.course.cross-list.VIEW' or 'system.org.cross-list.VIEW' or 'course.children.VIEW' entitlement is needed.\n\n**Since**: 3000.11.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/children",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>childCourse</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesChildren",
+      "description": "Loads a specific course cross-listing.\n\nThe 'system.course.cross-list.VIEW' or 'system.org.cross-list.VIEW' entitlement is needed.\n\n**Since**: 3000.11.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/children/{childCourseId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>childCourse</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesChildren",
+      "description": "Merges two courses (or organizations) together. Commonly referred to as cross-listing. Only a single level of parent/child relationship is supported (ie. Parent courses may not become children, similarly, a child cannot become a parent)\n\nMinimal entitlements required:\n\n- For courses: 'system.course.cross-list.VIEW'\n- For organizations: 'system.org.cross-list.VIEW'\n\nUpon being merged, all enrollments in the child course are replicated in the parent course, and any future enrollment changes in the child course are also synchronized automatically with the parent course. Duplicate student enrollments will result in a 409 CONFLICT unless the 'ignoreEnrollmentErrors' query parameter is set to true. Users in other roles, such as grader, teaching assistant, or guest, are assigned roles based on the last time they are added to the parent course.\n\n**Since**: 3400.1.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/children/{childCourseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesChildren",
+      "description": "Delete a course-course relationship, resulting in two unrelated courses.\n\nMinimal entitlements required:\n\n- For courses: 'system.course.separate-out.VIEW'\n- For organizations: 'system.org.separate-out.VIEW'\n\n**Since**: 3900.4.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/children/{childCourseId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "separationStyle",
+          "type": "string",
+          "description": "The method by which the courses will be separated.  Default: CompleteSeparation\n\n**Since**: 3900.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| completeSeparation | Re-enable the child course with enrollments and remove all the child enrollments from the master course. |\n| enrollmentsInBoth | Re-enable the child course with enrollments but leave all the child enrollments in the master course as well, marking them as unavailable. |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesCrosslistset",
+      "description": "Returns the course cross-listing set for the specified course. This will return any and all parent/child associations regardless of the specified course being a parent or child course. The result will be empty if the specified course is not cross-listed.\n\nThe 'system.course.cross-list.VIEW' or 'system.org.cross-list.VIEW' entitlement is needed.\n\n**Since**: 3400.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/crossListSet",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesTasks",
+      "description": "Check the status of a queued task associated with a Course. Returns 200 unless task is complete. If task is complete this endpoint will return a 303 SEE OTHER with a Location header providing a URI to the GET Course endpoint. Statistical data shows that the average copy task duration is under a second. However, very large courses can take several minutes. Also important to note is that these background tasks can potentially be queued behind other system tasks therefore prolonging the time a task stays in the `Queued` status. We recommend that this endpoint be polled every 60 seconds while waiting for a Course copy to complete.\n\nUsers with entitlements 'system.course.copy.EXECUTE' can view the task status.\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/tasks/{taskId}",
+      "pathParameters": [
+        {
+          "name": "taskId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesCopy",
+      "description": "Creates a copy of an existing Course into a new Course or an existing course. It is possible to limit the course content to be copied using options.\n\nUsing the payload without the \"copy\" object is equivalent to doing an exact copy of the course, which means all course settings will be replicated.\n\nFor a partial copy, set true in the supported settings inside the \"copy\" object.\n\nUsers with entitlements 'system.course.copy.EXECUTE' can create a course copy. Users with entitlements 'system.org.copy.EXECUTE' can create an organization copy. Users with entitlement 'course.content.copy.exact.EXECUTE' can copy Course/Organization materials to a new or existing course Users with entitlement 'course.content.copy.new.EXECUTE' can copy Course/Organization materials to a new course. All users's must also have 'course.content.copy.EXECUTE' entitlement associated with the specified source courseId.\n\n**Since**: 3800.2.0",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses/{courseId}/copy",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCourses",
+      "description": "Returns a list of courses and organizations.\n\nTo view disabled courses a user must have the entitlement 'system.course.VIEW'.\n\nUsers with the 'course.configure-properties.EXECUTE' course entitlement, or the 'system.course.properties.MODIFY' system entitlement can access all course properties.\n\nUsers enrolled in the course have read access to all properties except:\n\n- uuid\n- externalId\n- dataSourceId\n- created\n- allowGuests\n- enrollment.accessCode\n\nUsers who are not enrolled in the course and do not have associated entitlements only have read access to the following properties:\n\n- id\n- courseId\n- name\n- description\n- organization\n- readOnly\n- termId\n- availability.available\n- availability.duration.type\n- availability.duration.start\n- availability.duration.end\n- availability.duration.daysOfUse\nWhen courses are child courses, parent course data is also returned to provide a complete data representation of course relationships.\n\nIf the course enrollment is self-enroll, all users can view the course as though they were enrolled.\n\n**Since**: 3800.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v3/courses",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for courses with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.4.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3500.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for courses with courseId properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for courses with name properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Search for courses with description properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for courses with externalId properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for courses with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "allowGuests",
+          "type": "boolean",
+          "description": "Search for courses which are configured to allow/disallow guest access, based on input.  Default: n/a (return courses regardless of guests allowed)\n\n**Since**: 3200.3.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Defaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for courses with availability.available properties that contain this value.\n\n**Since**: 3000.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for courses with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Search for courses with this termId.  This may optionally be the term's externalId using the syntax \"externalId:spring2015\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "organization",
+          "type": "boolean",
+          "description": "Search for courses by organization flag.  A value of 'true' indicates that search results should be limited to only Organizations.  A value of 'false' indicates results should be limited to Courses.  Not setting this field indicates that both Courses and Organizations should be returned.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc),created\" Supported fields are:\n\n- courseId\n- name\n- externalId\n- created\n- modified\n\n**Since**: 3400.8.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "PostCourses",
+      "description": "Creates a course or organization.\n\nThe 'system.course.CREATE' entitlement is needed to create a course, while 'system.org.CREATE' is needed for an organization.\n\n**Since**: 3800.1.0",
+      "method": "post",
+      "path": "/learn/api/public/v3/courses",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCourses",
+      "description": "Loads a specific course or organization.\n\nTo view disabled courses a user must have the entitlement 'system.course.VIEW'.\n\nUsers with the 'course.configure-properties.EXECUTE' entitlement can access all course properties.\n\nUsers enrolled in the course have read access to all properties except:\n\n- uuid\n- externalId\n- dataSourceId\n- created\n- allowGuests\n- enrollment.accessCode\n\nUsers with no access to the course only have read access to the following properties:\n\n- id\n- courseId\n- name\n- description\n- organization\n- closedComplete\n- termId\n- availability.available\n- availability.duration.type\n- availability.duration.start\n- availability.duration.end\n- availability.duration.daysOfUse\nIf the course enrollment is self-enroll, all users can view the course as though they were enrolled.\n\n**Since**: 3800.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v3/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCourses",
+      "description": "Registers a queued task to delete a course or organization in asynchronous fashion.\n\nThe 'system.course.DELETE' entitlement is needed to delete a course, while 'system.org.DELETE' is needed for an organization.\n\n**Since**: 3800.1.0",
+      "method": "delete",
+      "path": "/learn/api/public/v3/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Courses",
+      "description": "Blackboard Learn courses API provides endpoints for managing courses related operations."
+    },
+    "endpoint": {
+      "name": "PatchCourses",
+      "description": "Updates a course or organization.\n\nTo update a course, the user must have either 'system.course|org.properties.MODIFY' or 'course.configure-properties.EXECUTE' entitlements.  However, if the user has the latter entitlement, then additional entitlements are needed to be able to update certain fields, as shown below: \n\n | Field                           | Entitlements Required                                                  |\n |---------------------------------|------------------------------------------------------------------------|\n | name                            | course.name.MODIFY                                                     |\n | description                     | course.name.MODIFY                                                     |\n | allowGuests                     | course.configure-guest-access.EXECUTE                                  |\n | enrollment.type                 | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.start                | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.end                  | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.accessCode           | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | availability.available          | course.configure-properties.EXECUTE, course.availability.MODIFY        |\n | locale.id                       | course.configure-properties.EXECUTE, course.locale.MODIFY              |\n | locale.force                    | course.configure-properties.EXECUTE, course.locale.MODIFY              |\n | availability.duration.type      | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.start     | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.end       | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.daysOfUse | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n \n\n**Since**: 3800.1.0",
+      "method": "patch",
+      "path": "/learn/api/public/v3/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Data sources",
+      "description": "Blackboard Learn data sources API provides endpoints for managing data sources related operations."
+    },
+    "endpoint": {
+      "name": "GetDatasources",
+      "description": "Returns a list of data sources.\n\nThe 'system.datasource.manager.VIEW' entitlement is needed.\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/dataSources",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Data sources",
+      "description": "Blackboard Learn data sources API provides endpoints for managing data sources related operations."
+    },
+    "endpoint": {
+      "name": "PostDatasources",
+      "description": "Creates a data source.\n\nThe 'system.datasource.manager.VIEW' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/dataSources",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Data sources",
+      "description": "Blackboard Learn data sources API provides endpoints for managing data sources related operations."
+    },
+    "endpoint": {
+      "name": "GetDatasources",
+      "description": "Loads a data source.\n\nThe 'system.datasource.manager.VIEW' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/dataSources/{dataSourceId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Data sources",
+      "description": "Blackboard Learn data sources API provides endpoints for managing data sources related operations."
+    },
+    "endpoint": {
+      "name": "DeleteDatasources",
+      "description": "Deletes a data source.\n\nThe 'system.datasource.manager.VIEW' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/dataSources/{dataSourceId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Data sources",
+      "description": "Blackboard Learn data sources API provides endpoints for managing data sources related operations."
+    },
+    "endpoint": {
+      "name": "PatchDatasources",
+      "description": "Updates a data source.\n\nThe 'system.datasource.manager.VIEW' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/dataSources/{dataSourceId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesDiscussions",
+      "description": "Get all discussions associated with the specified Ultra Course. The course must have ultra view enabled.\n\nRequires the following entitlement:\n\n- discussion.forum.VIEW\n</p> Enrolled users should be able to access this resource regardless of entitlement if the discussion is set to available. Any non-enrolled user with the required entitlements already mentioned above will be able to get an empty list response if consulted courseId does not have any discussion, otherwise, a 403 error should rise.\n\n**Since**: 3900.19.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc),available\" Supported fields are:\n\n- id\n- title\n- available\n- gradable\n- createdDate\n- modifiedDate\n- gradebookColumnId\n\n**Since**: 3900.19.0"
+        },
+        {
+          "name": "title",
+          "type": "string",
+          "description": "Search for forums with title properties that contain this value.  Search is case-insensitive.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "gradable",
+          "type": "boolean",
+          "description": "Search for forums which are configured to be gradable or not, based on input.\n\n**Since**: 3900.25.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesDiscussions",
+      "description": "Create a discussion within the specified Ultra Course. If the discussion is created as gradable an associated gradebook column is also created. Such gradebook column can be updated via the course grades API.\n\nRequires the following entitlements:\n\n- discussion.forum.CREATE\n- discussion.post.CREATE\n- discussion.thread.CREATE\n- course.content.CREATE.\n</p>\n\n**Since**: 3900.27.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesDiscussions",
+      "description": "Get a discussion in the Ultra Course with the specified id.\n\nRequires the following entitlement:\n\n- discussion.forum.VIEW\n</p> Enrolled users should be able to access this resource regardless of entitlement if the discussion is set to available\n\n**Since**: 3900.19.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesDiscussions",
+      "description": "Update a discussion in an Ultra Course.\n\nThis operation is always a partial-update. So user should only send data that he want to change. If the discussion is updated to be gradable an associated gradebook column is also created. Such gradebook column can be updated via the course grades API. List of entitlements which allow a logged on user to update a forum.\n\n- {@code discussion.forum.MODIFY}\n\n**Since**: 3900.27.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesDiscussionsGroups",
+      "description": "Get the groups associated to a discussion from an Ultra Course, or an empty list if there are none.\n\nRequires the following entitlement:\n\n- course.content.designer.VIEW\n</p>\n\n**Since**: 3900.27.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/groups",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"threadId(desc)\" Supported fields are:\n\n- groupId\n- threadId\n\n**Since**: 3900.27.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesDiscussionsGroups",
+      "description": "Sets the specified group inside a discussion from an Ultra Course. This will create a group thread. A discussion that already has messages, including drafts, will not be able to be changed into a group discussion. After the first group has been set, all subsequent groups must belong to the same group set. If the forum content is conditioned behind a memberships criteria, no group associations shall be created by this endpoint.\n\nRequires the following entitlement:\n\n- course.content.MODIFY\n</p>\n\n**Since**: 3900.27.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesDiscussionsMessages",
+      "description": "Get the messages of the specified discussion in an Ultra Course.\n\nRequires the following entitlement:\n\n- discussion.post.VIEW\n\nEnrolled users should be able to access this resource regardless of entitlement if the discussion is set to available For group discussions, students will be able to access only the messages associated with groups in which they are enrolled. Entitled users will have access to messages associated with all groups, but can filter returned messages based on groupId using the groupId query parameter A draft message can only be seen by its own author\n\n**Since**: 3900.19.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/messages",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Search for messages which are associated with this groupId.\n\n**Since**: 3900.19.0"
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for messages made by this userId.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Search for messages with status.\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Published | Message is published in the discussion and visible for all users. |\n| Deleted | Message is shown in the discussion as soft-deleted. |\n| Draft | Message is stored as a draft and only visible for the author user. |\n"
+        },
+        {
+          "name": "isRead",
+          "type": "boolean",
+          "description": "Search for read or unread messages.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for messages filtering by 'created'. If createdCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for messages filtering by 'modified'. If modifiedCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "posted",
+          "type": "string",
+          "description": "Search for messages filtering by 'posted'. If postedCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "edited",
+          "type": "string",
+          "description": "Search for messages filtering by 'edited'. If editedCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'created'. When not specified, it will perform as 'greaterOrEqual' by default if 'created' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'modified'. When not specified, it will perform as 'greaterOrEqual' by default if 'modified' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "postedCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'posted'. When not specified, it will perform as 'greaterOrEqual' by default if 'posted' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "editedCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'edited'. When not specified, it will perform as 'greaterOrEqual' by default if 'edited' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"createdDate(desc),givenName\" Supported fields are:\n\n- id\n- discussionId\n- parentId\n- threadId\n- userId\n- groupId\n- givenName\n- familyName\n- status\n- body\n- createdDate\n- modifiedDate\n- isRead\n\n**Since**: 3900.19.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesDiscussionsMessages",
+      "description": "Create a message in the main thread of a discussion from an Ultra Course. This corresponds to a direct reply to the topic.\n\nRequires the following entitlements:\n\n- discussion.post.CREATE\n\nFor group discussions, instructors must specify a valid group id for the message to be created in the specific group thread.\n\n**Since**: 3900.27.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/messages",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesDiscussionsMessages",
+      "description": "Deletes a message in a discussion from an Ultra Course. If the message has no replies, it is fully deleted. Otherwise, it is soft-deleted unless explicitly requested for complete deletion using the query parameter `deleteReplies`.\n\nRequires the following entitlement:\n\n- discussion.post.MODIFY\n- discussion.draft.DELETE\n- discussion.post.DELETE\n- discussion.post.author.DELETE\n- discussion.post.author.DELETE\n\n**Since**: 3900.27.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/messages/{messageId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "deleteReplies",
+          "type": "boolean",
+          "description": "Whether the DELETE request should delete the replies or not. If true, the message and its replies are hard-deleted. Otherwise, the message is soft-deleted. If the message doesn't have replies, it is hard-deleted in any case.\n\n**Since**: 3900.27.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesDiscussionsMessages",
+      "description": "Update a message of a discussion from an Ultra Course.\n\nRequires the following entitlement:\n\n- discussion.draft.MODIFY\n- discussion.post.MODIFY\n- discussion.post.author.MODIFY\n\n**Since**: 3900.27.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/messages/{messageId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesDiscussionsMessagesReplies",
+      "description": "Get the replies of the specified message in a discussion from an Ultra Course.\n\nRequires the following entitlement:\n\n- discussion.post.VIEW\n\nEnrolled users should be able to access this resource regardless of entitlement if the discussion is set to available A draft message can only be seen by its own author\n\n**Since**: 3900.19.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/messages/{messageId}/replies",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "groupId",
+          "type": "string",
+          "description": "Search for messages which are associated with this groupId.\n\n**Since**: 3900.19.0"
+        },
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for messages made by this userId.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "status",
+          "type": "string",
+          "description": "Search for messages with status.\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Published | Message is published in the discussion and visible for all users. |\n| Deleted | Message is shown in the discussion as soft-deleted. |\n| Draft | Message is stored as a draft and only visible for the author user. |\n"
+        },
+        {
+          "name": "isRead",
+          "type": "boolean",
+          "description": "Search for read or unread messages.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for messages filtering by 'created'. If createdCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for messages filtering by 'modified'. If modifiedCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "posted",
+          "type": "string",
+          "description": "Search for messages filtering by 'posted'. If postedCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "edited",
+          "type": "string",
+          "description": "Search for messages filtering by 'edited'. If editedCompare is not set, it will perform as 'greaterOrEqual' by default.\n\n**Since**: 3900.25.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'created'. When not specified, it will perform as 'greaterOrEqual' by default if 'created' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'modified'. When not specified, it will perform as 'greaterOrEqual' by default if 'modified' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "postedCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'posted'. When not specified, it will perform as 'greaterOrEqual' by default if 'posted' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "editedCompare",
+          "type": "string",
+          "description": "Operation to be applied to 'edited'. When not specified, it will perform as 'greaterOrEqual' by default if 'edited' contains a valid date\n\nMust be one of the following:\n\n- greaterOrEqual\n- lessThan\n\n**Since**: 3900.25.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"createdDate(desc),givenName\" Supported fields are:\n\n- id\n- discussionId\n- parentId\n- threadId\n- userId\n- groupId\n- givenName\n- familyName\n- status\n- body\n- createdDate\n- modifiedDate\n- isRead\n\n**Since**: 3900.19.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Discussions",
+      "description": "Blackboard Learn discussions API provides endpoints for managing discussions related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesDiscussionsMessagesReplies",
+      "description": "Create a reply to the specified message in a discussion from an Ultra Course.\n\nRequires the following entitlement:\n\n- discussion.post.CREATE\n\n**Since**: 3900.27.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/discussions/{discussionId}/messages/{messageId}/replies",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesAlignments",
+      "description": "Returns the list of Goal Alignments for the course specified by Id in the URL.\n\nThe 'course.learningstandards.alignment.VIEW' or 'course.learningstandards.alignment.student.VIEW' entitlement is required.\n\n**Since**: 3900.62.00",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/alignments",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "goalId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "blogId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by blog id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by course content id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "discussionId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by discussion id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "gradebookColumnId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by gradebook column id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by message/thread id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by assessment/question id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "resourceId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by resource id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "reference",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by reference.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "rubricRowId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by rubric row id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "rubricId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by rubric id.\n\n**Since**: 3900.62.00"
+        },
         {
           "name": "type",
           "type": "string",
-          "description": "If a [type](entity:GiftCardType) is provided, the endpoint returns gift cards of the specified type.\nOtherwise, the endpoint returns gift cards of all types."
+          "description": "Optional search criteria parameter to filter by type.\n\n**Since**: 3900.62.00\n\n\n| Type      | Description\n | --------- | --------- |\n| Blog | Blog Content Type |\n| CourseContent | Course Content Type |\n| ContentCollectionResource | Content Collection Resourse Type |\n| Discussion | Discussion Content Type |\n| DiscussionThread | Message/Thread Content Type |\n| Assessment | Assessment/Question Content Type |\n| GradebookColumn | Gradebook Column Content Type |\n| RubricRow | Rubric Row Content Type |\n| Rubric | Rubric Content Type |\n| Other | Other Content Type |\n"
         },
         {
-          "name": "state",
+          "name": "sort",
           "type": "string",
-          "description": "If a [state](entity:GiftCardStatus) is provided, the endpoint returns the gift cards in the specified state.\nOtherwise, the endpoint returns the gift cards of all states."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n- goalId\n\n**Since**: 3900.62.00"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
+    },
+    "endpoint": {
+      "name": "GetGoals",
+      "description": "Returns a list of Goals.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/goals",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0"
         },
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "If a limit is provided, the endpoint returns only the specified number of results per page.\nThe maximum value is 200. The default value is 30.\nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0"
         },
         {
-          "name": "cursor",
+          "name": "type",
           "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nIf a cursor is not provided, the endpoint returns the first page of the results. \nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
+          "description": "Optional search criteria parameter to filter by goal type.\n\n**Since**: 3900.53.0"
         },
         {
-          "name": "customer_id",
+          "name": "sort",
           "type": "string",
-          "description": "If a customer ID is provided, the endpoint returns only the gift cards linked to the specified customer."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.53.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -2541,144 +5185,36 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "CreateGiftCard",
-      "description": "The resulting gift card\nhas a `PENDING` state. To activate a gift card so that it can be redeemed for purchases, call\n[CreateGiftCardActivity](api-endpoint:GiftCardActivities-CreateGiftCardActivity) and create an `ACTIVATE`\nactivity with the initial balance. Alternatively, you can use [RefundPayment](api-endpoint:Refunds-RefundPayment)\nto refund a payment to the new gift card.",
-      "method": "post",
-      "path": "/v2/gift-cards",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveGiftCardFromGAN",
-      "method": "post",
-      "path": "/v2/gift-cards/from-gan",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveGiftCardFromNonce",
-      "method": "post",
-      "path": "/v2/gift-cards/from-nonce",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "LinkCustomerToGiftCard",
-      "method": "post",
-      "path": "/v2/gift-cards/{gift_card_id}/link-customer",
-      "pathParameters": [
-        {
-          "name": "gift_card_id",
-          "type": "string",
-          "description": "The ID of the gift card to be linked."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UnlinkCustomerFromGiftCard",
-      "method": "post",
-      "path": "/v2/gift-cards/{gift_card_id}/unlink-customer",
-      "pathParameters": [
-        {
-          "name": "gift_card_id",
-          "type": "string",
-          "description": "The ID of the gift card to be unlinked."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Gift Cards",
-      "description": "\n[Square Gift Cards](https://squareup.com/gift-cards) enable sellers to boost sales and attract new customers. Customers can purchase gift cards and redeem them at any of the seller's locations. Sellers can manage gift cards and track activity.\n\nUse the Gift Cards API to create and retrieve gift cards (for example, to get the gift card balance) and manage gift cards on file by linking or unlinking gift cards with customers. After creating a gift card, use the [Gift Card Activities API](https://developer.squareup.com/reference/square/gift-card-activities-api) to activate the gift card with an initial balance and manage other activities.\n\nFor more information, see the following guides:\n - [Gift Cards](https://developer.squareup.com/docs/gift-cards/using-gift-cards-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveGiftCard",
+      "name": "GetGoalsSets",
+      "description": "Returns a list of Goal Sets.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
       "method": "get",
-      "path": "/v2/gift-cards/{id}",
-      "pathParameters": [
+      "path": "/learn/api/public/v1/goals/sets",
+      "pathParameters": [],
+      "queryParameters": [
         {
-          "name": "id",
+          "name": "sort",
           "type": "string",
-          "description": "The ID of the gift card to retrieve."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.53.0"
         }
       ],
-      "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "RetrieveInventoryAdjustment",
+      "name": "GetGoalsSetsTypes",
+      "description": "Returns a list of Goals Set Types.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
       "method": "get",
-      "path": "/v2/inventory/adjustments/{adjustment_id}",
-      "pathParameters": [
-        {
-          "name": "adjustment_id",
-          "type": "string",
-          "description": "ID of the [InventoryAdjustment](entity:InventoryAdjustment) to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BatchChangeInventory",
-      "description": "On success: returns the current calculated counts for all objects\nreferenced in the request.\nOn failure: returns a list of related errors.",
-      "method": "post",
-      "path": "/v2/inventory/changes/batch-create",
+      "path": "/learn/api/public/v1/goals/sets/types",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -2687,14 +5223,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "BatchRetrieveInventoryChanges",
-      "description": "Results are paginated and sorted in ascending order according their\n`occurred_at` timestamp (oldest first).\n\nBatchRetrieveInventoryChanges is a catch-all query endpoint for queries\nthat cannot be handled by other, simpler endpoints.",
-      "method": "post",
-      "path": "/v2/inventory/changes/batch-retrieve",
+      "name": "GetGoalsSets",
+      "description": "Returns the Goal Set specified by Id.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/goals/sets/{goalSetId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -2703,14 +5239,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "BatchRetrieveInventoryCounts",
-      "description": "Results are paginated and sorted in descending order according to their\n`calculated_at` timestamp (newest first).\n\nWhen `updated_after` is specified, only counts that have changed since that\ntime (based on the server timestamp for the most recent change) are\nreturned. This allows clients to perform a \"sync\" operation, for example\nin response to receiving a Webhook notification.",
-      "method": "post",
-      "path": "/v2/inventory/counts/batch-retrieve",
+      "name": "GetGoalsSetsCategories",
+      "description": "Returns a list of Categories for a given Goal Set.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/goals/sets/{goalSetId}/categories",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -2719,20 +5255,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "RetrieveInventoryPhysicalCount",
+      "name": "GetGoalsSetsCategories",
+      "description": "Returns the Goal Set Category specified by Id.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
       "method": "get",
-      "path": "/v2/inventory/physical-counts/{physical_count_id}",
-      "pathParameters": [
-        {
-          "name": "physical_count_id",
-          "type": "string",
-          "description": "ID of the\n[InventoryPhysicalCount](entity:InventoryPhysicalCount) to retrieve."
-        }
-      ],
+      "path": "/learn/api/public/v1/goals/sets/{goalSetId}/categories/{goalSetCategoryId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -2740,889 +5271,258 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "RetrieveInventoryTransfer",
+      "name": "GetGoalsSetsCategoriesGoals",
+      "description": "Returns a list of Goals from a Goal Set and Category\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
       "method": "get",
-      "path": "/v2/inventory/transfers/{transfer_id}",
+      "path": "/learn/api/public/v1/goals/sets/{goalSetId}/categories/{goalSetCategoryId}/goals",
       "pathParameters": [
         {
-          "name": "transfer_id",
+          "name": "goalSetId",
           "type": "string",
-          "description": "ID of the [InventoryTransfer](entity:InventoryTransfer) to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Inventory",
-      "description": "\nThe Inventory API allows you to programmatically manage inventory counts and inventory changes of products or services.\n\nFor more information, see the following guides:\n - [Inventory](https://developer.squareup.com/docs/inventory-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveInventoryCount",
-      "description": "Responses are paginated and unsorted.\nFor more sophisticated queries, use a batch endpoint.",
-      "method": "get",
-      "path": "/v2/inventory/{catalog_object_id}",
-      "pathParameters": [
-        {
-          "name": "catalog_object_id",
-          "type": "string",
-          "description": "ID of the [CatalogObject](entity:CatalogObject) to retrieve."
+          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0"
         }
       ],
       "queryParameters": [
         {
-          "name": "location_ids",
-          "type": "string",
-          "description": "The [Location](entity:Location) IDs to look up as a comma-separated\nlist. An empty list queries all locations."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this to retrieve the next set of results for the original query.\n\nSee the [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination) guide for more information."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListInvoices",
-      "description": "The response \nis paginated. If truncated, the response includes a `cursor` that you    \nuse in a subsequent request to retrieve the next set of invoices.",
-      "method": "get",
-      "path": "/v2/invoices",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location for which to list invoices."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint. \nProvide this cursor to retrieve the next set of results for your original query.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of invoices to return (200 is the maximum `limit`). \nIf not provided, the server uses a default limit of 100 invoices."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateInvoice",
-      "description": "A draft invoice remains in your account and no action is taken. \nYou must publish the invoice before Square can process it (send it to the customer's email address or charge the customer’s card on file).",
-      "method": "post",
-      "path": "/v2/invoices",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchInvoices",
-      "description": "You can optionally specify customers in the filter for whom to \nretrieve invoices. In the current implementation, you can only specify one location and \noptionally one customer.\n\nThe response is paginated. If truncated, the response includes a `cursor` \nthat you use in a subsequent request to retrieve the next set of invoices.",
-      "method": "post",
-      "path": "/v2/invoices/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteInvoice",
-      "description": "When an invoice is deleted, the \nassociated order status changes to CANCELED. You can only delete a draft \ninvoice (you cannot delete a published invoice, including one that is scheduled for processing).",
-      "method": "delete",
-      "path": "/v2/invoices/{invoice_id}",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the invoice to delete."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The version of the [invoice](entity:Invoice) to delete.\nIf you do not know the version, you can call [GetInvoice](api-endpoint:Invoices-GetInvoice) or \n[ListInvoices](api-endpoint:Invoices-ListInvoices)."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetInvoice",
-      "method": "get",
-      "path": "/v2/invoices/{invoice_id}",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the invoice to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateInvoice",
-      "description": "This endpoint supports sparse updates, so you only need\nto specify the fields you want to change along with the required `version` field.\nSome restrictions apply to updating invoices. For example, you cannot change the\n`order_id` or `location_id` field.",
-      "method": "put",
-      "path": "/v2/invoices/{invoice_id}",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the invoice to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateInvoiceAttachment",
-      "description": "This endpoint accepts HTTP multipart/form-data file uploads\nwith a JSON `request` part and a `file` part. The `file` part must be a `readable stream` that contains a file\nin a supported format: GIF, JPEG, PNG, TIFF, BMP, or PDF.\n\nInvoices can have up to 10 attachments with a total file size of 25 MB. Attachments can be added only to invoices\nin the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.",
-      "method": "post",
-      "path": "/v2/invoices/{invoice_id}/attachments",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the [invoice](entity:Invoice) to attach the file to."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteInvoiceAttachment",
-      "description": "Attachments can be removed only\nfrom invoices in the `DRAFT`, `SCHEDULED`, `UNPAID`, or `PARTIALLY_PAID` state.",
-      "method": "delete",
-      "path": "/v2/invoices/{invoice_id}/attachments/{attachment_id}",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the [invoice](entity:Invoice) to delete the attachment from."
-        },
-        {
-          "name": "attachment_id",
-          "type": "string",
-          "description": "The ID of the [attachment](entity:InvoiceAttachment) to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelInvoice",
-      "description": "The seller cannot collect payments for \nthe canceled invoice.\n\nYou cannot cancel an invoice in the `DRAFT` state or in a terminal state: `PAID`, `REFUNDED`, `CANCELED`, or `FAILED`.",
-      "method": "post",
-      "path": "/v2/invoices/{invoice_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the [invoice](entity:Invoice) to cancel."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Invoices",
-      "description": "\n[Square Invoices](https://squareup.com/invoices) makes it easy for sellers to request and collect payments from their customers. Square notifies customers and processes invoice payments.\n\nUse the Invoices API to create and manage invoices for orders that were created using the Orders API. After you create the invoice and configure its delivery method, payment schedule, and other invoice settings, you can publish the invoice. Depending on the invoice settings, Square can send the invoice to the customer or automatically charge a card on file. Square hosts each invoice on a web page where customers can pay for it.\n\nFor more information, see the following guides:\n - [Invoices](https://developer.squareup.com/docs/invoices-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "PublishInvoice",
-      "description": "After an invoice is published, Square \nfollows up based on the invoice configuration. For example, Square \nsends the invoice to the customer's email address, charges the customer's card on file, or does \nnothing. Square also makes the invoice available on a Square-hosted invoice page. \n\nThe invoice `status` also changes from `DRAFT` to a status \nbased on the invoice configuration. For example, the status changes to `UNPAID` if \nSquare emails the invoice or `PARTIALLY_PAID` if Square charges a card on file for a portion of the \ninvoice amount.\n\nIn addition to the required `ORDERS_WRITE` and `INVOICES_WRITE` permissions, `CUSTOMERS_READ`\nand `PAYMENTS_WRITE` are required when publishing invoices configured for card-on-file payments.",
-      "method": "post",
-      "path": "/v2/invoices/{invoice_id}/publish",
-      "pathParameters": [
-        {
-          "name": "invoice_id",
-          "type": "string",
-          "description": "The ID of the invoice to publish."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListBreakTypes",
-      "method": "get",
-      "path": "/v2/labor/break-types",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "Filter the returned `BreakType` results to only those that are associated with the\nspecified location."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of `BreakType` results to return per page. The number can range between 1\nand 200. The default is 200."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pointer to the next page of `BreakType` results to fetch."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateBreakType",
-      "description": "A `BreakType` is a template for creating `Break` objects.\nYou must provide the following values in your request to this\nendpoint:\n\n- `location_id`\n- `break_name`\n- `expected_duration`\n- `is_paid`\n\nYou can only have three `BreakType` instances per location. If you attempt to add a fourth\n`BreakType` for a location, an `INVALID_REQUEST_ERROR` \"Exceeded limit of 3 breaks per location.\"\nis returned.",
-      "method": "post",
-      "path": "/v2/labor/break-types",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteBreakType",
-      "description": "A `BreakType` can be deleted even if it is referenced from a `Shift`.",
-      "method": "delete",
-      "path": "/v2/labor/break-types/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The UUID for the `BreakType` being deleted."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetBreakType",
-      "method": "get",
-      "path": "/v2/labor/break-types/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The UUID for the `BreakType` being retrieved."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateBreakType",
-      "method": "put",
-      "path": "/v2/labor/break-types/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": " The UUID for the `BreakType` being updated."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateShift",
-      "description": "A `Shift` represents a complete workday for a single team member.\nYou must provide the following values in your request to this\nendpoint:\n\n- `location_id`\n- `team_member_id`\n- `start_at`\n\nAn attempt to create a new `Shift` can result in a `BAD_REQUEST` error when:\n- The `status` of the new `Shift` is `OPEN` and the team member has another\nshift with an `OPEN` status.\n- The `start_at` date is in the future.\n- The `start_at` or `end_at` date overlaps another shift for the same team member.\n- The `Break` instances are set in the request and a break `start_at`\nis before the `Shift.start_at`, a break `end_at` is after\nthe `Shift.end_at`, or both.",
-      "method": "post",
-      "path": "/v2/labor/shifts",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchShifts",
-      "description": "The list to be returned can be filtered by:\n- Location IDs\n- Team member IDs\n- Shift status (`OPEN` or `CLOSED`)\n- Shift start\n- Shift end\n- Workday details\n\nThe list can be sorted by:\n- `START_AT`\n- `END_AT`\n- `CREATED_AT`\n- `UPDATED_AT`",
-      "method": "post",
-      "path": "/v2/labor/shifts/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteShift",
-      "method": "delete",
-      "path": "/v2/labor/shifts/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The UUID for the `Shift` being deleted."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetShift",
-      "method": "get",
-      "path": "/v2/labor/shifts/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The UUID for the `Shift` being retrieved."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateShift",
-      "description": "When adding a `Break` to a `Shift`, any earlier `Break` instances in the `Shift` have\nthe `end_at` property set to a valid RFC-3339 datetime string.\n\nWhen closing a `Shift`, all `Break` instances in the `Shift` must be complete with `end_at`\nset on each `Break`.",
-      "method": "put",
-      "path": "/v2/labor/shifts/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The ID of the object being updated."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListTeamMemberWages",
-      "method": "get",
-      "path": "/v2/labor/team-member-wages",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "Filter the returned wages to only those that are associated with the\nspecified team member."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of `TeamMemberWage` results to return per page. The number can range between\n1 and 200. The default is 200."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pointer to the next page of `EmployeeWage` results to fetch."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetTeamMemberWage",
-      "method": "get",
-      "path": "/v2/labor/team-member-wages/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The UUID for the `TeamMemberWage` being retrieved."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListWorkweekConfigs",
-      "method": "get",
-      "path": "/v2/labor/workweek-configs",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of `WorkweekConfigs` results to return per page."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pointer to the next page of `WorkweekConfig` results to fetch."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Labor",
-      "description": "\nThe Labor API allows you to see when employees clocked in and out, how much they worked during different\nperiods, and how many breaks they took. You can also call the API to register a past break, adjust a shift,\nor update a wage.\n\nThis API is used in conjunction with the Team API.\n\nFor more information, see the following guides:\n - [Labor](https://developer.squareup.com/docs/labor-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateWorkweekConfig",
-      "method": "put",
-      "path": "/v2/labor/workweek-configs/{id}",
-      "pathParameters": [
-        {
-          "name": "id",
-          "type": "string",
-          "description": "The UUID for the `WorkweekConfig` object being updated."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListLocationCustomAttributeDefinitions",
-      "description": "When all response pages are retrieved, the results include all custom attribute definitions\nthat are visible to the requesting application, including those that are created by other\napplications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/locations/custom-attribute-definitions",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "visibility_filter",
-          "type": "string",
-          "description": "Filters the `CustomAttributeDefinition` results by their `visibility` values."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateLocationCustomAttributeDefinition",
-      "description": "Use this endpoint to define a custom attribute that can be associated with locations.\nA custom attribute definition specifies the `key`, `visibility`, `schema`, and other properties\nfor a custom attribute. After the definition is created, you can call\n[UpsertLocationCustomAttribute](api-endpoint:LocationCustomAttributes-UpsertLocationCustomAttribute) or\n[BulkUpsertLocationCustomAttributes](api-endpoint:LocationCustomAttributes-BulkUpsertLocationCustomAttributes)\nto set the custom attribute for locations.",
-      "method": "post",
-      "path": "/v2/locations/custom-attribute-definitions",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteLocationCustomAttributeDefinition",
-      "description": "Deleting a custom attribute definition also deletes the corresponding custom attribute from\nall locations.\nOnly the definition owner can delete a custom attribute definition.",
-      "method": "delete",
-      "path": "/v2/locations/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveLocationCustomAttributeDefinition",
-      "description": "To retrieve a custom attribute definition created by another application, the `visibility`\nsetting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/locations/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to retrieve. If the requesting application\nis not the definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute definition, which is used for strongly consistent\nreads to guarantee that you receive the most up-to-date data. When included in the request,\nSquare returns the specified version or a higher version if one exists. If the specified version\nis higher than the current version, Square returns a `BAD_REQUEST` error."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateLocationCustomAttributeDefinition",
-      "description": "Use this endpoint to update the following fields: `name`, `description`, `visibility`, or the\n`schema` for a `Selection` data type.\nOnly the definition owner can update a custom attribute definition.",
-      "method": "put",
-      "path": "/v2/locations/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkDeleteLocationCustomAttributes",
-      "description": "To delete a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/locations/custom-attributes/bulk-delete",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkUpsertLocationCustomAttributes",
-      "description": "Use this endpoint to set the value of one or more custom attributes for one or more locations.\nA custom attribute is based on a custom attribute definition in a Square seller account, which is\ncreated using the [CreateLocationCustomAttributeDefinition](api-endpoint:LocationCustomAttributes-CreateLocationCustomAttributeDefinition) endpoint.\nThis `BulkUpsertLocationCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert\nrequests and returns a map of individual upsert responses. Each upsert request has a unique ID\nand provides a location ID and custom attribute. Each upsert response is returned with the ID\nof the corresponding request.\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/locations/custom-attributes/bulk-upsert",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListLocationCustomAttributes",
-      "description": "You can use the `with_definitions` query parameter to also retrieve custom attribute definitions\nin the same call.\nWhen all response pages are retrieved, the results include all custom attributes that are\nvisible to the requesting application, including those that are owned by other applications\nand set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/locations/{location_id}/custom-attributes",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the target [location](entity:Location)."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "visibility_filter",
-          "type": "string",
-          "description": "Filters the `CustomAttributeDefinition` results by their `visibility` values."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request. For more\ninformation, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "with_definitions",
+          "name": "recursive",
           "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each\ncustom attribute. Set this parameter to `true` to get the name and description of each custom\nattribute, information about the data type, or other definition details. The default value is `false`."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteLocationCustomAttribute",
-      "description": "To delete a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "delete",
-      "path": "/v2/locations/{location_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the target [location](entity:Location)."
+          "description": "Search for child goals recursively. A value of 'true' return all top-level goals and any descendant goals. A value of 'false', only top-level goals are returned and this is the default behavior.\n\n**Since**: 3900.53.0"
         },
         {
-          "name": "key",
+          "name": "categoryId",
           "type": "string",
-          "description": "The key of the custom attribute to delete. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
+          "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0"
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal type.\n\n**Since**: 3900.53.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.53.0"
         }
       ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
     },
     "endpoint": {
-      "name": "RetrieveLocationCustomAttribute",
-      "description": "You can use the `with_definition` query parameter to also retrieve the custom attribute definition\nin the same call.\nTo retrieve a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "GetGoals",
+      "description": "Returns the Goal specified by Id.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
       "method": "get",
-      "path": "/v2/locations/{location_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the target [location](entity:Location)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to retrieve. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
-        }
-      ],
+      "path": "/learn/api/public/v1/goals/{goalId}",
+      "pathParameters": [],
       "queryParameters": [
         {
-          "name": "with_definition",
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>category</li><li>goalSet</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
+    },
+    "endpoint": {
+      "name": "GetGoalsAlignments",
+      "description": "Returns a list of Goal Alignments.\n\nThe 'system.goal.align.VIEW' entitlement is required.\n\n**Since**: 3900.62.00",
+      "method": "get",
+      "path": "/learn/api/public/v1/goals/{goalId}/alignments",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by course id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "blogId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by blog id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by course content id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "discussionId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by discussion id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "gradebookColumnId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by gradebook column id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "messageId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by message/thread id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "questionId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by assessment/question id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "resourceId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by resource id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "reference",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by reference.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "rubricRowId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by rubric row id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "rubricId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by rubric id.\n\n**Since**: 3900.62.00"
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by type.\n\n**Since**: 3900.62.00\n\n\n| Type      | Description\n | --------- | --------- |\n| Blog | Blog Content Type |\n| CourseContent | Course Content Type |\n| ContentCollectionResource | Content Collection Resourse Type |\n| Discussion | Discussion Content Type |\n| DiscussionThread | Message/Thread Content Type |\n| Assessment | Assessment/Question Content Type |\n| GradebookColumn | Gradebook Column Content Type |\n| RubricRow | Rubric Row Content Type |\n| Rubric | Rubric Content Type |\n| Other | Other Content Type |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n- goalId\n\n**Since**: 3900.62.00"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Goals",
+      "description": "Blackboard Learn goals API provides endpoints for managing goals related operations."
+    },
+    "endpoint": {
+      "name": "GetGoalsChildren",
+      "description": "Returns the list of Children Goals from the specified Parent Goal.\n\nThe 'system.learningstandards.VIEW' entitlement is required.\n\n**Since**: 3900.53.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/goals/{goalId}/children",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "categoryId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by category id.\n\n**Since**: 3900.53.0"
+        },
+        {
+          "name": "goalSetId",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal set id.\n\n**Since**: 3900.53.0"
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Optional search criteria parameter to filter by goal type.\n\n**Since**: 3900.53.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- id\n- title\n\n**Since**: 3900.53.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesNodes",
+      "description": "Obtains a list of nodes to which a given course is directly associated.\n\nUsers with the 'system.multiinst.node.course.association.VIEW' entitlement and the 'system.multiinst.node.org.association.VIEW' system entitlement can access all node association information.\n\n**Since**: 3800.10.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/nodes",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>node</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "GetInstitutionalhierarchyNodes",
+      "description": "Returns the Top-level institutional hierarchy nodes\n\nEntitlement system.multiinst.hierarchy.manager.VIEW required\n\nUsers with entitlement \"system.multiinst.hierarchy.manager.VIEW\" for Node management can view all fields.\n\n**Since**: 3800.10.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "recursive",
           "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of\nthe custom attribute. Set this parameter to `true` to get the name and description of the custom\nattribute, information about the data type, or other definition details. The default value is `false`."
-        },
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute, which is used for strongly consistent reads to\nguarantee that you receive the most up-to-date data. When included in the request, Square\nreturns the specified version or a higher version if one exists. If the specified version is\nhigher than the current version, Square returns a `BAD_REQUEST` error."
+          "description": "Search Institutional Hierarchy Nodes recursively. If true, returns all descendant nodes of the specified Node. If false, only immediate children are returned (defualt: false)\n\n**Since**: 3800.14.0"
         }
       ],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Location Custom Attributes",
-      "description": "\nUse the Location Custom Attributes API to create and manage custom attributes for locations. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for locations.\n\nFor more information, see the following guides:\n - [Location Custom Attributes](https://developer.squareup.com/docs/location-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "UpsertLocationCustomAttribute",
-      "description": "Use this endpoint to set the value of a custom attribute for a specified location.\nA custom attribute is based on a custom attribute definition in a Square seller account, which\nis created using the [CreateLocationCustomAttributeDefinition](api-endpoint:LocationCustomAttributes-CreateLocationCustomAttributeDefinition) endpoint.\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "PostInstitutionalhierarchyNodes",
+      "description": "Creates a new institutional hierarchy node\n\nEntitlement system.multiinst.hierarchy.manager.CREATE required\n\nUsers with entitlement \"system.multiinst.hierarchy.manager.CREATE\" for Node management can create a new Node.\n\n**Since**: 3800.15.0",
       "method": "post",
-      "path": "/v2/locations/{location_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the target [location](entity:Location)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to create or update. This key must match the `key` of a\ncustom attribute definition in the Square seller account. If the requesting application is not\nthe definition owner, you must use the qualified key."
-        }
-      ],
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes",
+      "pathParameters": [],
       "queryParameters": [],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Locations",
-      "description": "\nMany sellers use multiple locations to track where they make sales. The Locations API allows you to\ncreate and manage data about those locations, such as their addresses, names, and business hours.\n\nFor more information, see the following guides:\n - [Locations](https://developer.squareup.com/docs/locations-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "ListLocations",
-      "description": "Locations are listed alphabetically by `name`.",
+      "name": "GetInstitutionalhierarchyNodes",
+      "description": "Returns the institutional hierarchy node corresponding the provided ID\n\nEntitlement system.multiinst.hierarchy.manager.VIEW required\n\nUsers with entitlement \"system.multiinst.hierarchy.manager.VIEW\" for Node management can view all fields.\n\n**Since**: 3800.10.0",
       "method": "get",
-      "path": "/v2/locations",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -3631,382 +5531,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Locations",
-      "description": "\nMany sellers use multiple locations to track where they make sales. The Locations API allows you to\ncreate and manage data about those locations, such as their addresses, names, and business hours.\n\nFor more information, see the following guides:\n - [Locations](https://developer.squareup.com/docs/locations-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "CreateLocation",
-      "description": "Creating new locations allows for separate configuration of receipt layouts, item prices,\nand sales reports. Developers can use locations to separate sales activity through applications\nthat integrate with Square from sales activity elsewhere in a seller's account.\nLocations created programmatically with the Locations API last forever and\nare visible to the seller for their own management. Therefore, ensure that\neach location has a sensible and unique name.",
-      "method": "post",
-      "path": "/v2/locations",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Locations",
-      "description": "\nMany sellers use multiple locations to track where they make sales. The Locations API allows you to\ncreate and manage data about those locations, such as their addresses, names, and business hours.\n\nFor more information, see the following guides:\n - [Locations](https://developer.squareup.com/docs/locations-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveLocation",
-      "description": "Specify \"main\"\nas the location ID to retrieve details of the [main location](https://developer.squareup.com/docs/locations-api#about-the-main-location).",
-      "method": "get",
-      "path": "/v2/locations/{location_id}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location to retrieve. Specify the string\n\"main\" to return the main location."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Locations",
-      "description": "\nMany sellers use multiple locations to track where they make sales. The Locations API allows you to\ncreate and manage data about those locations, such as their addresses, names, and business hours.\n\nFor more information, see the following guides:\n - [Locations](https://developer.squareup.com/docs/locations-api)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateLocation",
-      "method": "put",
-      "path": "/v2/locations/{location_id}",
-      "pathParameters": [
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "The ID of the location to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateLoyaltyAccount",
-      "description": "To create a loyalty account, you must provide the `program_id` and a `mapping` with the `phone_number` of the buyer.",
-      "method": "post",
-      "path": "/v2/loyalty/accounts",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchLoyaltyAccounts",
-      "description": "You can search for a loyalty account using the phone number or customer ID associated with the account. To return all loyalty accounts, specify an empty `query` object or omit it entirely.\n\nSearch results are sorted by `created_at` in ascending order.",
-      "method": "post",
-      "path": "/v2/loyalty/accounts/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveLoyaltyAccount",
-      "method": "get",
-      "path": "/v2/loyalty/accounts/{account_id}",
-      "pathParameters": [
-        {
-          "name": "account_id",
-          "type": "string",
-          "description": "The ID of the [loyalty account](entity:LoyaltyAccount) to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "AccumulateLoyaltyPoints",
-      "description": "- If you are using the Orders API to manage orders, provide the `order_id`. Square reads the order\nto compute the points earned from both the base loyalty program and an associated\n[loyalty promotion](entity:LoyaltyPromotion). For purchases that qualify for multiple accrual\nrules, Square computes points based on the accrual rule that grants the most points.\nFor purchases that qualify for multiple promotions, Square computes points based on the most\nrecently created promotion. A purchase must first qualify for program points to be eligible for promotion points.\n\n- If you are not using the Orders API to manage orders, provide `points` with the number of points to add.\nYou must first perform a client-side computation of the points earned from the loyalty program and\nloyalty promotion. For spend-based and visit-based programs, you can call [CalculateLoyaltyPoints](api-endpoint:Loyalty-CalculateLoyaltyPoints)\nto compute the points earned from the base loyalty program. For information about computing points earned from a loyalty promotion, see\n[Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).",
-      "method": "post",
-      "path": "/v2/loyalty/accounts/{account_id}/accumulate",
-      "pathParameters": [
-        {
-          "name": "account_id",
-          "type": "string",
-          "description": "The ID of the target [loyalty account](entity:LoyaltyAccount)."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "AdjustLoyaltyPoints",
-      "description": "Use this endpoint only when you need to manually adjust points. Otherwise, in your application flow, you call\n[AccumulateLoyaltyPoints](api-endpoint:Loyalty-AccumulateLoyaltyPoints)\nto add points when a buyer pays for the purchase.",
-      "method": "post",
-      "path": "/v2/loyalty/accounts/{account_id}/adjust",
-      "pathParameters": [
-        {
-          "name": "account_id",
-          "type": "string",
-          "description": "The ID of the target [loyalty account](entity:LoyaltyAccount)."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchLoyaltyEvents",
-      "description": "A Square loyalty program maintains a ledger of events that occur during the lifetime of a\nbuyer's loyalty account. Each change in the point balance\n(for example, points earned, points redeemed, and points expired) is\nrecorded in the ledger. Using this endpoint, you can search the ledger for events.\n\nSearch results are sorted by `created_at` in descending order.",
-      "method": "post",
-      "path": "/v2/loyalty/events/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveLoyaltyProgram",
-      "description": "Loyalty programs define how buyers can earn points and redeem points for rewards. Square sellers can have only one loyalty program, which is created and managed from the Seller Dashboard. For more information, see [Loyalty Program Overview](https://developer.squareup.com/docs/loyalty/overview).",
-      "method": "get",
-      "path": "/v2/loyalty/programs/{program_id}",
-      "pathParameters": [
-        {
-          "name": "program_id",
-          "type": "string",
-          "description": "The ID of the loyalty program or the keyword `main`. Either value can be used to retrieve the single loyalty program that belongs to the seller."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CalculateLoyaltyPoints",
-      "description": "Applications might call this endpoint\nto display the points to the buyer.\n\n- If you are using the Orders API to manage orders, provide the `order_id` and (optional) `loyalty_account_id`.\nSquare reads the order to compute the points earned from the base loyalty program and an associated\n[loyalty promotion](entity:LoyaltyPromotion).\n\n- If you are not using the Orders API to manage orders, provide `transaction_amount_money` with the\npurchase amount. Square uses this amount to calculate the points earned from the base loyalty program,\nbut not points earned from a loyalty promotion. For spend-based and visit-based programs, the `tax_mode`\nsetting of the accrual rule indicates how taxes should be treated for loyalty points accrual.\nIf the purchase qualifies for program points, call\n[ListLoyaltyPromotions](api-endpoint:Loyalty-ListLoyaltyPromotions) and perform a client-side computation\nto calculate whether the purchase also qualifies for promotion points. For more information, see\n[Calculating promotion points](https://developer.squareup.com/docs/loyalty-api/loyalty-promotions#calculate-promotion-points).",
-      "method": "post",
-      "path": "/v2/loyalty/programs/{program_id}/calculate",
-      "pathParameters": [
-        {
-          "name": "program_id",
-          "type": "string",
-          "description": "The ID of the [loyalty program](entity:LoyaltyProgram), which defines the rules for accruing points."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListLoyaltyPromotions",
-      "description": "Results are sorted by the `created_at` date in descending order (newest to oldest).",
-      "method": "get",
-      "path": "/v2/loyalty/programs/{program_id}/promotions",
-      "pathParameters": [
-        {
-          "name": "program_id",
-          "type": "string",
-          "description": "The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID,\ncall [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "status",
-          "type": "string",
-          "description": "The status to filter the results by. If a status is provided, only loyalty promotions\nwith the specified status are returned. Otherwise, all loyalty promotions associated with\nthe loyalty program are returned."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response.\nThe minimum value is 1 and the maximum value is 30. The default value is 30.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateLoyaltyPromotion",
-      "description": "A loyalty promotion\nenables buyers to earn points in addition to those earned from the base loyalty program.\n\nThis endpoint sets the loyalty promotion to the `ACTIVE` or `SCHEDULED` status, depending on the\n`available_time` setting. A loyalty program can have a maximum of 10 loyalty promotions with an\n`ACTIVE` or `SCHEDULED` status.",
-      "method": "post",
-      "path": "/v2/loyalty/programs/{program_id}/promotions",
-      "pathParameters": [
-        {
-          "name": "program_id",
-          "type": "string",
-          "description": "The ID of the [loyalty program](entity:LoyaltyProgram) to associate with the promotion.\nTo get the program ID, call [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram)\nusing the `main` keyword."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveLoyaltyPromotion",
-      "method": "get",
-      "path": "/v2/loyalty/programs/{program_id}/promotions/{promotion_id}",
-      "pathParameters": [
-        {
-          "name": "promotion_id",
-          "type": "string",
-          "description": "The ID of the [loyalty promotion](entity:LoyaltyPromotion) to retrieve."
-        },
-        {
-          "name": "program_id",
-          "type": "string",
-          "description": "The ID of the base [loyalty program](entity:LoyaltyProgram). To get the program ID,\ncall [RetrieveLoyaltyProgram](api-endpoint:Loyalty-RetrieveLoyaltyProgram) using the `main` keyword."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelLoyaltyPromotion",
-      "description": "Use this endpoint to cancel an `ACTIVE` promotion earlier than the\nend date, cancel an `ACTIVE` promotion when an end date is not specified, or cancel a `SCHEDULED` promotion.\nBecause updating a promotion is not supported, you can also use this endpoint to cancel a promotion before\nyou create a new one.\n\nThis endpoint sets the loyalty promotion to the `CANCELED` state",
-      "method": "post",
-      "path": "/v2/loyalty/programs/{program_id}/promotions/{promotion_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "promotion_id",
-          "type": "string",
-          "description": "The ID of the [loyalty promotion](entity:LoyaltyPromotion) to cancel. You can cancel a\npromotion that has an `ACTIVE` or `SCHEDULED` status."
-        },
-        {
-          "name": "program_id",
-          "type": "string",
-          "description": "The ID of the base [loyalty program](entity:LoyaltyProgram)."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateLoyaltyReward",
-      "description": "In the process, the endpoint does following:\n\n- Uses the `reward_tier_id` in the request to determine the number of points\nto lock for this reward.\n- If the request includes `order_id`, it adds the reward and related discount to the order.\n\nAfter a reward is created, the points are locked and\nnot available for the buyer to redeem another reward.",
-      "method": "post",
-      "path": "/v2/loyalty/rewards",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchLoyaltyRewards",
-      "description": "This endpoint accepts a request with no query filters and returns results for all loyalty accounts.\nIf you include a `query` object, `loyalty_account_id` is required and `status` is  optional.\n\nIf you know a reward ID, use the\n[RetrieveLoyaltyReward](api-endpoint:Loyalty-RetrieveLoyaltyReward) endpoint.\n\nSearch results are sorted by `updated_at` in descending order.",
-      "method": "post",
-      "path": "/v2/loyalty/rewards/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteLoyaltyReward",
-      "description": "- If an order ID was specified when the reward was created\n(see [CreateLoyaltyReward](api-endpoint:Loyalty-CreateLoyaltyReward)),\nit updates the order by removing the reward and related\ndiscounts.\n\nYou cannot delete a reward that has reached the terminal state (REDEEMED).",
+      "name": "DeleteInstitutionalhierarchyNodes",
+      "description": "Deletes an institutional hierarchy node. The root node cannot be deleted. This deletes orphan children in a cascading fashion.\n\nThe 'system.multiinst.hierarchy.manager.DELETE' entitlement is required.\n\n**Since**: 3800.15.0",
       "method": "delete",
-      "path": "/v2/loyalty/rewards/{reward_id}",
-      "pathParameters": [
-        {
-          "name": "reward_id",
-          "type": "string",
-          "description": "The ID of the [loyalty reward](entity:LoyaltyReward) to delete."
-        }
-      ],
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -4014,20 +5547,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "RetrieveLoyaltyReward",
-      "method": "get",
-      "path": "/v2/loyalty/rewards/{reward_id}",
-      "pathParameters": [
-        {
-          "name": "reward_id",
-          "type": "string",
-          "description": "The ID of the [loyalty reward](entity:LoyaltyReward) to retrieve."
-        }
-      ],
+      "name": "PatchInstitutionalhierarchyNodes",
+      "description": "Updates Institutional Hierarchy Node information.\n\nIf parentId is sent a move node task would be processed on background, this returns a location header where this task status can be consulted.\n\nEntitlement system.multiinst.hierarchy.manager.MODIFY is required\n\n**Since**: 3800.15.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -4035,329 +5563,183 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Loyalty",
-      "description": "\nSellers subscribe to [Square Loyalty](https://squareup.com/software/loyalty) to offer a loyalty program that can increase repeat visits to their business by rewarding customers.\n\nUse the Loyalty API to create loyalty accounts for buyers and enable them to earn points for purchases and redeem points for reward discounts. Also use the Loyalty API to retrieve details about the loyalty program, create and manage loyalty promotions that extend the base program, and track balance-changing events for loyalty accounts.\n\nFor more information, see the following guides:\n - [Loyalty](https://developer.squareup.com/docs/loyalty-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "RedeemLoyaltyReward",
-      "description": "The endpoint sets the reward to the `REDEEMED` terminal state.\n\nIf you are using your own order processing system (not using the\nOrders API), you call this endpoint after the buyer paid for the\npurchase.\n\nAfter the reward reaches the terminal state, it cannot be deleted.\nIn other words, points used for the reward cannot be returned\nto the account.",
-      "method": "post",
-      "path": "/v2/loyalty/rewards/{reward_id}/redeem",
-      "pathParameters": [
-        {
-          "name": "reward_id",
-          "type": "string",
-          "description": "The ID of the [loyalty reward](entity:LoyaltyReward) to redeem."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListMerchantCustomAttributeDefinitions",
-      "description": "When all response pages are retrieved, the results include all custom attribute definitions\nthat are visible to the requesting application, including those that are created by other\napplications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "GetInstitutionalhierarchyNodesChildren",
+      "description": "Returns the children of the institutional hierarchy node corresponding to the provided ID\n\nEntitlement system.multiinst.hierarchy.manager.VIEW required\n\nUsers with entitlement \"system.multiinst.hierarchy.manager.VIEW\" for Node management can view all fields.\n\n**Since**: 3800.10.0",
       "method": "get",
-      "path": "/v2/merchants/custom-attribute-definitions",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/children",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "visibility_filter",
-          "type": "string",
-          "description": "Filters the `CustomAttributeDefinition` results by their `visibility` values."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateMerchantCustomAttributeDefinition",
-      "description": "Use this endpoint to define a custom attribute that can be associated with a merchant connecting to your application.\nA custom attribute definition specifies the `key`, `visibility`, `schema`, and other properties\nfor a custom attribute. After the definition is created, you can call\n[UpsertMerchantCustomAttribute](api-endpoint:MerchantCustomAttributes-UpsertMerchantCustomAttribute) or\n[BulkUpsertMerchantCustomAttributes](api-endpoint:MerchantCustomAttributes-BulkUpsertMerchantCustomAttributes)\nto set the custom attribute for a merchant.",
-      "method": "post",
-      "path": "/v2/merchants/custom-attribute-definitions",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteMerchantCustomAttributeDefinition",
-      "description": "Deleting a custom attribute definition also deletes the corresponding custom attribute from\nthe merchant.\nOnly the definition owner can delete a custom attribute definition.",
-      "method": "delete",
-      "path": "/v2/merchants/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveMerchantCustomAttributeDefinition",
-      "description": "To retrieve a custom attribute definition created by another application, the `visibility`\nsetting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/merchants/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to retrieve. If the requesting application\nis not the definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute definition, which is used for strongly consistent\nreads to guarantee that you receive the most up-to-date data. When included in the request,\nSquare returns the specified version or a higher version if one exists. If the specified version\nis higher than the current version, Square returns a `BAD_REQUEST` error."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateMerchantCustomAttributeDefinition",
-      "description": "Use this endpoint to update the following fields: `name`, `description`, `visibility`, or the\n`schema` for a `Selection` data type.\nOnly the definition owner can update a custom attribute definition.",
-      "method": "put",
-      "path": "/v2/merchants/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkDeleteMerchantCustomAttributes",
-      "description": "To delete a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/merchants/custom-attributes/bulk-delete",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkUpsertMerchantCustomAttributes",
-      "description": "Use this endpoint to set the value of one or more custom attributes for a merchant.\nA custom attribute is based on a custom attribute definition in a Square seller account, which is\ncreated using the [CreateMerchantCustomAttributeDefinition](api-endpoint:MerchantCustomAttributes-CreateMerchantCustomAttributeDefinition) endpoint.\nThis `BulkUpsertMerchantCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert\nrequests and returns a map of individual upsert responses. Each upsert request has a unique ID\nand provides a merchant ID and custom attribute. Each upsert response is returned with the ID\nof the corresponding request.\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/merchants/custom-attributes/bulk-upsert",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListMerchantCustomAttributes",
-      "description": "You can use the `with_definitions` query parameter to also retrieve custom attribute definitions\nin the same call.\nWhen all response pages are retrieved, the results include all custom attributes that are\nvisible to the requesting application, including those that are owned by other applications\nand set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/merchants/{merchant_id}/custom-attributes",
-      "pathParameters": [
-        {
-          "name": "merchant_id",
-          "type": "string",
-          "description": "The ID of the target [merchant](entity:Merchant)."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "visibility_filter",
-          "type": "string",
-          "description": "Filters the `CustomAttributeDefinition` results by their `visibility` values."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory.\nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100.\nThe default value is 20. For more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint.\nProvide this cursor to retrieve the next page of results for your original request. For more\ninformation, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "with_definitions",
+          "name": "recursive",
           "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each\ncustom attribute. Set this parameter to `true` to get the name and description of each custom\nattribute, information about the data type, or other definition details. The default value is `false`."
+          "description": "Search Institutional Hierarchy Nodes recursively. If true, returns all descendant nodes of the specified Node. If false, only immediate children are returned (defualt: false)\n\n**Since**: 3800.14.0"
         }
       ],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "DeleteMerchantCustomAttribute",
-      "description": "To delete a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "PostInstitutionalhierarchyNodesChildren",
+      "description": "Create a new institutional hierarchy node whose parent corresponds to the supplied nodeId\n\nEntitlement system.multiinst.hierarchy.manager.CREATE required\n\nUsers with entitlement \"system.multiinst.hierarchy.manager.CREATE\" for Node management can create a new Node.\n\n**Since**: 3800.15.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/children",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "GetInstitutionalhierarchyNodesCourses",
+      "description": "Returns a list of node-course relationships for the specified node.\n\nUsers with the 'system.multiinst.node.course.association.VIEW' entitlement and the 'system.multiinst.node.org.association.VIEW' system entitlement can access all node association information.\n\n**Since**: 3800.10.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/courses",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>course</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "PutInstitutionalhierarchyNodesCourses",
+      "description": "Creates a node-course relationship for the specified node and course.\n\nUsers with the 'system.multiinst.node.course.association.CREATE' entitlement can create Course - Hierarchy Node associations. Users with the 'system.multiinst.node.org.association.CREATE' entitlement can create Organization - Hierarchy Node associations\n\n**Since**: 3800.17.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "DeleteInstitutionalhierarchyNodesCourses",
+      "description": "Deletes the association between a given Node and a Course\n\nEntitlement system.multiinst.node.course.association.DELETE required to delete Node-Course associations Entitlement system.multiinst.node.org.association.DELETE required to delete Node-Organization associations\n\n**Since**: 3800.17.0",
       "method": "delete",
-      "path": "/v2/merchants/{merchant_id}/custom-attributes/{key}",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "PatchInstitutionalhierarchyNodesCourses",
+      "description": "Update a specified node-course association.\n\nUsers with the 'system.multiinst.node.course.association.CREATE' entitlement can update Course - Hierarchy Node associations Users with the 'system.multiinst.node.org.association.CREATE' entitlement can update Organization - Hierarchy Node associations\n\n**Since**: 3800.17.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
+    },
+    "endpoint": {
+      "name": "GetInstitutionalhierarchyNodesTools",
+      "description": "Returns a list of tools associated to a node\n\nEntitlement system.multiinst.node.tools.MODIFY required\n\nUsers with entitlement \"system.multiinst.node.tools.MODIFY\" for Node management can make use of this Endpoint.\n\n**Since**: 3900.16.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/tools/{toolType}",
       "pathParameters": [
         {
-          "name": "merchant_id",
+          "name": "toolType",
           "type": "string",
-          "description": "The ID of the target [merchant](entity:Merchant)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to delete. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
+          "description": ""
         }
       ],
       "queryParameters": [],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "RetrieveMerchantCustomAttribute",
-      "description": "You can use the `with_definition` query parameter to also retrieve the custom attribute definition\nin the same call.\nTo retrieve a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/merchants/{merchant_id}/custom-attributes/{key}",
+      "name": "PatchInstitutionalhierarchyNodesTools",
+      "description": "Modifies a tool related to a specific node and tool type. The modified tool is returned if modification runs succesfuly\n\nEntitlements system.multiinst.node.tools.MODIFY and system.multiinst.node.tools.lock.override.MODIFY are required\n\nUsers with entitlement \"system.multiinst.node.tools.MODIFY\" and \"system.multiinst.node.tools.lock.override.MODIFY\" for Node management can make use of this Endpoint.\n\n**Since**: 3900.16.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/tools/{toolType}/{toolId}",
       "pathParameters": [
         {
-          "name": "merchant_id",
+          "name": "toolType",
           "type": "string",
-          "description": "The ID of the target [merchant](entity:Merchant)."
+          "description": ""
         },
         {
-          "name": "key",
+          "name": "toolId",
           "type": "string",
-          "description": "The key of the custom attribute to retrieve. This key must match the `key` of a custom\nattribute definition in the Square seller account. If the requesting application is not the\ndefinition owner, you must use the qualified key."
+          "description": ""
         }
       ],
       "queryParameters": [
         {
-          "name": "with_definition",
+          "name": "updateExistingOriginalCourses",
           "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of\nthe custom attribute. Set this parameter to `true` to get the name and description of the custom\nattribute, information about the data type, or other definition details. The default value is `false`."
-        },
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "The current version of the custom attribute, which is used for strongly consistent reads to\nguarantee that you receive the most up-to-date data. When included in the request, Square\nreturns the specified version or a higher version if one exists. If the specified version is\nhigher than the current version, Square returns a `BAD_REQUEST` error."
+          "description": "Scope of updated Tool Settings. By default if the parameter is not present or is set as false, the updated settings will be applied to new Original courses and all Ultra courses (new and existing). If present and value is true, the updated settings will be applied to all new and existing courses (Original and Ultra).\n\n**Since**: 3900.16.0"
         }
       ],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Merchant Custom Attributes",
-      "description": "\nUse the Merchant Custom Attributes API to create and manage custom attributes for merchants that connect to your application. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows.\n\nFor more information, see the following guides:\n - [Merchant Custom Attributes](https://developer.squareup.com/docs/merchant-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "UpsertMerchantCustomAttribute",
-      "description": "Use this endpoint to set the value of a custom attribute for a specified merchant.\nA custom attribute is based on a custom attribute definition in a Square seller account, which\nis created using the [CreateMerchantCustomAttributeDefinition](api-endpoint:MerchantCustomAttributes-CreateMerchantCustomAttributeDefinition) endpoint.\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/merchants/{merchant_id}/custom-attributes/{key}",
-      "pathParameters": [
-        {
-          "name": "merchant_id",
-          "type": "string",
-          "description": "The ID of the target [merchant](entity:Merchant)."
-        },
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute to create or update. This key must match the `key` of a\ncustom attribute definition in the Square seller account. If the requesting application is not\nthe definition owner, you must use the qualified key."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Merchants",
-      "description": "\nThe Merchants API groups individual seller locations into larger organizations, allowing them to operate as a single entity. Each merchant represents one organization or business that sells with Square. Use this API to retrieve core information about the organization connecting to your application such as the merchant ID, language preferences, country, account status, and the name of the overall business.\n\nFor more information, see the following guide:\n - [Merchants](https://developer.squareup.com/docs/merchants-api)"
-    },
-    "endpoint": {
-      "name": "ListMerchants",
-      "description": "The access token used to connect your application to a Square seller is associated\nwith a single merchant. That means that `ListMerchants` returns a list\nwith a single `Merchant` object. You can specify your personal access token\nto get your own merchant information or specify an OAuth token to get the\ninformation for the merchant that granted your application access.\n\nIf you know the merchant ID, you can also use the [RetrieveMerchant](api-endpoint:Merchants-RetrieveMerchant)\nendpoint to retrieve the merchant information.",
+      "name": "GetInstitutionalhierarchyNodesUsers",
+      "description": "Returns a list of node-user relationships for the specified node.\n\nUsers with the 'system.multiinst.node.user.association.VIEW' entitlement can access all node association information.\n\n**Since**: 3900.8.0",
       "method": "get",
-      "path": "/v2/merchants",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/users",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "cursor",
-          "type": "integer",
-          "description": "The cursor generated by the previous response."
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -4366,453 +5748,629 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Merchants",
-      "description": "\nThe Merchants API groups individual seller locations into larger organizations, allowing them to operate as a single entity. Each merchant represents one organization or business that sells with Square. Use this API to retrieve core information about the organization connecting to your application such as the merchant ID, language preferences, country, account status, and the name of the overall business.\n\nFor more information, see the following guide:\n - [Merchants](https://developer.squareup.com/docs/merchants-api)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "RetrieveMerchant",
-      "method": "get",
-      "path": "/v2/merchants/{merchant_id}",
-      "pathParameters": [
-        {
-          "name": "merchant_id",
-          "type": "string",
-          "description": "The ID of the merchant to retrieve. If the string \"me\" is supplied as the ID,\nthen retrieve the merchant that is currently accessible to this call."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "OAuth",
-      "description": "\nThe Square OAuth API lets applications request and obtain permission from a Square account to make API\ncalls on behalf of that account. Applications can request individual permissions so that users do not need\nto grant full access to their Square accounts.\n\nFor more information, see the following guides:\n - [OAuth](https://developer.squareup.com/docs/oauth-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RevokeToken",
-      "description": "If an account has more than one OAuth access token for your application, this\nendpoint revokes all of them, regardless of which token you specify. \n\n__Important:__ The `Authorization` header for this endpoint must have the\nfollowing format:\n\n```\nAuthorization: Client APPLICATION_SECRET\n```\n\nReplace `APPLICATION_SECRET` with the application secret on the **OAuth**\npage for your application in the Developer Dashboard.",
-      "method": "post",
-      "path": "/oauth2/revoke",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "OAuth",
-      "description": "\nThe Square OAuth API lets applications request and obtain permission from a Square account to make API\ncalls on behalf of that account. Applications can request individual permissions so that users do not need\nto grant full access to their Square accounts.\n\nFor more information, see the following guides:\n - [OAuth](https://developer.squareup.com/docs/oauth-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ObtainToken",
-      "description": "The `grant_type` parameter specifies the type of OAuth request. If \n`grant_type` is `authorization_code`, you must include the authorization \ncode you received when a seller granted you authorization. If `grant_type` \nis `refresh_token`, you must provide a valid refresh token. If you're using \nan old version of the Square APIs (prior to March 13, 2019), `grant_type` \ncan be `migration_token` and you must provide a valid migration token.\n\nYou can use the `scopes` parameter to limit the set of permissions granted \nto the access token and refresh token. You can use the `short_lived` parameter \nto create an access token that expires in 24 hours.\n\n__Note:__ OAuth tokens should be encrypted and stored on a secure server. \nApplication clients should never interact directly with OAuth tokens.",
-      "method": "post",
-      "path": "/oauth2/token",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "OAuth",
-      "description": "\nThe Square OAuth API lets applications request and obtain permission from a Square account to make API\ncalls on behalf of that account. Applications can request individual permissions so that users do not need\nto grant full access to their Square accounts.\n\nFor more information, see the following guides:\n - [OAuth](https://developer.squareup.com/docs/oauth-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveTokenStatus",
-      "description": "Add the access token to the Authorization header of the request.\n\n__Important:__ The `Authorization` header you provide to this endpoint must have the following format:\n\n```\nAuthorization: Bearer ACCESS_TOKEN\n```\n\nwhere `ACCESS_TOKEN` is a\n[valid production authorization credential](https://developer.squareup.com/docs/build-basics/access-tokens).\n\nIf the access token is expired or not a valid access token, the endpoint returns an `UNAUTHORIZED` error.",
-      "method": "post",
-      "path": "/oauth2/token/status",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListOrderCustomAttributeDefinitions",
-      "description": "When all response pages are retrieved, the results include all custom attribute definitions\nthat are visible to the requesting application, including those that are created by other\napplications and set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that\nseller-defined custom attributes (also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/orders/custom-attribute-definitions",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "visibility_filter",
-          "type": "string",
-          "description": "Requests that all of the custom attributes be returned, or only those that are read-only or read-write."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint. \nProvide this cursor to retrieve the next page of results for your original request. \nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory. \nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100. \nThe default value is 20.\nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateOrderCustomAttributeDefinition",
-      "description": "Use this endpoint to\ndefine a custom attribute that can be associated with orders.\n\nAfter creating a custom attribute definition, you can set the custom attribute for orders\nin the Square seller account.",
-      "method": "post",
-      "path": "/v2/orders/custom-attribute-definitions",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DeleteOrderCustomAttributeDefinition",
-      "description": "Only the definition owner can delete a custom attribute definition.",
-      "method": "delete",
-      "path": "/v2/orders/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveOrderCustomAttributeDefinition",
-      "description": "To retrieve a custom attribute definition created by another application, the `visibility`\nsetting must be `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "get",
-      "path": "/v2/orders/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to retrieve."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "version",
-          "type": "integer",
-          "description": "To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency)\ncontrol, include this optional field and specify the current version of the custom attribute."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateOrderCustomAttributeDefinition",
-      "description": "Only the definition owner can update a custom attribute definition. Note that sellers can view all custom attributes in exported customer data, including those set to `VISIBILITY_HIDDEN`.",
+      "name": "PutInstitutionalhierarchyNodesUsers",
+      "description": "Creates the association between a given Node and a User.\n\nEntitlement 'system.multiinst.node.user.association.CREATE' is required.\n\n**Since**: 3900.8.0",
       "method": "put",
-      "path": "/v2/orders/custom-attribute-definitions/{key}",
-      "pathParameters": [
-        {
-          "name": "key",
-          "type": "string",
-          "description": "The key of the custom attribute definition to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkDeleteOrderCustomAttributes",
-      "description": "Use this endpoint to delete one or more custom attributes from one or more orders.\nA custom attribute is based on a custom attribute definition in a Square seller account.  (To create a\ncustom attribute definition, use the [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition) endpoint.)\n\nThis `BulkDeleteOrderCustomAttributes` endpoint accepts a map of 1 to 25 individual delete\nrequests and returns a map of individual delete responses. Each delete request has a unique ID\nand provides an order ID and custom attribute. Each delete response is returned with the ID\nof the corresponding request.\n\nTo delete a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/orders/custom-attributes/bulk-delete",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/users/{userId}",
       "pathParameters": [],
       "queryParameters": [],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "BulkUpsertOrderCustomAttributes",
-      "description": "Use this endpoint to delete one or more custom attributes from one or more orders.\nA custom attribute is based on a custom attribute definition in a Square seller account.  (To create a\ncustom attribute definition, use the [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition) endpoint.)\n\nThis `BulkUpsertOrderCustomAttributes` endpoint accepts a map of 1 to 25 individual upsert\nrequests and returns a map of individual upsert responses. Each upsert request has a unique ID\nand provides an order ID and custom attribute. Each upsert response is returned with the ID\nof the corresponding request.\n\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/orders/custom-attributes/bulk-upsert",
+      "name": "DeleteInstitutionalhierarchyNodesUsers",
+      "description": "Deletes the association between a given Node and a User.\n\nEntitlement 'system.multiinst.node.user.association.DELETE' is required.\n\n**Since**: 3900.8.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/users/{userId}",
       "pathParameters": [],
       "queryParameters": [],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Institutional hierarchy",
+      "description": "Blackboard Learn institutional hierarchy API provides endpoints for managing institutional hierarchy related operations."
     },
     "endpoint": {
-      "name": "ListOrderCustomAttributes",
-      "description": "You can use the `with_definitions` query parameter to also retrieve custom attribute definitions\nin the same call.\n\nWhen all response pages are retrieved, the results include all custom attributes that are\nvisible to the requesting application, including those that are owned by other applications\nand set to `VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "GetUsersNodes",
+      "description": "Obtains the Institutional Hierarchy Nodes associated to a User.\n\nEntitlement system.multiinst.node.user.association.VIEW is required\n\n**Since**: 3900.8.0",
       "method": "get",
-      "path": "/v2/orders/{order_id}/custom-attributes",
-      "pathParameters": [
-        {
-          "name": "order_id",
-          "type": "string",
-          "description": "The ID of the target [order](entity:Order)."
-        }
-      ],
+      "path": "/learn/api/public/v1/users/{userId}/nodes",
+      "pathParameters": [],
       "queryParameters": [
         {
-          "name": "visibility_filter",
+          "name": "expand",
           "type": "string",
-          "description": "Requests that all of the custom attributes be returned, or only those that are read-only or read-write."
-        },
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>node</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy administrators",
+      "description": "Blackboard Learn institutional hierarchy administrators API provides endpoints for managing institutional hierarchy administrators related operations."
+    },
+    "endpoint": {
+      "name": "GetInstitutionalhierarchyNodesAdmins",
+      "description": "Lists all the Administrators from an Institutional Hierarchy Node.\n\nThe 'system.multiinst.node.admin.association.VIEW' entitlement is required.\n\n**Since**: 3900.37.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/admins",
+      "pathParameters": [],
+      "queryParameters": [
         {
-          "name": "cursor",
+          "name": "sort",
           "type": "string",
-          "description": "The cursor returned in the paged response from the previous call to this endpoint. \nProvide this cursor to retrieve the next page of results for your original request. \nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"title(desc)\" Supported fields are:\n\n- userId\n\n**Since**: 3900.37.0"
         },
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to return in a single paged response. This limit is advisory. \nThe response might contain more or fewer results. The minimum value is 1 and the maximum value is 100. \nThe default value is 20.\nFor more information, see [Pagination](https://developer.squareup.com/docs/working-with-apis/pagination)."
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy administrators",
+      "description": "Blackboard Learn institutional hierarchy administrators API provides endpoints for managing institutional hierarchy administrators related operations."
+    },
+    "endpoint": {
+      "name": "GetInstitutionalhierarchyNodesAdmins",
+      "description": "Gets information of the specified user as an administrator of the specified node.\n\nThe 'system.multiinst.node.admin.association.VIEW' entitlement is required.\n\n**Since**: 3900.37.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/admins/{userId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy administrators",
+      "description": "Blackboard Learn institutional hierarchy administrators API provides endpoints for managing institutional hierarchy administrators related operations."
+    },
+    "endpoint": {
+      "name": "PutInstitutionalhierarchyNodesAdmins",
+      "description": "Create an association between the specified user as an administrator and the specified node with the provided system roles, giving a <strong>201 CREATED</strong> status code as a result. If the association already exists, system roles are updated giving a <strong>200 OK</strong> code as a result. Custom roles are supported, also by adding ´:custom´ as role sufix, for example 'aCustomRole:custom'. This sufix helps to distinguish custom roles with same name as system-created roles, for example: 'SystemSupport:custom' would be taken as a custom role, otherwise will be taken as System Support role. Non-administrative system roles (Guest, Integration, User/None, Observer) are not supported. </p> User with 'system.multiinst.node.admin.association.shared.roles.CREATE' entitlement are able to create associations on nodes where they are currently administrators and only with System Roles they already have. </p> User with 'system.multiinst.node.admin.association.all.roles.CREATE' entitlement can assign any administrators to any nodes without restrictions and with any amount of administrative System Roles.\n\n**Since**: 3900.37.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/admins/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Institutional hierarchy administrators",
+      "description": "Blackboard Learn institutional hierarchy administrators API provides endpoints for managing institutional hierarchy administrators related operations."
+    },
+    "endpoint": {
+      "name": "DeleteInstitutionalhierarchyNodesAdmins",
+      "description": "Removes an user as node administrator.\n\nThe 'system.multiinst.node.admin.association.DELETE' entitlement is required.\n\n**Since**: 3900.37.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/institutionalHierarchy/nodes/{nodeId}/admins/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "GetLtiDomains",
+      "description": "This endpoint returns the list of LTI domain configs\n\nNo entitlements required to view the data exposed by this endpoint (Since: 3900.46.0)\n\nEntitlement system.administration.VIEW required for versions 3900.45.0 and before\n\n**Since**: 3300.9.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/lti/domains",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "PostLtiDomains",
+      "description": "Creates an LTI Domain Config.\n\nThe 'system.administration.VIEW' entitlement is needed to create a domain.\n\n**Since**: 3300.9.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/lti/domains",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "GetLtiDomains",
+      "description": "This endpoint returns the LTI domain config with the specified Id\n\nNo entitlements required to view the data exposed by this endpoint (Since: 3900.46.0)\n\nEntitlement system.administration.VIEW required for versions 3900.45.0 and before\n\n**Since**: 3300.9.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/lti/domains/{domainId}",
+      "pathParameters": [
+        {
+          "name": "domainId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "DeleteLtiDomains",
+      "description": "Deletes an LTI Domain Config.\n\nThe 'system.administration.VIEW' entitlement is needed to delete a domain.\n\n**Since**: 3300.9.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/lti/domains/{domainId}",
+      "pathParameters": [
+        {
+          "name": "domainId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "PatchLtiDomains",
+      "description": "Updates an LTI Domain Config.\n\nThe 'system.administration.VIEW' entitlement is needed to update a domain.\n\n**Since**: 3300.9.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/lti/domains/{domainId}",
+      "pathParameters": [
+        {
+          "name": "domainId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "GetLtiPlacements",
+      "description": "Returns a list of LTI placements\n\nSupports the standard paging and sorting query parameters, with a maximum page size of 1000.\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/lti/placements",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "handle",
+          "type": "string",
+          "description": "Search for placements with handle properties that contain this value.\n\n**Since**: 3200.12.0"
         },
         {
-          "name": "with_definitions",
+          "name": "name",
+          "type": "string",
+          "description": "Search for placements with name properties that contain this value.\n\n**Since**: 3200.12.0"
+        },
+        {
+          "name": "type",
+          "type": "string",
+          "description": "Search for placements with type properties that contain this value.\n\n**Since**: 3200.12.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Application | Application or Student Tool Placement |\n| ContentHandler | Content Type placement |\n| ContentItemMessage | Content-item Message placement (see IMSGlobal spec)  **Since**: 3300.5.0 |\n| System | System-level Tools |\n| Administrator | Administrator-level Tools  **Since**: 3400.1.0 |\n| UltraUI | Ultra-UI Extensions  **Since**: 3700.6.0 |\n| BaseNavigation | Base Navigation |\n| CourseNavigation | Course Navigation |\n| Proctoring | Proctoring  **Since**: 3900.10.0 |\n| CloudDocument | Cloud Document Type Placement  **Since**: 3900.34.0 |\n| AssetProcessor | Asset Processor Type Placement |\n| OpenBadgeProvider | OpenBadge Provider Type Placement |\n| Eulalaunch | EULA Launch Type Placement |\n"
+        },
+        {
+          "name": "authorId",
+          "type": "string",
+          "description": "Search for placements with author ID properties that contain this value.\n\n**Since**: 3200.12.0\n\n**Deprecated**: since 3900.0.0; Field was never used and has been removed"
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for LTI placements that are available for this course. Note this only applies to Application, ContentHandler, and ContentItemMessage types currently\n\n**Since**: 3900.0.0"
+        },
+        {
+          "name": "domainId",
+          "type": "string",
+          "description": "Search for LTI placements that are associated to a specific domainId\n\n**Since**: 3900.46.0"
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for placements with a specific availability value\n\n**Since**: 3900.46.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\"\n\n**Since**: 3100.0.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "PostLtiPlacements",
+      "description": "Creates an LTI placement\n\nThe 'system.administration.VIEW' entitlement is required to create placements\n\n**Since**: 3300.0.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/lti/placements",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "GetLtiPlacements",
+      "description": "Returns the LTI placement with the specified Id\n\n**Since**: 3300.0.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/lti/placements/{placementId}",
+      "pathParameters": [
+        {
+          "name": "placementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "DeleteLtiPlacements",
+      "description": "Deletes an LTI placement with the specified Id\n\nThe 'system.administration.VIEW' entitlement is required to delete placements\n\n**Since**: 3300.0.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/lti/placements/{placementId}",
+      "pathParameters": [
+        {
+          "name": "placementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Lti",
+      "description": "Blackboard Learn lti API provides endpoints for managing lti related operations."
+    },
+    "endpoint": {
+      "name": "PatchLtiPlacements",
+      "description": "Updates an LTI placement with the given Id\n\nThe 'system.administration.VIEW' entitlement is required to update placements\n\n**Since**: 3300.0.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/lti/placements/{placementId}",
+      "pathParameters": [
+        {
+          "name": "placementId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Performance dashboard",
+      "description": "Blackboard Learn performance dashboard API provides endpoints for managing performance dashboard related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesPerformanceContentreviewstatus",
+      "description": "List the content review statuses for all the users enrolled in a course. Users calling this endpoint must have the following entitlement: this entitlement check.\n\n- {@code course.performance.dashboard.VIEW}\n\n**Since**: 3700.15.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/performance/contentReviewStatus",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Optional search criteria to filter by user id.\n\n**Since**: 3700.15.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Performance scale",
+      "description": "Blackboard Learn performance scale API provides endpoints for managing performance scale related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesSettingsGoalperformanceScale",
+      "description": "Returns the list of the goal performance scale configuration.\n\nNo entitlement is required to use this endpoint.\n\n**Since**: 3900.105.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/settings/goalperformance/scale",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Proctoring",
+      "description": "Blackboard Learn proctoring API provides endpoints for managing proctoring related operations."
+    },
+    "endpoint": {
+      "name": "GetProctoringServices",
+      "description": "Returns a list of proctoring services Supports the standard paging query parameters, with a maximum page size of 1000. No entitlement check is performed as this data is not restricted. Any secure fields such as keys/secrets are not included in the results.\n\n**Since**: 3500.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/proctoring/services",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Proctoring",
+      "description": "Blackboard Learn proctoring API provides endpoints for managing proctoring related operations."
+    },
+    "endpoint": {
+      "name": "GetProctoringServices",
+      "description": "Returns the proctoring service with the specified Id No entitlement check is performed as this data is not restricted. Any secure fields such as keys/secrets are not included in the results.\n\n**Since**: 3500.6.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/proctoring/services/{proctoringServiceId}",
+      "pathParameters": [
+        {
+          "name": "proctoringServiceId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Pronouns",
+      "description": "Blackboard Learn pronouns API provides endpoints for managing pronouns related operations."
+    },
+    "endpoint": {
+      "name": "GetPronouns",
+      "description": "Returns a list of pronouns\n\nSupports the standard paging query parameters, with a maximum page size of 200.\n\n**Since**: 3900.26.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/pronouns",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Pronouns",
+      "description": "Blackboard Learn pronouns API provides endpoints for managing pronouns related operations."
+    },
+    "endpoint": {
+      "name": "PostPronouns",
+      "description": "Create a pronoun\n\nUsers with the 'system.pronouns.MODIFY' entitlement can create pronouns.\n\nPending pronouns created will be submitted to the System Administrator for approval and will not be immediately added to the list, regardless of entitlement.\n\n**Since**: 3900.26.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/pronouns",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Pronouns",
+      "description": "Blackboard Learn pronouns API provides endpoints for managing pronouns related operations."
+    },
+    "endpoint": {
+      "name": "DeletePronouns",
+      "description": "Delete a pronoun\n\nThe 'system.pronouns.MODIFY' entitlement is needed in order to delete the pronoun.\n\n**Since**: 3900.26.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/pronouns/{pronounId}",
+      "pathParameters": [
+        {
+          "name": "pronounId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Pronouns",
+      "description": "Blackboard Learn pronouns API provides endpoints for managing pronouns related operations."
+    },
+    "endpoint": {
+      "name": "PatchPronouns",
+      "description": "Update a pronoun\n\nThe 'system.pronouns.MODIFY' entitlement is needed in order to update the pronoun.\n\n**Since**: 3900.26.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/pronouns/{pronounId}",
+      "pathParameters": [
+        {
+          "name": "pronounId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Roles",
+      "description": "Blackboard Learn roles API provides endpoints for managing roles related operations."
+    },
+    "endpoint": {
+      "name": "GetCourseroles",
+      "description": "\n\nReturns a list of course roles.  This list will contain all the course roles the context user has access to see. </p>\n\nIf the context user has this entitlement, then the user can see all course roles:\n\n- system.enrollment.CREATE\n</p>\n\nOtherwise, at least one of these course role entitlements are checked for any course the context user is enrolled in:\n\n- course.user-enroll.EXECUTE\n- system.enrollment.CREATE\n- course.user-role.MODIFY\n</p>\n\nIf the logged in user has at least one of those course role entitlements for a Course where Course.organization = false, then the user can see course roles where Availability.Available = Course or CourseAndOrganization </p>\n\nIf the logged in user has any of those course role entitlements for a Course where Course.organization = true, then the user can see course roles where Availability.Available = Organization or CourseAndOrganization </p>\n\nNote that these entitlements will not grant the user the ability to create, modify or delete course roles without permission. </p>\n\n**Since**: 3300.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courseRoles",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\"\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "custom",
           "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each\ncustom attribute. Set this parameter to `true` to get the name and description of each custom attribute, \ninformation about the data type, or other definition details. The default value is `false`."
+          "description": "Search course roles by whether they are a custom or system generated course role.\n\n**Since**: 3300.5.0"
+        },
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "Search course roles using their roleId's.  Any course role with a roleId that contains the given string will be returned.  The search is case insensitive.\n\n**Since**: 3300.5.0"
         }
       ],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Roles",
+      "description": "Blackboard Learn roles API provides endpoints for managing roles related operations."
     },
     "endpoint": {
-      "name": "DeleteOrderCustomAttribute",
-      "description": "To delete a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "delete",
-      "path": "/v2/orders/{order_id}/custom-attributes/{custom_attribute_key}",
+      "name": "GetCourseroles",
+      "description": "\n\nReturns a single course role.  The path id can be either the CourseRole.id field like \"/courseRoles/_5_1\" or the CourseRole.roleId field like \"/courseRoles/roleId:Student\". </p>\n\nA 403 (FORBIDDEN) status is returned if the context user does not have access to see the course role. </p>\n\nIf the context user has this entitlement, then the user can see all course roles:\n\n- system.enrollment.CREATE\n</p>\n\nOtherwise, at least one of these course role entitlements are checked for any course the context user is enrolled in:\n\n- course.user-enroll.EXECUTE\n- system.enrollment.CREATE\n- course.user-role.MODIFY\n</p>\n\nIf the logged in user has at least one of those course role entitlements for a Course where Course.organization = false, then the user can see course roles where Availability.Available = Course or CourseAndOrganization </p>\n\nIf the logged in user has any of those course role entitlements for a Course where Course.organization = true, then the user can see course roles where Availability.Available = Organization or CourseAndOrganization </p>\n\nNote that these entitlements will not grant the user the ability to create, modify or delete course roles without permission. </p>\n\n**Since**: 3300.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courseRoles/{roleId}",
       "pathParameters": [
         {
-          "name": "order_id",
+          "name": "roleId",
           "type": "string",
-          "description": "The ID of the target [order](entity:Order)."
-        },
-        {
-          "name": "custom_attribute_key",
-          "type": "string",
-          "description": "The key of the custom attribute to delete.  This key must match the key of an\nexisting custom attribute definition."
+          "description": "The course role ID.  This may be the primary ID, or the roleId. The suffix \":custom\" will be appended to the roleId of a custom course role if that roleId conflicts with the roleId of a system generated course role.  For example, if a custom role roleId is specified as \"Student\" then the roleId will actually be \"Student:custom\" since there is already a system generated course role with the roleId of \"Student\".  \n\n | ID type    | Examples                                                   |\n |------------|------------------------------------------------------------|\n | primary    | _123_1                                                     |\n | roleId     | roleId:Student, roleId:MyCustomRole, roleId:Student:custom |\n \n\n**Since**: 3300.5.0"
         }
       ],
       "queryParameters": [],
-      "releaseStatus": "BETA",
+      "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Roles",
+      "description": "Blackboard Learn roles API provides endpoints for managing roles related operations."
     },
     "endpoint": {
-      "name": "RetrieveOrderCustomAttribute",
-      "description": "You can use the `with_definition` query parameter to also retrieve the custom attribute definition\nin the same call.\n\nTo retrieve a custom attribute owned by another application, the `visibility` setting must be\n`VISIBILITY_READ_ONLY` or `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\nalso known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
+      "name": "GetInstitutionroles",
+      "description": "Returns a list of institution roles.\n\nUsers must have the entitlement 'system.institutionrole.VIEW' to access this endpoint.\n\n**Since**: 3300.4.0",
       "method": "get",
-      "path": "/v2/orders/{order_id}/custom-attributes/{custom_attribute_key}",
-      "pathParameters": [
-        {
-          "name": "order_id",
-          "type": "string",
-          "description": "The ID of the target [order](entity:Order)."
-        },
-        {
-          "name": "custom_attribute_key",
-          "type": "string",
-          "description": "The key of the custom attribute to retrieve.  This key must match the key of an\nexisting custom attribute definition."
-        }
-      ],
+      "path": "/learn/api/public/v1/institutionRoles",
+      "pathParameters": [],
       "queryParameters": [
         {
-          "name": "version",
-          "type": "integer",
-          "description": "To enable [optimistic concurrency](https://developer.squareup.com/docs/build-basics/common-api-patterns/optimistic-concurrency)\ncontrol, include this optional field and specify the current version of the custom attribute."
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"roleId(desc)\" Supported fields are:\n\n- roleId\n- custom\n\n**Since**: 3300.4.0"
         },
         {
-          "name": "with_definition",
+          "name": "roleId",
+          "type": "string",
+          "description": "Search for institution roles with roleId properties that contain this value.\n\n**Since**: 3300.4.0"
+        },
+        {
+          "name": "custom",
           "type": "boolean",
-          "description": "Indicates whether to return the [custom attribute definition](entity:CustomAttributeDefinition) in the `definition` field of each \ncustom attribute. Set this parameter to `true` to get the name and description of each custom attribute, \ninformation about the data type, or other definition details. The default value is `false`."
+          "description": "Search for institution roles by custom flag.  A value of 'true' indicates that search results should be limited to only custom roles.  A value of 'false' indicates results should be limited to built-in roles.  Not setting this field indicates that all institution roles should be returned.\n\n**Since**: 3300.4.0"
         }
       ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Order Custom Attributes",
-      "description": "\nUse the Order Custom Attributes API to create and manage custom attributes for orders. Custom attributes can be used to store properties or metadata that simplify integration, synchronization, and personalization workflows. After a custom attribute definition is created in a Square seller account, the custom attribute value can be set for orders.\n\nFor more information, see the following guides:\n - [Order Custom Attributes](https://developer.squareup.com/docs/orders-custom-attributes-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpsertOrderCustomAttribute",
-      "description": "Use this endpoint to set the value of a custom attribute for a specific order.\nA custom attribute is based on a custom attribute definition in a Square seller account. (To create a\ncustom attribute definition, use the [CreateOrderCustomAttributeDefinition](api-endpoint:OrderCustomAttributes-CreateOrderCustomAttributeDefinition) endpoint.)\n\nTo create or update a custom attribute owned by another application, the `visibility` setting\nmust be `VISIBILITY_READ_WRITE_VALUES`. Note that seller-defined custom attributes\n(also known as custom fields) are always set to `VISIBILITY_READ_WRITE_VALUES`.",
-      "method": "post",
-      "path": "/v2/orders/{order_id}/custom-attributes/{custom_attribute_key}",
-      "pathParameters": [
-        {
-          "name": "order_id",
-          "type": "string",
-          "description": "The ID of the target [order](entity:Order)."
-        },
-        {
-          "name": "custom_attribute_key",
-          "type": "string",
-          "description": "The key of the custom attribute to create or update.  This key must match the key \nof an existing custom attribute definition."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateOrder",
-      "description": "To pay for a created order, see\n[Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).\n\nYou can modify open orders using the [UpdateOrder](api-endpoint:Orders-UpdateOrder) endpoint.",
-      "method": "post",
-      "path": "/v2/orders",
-      "pathParameters": [],
-      "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Roles",
+      "description": "Blackboard Learn roles API provides endpoints for managing roles related operations."
     },
     "endpoint": {
-      "name": "BatchRetrieveOrders",
-      "description": "If a given order ID does not exist, the ID is ignored instead of generating an error.",
-      "method": "post",
-      "path": "/v2/orders/batch-retrieve",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CalculateOrder",
-      "method": "post",
-      "path": "/v2/orders/calculate",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CloneOrder",
-      "description": "The newly created order has\nonly the core fields (such as line items, taxes, and discounts) copied from the original order.",
-      "method": "post",
-      "path": "/v2/orders/clone",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchOrders",
-      "description": "Orders include all sales,\nreturns, and exchanges regardless of how or when they entered the Square\necosystem (such as Point of Sale, Invoices, and Connect APIs).\n\n`SearchOrders` requests need to specify which locations to search and define a\n[SearchOrdersQuery](entity:SearchOrdersQuery) object that controls\nhow to sort or filter the results. Your `SearchOrdersQuery` can:\n\n  Set filter criteria.\n  Set the sort order.\n  Determine whether to return results as complete `Order` objects or as\n[OrderEntry](entity:OrderEntry) objects.\n\nNote that details for orders processed with Square Point of Sale while in\noffline mode might not be transmitted to Square for up to 72 hours. Offline\norders have a `created_at` value that reflects the time the order was created,\nnot the time it was subsequently transmitted to Square.",
-      "method": "post",
-      "path": "/v2/orders/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveOrder",
+      "name": "GetInstitutionroles",
+      "description": "Loads a specific institution role.\n\nUsers must have the entitlement 'system.institutionrole.VIEW' to access this endpoint.\n\n**Since**: 3300.4.0",
       "method": "get",
-      "path": "/v2/orders/{order_id}",
+      "path": "/learn/api/public/v1/institutionRoles/{roleId}",
       "pathParameters": [
         {
-          "name": "order_id",
+          "name": "roleId",
           "type": "string",
-          "description": "The ID of the order to retrieve."
+          "description": "The institution role ID.  This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | roleId     | roleId:STUDENT                        |\n \n\n**Since**: 3300.5.0"
         }
       ],
       "queryParameters": [],
@@ -4822,134 +6380,30 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Roles",
+      "description": "Blackboard Learn roles API provides endpoints for managing roles related operations."
     },
     "endpoint": {
-      "name": "UpdateOrder",
-      "description": "Orders with a `COMPLETED` or `CANCELED` state cannot be updated.\n\nAn `UpdateOrder` request requires the following:\n\n- The `order_id` in the endpoint path, identifying the order to update.\n- The latest `version` of the order to update.\n- The [sparse order](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#sparse-order-objects)\ncontaining only the fields to update and the version to which the update is\nbeing applied.\n- If deleting fields, the [dot notation paths](https://developer.squareup.com/docs/orders-api/manage-orders/update-orders#identifying-fields-to-delete)\nidentifying the fields to clear.\n\nTo pay for an order, see\n[Pay for Orders](https://developer.squareup.com/docs/orders-api/pay-for-orders).",
-      "method": "put",
-      "path": "/v2/orders/{order_id}",
-      "pathParameters": [
-        {
-          "name": "order_id",
-          "type": "string",
-          "description": "The ID of the order to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Orders",
-      "description": "\nThe Orders API is your one-stop shop for adding rich functionality to payments. You can itemize\npayments using custom line items or catalog objects, send orders to physical Point of Sale devices\nto be fulfilled, attach a customer to a payment, and more.\n\nIn addition, the Orders API lets you search through all of a seller's past sales and returns itemization\ndata, customer references, and other details from sales made using POS or online.\n\nIf you use the Square Orders API with a non-Square payments provider, Square charges a transaction fee. For more information, see [Orders API fee structure.](https://developer.squareup.com/docs/payments-pricing#orders-api-fee-structure)\n\nFor more information, see the following guides:\n - [Orders](https://developer.squareup.com/docs/orders-api/what-it-does)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "PayOrder",
-      "description": "The total of the `payment_ids` listed in the request must be equal to the order\ntotal. Orders with a total amount of `0` can be marked as paid by specifying an empty\narray of `payment_ids` in the request.\n\nTo be used with `PayOrder`, a payment must:\n\n- Reference the order by specifying the `order_id` when [creating the payment](api-endpoint:Payments-CreatePayment).\nAny approved payments that reference the same `order_id` not specified in the\n`payment_ids` is canceled.\n- Be approved with [delayed capture](https://developer.squareup.com/docs/payments-api/take-payments/card-payments/delayed-capture).\nUsing a delayed capture payment with `PayOrder` completes the approved payment.",
-      "method": "post",
-      "path": "/v2/orders/{order_id}/pay",
-      "pathParameters": [
-        {
-          "name": "order_id",
-          "type": "string",
-          "description": "The ID of the order being paid."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListPayments",
-      "description": "Results are eventually consistent, and new payments or changes to payments might take several\nseconds to appear.\n\nThe maximum results per page is 100.",
+      "name": "GetSystemroles",
+      "description": "Returns a list of system roles.\n\nUsers must have the 'system.systemrole.manager.VIEW' entitlement to access this endpoint.\n\n**Since**: 3300.5.0",
       "method": "get",
-      "path": "/v2/payments",
+      "path": "/learn/api/public/v1/systemRoles",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "begin_time",
+          "name": "roleId",
           "type": "string",
-          "description": "Indicates the start of the time range to retrieve payments for, in RFC 3339 format.  \nThe range is determined using the `created_at` field for each Payment.\nInclusive. Default: The current time minus one year."
+          "description": "Search for system roles with roleId\n\n**Since**: 3300.5.0"
         },
         {
-          "name": "end_time",
-          "type": "string",
-          "description": "Indicates the end of the time range to retrieve payments for, in RFC 3339 format.  The \nrange is determined using the `created_at` field for each Payment.\n\nDefault: The current time."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which results are listed by `ListPaymentsRequest.sort_field`:\n- `ASC` - Oldest to newest.\n- `DESC` - Newest to oldest (default)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "Limit results to the location supplied. By default, results are returned\nfor the default (main) location associated with the seller."
-        },
-        {
-          "name": "total",
-          "type": "integer",
-          "description": "The exact amount in the `total_money` for a payment."
-        },
-        {
-          "name": "last_4",
-          "type": "string",
-          "description": "The last four digits of a payment card."
-        },
-        {
-          "name": "card_brand",
-          "type": "string",
-          "description": "The brand of the payment card (for example, VISA)."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to be returned in a single page.\nIt is possible to receive fewer results than the specified limit on a given page.\n\nThe default value of 100 is also the maximum allowed value. If the provided value is \ngreater than 100, it is ignored and the default value is used instead.\n\nDefault: `100`"
-        },
-        {
-          "name": "is_offline_payment",
+          "name": "custom",
           "type": "boolean",
-          "description": "Whether the payment was taken offline or not."
+          "description": "Search for system roles by custom flag.  A value of 'true' indicates that search results should be limited to only custom roles.  A value of 'false' indicates results should be limited to built-in roles.  Not setting this field indicates that all system roles should be returned.\n\n**Since**: 3300.5.0"
         },
         {
-          "name": "offline_begin_time",
+          "name": "sort",
           "type": "string",
-          "description": "Indicates the start of the time range for which to retrieve offline payments, in RFC 3339\nformat for timestamps. The range is determined using the\n`offline_payment_details.client_created_at` field for each Payment. If set, payments without a\nvalue set in `offline_payment_details.client_created_at` will not be returned.\n\nDefault: The current time.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        },
-        {
-          "name": "offline_end_time",
-          "type": "string",
-          "description": "Indicates the end of the time range for which to retrieve offline payments, in RFC 3339\nformat for timestamps. The range is determined using the\n`offline_payment_details.client_created_at` field for each Payment. If set, payments without a\nvalue set in `offline_payment_details.client_created_at` will not be returned.\n\nDefault: The current time.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        },
-        {
-          "name": "updated_at_begin_time",
-          "type": "string",
-          "description": "Indicates the start of the time range to retrieve payments for, in RFC 3339 format.  The\nrange is determined using the `updated_at` field for each Payment."
-        },
-        {
-          "name": "updated_at_end_time",
-          "type": "string",
-          "description": "Indicates the end of the time range to retrieve payments for, in RFC 3339 format.  The\nrange is determined using the `updated_at` field for each Payment."
-        },
-        {
-          "name": "sort_field",
-          "type": "string",
-          "description": "The field used to sort results by. The default is `CREATED_AT`."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"roleId(desc)\"\n\nSupported fields are:\n\n<ul - roleId\n- custom\n\n**Since**: 3300.5.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -4958,14 +6412,36 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Roles",
+      "description": "Blackboard Learn roles API provides endpoints for managing roles related operations."
     },
     "endpoint": {
-      "name": "CreatePayment",
-      "description": "You can use this endpoint \nto charge a card (credit/debit card or    \nSquare gift card) or record a payment that the seller received outside of Square \n(cash payment from a buyer or a payment that an external entity \nprocessed on behalf of the seller).\n\nThe endpoint creates a \n`Payment` object and returns it in the response.",
-      "method": "post",
-      "path": "/v2/payments",
+      "name": "GetSystemroles",
+      "description": "Get a specific system role by roleId. See the roleId parameter for valid roleId formats.\n\nUsers must have the 'system.systemrole.manager.VIEW' entitlement to access this endpoint.\n\n**Since**: 3300.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/systemRoles/{roleId}",
+      "pathParameters": [
+        {
+          "name": "roleId",
+          "type": "string",
+          "description": "The System Role ID.  This may be the primary ID, or the secondary roleId type. The suffix \":custom\" will be appended to the roleId of a custom system role if that roleId conflicts with the roleId of a system generated role.  For example, if a custom role roleId is specified as \"Guest\" then the roleId will actually be \"Guest:custom\" since there is already a system generated role with the roleId of \"Guest\". \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | roleId     | roleId:column1                        |\n \n\n**Since**: 3300.5.0"
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubric associations",
+      "description": "Blackboard Learn rubric associations API provides endpoints for managing rubric associations related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsRubricsAssociations",
+      "description": "Returns the list of Rubric Associations related to the specified gradebook column within the specified course.\n\nUser must have the following entitlements in order to see the associations.\n\n- {@code course.rubrics.VIEW}\n- {@code course.gradebook-metadata.VIEW}\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.60.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/rubrics/associations",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -4974,153 +6450,20 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Rubric associations",
+      "description": "Blackboard Learn rubric associations API provides endpoints for managing rubric associations related operations."
     },
     "endpoint": {
-      "name": "CancelPaymentByIdempotencyKey",
-      "description": "Use this method when the status of a `CreatePayment` request is unknown (for example, after you send a\n`CreatePayment` request, a network error occurs and you do not get a response). In this case, you can\ndirect Square to cancel the payment using this endpoint. In the request, you provide the same\nidempotency key that you provided in your `CreatePayment` request that you want to cancel. After\ncanceling the payment, you can submit your `CreatePayment` request again.\n\nNote that if no payment with the specified idempotency key is found, no action is taken and the endpoint\nreturns successfully.",
-      "method": "post",
-      "path": "/v2/payments/cancel",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetPayment",
+      "name": "GetCoursesRubricsAssociations",
+      "description": "Returns a list of rubric associations for a given course Id and rubric Id. If provided course Id is from an Original course, associations might include both Gradebook and Assessments entities. If provided course Id is from an Ultra course, only associations with Gradebook entities will be fetched.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.VIEW}\n\n**Since**: 3900.60.0",
       "method": "get",
-      "path": "/v2/payments/{payment_id}",
-      "pathParameters": [
-        {
-          "name": "payment_id",
-          "type": "string",
-          "description": "A unique ID for the desired payment."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdatePayment",
-      "description": "You can update the `amount_money` and `tip_money` using this endpoint.",
-      "method": "put",
-      "path": "/v2/payments/{payment_id}",
-      "pathParameters": [
-        {
-          "name": "payment_id",
-          "type": "string",
-          "description": "The ID of the payment to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelPayment",
-      "description": "You can use this endpoint to cancel a payment with \nthe APPROVED `status`.",
-      "method": "post",
-      "path": "/v2/payments/{payment_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "payment_id",
-          "type": "string",
-          "description": "The ID of the payment to cancel."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payments",
-      "description": "\nApplications need the following input to take a payment:\n\n- The amount to charge.\n- The payment recipient. The payment goes to the account identified by the Authorization header in the API request.\n- The payment source. The source can be a payment token or card on file.\n\n  You can generate a payment token using the Web Payments SDK and the In-App Payments SDK. For working code examples, see [Square Connect API Examples](https://github.com/square/connect-api-examples).\n\n  A card on file is a credit card, debit card, or gift card that is associated with a customer. \n  You can create a customer and add a card on file using Square APIs, the Square Seller Dashboard, or the Square Point of Sale application.\n\n  For more information, see the following guides:\n - [Payments](https://developer.squareup.com/docs/payments-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CompletePayment",
-      "description": "By default, payments are set to complete immediately after they are created.\n\nYou can use this endpoint to complete a payment with the APPROVED `status`.",
-      "method": "post",
-      "path": "/v2/payments/{payment_id}/complete",
-      "pathParameters": [
-        {
-          "name": "payment_id",
-          "type": "string",
-          "description": "The unique ID identifying the payment to be completed."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payouts",
-      "description": "\nThe Payouts API allows you to see a complete list of payouts made to a seller's banking destination,\nwith a list of payout entries that describe the payments associated with each payout. It can be paired with the\nBank Accounts API to add detail about which bank account each payout was made to.\n\nFor more information, see the following guide:\n - [Payouts](https://developer.squareup.com/docs/payouts/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListPayouts",
-      "description": "You can filter payouts by location ID, status, time range, and order them in ascending or descending order.\nTo call this endpoint, set `PAYOUTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/payouts",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "location_id",
+          "name": "sort",
           "type": "string",
-          "description": "The ID of the location for which to list the payouts.\nBy default, payouts are returned for the default (main) location associated with the seller."
-        },
-        {
-          "name": "status",
-          "type": "string",
-          "description": "If provided, only payouts with the given status are returned."
-        },
-        {
-          "name": "begin_time",
-          "type": "string",
-          "description": "The timestamp for the beginning of the payout creation time, in RFC 3339 format.\nInclusive. Default: The current time minus one year.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        },
-        {
-          "name": "end_time",
-          "type": "string",
-          "description": "The timestamp for the end of the payout creation time, in RFC 3339 format.\nDefault: The current time.\n\nExamples for January 25th, 2020 6:25:34pm Pacific Standard Time:\n\nUTC:  2020-01-26T02:25:34Z\n\nPacific Standard Time with UTC offset:  2020-01-25T18:25:34-08:00"
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which payouts are listed."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).\nIf request parameters change between requests, subsequent results may contain duplicates or missing records."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to be returned in a single page.\nIt is possible to receive fewer results than the specified limit on a given page.\nThe default value of 100 is also the maximum allowed value. If the provided value is\ngreater than 100, it is ignored and the default value is used instead.\nDefault: `100`"
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\"\n\n**Since**: 3100.0.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -5129,146 +6472,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Payouts",
-      "description": "\nThe Payouts API allows you to see a complete list of payouts made to a seller's banking destination,\nwith a list of payout entries that describe the payments associated with each payout. It can be paired with the\nBank Accounts API to add detail about which bank account each payout was made to.\n\nFor more information, see the following guide:\n - [Payouts](https://developer.squareup.com/docs/payouts/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Rubric associations",
+      "description": "Blackboard Learn rubric associations API provides endpoints for managing rubric associations related operations."
     },
     "endpoint": {
-      "name": "GetPayout",
-      "description": "To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/payouts/{payout_id}",
-      "pathParameters": [
-        {
-          "name": "payout_id",
-          "type": "string",
-          "description": "The ID of the payout to retrieve the information for."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Payouts",
-      "description": "\nThe Payouts API allows you to see a complete list of payouts made to a seller's banking destination,\nwith a list of payout entries that describe the payments associated with each payout. It can be paired with the\nBank Accounts API to add detail about which bank account each payout was made to.\n\nFor more information, see the following guide:\n - [Payouts](https://developer.squareup.com/docs/payouts/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListPayoutEntries",
-      "description": "To call this endpoint, set `PAYOUTS_READ` for the OAuth scope.",
-      "method": "get",
-      "path": "/v2/payouts/{payout_id}/payout-entries",
-      "pathParameters": [
-        {
-          "name": "payout_id",
-          "type": "string",
-          "description": "The ID of the payout to retrieve the information for."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which payout entries are listed."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination).\nIf request parameters change between requests, subsequent results may contain duplicates or missing records."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to be returned in a single page.\nIt is possible to receive fewer results than the specified limit on a given page.\nThe default value of 100 is also the maximum allowed value. If the provided value is\ngreater than 100, it is ignored and the default value is used instead.\nDefault: `100`"
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Refunds",
-      "description": "\nThe following applies to refunds:\n\n- You cannot refund more than what was originally collected.\n- The refund amount must be available in the account's Square balance. If the amount is not available, Square attempts to take money out of\n  the associated bank account. Refunds are in a state of PENDING until the funds are secured.\n- If funds cannot be secured, the refund is not completed and the buyer does not receive a credit. The refund has \n  a status of FAILED. Future refunds to this payment are not allowed and the buyer should be reimbursed by other means.\n- You can refund only payments with status COMPLETED. You cannot refund an APPROVED payment; however, you can cancel\n  an approved payment.\n\nFor more information, see the following guides:\n - [Refunds](https://developer.squareup.com/docs/payments-api/refund-payments)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListPaymentRefunds",
-      "description": "Results are eventually consistent, and new refunds or changes to refunds might take several\nseconds to appear.\n\nThe maximum results per page is 100.",
-      "method": "get",
-      "path": "/v2/refunds",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "begin_time",
-          "type": "string",
-          "description": "Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339 \nformat.  The range is determined using the `created_at` field for each `PaymentRefund`. \n\nDefault: The current time minus one year."
-        },
-        {
-          "name": "end_time",
-          "type": "string",
-          "description": "Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339 \nformat.  The range is determined using the `created_at` field for each `PaymentRefund`.\n\nDefault: The current time."
-        },
-        {
-          "name": "sort_order",
-          "type": "string",
-          "description": "The order in which results are listed by `PaymentRefund.created_at`:\n- `ASC` - Oldest to newest.\n- `DESC` - Newest to oldest (default)."
-        },
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this cursor to retrieve the next set of results for the original query.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        },
-        {
-          "name": "location_id",
-          "type": "string",
-          "description": "Limit results to the location supplied. By default, results are returned\nfor all locations associated with the seller."
-        },
-        {
-          "name": "status",
-          "type": "string",
-          "description": "If provided, only refunds with the given status are returned.\nFor a list of refund status values, see [PaymentRefund](entity:PaymentRefund).\n\nDefault: If omitted, refunds are returned regardless of their status."
-        },
-        {
-          "name": "source_type",
-          "type": "string",
-          "description": "If provided, only returns refunds whose payments have the indicated source type.\nCurrent values include `CARD`, `BANK_ACCOUNT`, `WALLET`, `CASH`, and `EXTERNAL`.\nFor information about these payment source types, see\n[Take Payments](https://developer.squareup.com/docs/payments-api/take-payments).\n\nDefault: If omitted, refunds are returned regardless of the source type."
-        },
-        {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to be returned in a single page.\n\nIt is possible to receive fewer results than the specified limit on a given page.\n\nIf the supplied value is greater than 100, no more than 100 results are returned.\n\nDefault: 100"
-        },
-        {
-          "name": "updated_at_begin_time",
-          "type": "string",
-          "description": "Indicates the start of the time range to retrieve each `PaymentRefund` for, in RFC 3339\nformat.  The range is determined using the `updated_at` field for each `PaymentRefund`.\n\nDefault: If omitted, the time range starts at `begin_time`."
-        },
-        {
-          "name": "updated_at_end_time",
-          "type": "string",
-          "description": "Indicates the end of the time range to retrieve each `PaymentRefund` for, in RFC 3339\nformat.  The range is determined using the `updated_at` field for each `PaymentRefund`.\n\nDefault: The current time."
-        },
-        {
-          "name": "sort_field",
-          "type": "string",
-          "description": "The field used to sort results by. The default is `CREATED_AT`."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Refunds",
-      "description": "\nThe following applies to refunds:\n\n- You cannot refund more than what was originally collected.\n- The refund amount must be available in the account's Square balance. If the amount is not available, Square attempts to take money out of\n  the associated bank account. Refunds are in a state of PENDING until the funds are secured.\n- If funds cannot be secured, the refund is not completed and the buyer does not receive a credit. The refund has \n  a status of FAILED. Future refunds to this payment are not allowed and the buyer should be reimbursed by other means.\n- You can refund only payments with status COMPLETED. You cannot refund an APPROVED payment; however, you can cancel\n  an approved payment.\n\nFor more information, see the following guides:\n - [Refunds](https://developer.squareup.com/docs/payments-api/refund-payments)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RefundPayment",
-      "description": "You can refund the entire payment amount or a\nportion of it. You can use this endpoint to refund a card payment or record a \nrefund of a cash or external payment. For more information, see\n[Refund Payment](https://developer.squareup.com/docs/payments-api/refund-payments).",
+      "name": "PostCoursesRubricsAssociations",
+      "description": "Creates a rubric association for a given course Id, rubric Id and association entity Id (can be a gradebook column or question Id).\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.CREATE}\n\n**Since**: 3900.86.0",
       "method": "post",
-      "path": "/v2/refunds",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -5277,35 +6488,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Refunds",
-      "description": "\nThe following applies to refunds:\n\n- You cannot refund more than what was originally collected.\n- The refund amount must be available in the account's Square balance. If the amount is not available, Square attempts to take money out of\n  the associated bank account. Refunds are in a state of PENDING until the funds are secured.\n- If funds cannot be secured, the refund is not completed and the buyer does not receive a credit. The refund has \n  a status of FAILED. Future refunds to this payment are not allowed and the buyer should be reimbursed by other means.\n- You can refund only payments with status COMPLETED. You cannot refund an APPROVED payment; however, you can cancel\n  an approved payment.\n\nFor more information, see the following guides:\n - [Refunds](https://developer.squareup.com/docs/payments-api/refund-payments)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Rubric associations",
+      "description": "Blackboard Learn rubric associations API provides endpoints for managing rubric associations related operations."
     },
     "endpoint": {
-      "name": "GetPaymentRefund",
+      "name": "GetCoursesRubricsAssociations",
+      "description": "Returns a rubric association for a given course Id, rubric Id and rubric association Id.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.VIEW}\n\n**Since**: 3900.60.0",
       "method": "get",
-      "path": "/v2/refunds/{refund_id}",
-      "pathParameters": [
-        {
-          "name": "refund_id",
-          "type": "string",
-          "description": "The unique ID for the desired `PaymentRefund`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Sites",
-      "description": "\nSquare sellers use Square Online to build eCommerce websites. The Sites API lets you get basic details about Square Online sites, such as the site ID, title, and domain. You can use the Sites API with the Snippets API to manage snippets that extend Square Online features.\n\n __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).\n\n For more information, see the following guide:\n - [Sites](https://developer.squareup.com/docs/sites-api/overview)"
-    },
-    "endpoint": {
-      "name": "ListSites",
-      "description": "Sites are listed in descending order by the `created_at` date.\n\n\n__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).",
-      "method": "get",
-      "path": "/v2/sites",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -5314,21 +6504,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Snippets",
-      "description": "\nThe Snippets API lets you manage snippets that add custom functionality to Square Online sites. A snippet is HTML, CSS, and JavaScript that is injected into the `head` element of all pages on a site, except for checkout pages. You can use the Snippets API to create applications that help meet the many needs of Square sellers.\n\n __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).\n\n For more information, see the following guide:\n - [Snippets](https://developer.squareup.com/docs/snippets-api/overview)"
+      "name": "Rubric associations",
+      "description": "Blackboard Learn rubric associations API provides endpoints for managing rubric associations related operations."
     },
     "endpoint": {
-      "name": "DeleteSnippet",
-      "description": "You can call [ListSites](api-endpoint:Sites-ListSites) to get the IDs of the sites that belong to a seller.\n\n\n__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).",
+      "name": "DeleteCoursesRubricsAssociations",
+      "description": "Deletes a rubric association for a given course Id, rubric Id and rubric association Id.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.DELETE}\n\n**Since**: 3900.86.0",
       "method": "delete",
-      "path": "/v2/sites/{site_id}/snippet",
-      "pathParameters": [
-        {
-          "name": "site_id",
-          "type": "string",
-          "description": "The ID of the site that contains the snippet."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -5336,117 +6520,124 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Snippets",
-      "description": "\nThe Snippets API lets you manage snippets that add custom functionality to Square Online sites. A snippet is HTML, CSS, and JavaScript that is injected into the `head` element of all pages on a site, except for checkout pages. You can use the Snippets API to create applications that help meet the many needs of Square sellers.\n\n __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).\n\n For more information, see the following guide:\n - [Snippets](https://developer.squareup.com/docs/snippets-api/overview)"
+      "name": "Rubric associations",
+      "description": "Blackboard Learn rubric associations API provides endpoints for managing rubric associations related operations."
     },
     "endpoint": {
-      "name": "RetrieveSnippet",
-      "description": "A site can contain snippets from multiple snippet applications, but you can retrieve only the snippet that was added by your application.\n\nYou can call [ListSites](api-endpoint:Sites-ListSites) to get the IDs of the sites that belong to a seller.\n\n\n__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).",
+      "name": "PatchCoursesRubricsAssociations",
+      "description": "Updates a rubric association for a given course Id, rubric Id and rubric association Id. The associated entity cannot be changed through this endpoint. Use create and delete to move rubric associations entities.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.MODIFY}\n\n**Since**: 3900.86.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubric evaluations",
+      "description": "Blackboard Learn rubric evaluations API provides endpoints for managing rubric evaluations related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsAttemptsRubricEvaluations",
+      "description": "Returns the list of Rubric Evaluations related to the specified attempt.\n\nUser must have the following entitlement in order to see the evaluations.\n\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.69.0",
       "method": "get",
-      "path": "/v2/sites/{site_id}/snippet",
-      "pathParameters": [
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/attempts/{attemptId}/rubric/evaluations",
+      "pathParameters": [],
+      "queryParameters": [
         {
-          "name": "site_id",
+          "name": "sort",
           "type": "string",
-          "description": "The ID of the site that contains the snippet."
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.69.0"
         }
       ],
-      "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
     }
   },
   {
     "api": {
-      "name": "Snippets",
-      "description": "\nThe Snippets API lets you manage snippets that add custom functionality to Square Online sites. A snippet is HTML, CSS, and JavaScript that is injected into the `head` element of all pages on a site, except for checkout pages. You can use the Snippets API to create applications that help meet the many needs of Square sellers.\n\n __Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).\n\n For more information, see the following guide:\n - [Snippets](https://developer.squareup.com/docs/snippets-api/overview)"
+      "name": "Rubric evaluations",
+      "description": "Blackboard Learn rubric evaluations API provides endpoints for managing rubric evaluations related operations."
     },
     "endpoint": {
-      "name": "UpsertSnippet",
-      "description": "The snippet code is appended to the end of the `head` element on every page of the site, except checkout pages. A snippet application can add one snippet to a given site. \n\nYou can call [ListSites](api-endpoint:Sites-ListSites) to get the IDs of the sites that belong to a seller.\n\n\n__Note:__ Square Online APIs are publicly available as part of an early access program. For more information, see [Early access program for Square Online APIs](https://developer.squareup.com/docs/online-api#early-access-program-for-square-online-apis).",
-      "method": "post",
-      "path": "/v2/sites/{site_id}/snippet",
-      "pathParameters": [
-        {
-          "name": "site_id",
-          "type": "string",
-          "description": "The ID of the site where you want to add or update the snippet."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateSubscription",
-      "description": "If you provide a card on file in the request, Square charges the card for\nthe subscription. Otherwise, Square sends an invoice to the customer's email\naddress. The subscription starts immediately, unless the request includes\nthe optional `start_date`. Each individual subscription is associated with a particular location.\n\nFor more information, see [Create a subscription](https://developer.squareup.com/docs/subscriptions-api/manage-subscriptions#create-a-subscription).",
-      "method": "post",
-      "path": "/v2/subscriptions",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkSwapPlan",
-      "description": "For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).",
-      "method": "post",
-      "path": "/v2/subscriptions/bulk-swap-plan",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchSubscriptions",
-      "description": "Results are ordered chronologically by subscription creation date. If\nthe request specifies more than one location ID,\nthe endpoint orders the result\nby location ID, and then by creation date within each location. If no locations are given\nin the query, all locations are searched.\n\nYou can also optionally specify `customer_ids` to search by customer.\nIf left unset, all customers\nassociated with the specified locations are returned.\nIf the request specifies customer IDs, the endpoint orders results\nfirst by location, within location by customer ID, and within\ncustomer by subscription creation date.",
-      "method": "post",
-      "path": "/v2/subscriptions/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveSubscription",
+      "name": "GetCoursesGradebookColumnsGroupattemptsRubricEvaluations",
+      "description": "Returns the list of Rubric Evaluations related to the specified group attempt.\n\nUser must have the following entitlement in order to see the evaluations.\n\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.100.0",
       "method": "get",
-      "path": "/v2/subscriptions/{subscription_id}",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/groupAttempts/{groupAttemptId}/rubric/evaluations",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.69.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubric evaluations",
+      "description": "Blackboard Learn rubric evaluations API provides endpoints for managing rubric evaluations related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesRubricsAssociationsEvaluations",
+      "description": "Returns a list of rubric evaluations for a given course Id, rubric Id and rubric association Id.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.69.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}/evaluations",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"id(desc)\" Supported fields are:\n\n- id\n\n**Since**: 3900.69.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubric evaluations",
+      "description": "Blackboard Learn rubric evaluations API provides endpoints for managing rubric evaluations related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesRubricsAssociationsEvaluations",
+      "description": "Creates a rubric evaluation related with the given course Id, rubric Id, rubric association Id and evaluation Id. This endpoint only supports Ultra courses in Blackboard Learn.\n\nCreation require the selected scores for all rubric evaluation cells.\n\nUser must have the following entitlement in order to create the provided rubric evaluation.\n\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.89.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}/evaluations",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubric evaluations",
+      "description": "Blackboard Learn rubric evaluations API provides endpoints for managing rubric evaluations related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesRubricsAssociationsEvaluations",
+      "description": "Returns a rubric evaluation for a given course Id, rubric Id, rubric association Id and evaluation Id.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.69.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}/evaluations/{rubricEvaluationId}",
       "pathParameters": [
         {
-          "name": "subscription_id",
+          "name": "rubricEvaluationId",
           "type": "string",
-          "description": "The ID of the subscription to retrieve."
+          "description": ""
         }
       ],
       "queryParameters": [
         {
-          "name": "include",
+          "name": "expand",
           "type": "string",
-          "description": "A query parameter to specify related information to be included in the response. \n\nThe supported query parameter values are: \n\n- `actions`: to include scheduled actions on the targeted subscription."
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>cells</li></ul>"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -5455,19 +6646,19 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Rubric evaluations",
+      "description": "Blackboard Learn rubric evaluations API provides endpoints for managing rubric evaluations related operations."
     },
     "endpoint": {
-      "name": "UpdateSubscription",
-      "description": "To clear a field, set its value to `null`.",
-      "method": "put",
-      "path": "/v2/subscriptions/{subscription_id}",
+      "name": "PatchCoursesRubricsAssociationsEvaluations",
+      "description": "Updates a rubric evaluation related with the given course Id, rubric Id, rubric association Id and evaluation Id. This endpoint only supports Ultra courses in Blackboard Learn.\n\nPartial update is allowed, it accepts 1 to all cells in the rubric evaluation body.\n\nUser must have the following entitlement in order to update the provided rubric evaluation.\n\n- {@code course.gradebook.MODIFY}\n\n**Since**: 3900.89.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}/associations/{rubricAssociationId}/evaluations/{rubricEvaluationId}",
       "pathParameters": [
         {
-          "name": "subscription_id",
+          "name": "rubricEvaluationId",
           "type": "string",
-          "description": "The ID of the subscription to update."
+          "description": ""
         }
       ],
       "queryParameters": [],
@@ -5477,99 +6668,246 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Rubrics",
+      "description": "Blackboard Learn rubrics API provides endpoints for managing rubrics related operations."
     },
     "endpoint": {
-      "name": "DeleteSubscriptionAction",
+      "name": "GetCoursesRubrics",
+      "description": "Returns a list of rubrics for a given course.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.VIEW}\n\n**Since**: 3900.46.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubrics",
+      "description": "Blackboard Learn rubrics API provides endpoints for managing rubrics related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesRubrics",
+      "description": "Creates a new rubric for a given course. This endpoint only supports Ultra courses in Blackboard Learn.\n\nUser must have the following entitlement in order to create the rubric in the course.\n\n- {@code course.rubrics.CREATE}\n\n**Since**: 3900.89.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubrics",
+      "description": "Blackboard Learn rubrics API provides endpoints for managing rubrics related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesRubrics",
+      "description": "Returns a rubric for a given course Id and a rubric Id.\n\nUser must have the following entitlement in order to see the provided course's rubrics.\n\n- {@code course.rubrics.VIEW}\n\n**Since**: 3900.46.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>cells</li><li>columns</li><li>rows</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubrics",
+      "description": "Blackboard Learn rubrics API provides endpoints for managing rubrics related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesRubrics",
+      "description": "Deletes a rubric for a given course. This endpoint only supports Ultra courses in Blackboard Learn.\n\nUser must have the following entitlement in order to delete the rubric in a course.\n\n- {@code course.rubrics.DELETE}\n\n**Since**: 3900.89.0",
       "method": "delete",
-      "path": "/v2/subscriptions/{subscription_id}/actions/{action_id}",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Rubrics",
+      "description": "Blackboard Learn rubrics API provides endpoints for managing rubrics related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesRubrics",
+      "description": "Updates a rubric for a given course. This endpoint only supports Ultra courses in Blackboard Learn.\n\nUser must have the following entitlement in order to update the rubric in the course.\n\n- {@code course.rubrics.MODIFY}\n\n**Since**: 3900.89.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/rubrics/{rubricId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Sessions",
+      "description": "Blackboard Learn sessions API provides endpoints for managing sessions related operations."
+    },
+    "endpoint": {
+      "name": "GetLoginasSessions",
+      "description": "List of historic login-as-user sessions in Learn.\n\nUsers with the following entitlement can view login as sessions:\n\n- system.user.impersonate.VIEW\n</p>\n\n**Since**: 3900.58.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/loginAs/sessions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Sessions",
+      "description": "Blackboard Learn sessions API provides endpoints for managing sessions related operations."
+    },
+    "endpoint": {
+      "name": "GetSessions",
+      "description": "List active user sessions in Learn.\n\nUsers with the following entitlement can view others session:\n\n- system.user.sessions.VIEW\n</p>\n\nAlso with users with any of the following entitlements can view the users information using the expand param:\n\n- system.user.VIEW\n- user.VIEW\n</p>\n\n**Since**: 3800.4.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/sessions",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "expand",
+          "type": "string",
+          "description": "A comma-delimited list of fields to expand as part of the response. Expanded fields may cause additional load time. Supported fields are:<br><ul><li>user</li></ul>"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "SIS Logs",
+      "description": "Blackboard Learn SIS Logs API provides endpoints for managing sis logs related operations."
+    },
+    "endpoint": {
+      "name": "GetLogsSisDatasets",
+      "description": "\n\nReturns a list of SIS Integration logs. Users with 'system.dataintegrations.log.VIEW' entitlement can view these logs. </p> </p> NOTE: If integration is processing the feed file then 423 (LOCKED) will be returned as response.\n\n**Since**: 3200.0.1",
+      "method": "get",
+      "path": "/learn/api/public/v1/logs/sis/dataSets/{id}",
       "pathParameters": [
         {
-          "name": "subscription_id",
+          "name": "id",
           "type": "string",
-          "description": "The ID of the subscription the targeted action is to act upon."
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "System",
+      "description": "Blackboard Learn system API provides endpoints for managing system related operations."
+    },
+    "endpoint": {
+      "name": "GetSystemInfo",
+      "description": "Gets the values of Cloud settings that are needed for interacting with platform services.\n\n**Since**: 3900.56.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/system/info",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "System",
+      "description": "Blackboard Learn system API provides endpoints for managing system related operations."
+    },
+    "endpoint": {
+      "name": "GetSystemPoliciesPrivacy",
+      "description": "Returns the links to the Blackboard and Institution privacy policies\n\n**Since**: 3400.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/system/policies/privacy",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "System",
+      "description": "Blackboard Learn system API provides endpoints for managing system related operations."
+    },
+    "endpoint": {
+      "name": "GetSystemTasks",
+      "description": "Get the background task by the given task Id.\n\n**Since**: 3800.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/system/tasks/{taskId}",
+      "pathParameters": [
+        {
+          "name": "taskId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "System",
+      "description": "Blackboard Learn system API provides endpoints for managing system related operations."
+    },
+    "endpoint": {
+      "name": "GetSystemVersion",
+      "description": "Gets the current Learn server version.\n\n**Since**: 3000.3.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/system/version",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Terms",
+      "description": "Blackboard Learn terms API provides endpoints for managing terms related operations."
+    },
+    "endpoint": {
+      "name": "GetTerms",
+      "description": "Returns a list of terms.\n\nProperties returned for each term will depend on whether or not the caller has one of the term entitlements.\n\nCallers without either the entitlements 'term.VIEW' or 'term.MODIFY' will always get a minimal set of core properties:\n\n- id\n- name\n- description\n- availability.*\n\nIf the user has one of the entitlements, they will also get the following properties:\n\n- externalId\n- dataSourceId\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/terms",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for term with externalId properties that contain this value.\n\n**Since**: 3100.6.0"
         },
         {
-          "name": "action_id",
+          "name": "dataSourceId",
           "type": "string",
-          "description": "The ID of the targeted action to be deleted."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ChangeBillingAnchorDate",
-      "method": "post",
-      "path": "/v2/subscriptions/{subscription_id}/billing-anchor",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "The ID of the subscription to update the billing anchor date."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelSubscription",
-      "description": "This \nsets the `canceled_date` field to the end of the active billing period. After this date, \nthe subscription status changes from ACTIVE to CANCELED.",
-      "method": "post",
-      "path": "/v2/subscriptions/{subscription_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "The ID of the subscription to cancel."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ListSubscriptionEvents",
-      "method": "get",
-      "path": "/v2/subscriptions/{subscription_id}/events",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "The ID of the subscription to retrieve the events for."
-        }
-      ],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "When the total number of resulting subscription events exceeds the limit of a paged response, \nspecify the cursor returned from a preceding response here to fetch the next set of results.\nIf the cursor is unset, the response contains the last page of the results.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
+          "description": "Search for term with this dataSourceId.\n\n**Since**: 3100.6.0"
         },
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "The upper limit on the number of subscription events to return\nin a paged response."
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.6.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the term and the courses it contains. |\n| No | Students may not access the term or the courses it contains. |\n"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -5578,78 +6916,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
+      "name": "Terms",
+      "description": "Blackboard Learn terms API provides endpoints for managing terms related operations."
     },
     "endpoint": {
-      "name": "PauseSubscription",
+      "name": "PostTerms",
+      "description": "Creates a term.\n\nThe 'system.term.MODIFY' entitlement is needed.\n\n**Since**: 2015.11.0",
       "method": "post",
-      "path": "/v2/subscriptions/{subscription_id}/pause",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "The ID of the subscription to pause."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "ResumeSubscription",
-      "method": "post",
-      "path": "/v2/subscriptions/{subscription_id}/resume",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "The ID of the subscription to resume."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Subscriptions",
-      "description": "\nSubscriptions enable sellers to generate a reliable cash flow and recurring revenue to grow their businesses. Square offers the Subscriptions API for developers to embed subscription functionality in their applications. You first create a subscription plan using the Catalog API and then use the Subscriptions API to create and manage subscriptions. \n\nFor more information, see the following guides:\n - [Subscriptions](https://developer.squareup.com/docs/subscriptions/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SwapPlan",
-      "description": "For more information, see [Swap Subscription Plan Variations](https://developer.squareup.com/docs/subscriptions-api/swap-plan-variations).",
-      "method": "post",
-      "path": "/v2/subscriptions/{subscription_id}/swap-plan",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "The ID of the subscription to swap the subscription plan for."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "CreateTeamMember",
-      "description": "The `TeamMember` object is returned on successful creates.\nYou must provide the following values in your request to this endpoint:\n- `given_name`\n- `family_name`\n\nLearn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#createteammember).",
-      "method": "post",
-      "path": "/v2/team-members",
+      "path": "/learn/api/public/v1/terms",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -5658,670 +6932,809 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
+      "name": "Terms",
+      "description": "Blackboard Learn terms API provides endpoints for managing terms related operations."
     },
     "endpoint": {
-      "name": "BulkCreateTeamMembers",
-      "description": "The created `TeamMember` objects are returned on successful creates.\nThis process is non-transactional and processes as much of the request as possible. If one of the creates in\nthe request cannot be successfully processed, the request is not marked as failed, but the body of the response\ncontains explicit error information for the failed create.\n\nLearn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#bulk-create-team-members).",
-      "method": "post",
-      "path": "/v2/team-members/bulk-create",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "BulkUpdateTeamMembers",
-      "description": "The updated `TeamMember` objects are returned on successful updates.\nThis process is non-transactional and processes as much of the request as possible. If one of the updates in\nthe request cannot be successfully processed, the request is not marked as failed, but the body of the response\ncontains explicit error information for the failed update.\nLearn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#bulk-update-team-members).",
-      "method": "post",
-      "path": "/v2/team-members/bulk-update",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "ListJobs",
-      "description": "Results are sorted by title in ascending order.",
+      "name": "GetTerms",
+      "description": "Loads a term.\n\nProperties returned will depend on whether or not the caller has one of the term entitlements.\n\nCallers without either the entitlements 'term.VIEW' or 'term.MODIFY' will always get a minimal set of core properties:\n\n- id\n- name\n- description\n- availability.*\n\nIf the user has one of the entitlements, they will also get the following properties:\n\n- externalId\n- dataSourceId\n\n**Since**: 2015.11.0",
       "method": "get",
-      "path": "/v2/team-members/jobs",
+      "path": "/learn/api/public/v1/terms/{termId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Terms",
+      "description": "Blackboard Learn terms API provides endpoints for managing terms related operations."
+    },
+    "endpoint": {
+      "name": "DeleteTerms",
+      "description": "Deletes a term.\n\nThe 'system.term.MODIFY' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/terms/{termId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Terms",
+      "description": "Blackboard Learn terms API provides endpoints for managing terms related operations."
+    },
+    "endpoint": {
+      "name": "PatchTerms",
+      "description": "Updates a term.\n\nThe 'system.term.MODIFY' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/terms/{termId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Uploads",
+      "description": "Blackboard Learn uploads API provides endpoints for managing uploads related operations."
+    },
+    "endpoint": {
+      "name": "PostUploads",
+      "description": "Upload a file to temporary storage. The request is a multipart/form-data POST following RFC 1867. (https://www.ietf.org/rfc/rfc1867.txt)\n\nThe uploaded file will be scanned for potential security threats by the system's XSS filters. If the file is deemed as unsafe, the request will be rejected and an HTTP Status of 422 is returned.\n\nReturns an ID of the file reference, so it can be used for processing by a different service.\n\nExample Request: <pre> {@code curl -X POST -H 'Authorization: Bearer your_token' -F 'file=@/path/to/your/file' https://YOUR_LEARN_INSTANCE/learn/api/public/v1/uploads } </pre>\n\n**Since**: 3100.12.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/uploads",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Uploads",
+      "description": "Blackboard Learn uploads API provides endpoints for managing uploads related operations."
+    },
+    "endpoint": {
+      "name": "GetUploadsSettings",
+      "description": "Retrieve all settings of upload file service\n\n**Since**: 3900.41.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/uploads/settings",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsers",
+      "description": "Returns a list of users.\n\nAt least one of the entitlements 'system.user.VIEW' or 'user.VIEW' are needed.\n\nNote: Users with the 'SystemAdmin' role are only included in the results if the logged on user also has this role.\n\n**Since**: 3000.1.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users",
       "pathParameters": [],
       "queryParameters": [
         {
-          "name": "cursor",
+          "name": "userName",
           "type": "string",
-          "description": "The pagination cursor returned by the previous call to this endpoint. Provide this\ncursor to retrieve the next page of results for your original request. For more information,\nsee [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
-        }
-      ],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "CreateJob",
-      "description": "A job defines a title and tip eligibility. Note that\ncompensation is defined in a [job assignment](entity:JobAssignment) in a team member's wage setting.",
-      "method": "post",
-      "path": "/v2/team-members/jobs",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveJob",
-      "method": "get",
-      "path": "/v2/team-members/jobs/{job_id}",
-      "pathParameters": [
-        {
-          "name": "job_id",
-          "type": "string",
-          "description": "The ID of the job to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "UpdateJob",
-      "description": "Changes to the title propagate to all\n`JobAssignment`, `Shift`, and `TeamMemberWage` objects that reference the job ID. Changes to\ntip eligibility propagate to all `TeamMemberWage` objects that reference the job ID.",
-      "method": "put",
-      "path": "/v2/team-members/jobs/{job_id}",
-      "pathParameters": [
-        {
-          "name": "job_id",
-          "type": "string",
-          "description": "The ID of the job to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "SearchTeamMembers",
-      "description": "The list can be filtered by location IDs, `ACTIVE` or `INACTIVE` status, or whether\nthe team member is the Square account owner.",
-      "method": "post",
-      "path": "/v2/team-members/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveTeamMember",
-      "description": "Learn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrieve-a-team-member).",
-      "method": "get",
-      "path": "/v2/team-members/{team_member_id}",
-      "pathParameters": [
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "The ID of the team member to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "UpdateTeamMember",
-      "description": "The `TeamMember` object is returned on successful updates.\nLearn about [Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#update-a-team-member).",
-      "method": "put",
-      "path": "/v2/team-members/{team_member_id}",
-      "pathParameters": [
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "The ID of the team member to update."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "RetrieveWageSetting",
-      "description": "For more information, see\n[Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#retrievewagesetting).\n\nSquare recommends using [RetrieveTeamMember](api-endpoint:Team-RetrieveTeamMember) or [SearchTeamMembers](api-endpoint:Team-SearchTeamMembers)\nto get this information directly from the `TeamMember.wage_setting` field.",
-      "method": "get",
-      "path": "/v2/team-members/{team_member_id}/wage-setting",
-      "pathParameters": [
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "The ID of the team member for which to retrieve the wage setting."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Team",
-      "description": "\nThe Team API allows applications to manage team members and job definitions, which can be useful\nin payroll and accounting contexts.\n\nThe Team API integrates closely with the Labor API for timecard management.\n\nFor more information, see the following guide:\n - [Team](https://developer.squareup.com/docs/team/overview)\n - [Square Webhooks](https://developer.squareup.com/docs/webhooks-overview)\n"
-    },
-    "endpoint": {
-      "name": "UpdateWageSetting",
-      "description": "The object is created if a\n`WageSetting` with the specified `team_member_id` doesn't exist. Otherwise,\nit fully replaces the `WageSetting` object for the team member.\nThe `WageSetting` is returned on a successful update. For more information, see\n[Troubleshooting the Team API](https://developer.squareup.com/docs/team/troubleshooting#create-or-update-a-wage-setting).\n\nSquare recommends using [CreateTeamMember](api-endpoint:Team-CreateTeamMember) or [UpdateTeamMember](api-endpoint:Team-UpdateTeamMember)\nto manage the `TeamMember.wage_setting` field directly.",
-      "method": "put",
-      "path": "/v2/team-members/{team_member_id}/wage-setting",
-      "pathParameters": [
-        {
-          "name": "team_member_id",
-          "type": "string",
-          "description": "The ID of the team member for which to update the `WageSetting` object."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateTerminalAction",
-      "method": "post",
-      "path": "/v2/terminals/actions",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchTerminalActions",
-      "description": "Terminal action requests are available for 30 days.",
-      "method": "post",
-      "path": "/v2/terminals/actions/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetTerminalAction",
-      "description": "Terminal action requests are available for 30 days.",
-      "method": "get",
-      "path": "/v2/terminals/actions/{action_id}",
-      "pathParameters": [
-        {
-          "name": "action_id",
-          "type": "string",
-          "description": "Unique ID for the desired `TerminalAction`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelTerminalAction",
-      "method": "post",
-      "path": "/v2/terminals/actions/{action_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "action_id",
-          "type": "string",
-          "description": "Unique ID for the desired `TerminalAction`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DismissTerminalAction",
-      "description": "See [Link and Dismiss Actions](https://developer.squareup.com/docs/terminal-api/advanced-features/custom-workflows/link-and-dismiss-actions) for more details.",
-      "method": "post",
-      "path": "/v2/terminals/actions/{action_id}/dismiss",
-      "pathParameters": [
-        {
-          "name": "action_id",
-          "type": "string",
-          "description": "Unique ID for the `TerminalAction` associated with the action to be dismissed."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateTerminalCheckout",
-      "method": "post",
-      "path": "/v2/terminals/checkouts",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchTerminalCheckouts",
-      "description": "Only Terminal checkout requests created for the merchant scoped to the OAuth token are returned. Terminal checkout requests are available for 30 days.",
-      "method": "post",
-      "path": "/v2/terminals/checkouts/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetTerminalCheckout",
-      "description": "Terminal checkout requests are available for 30 days.",
-      "method": "get",
-      "path": "/v2/terminals/checkouts/{checkout_id}",
-      "pathParameters": [
-        {
-          "name": "checkout_id",
-          "type": "string",
-          "description": "The unique ID for the desired `TerminalCheckout`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelTerminalCheckout",
-      "method": "post",
-      "path": "/v2/terminals/checkouts/{checkout_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "checkout_id",
-          "type": "string",
-          "description": "The unique ID for the desired `TerminalCheckout`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DismissTerminalCheckout",
-      "method": "post",
-      "path": "/v2/terminals/checkouts/{checkout_id}/dismiss",
-      "pathParameters": [
-        {
-          "name": "checkout_id",
-          "type": "string",
-          "description": "Unique ID for the `TerminalCheckout` associated with the checkout to be dismissed."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateTerminalRefund",
-      "description": "Refunds for Interac payments on a Square Terminal are supported only for Interac debit cards in Canada. Other refunds for Terminal payments should use the Refunds API. For more information, see [Refunds API](api:Refunds).",
-      "method": "post",
-      "path": "/v2/terminals/refunds",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchTerminalRefunds",
-      "description": "Terminal refund requests are available for 30 days.",
-      "method": "post",
-      "path": "/v2/terminals/refunds/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "GetTerminalRefund",
-      "description": "Terminal refund objects are available for 30 days.",
-      "method": "get",
-      "path": "/v2/terminals/refunds/{terminal_refund_id}",
-      "pathParameters": [
-        {
-          "name": "terminal_refund_id",
-          "type": "string",
-          "description": "The unique ID for the desired `TerminalRefund`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CancelTerminalRefund",
-      "method": "post",
-      "path": "/v2/terminals/refunds/{terminal_refund_id}/cancel",
-      "pathParameters": [
-        {
-          "name": "terminal_refund_id",
-          "type": "string",
-          "description": "The unique ID for the desired `TerminalRefund`."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Terminal",
-      "description": "\nThe Terminal API allows you to manage sending and receiving requests and responses from a paired Square Terminal. For a Terminal checkout, refund, or action, you can create a request, check its status, cancel the request, search for in-process requests, and get the results of the request after it is completed. In the current implementation, refunds are only supported for Interac debit cards in Canada.\n\nFor more information, see the following guides:\n - [Terminal](https://developer.squareup.com/docs/terminal-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "DismissTerminalRefund",
-      "method": "post",
-      "path": "/v2/terminals/refunds/{terminal_refund_id}/dismiss",
-      "pathParameters": [
-        {
-          "name": "terminal_refund_id",
-          "type": "string",
-          "description": "Unique ID for the `TerminalRefund` associated with the refund to be dismissed."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkCreateVendors",
-      "method": "post",
-      "path": "/v2/vendors/bulk-create",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkRetrieveVendors",
-      "method": "post",
-      "path": "/v2/vendors/bulk-retrieve",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "BulkUpdateVendors",
-      "method": "put",
-      "path": "/v2/vendors/bulk-update",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "CreateVendor",
-      "method": "post",
-      "path": "/v2/vendors/create",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "SearchVendors",
-      "method": "post",
-      "path": "/v2/vendors/search",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "RetrieveVendor",
-      "method": "get",
-      "path": "/v2/vendors/{vendor_id}",
-      "pathParameters": [
-        {
-          "name": "vendor_id",
-          "type": "string",
-          "description": "ID of the [Vendor](entity:Vendor) to retrieve."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Vendors",
-      "description": "The Vendors API allows applications to create, retrieve, and update vendors as suppliers to a seller.\n\nFor more information, see the following guides:\n - [Vendors](https://developer.squareup.com/docs/vendors-api/overview)\n - [Square Webhooks Overview](https://developer.squareup.com/docs/webhooks-overview)"
-    },
-    "endpoint": {
-      "name": "UpdateVendor",
-      "method": "put",
-      "path": "/v2/vendors/{vendor_id}",
-      "pathParameters": [],
-      "queryParameters": [],
-      "releaseStatus": "BETA",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
-    },
-    "endpoint": {
-      "name": "ListWebhookEventTypes",
-      "method": "get",
-      "path": "/v2/webhooks/event-types",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "api_version",
-          "type": "string",
-          "description": "The API version for which to list event types. Setting this field overrides the default version used by the application."
-        }
-      ],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
-    },
-    "endpoint": {
-      "name": "ListWebhookSubscriptions",
-      "method": "get",
-      "path": "/v2/webhooks/subscriptions",
-      "pathParameters": [],
-      "queryParameters": [
-        {
-          "name": "cursor",
-          "type": "string",
-          "description": "A pagination cursor returned by a previous call to this endpoint.\nProvide this to retrieve the next set of results for your original query.\n\nFor more information, see [Pagination](https://developer.squareup.com/docs/build-basics/common-api-patterns/pagination)."
+          "description": "Search for users with userName properties that contain this value.\n\n**Since**: 3000.11.0"
         },
         {
-          "name": "include_disabled",
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for users with externalId properties that contain this value.\n\n**Since**: 3000.11.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for users with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3000.11.0"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for users with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3700.1.0"
+        },
+        {
+          "name": "lastLogin",
+          "type": "string",
+          "description": "Search for users with a last login date relative to this value.  'lastLoginCompare' may also be sent to control search behavior. A user who has never logged in would have a null last login date.  This is not considered to be greater than, less than, or equal to a valid date. Such users will be filtered out any time this filter is used.\n\n**Since**: 3900.9.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\n\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3000.11.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "lastLoginCompare",
+          "type": "string",
+          "description": "Used alongside the 'lastLoginDate' search parameter.  Supported values:\n\n- lessThan\n- greaterOrEqual\nDefaults to greaterOrEqual if not specified.\n\n**Since**: 3900.9.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for users with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3000.11.0"
+        },
+        {
+          "name": "institutionRoleIds",
+          "type": "ref",
+          "description": "Search for users with the specified institutionRoleIds.  This may be a comma separated list of institution role ids.\n\n**Since**: 3900.61.0"
+        },
+        {
+          "name": "name.family",
+          "type": "string",
+          "description": "Search for users with name.family properties that contain this value.\n\n**Since**: 3000.11.0"
+        },
+        {
+          "name": "studentId",
+          "type": "string",
+          "description": "Search for users with the specified studentId.\n\n**Since**: 3900.80.00"
+        },
+        {
+          "name": "contact.email",
+          "type": "string",
+          "description": "Search for users with the specified contact.email value. Only users with the entitlement \"system.user.properties.MODIFY\" are allowed to filter by this attribute, the query parameter is ignored otherwise.\n\n**Since**: 3900.80.00"
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for users with availability.available properties that contain this value.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name.family(desc),created\" Supported fields are:\n\n- userName\n- name.family\n- externalId\n- dataSourceId\n- created\n\n**Since**: 3100.0.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "PostUsers",
+      "description": "Creates a user.\n\nThe 'system.user.CREATE' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "post",
+      "path": "/learn/api/public/v1/users",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsers",
+      "description": "Loads a user.\n\nProperties returned will depend on the caller's entitlements.\n\nCallers with the entitlement 'user.VIEW' will always get a minimal set of core properties:\n\n- id\n- name.given\n- name.family\n- name.middle\n- systemRoleIds\n\nDepending on the Learn administrator customizable user field display settings, as well as the target user's personal visibility settings, the following fields might also be included:\n\n- userName\n- educationLevel\n- gender\n- birthDate\n- name.other\n- name.suffix\n- name.title\n- job.*\n- contact.*\n- address.*\n\nCallers asking for their own user record get all fields listed above, plus:\n\n- locale.*\n\nAll user properties are provided to callers with one of the entitlements 'system.user.properties.MODIFY', 'system.useradmin.generic.VIEW', or 'system.user.VIEW'.\n\n**Since**: 2015.11.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "DeleteUsers",
+      "description": "Deletes a user.\n\nThe 'system.user.DELETE' entitlement is needed.\n\n**Since**: 2015.11.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "PatchUsers",
+      "description": "Updates a user.\n\nCallers may update their own user record if they have the 'self.user.MODIFY' entitlement.  Updating other users requires the 'system.user.properties.MODIFY' entitlement.\n\nCertain properties may be edited by callers with more finely grained entitlements: \n\n | Field                  | Entitlements Required                               |\n |------------------------|-----------------------------------------------------|\n | systemRoleIds          | system.user.MODIFY, system.user-system-role.MODIFY  |\n | availability.available | system.user.MODIFY, system.user.availability.MODIFY |\n | password               | system.user.MODIFY, system.user-password.MODIFY     |\n \n\n**Since**: 2015.11.0",
+      "method": "patch",
+      "path": "/learn/api/public/v1/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsersAvatar",
+      "description": "Gets a user's avatar image.\n\nThe response is an HTTP redirect rather then image raw data. It is up to the caller of the api to follow the redirect and download the image.\n\nThe redirect link returned is signed on behalf of the user of the API. It is expiring, so it is not recommended for bookmarking. The caller of this API is checked for permissions to see the requested user's resource.\n\n**Since**: 3800.10.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}/avatar",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsersObservees",
+      "description": "Returns a list of users being observed by a given user.\n\nThe 'observer.associations.VIEW' entitlement is needed as well as being able to view the provided user.\n\n**Since**: 3500.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}/observees",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsersObservers",
+      "description": "Returns a list of users observing a given user.\n\nThe 'observer.associations.VIEW' entitlement is needed as well as being able to view the provided user.\n\n**Since**: 3500.5.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}/observers",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "PutUsersObservers",
+      "description": "Creates an observer/observee association. The user identified by userId must not have the OBSERVER system role. Similarly, the user identified by observerId must have the OBSERVER system role.\n\nThe 'system.observer_user.CREATE' entitlement is needed as well as being able to view the provided users.\n\n**Since**: 3500.5.0",
+      "method": "put",
+      "path": "/learn/api/public/v1/users/{userId}/observers/{observerId}",
+      "pathParameters": [
+        {
+          "name": "observerId",
+          "type": "string",
+          "description": "The user ID.  This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | externalId | externalId:jsmith                     |\n | userName   | userName:jsmith                       |\n | uuid       | uuid:915c7567d76d444abf1eed56aad3beb5 |\n \n\n**Since**: 3500.5.0"
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "DeleteUsersObservers",
+      "description": "Removes an observer/observee association.\n\nThe 'system.observer_user.DELETE' entitlement is needed as well as being able to view the provided users.\n\n**Since**: 3500.5.0",
+      "method": "delete",
+      "path": "/learn/api/public/v1/users/{userId}/observers/{observerId}",
+      "pathParameters": [
+        {
+          "name": "observerId",
+          "type": "string",
+          "description": "The user ID.  This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | externalId | externalId:jsmith                     |\n | userName   | userName:jsmith                       |\n | uuid       | uuid:915c7567d76d444abf1eed56aad3beb5 |\n \n\n**Since**: 3500.5.0"
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsersPronunciationaudio",
+      "description": "Gets a user's pronunciation audio\n\nThe response is an HTTP redirect rather than an audio file. It is up to the caller of the api to follow the redirect and download the image.\n\nThe redirect link returned is signed on behalf of the user of the API. It is expiring, so it is not recommended for bookmarking. The caller of this API is checked for permissions to see the requested user's resource.\n\n**Since**: 3900.32.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}/pronunciationAudio",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Users",
+      "description": "Blackboard Learn users API provides endpoints for managing users related operations."
+    },
+    "endpoint": {
+      "name": "GetUsersSessions",
+      "description": "Displays active session information for a specific user.\n\nThe entitlement system.user.sessions.VIEW is needed to request a user's active sessions.\n\n**Since**: 3800.4.0",
+      "method": "get",
+      "path": "/learn/api/public/v1/users/{userId}/sessions",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumns",
+      "description": "Returns a list of grade columns.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed. Alternatively, student users may view the grade columns if they are enrolled in the course, and the mygrade tool is available in the course, and the columns are visible to the student. Observers may view grade columns if course access is allowed for observers and the associated observee is a student that satisfies all conditions required by a student user to view grade columns.\n\nStudent or observer users may view a limited subset of grade column fields:\n\n- id\n- name\n- description\n- externalGrade\n- contentId\n- score.possible\n- grading.type\n- grading.due\n- grading.attemptsAllowed\n- grading.scoringModel\n- availability.available\n\n**Since**: 3000.3.0\n\n**Deprecated**: since 3200.10.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "contentId",
+          "type": "string",
+          "description": "Search for grade columns associated with this content item.\n\n**Since**: 3000.11.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGradebookColumns",
+      "description": "Create a manual grade column. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3000.7.0\n\n**Deprecated**: since 3200.10.0; use the v2 end-point instead",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumns",
+      "description": "Loads a specific grade column.\n\nThe entitlement \"course.gradebook.MODIFY\" is needed. Alternatively, student users may view the grade column if they are enrolled in the course, and the mygrade tool is available in the course, and the column is visible to the student. Observers may view the grade column if course access is allowed for observers and the associated observee is a student that satisfies all conditions required by a student user to view grade columns.\n\nStudent or observer users may view a limited subset of grade column fields:\n\n- id\n- name\n- description\n- externalGrade\n- contentId\n- score.possible\n- grading.type\n- grading.due\n- grading.attemptsAllowed\n- grading.scoringModel\n- availability.available\n\n**Since**: 3000.3.0\n\n**Deprecated**: since 3200.10.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGradebookColumns",
+      "description": "Delete a specific grade column. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3000.7.0\n\n**Deprecated**: since 3200.10.0; use the v2 end-point instead",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookColumns",
+      "description": "Update a manual grade column. The entitlement \"course.gradebook.MODIFY\" is needed.\n\n**Since**: 3000.7.0\n\n**Deprecated**: since 3200.10.0; use the v2 end-point instead",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsAttempts",
+      "description": "Returns a list of attempts associated with the specified grade column.\n\nThe 'course.gradebook.MODIFY' entitlement is needed to view column attempts. Alternatively, if the 'userId' query parameter is specified, and the user making the request matches the specified 'userId', then the user may view his/her own attempt.  When querying an anonymous grade column, if the release criteria has not yet been met, then the 'userId' attribute will not be populated for the returned column attempts.  If the release criteria has not been met and the 'userId' query parameter is specified, a 403 response is returned, unless the requesting user matches the specified 'userId' value.\n\nA subset of attempt properties are available to a student when requesting his or her own attempts:\n\n- id\n- userId\n- groupAttemptId\n- status\n- text\n- score\n- groupOverride\n- feedback\n- studentComments\n- studentSubmission\n- exempt\n- created\nWhen this endpoint is called by the API Gateway User, the response will only contain attributes visible to a Grader. If an Attempt is InProgress, then a Student's submission & comments would not be visible to the API Gateway User. If an Attempt is NeedsGrading, then a Student's submission & comments are visible to the API Gateway User.\n\nIf the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure taking is enabled, and the attempt status is InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\nIf the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure reviewing is enabled, and the attempt status is not InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\n**Since**: 3100.4.0\n\n**Deprecated**: since 3300.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/attempts",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "userId",
+          "type": "string",
+          "description": "Search for grade column attempts submitted by this user. This may be the primary ID, or any of the secondary IDs prefixed with the ID type. \n\n | ID type    | Example                               |\n |------------|---------------------------------------|\n | primary    | _123_1                                |\n | externalId | externalId:jsmith                     |\n | userName   | userName:jsmith                       |\n | uuid       | uuid:915c7567d76d444abf1eed56aad3beb5 |\n \n\n**Since**: 3100.4.0"
+        },
+        {
+          "name": "attemptStatuses",
+          "type": "string",
+          "description": "Search for grade column attempts with one of these statuses.\n\n**Since**: 3100.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| NotAttempted | none of the students in a group has submitted an attempt; applies only to group assessments |\n| Abandoned |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| InProgress | attempt activity has commenced, but has not been submitted for grading |\n| Suspended |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| Canceled |   **Deprecated**: Since 9.1 SP8 unsupported status, undetermined behavior if used. |\n| NeedsGrading | attempt has been submitted for grading, but has not been fully graded |\n| Completed | a grade has been entered for the attempt |\n| InMoreProgress | attempt has been graded, but more student activity occurred after the grade was entered; applies only to collaborative tools such as discussions |\n| NeedsMoreGrading | additional student activity occurring after a grade was entered requires that the attempt be regraded; applies only to collaborative tools such as discussions |\n"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for attempts with created date relative to this value. 'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "modified",
+          "type": "string",
+          "description": "Search for attempts with modified date relative to this value. 'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "attemptDate",
+          "type": "string",
+          "description": "Search for attempts with attempt date relative to this value. 'attemptDateCompare' may also be sent to control search behavior.\n\n**Since**: 3800.0.0"
+        },
+        {
+          "name": "attemptDateCompare",
+          "type": "string",
+          "description": "Used alongside the 'attemptDate' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3800.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsAttempts",
+      "description": "Loads the grade column attempt for the specified id.\n\nThe 'course.gradebook.MODIFY' entitlement is needed to view an attempt. Alternatively, if the user making the request is also the user associated with the attempt grade, then the user may view his/her own attempt.  When accessing an anonymous grade column attempt, if the release criteria has not yet been met, then the 'userId' attribute will not be populated for the returned attempt.\n\nA subset of attempt properties are available to a student when requesting his or her own attempt:\n\n- id\n- userId\n- groupAttemptId\n- status\n- text\n- score\n- groupOverride\n- feedback\n- studentComments\n- studentSubmission\n- exempt\n- created\nWhen this endpoint is called by the API Gateway User, the response will only contain attributes visible to a Grader. If an Attempt is InProgress, then a Student's submission & comments would not be visible to the API Gateway User. If an Attempt is NeedsGrading, then a Student's submission & comments are visible to the API Gateway User. </p> If the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure taking is enabled, and the attempt status is InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\nIf the caller has the course.assessment.EXECUTE entitlement, and the attempt is associated with an assessment where the flag to require secure reviewing is enabled, and the attempt status is not InProgress, then the studentSubmission is omitted unless the call comes from a secure browser.\n\n**Since**: 3100.4.0\n\n**Deprecated**: since 3300.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/attempts/{attemptId}",
+      "pathParameters": [
+        {
+          "name": "attemptId",
+          "type": "string",
+          "description": ""
+        }
+      ],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsUsers",
+      "description": "Returns a list of grades associated with the specified grade column.  This operation does not include 'ReadyToPost' grades when returning grade details for calculated grade columns.\n\nUsers with entitlement 'course.gradebook.MODIFY' can retrieve grades for any or all enrolled users. Requests for grades in a columns whose attempts are not visible to instructors will return with a status of \"403 - Forbidden.\"\n\nEnrolled users without the 'course.gradebook.MODIFY' entitlement may only view their own grade; such users cannot retrieve grades of other users.  A request for the grade in a columns that has been hidden from students in the gradebook will return with a status \"403 - Forbidden.\".  A subset of grade properties are available to a student when requesting his or her own grades:\n\n- userId\n- columnId\n- status\n- text\n- score\n- exempt\n- feedback\n\n**Since**: 3000.3.0\n\n**Deprecated**: since 3300.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/users",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookColumnsUsers",
+      "description": "Loads the grade column grade for a specific user.  If grade details have yet to be entered for the specified user, then no grade details will be included in the returned grade object.  This operation does not include 'ReadyToPost' grades when returning grade details for calculated grade columns.\n\nUsers with entitlement 'course.gradebook.MODIFY' can retrieve grades for any or all enrolled users. Requests for grades in a columns whose attempts are not visible to instructors will return with a status of \"403 - Forbidden.\"\n\nEnrolled users without the 'course.gradebook.MODIFY' entitlement may only view their own grade; such users cannot retrieve grades of other users.  A request for the grade in a columns that has been hidden from students in the gradebook will return with a status \"403 - Forbidden.\".  A subset of grade properties are available to a student when requesting his or her own grades:\n\n- userId\n- columnId\n- status\n- text\n- score\n- exempt\n- feedback\n\n**Since**: 3000.3.0\n\n**Deprecated**: since 3300.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGradebookColumnsUsers",
+      "description": "Update the grade column grade for a specific user, including the text grade, score, instructor notes and feedback, and exempt status.  When updating text grade or score, the resulting grade is always marked as 'Posted'.  This end-point, currently, does not support marking the grade as 'ReadyToPost'.  Grade overrides may be cleared by either specifying the 'score' attribute as null, or the 'text'; attribute as null, '', or '-' in the body of the request. The entitlement 'course.gradebook.MODIFY' is required to perform this operation.\n\n**Since**: 3000.5.0\n\n**Deprecated**: since 3300.0.0; use the v2 end-point instead",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/columns/{columnId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course grades",
+      "description": "Blackboard Learn deprecated - course grades API provides endpoints for managing deprecated - course grades related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGradebookUsers",
+      "description": "Loads the course grades for a specific user.\n\nUsers with entitlement \"course.gradebook.MODIFY\" have read access to all the properties of the collection results.\n\nUsers without entitlement \"course.gradebook.MODIFY\" requesting grades for themselves (i.e., userId = current user id) have read access to a restricted subset of properties of the collections result. These are the properties available to a student when requesting his or her own grades:\n\n- userId\n- columnId\n- status\n- text\n- score\n- exempt\n- feedback\n\n**Since**: 3000.3.0\n\n**Deprecated**: since 3300.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/gradebook/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course group users",
+      "description": "Blackboard Learn deprecated - course group users API provides endpoints for managing deprecated - course group users related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsUsers",
+      "description": "Returns a list of group memberships objects for the specified group.\n\nCallers not enrolled in the group must have at least one of the following entitlements:\n\n- course.group.VIEW\n\n**Since**: 3100.6.0\n\n**Deprecated**: since 3600.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}/users",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course group users",
+      "description": "Blackboard Learn deprecated - course group users API provides endpoints for managing deprecated - course group users related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroupsUsers",
+      "description": "Loads a group membership in the specified group.\n\nCallers not enrolled in the group must have at least one of the following entitlements:\n\n- course.group.VIEW\n\n**Since**: 3100.6.0\n\n**Deprecated**: since 3600.0.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course group users",
+      "description": "Blackboard Learn deprecated - course group users API provides endpoints for managing deprecated - course group users related operations."
+    },
+    "endpoint": {
+      "name": "PutCoursesGroupsUsers",
+      "description": "Creates a group membership in the specified group.\n\nMinimal entitlements required:\n\n- course.group.MODIFY\n\n**Since**: 3100.6.0\n\n**Deprecated**: since 3600.0.0; use the v2 end-point instead",
+      "method": "put",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course group users",
+      "description": "Blackboard Learn deprecated - course group users API provides endpoints for managing deprecated - course group users related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGroupsUsers",
+      "description": "Deletes a group from the specified course.\n\nRequired entitlements:\n\n- course.group.MODIFY\n\n**Since**: 3100.6.0\n\n**Deprecated**: since 3600.0.0; use the v2 end-point instead",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}/users/{userId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course groups",
+      "description": "Blackboard Learn deprecated - course groups API provides endpoints for managing deprecated - course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroups",
+      "description": "Callers with the following entitlement can view all groups in the course:\n\n- course.groups.VIEW\nCallers enrolled in course can view all groups they're enrolled in, and all self-enrollment groups\n\n**Since**: 3100.5.0\n\n**Deprecated**: since 3800.6.0; use the v2 end-point instead.",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc)\" Supported fields are:\n\n- name\n- externalId\n\n**Since**: 3100.4.0"
+        }
+      ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course groups",
+      "description": "Blackboard Learn deprecated - course groups API provides endpoints for managing deprecated - course groups related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesGroups",
+      "description": "Creates a group in the specified course.\n\nMinimal entitlements required:\n\n- course.group.CREATE\n\n**Since**: 3100.5.0\n\n**Deprecated**: since 3800.6.0; use the v2 end-point instead.",
+      "method": "post",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course groups",
+      "description": "Blackboard Learn deprecated - course groups API provides endpoints for managing deprecated - course groups related operations."
+    },
+    "endpoint": {
+      "name": "GetCoursesGroups",
+      "description": "Loads a group in the specified course.\n\nEntitlement and field visibility rules are the same as those when loading the groups collection.\n\n**Since**: 3100.5.0\n\n**Deprecated**: since 3800.6.0; use the v2 end-point instead.",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course groups",
+      "description": "Blackboard Learn deprecated - course groups API provides endpoints for managing deprecated - course groups related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCoursesGroups",
+      "description": "Deletes a group from the specified course.\n\nRequired entitlements:\n\n- course.group.DELETE\n\n**Since**: 3100.5.0\n\n**Deprecated**: since 3800.6.0; use the v2 end-point instead.",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - course groups",
+      "description": "Blackboard Learn deprecated - course groups API provides endpoints for managing deprecated - course groups related operations."
+    },
+    "endpoint": {
+      "name": "PatchCoursesGroups",
+      "description": "Updates a group in the specified course.\n\nMinimal entitlements required:\n\n- course.group.MODIFY\n\n**Since**: 3100.5.0\n\n**Deprecated**: since 3800.6.0; use the v2 end-point instead.",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}/groups/{groupId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCourses",
+      "description": "Returns a list of courses and organizations.\n\nTo view disabled courses a user must have the entitlement 'system.course.VIEW'.\n\nUsers with the 'course.configure-properties.EXECUTE' entitlement can access all course properties.\n\nUsers enrolled in the course have read access to all properties except:\n\n- uuid\n- externalId\n- dataSourceId\n- created\n- allowGuests\n- enrollment.accessCode\n\nUsers who are not enrolled in the course and do not have associated entitlements only have read access to the following properties:\n\n- id\n- courseId\n- name\n- description\n- organization\n- readOnly\n- termId\n- availability.available\n- availability.duration.type\n- availability.duration.start\n- availability.duration.end\n- availability.duration.daysOfUse\nWhen courses are child courses, parent course data is also returned to provide a complete data representation of course relationships.\n\nIf the course enrollment is self-enroll, all users can view the course as though they were enrolled.\n\n**Since**: 3000.1.0\n\n**Deprecated**: since 3400.8.0; use the v2 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v1/courses",
+      "pathParameters": [],
+      "queryParameters": [
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for courses with courseId properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for courses with name properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Search for courses with description properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for courses with externalId properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for courses with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "allowGuests",
           "type": "boolean",
-          "description": "Includes disabled [Subscription](entity:WebhookSubscription)s.\nBy default, all enabled [Subscription](entity:WebhookSubscription)s are returned."
+          "description": "Search for courses which are configured to allow/disallow guest access, based on input.  Default: n/a (return courses regardless of guests allowed)\n\n**Since**: 3200.3.0"
         },
         {
-          "name": "sort_order",
+          "name": "createdCompare",
           "type": "string",
-          "description": "Sorts the returned list by when the [Subscription](entity:WebhookSubscription) was created with the specified order.\nThis field defaults to ASC."
+          "description": "Used alongside the 'created' search parameter.  Defaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
         },
         {
-          "name": "limit",
-          "type": "integer",
-          "description": "The maximum number of results to be returned in a single page.\nIt is possible to receive fewer results than the specified limit on a given page.\nThe default value of 100 is also the maximum allowed value.\n\nDefault: 100"
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for courses with availability.available properties that contain this value.\n\n**Since**: 3000.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for courses with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Search for courses with this termId.  This may optionally be the term's externalId using the syntax \"externalId:spring2015\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "organization",
+          "type": "boolean",
+          "description": "Search for courses by organization flag.  A value of 'true' indicates that search results should be limited to only Organizations.  A value of 'false' indicates results should be limited to Courses.  Not setting this field indicates that both Courses and Organizations should be returned.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc),created\" Supported fields are:\n\n- courseId\n- name\n- externalId\n- created\n\n**Since**: 3100.0.0"
         }
       ],
       "releaseStatus": "PUBLIC",
@@ -6330,13 +7743,14 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
     },
     "endpoint": {
-      "name": "CreateWebhookSubscription",
+      "name": "PostCourses",
+      "description": "Creates a course or organization.\n\nThe 'system.course.CREATE' entitlement is needed to create a course, while 'system.org.CREATE' is needed for an organization.\n\n**Since**: 2015.11.0\n\n**Deprecated**: since 3400.8.0; use the v2 end-point instead",
       "method": "post",
-      "path": "/v2/webhooks/subscriptions",
+      "path": "/learn/api/public/v1/courses",
       "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
@@ -6345,41 +7759,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
     },
     "endpoint": {
-      "name": "DeleteWebhookSubscription",
-      "method": "delete",
-      "path": "/v2/webhooks/subscriptions/{subscription_id}",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "[REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to delete."
-        }
-      ],
-      "queryParameters": [],
-      "releaseStatus": "PUBLIC",
-      "isMultipart": false
-    }
-  },
-  {
-    "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
-    },
-    "endpoint": {
-      "name": "RetrieveWebhookSubscription",
+      "name": "GetCourses",
+      "description": "Loads a specific course or organization.\n\nTo view disabled courses a user must have the entitlement 'system.course.VIEW'.\n\nUsers with the 'course.configure-properties.EXECUTE' entitlement can access all course properties.\n\nUsers enrolled in the course have read access to all properties except:\n\n- uuid\n- externalId\n- dataSourceId\n- created\n- allowGuests\n- enrollment.accessCode\n\nUsers who are not enrolled in the course and do not have associated entitlements only have read access to the following properties:\n\n- id\n- courseId\n- name\n- description\n- organization\n- readOnly\n- termId\n- availability.available\n- availability.duration.type\n- availability.duration.start\n- availability.duration.end\n- availability.duration.daysOfUse\nIf the course enrollment is self-enroll, all users can view the course as though they were enrolled.\n\n**Since**: 2015.11.0\n\n**Deprecated**: since 3400.8.0; use the v2 end-point instead",
       "method": "get",
-      "path": "/v2/webhooks/subscriptions/{subscription_id}",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "[REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to retrieve."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -6387,20 +7775,15 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
     },
     "endpoint": {
-      "name": "UpdateWebhookSubscription",
-      "method": "put",
-      "path": "/v2/webhooks/subscriptions/{subscription_id}",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "[REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update."
-        }
-      ],
+      "name": "DeleteCourses",
+      "description": "Deletes a course or organization in synchronous fashion.\n\nThe 'system.course.DELETE' entitlement is needed to delete a course, while 'system.org.DELETE' is needed for an organization.\n\n**Since**: 2015.11.0\n\n**Deprecated**: since 3400.8.0; use the v2 end-point instead",
+      "method": "delete",
+      "path": "/learn/api/public/v1/courses/{courseId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -6408,20 +7791,31 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
     },
     "endpoint": {
-      "name": "UpdateWebhookSubscriptionSignatureKey",
+      "name": "PatchCourses",
+      "description": "Updates a course or organization.\n\nTo update a course, the user must have either 'system.course|org.properties.MODIFY' or 'course.configure-properties.EXECUTE' entitlements.  However, if the user has the latter entitlement, then additional entitlements are needed to be able to update certain fields, as shown below: \n\n | Field                           | Entitlements Required                                                  |\n |---------------------------------|------------------------------------------------------------------------|\n | name                            | course.name.MODIFY                                                     |\n | description                     | course.name.MODIFY                                                     |\n | allowGuests                     | course.configure-guest-access.EXECUTE                                  |\n | enrollment.type                 | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.start                | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.end                  | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.accessCode           | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | availability.available          | course.configure-properties.EXECUTE, course.availability.MODIFY        |\n | locale.id                       | course.configure-properties.EXECUTE, course.locale.MODIFY              |\n | locale.force                    | course.configure-properties.EXECUTE, course.locale.MODIFY              |\n | availability.duration.type      | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.start     | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.end       | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.daysOfUse | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n \n\n**Since**: 2015.11.0\n\n**Deprecated**: since 3400.8.0; use the v2 end-point instead",
+      "method": "patch",
+      "path": "/learn/api/public/v1/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
+    },
+    "endpoint": {
+      "name": "PostCoursesCopy",
+      "description": "Creates an exact copy of an existing Course into a new Course.\n\nUsers with entitlements 'system.course.copy.EXECUTE' can create a course copy. Users with entitlements 'system.org.copy.EXECUTE' can create an organization copy. All users's must also have 'course.content.copy.EXECUTE' entitlement associated with the specified source courseId.\n\n**Since**: 3300.0.0\n\n**Deprecated**: since 3800.0.0; use the v2 end-point instead.",
       "method": "post",
-      "path": "/v2/webhooks/subscriptions/{subscription_id}/signature-key",
-      "pathParameters": [
-        {
-          "name": "subscription_id",
-          "type": "string",
-          "description": "[REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to update."
-        }
-      ],
+      "path": "/learn/api/public/v1/courses/{courseId}/copy",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false
@@ -6429,20 +7823,150 @@ export const apiMap: ApiInfo[] = [
   },
   {
     "api": {
-      "name": "Webhook Subscriptions",
-      "description": "\nThe Webhook Subscriptions API allows you to create, retrieve, update, and delete webhook subscriptions. Because Webhook subscriptions are owned by the application and not any one seller, you cannot use OAuth Access Tokens with the Webhook Subscriptions API. You must use the application’s [personal access token](/docs/build-basics/access-tokens).\n\nFor more information, see the following guide the following guide:\n - [Webhook Subscriptions](https://developer.squareup.com/docs/webhooks/webhook-subscriptions-api)"
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
     },
     "endpoint": {
-      "name": "TestWebhookSubscription",
-      "method": "post",
-      "path": "/v2/webhooks/subscriptions/{subscription_id}/test",
-      "pathParameters": [
+      "name": "GetCourses",
+      "description": "Returns a list of courses and organizations.\n\nTo view disabled courses a user must have the entitlement 'system.course.VIEW'.\n\nUsers with the 'course.configure-properties.EXECUTE' course entitlement, or the 'system.course.properties.MODIFY' system entitlement can access all course properties.\n\nUsers enrolled in the course have read access to all properties except:\n\n- uuid\n- externalId\n- dataSourceId\n- created\n- allowGuests\n- enrollment.accessCode\n\nUsers who are not enrolled in the course and do not have associated entitlements only have read access to the following properties:\n\n- id\n- courseId\n- name\n- description\n- organization\n- readOnly\n- termId\n- availability.available\n- availability.duration.type\n- availability.duration.start\n- availability.duration.end\n- availability.duration.daysOfUse\nWhen courses are child courses, parent course data is also returned to provide a complete data representation of course relationships.\n\nIf the course enrollment is self-enroll, all users can view the course as though they were enrolled.\n\n**Since**: 3400.8.0\n\n**Deprecated**: since 3800.1.0; use the v3 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses",
+      "pathParameters": [],
+      "queryParameters": [
         {
-          "name": "subscription_id",
+          "name": "modified",
           "type": "string",
-          "description": "[REQUIRED] The ID of the [Subscription](entity:WebhookSubscription) to test."
+          "description": "Search for courses with a modified date relative to this value.  'modifiedCompare' may also be sent to control search behavior.\n\n**Since**: 3500.4.0"
+        },
+        {
+          "name": "modifiedCompare",
+          "type": "string",
+          "description": "Used alongside the 'modified' search parameter. Defaults to greaterOrEqual if not specified.\n\n**Since**: 3500.4.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "courseId",
+          "type": "string",
+          "description": "Search for courses with courseId properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "description": "Search for courses with name properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "description": "Search for courses with description properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "externalId",
+          "type": "string",
+          "description": "Search for courses with externalId properties that contain this value.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "created",
+          "type": "string",
+          "description": "Search for courses with a created date relative to this value.  'createdCompare' may also be sent to control search behavior.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "allowGuests",
+          "type": "boolean",
+          "description": "Search for courses which are configured to allow/disallow guest access, based on input.  Default: n/a (return courses regardless of guests allowed)\n\n**Since**: 3200.3.0"
+        },
+        {
+          "name": "createdCompare",
+          "type": "string",
+          "description": "Used alongside the 'created' search parameter.  Defaults to greaterOrEqual if not specified.\n\n**Since**: 3100.0.0\n\n\n| Type      | Description\n | --------- | --------- |\n| lessThan |  |\n| greaterOrEqual |  |\n"
+        },
+        {
+          "name": "availability.available",
+          "type": "string",
+          "description": "Search for courses with availability.available properties that contain this value.\n\n**Since**: 3000.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n"
+        },
+        {
+          "name": "dataSourceId",
+          "type": "string",
+          "description": "Search for courses with this dataSourceId.  This may optionally be the data source's externalId using the syntax \"externalId:math101\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "termId",
+          "type": "string",
+          "description": "Search for courses with this termId.  This may optionally be the term's externalId using the syntax \"externalId:spring2015\".\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "organization",
+          "type": "boolean",
+          "description": "Search for courses by organization flag.  A value of 'true' indicates that search results should be limited to only Organizations.  A value of 'false' indicates results should be limited to Courses.  Not setting this field indicates that both Courses and Organizations should be returned.\n\n**Since**: 3100.0.0"
+        },
+        {
+          "name": "sort",
+          "type": "string",
+          "description": "Properties to sort by. This is a comma-delimited list of JSON properties, with an optional \"(desc)\" suffix to request a descending sort for that property. e.g. \"name(desc),created\" Supported fields are:\n\n- courseId\n- name\n- externalId\n- created\n- modified\n\n**Since**: 3400.8.0"
         }
       ],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
+    },
+    "endpoint": {
+      "name": "PostCourses",
+      "description": "Creates a course or organization.\n\nThe 'system.course.CREATE' entitlement is needed to create a course, while 'system.org.CREATE' is needed for an organization.\n\n**Since**: 3400.8.0\n\n**Deprecated**: since 3800.1.0; use the v3 end-point instead",
+      "method": "post",
+      "path": "/learn/api/public/v2/courses",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
+    },
+    "endpoint": {
+      "name": "GetCourses",
+      "description": "Loads a specific course or organization.\n\nTo view disabled courses a user must have the entitlement 'system.course.VIEW'.\n\nUsers with the 'course.configure-properties.EXECUTE' entitlement can access all course properties.\n\nUsers enrolled in the course have read access to all properties except:\n\n- uuid\n- externalId\n- dataSourceId\n- created\n- allowGuests\n- enrollment.accessCode\n\nUsers with no access to the course only have read access to the following properties:\n\n- id\n- courseId\n- name\n- description\n- organization\n- closedComplete\n- termId\n- availability.available\n- availability.duration.type\n- availability.duration.start\n- availability.duration.end\n- availability.duration.daysOfUse\nIf the course enrollment is self-enroll, all users can view the course as though they were enrolled.\n\n**Since**: 3400.8.0\n\n**Deprecated**: since 3800.1.0; use the v3 end-point instead",
+      "method": "get",
+      "path": "/learn/api/public/v2/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
+    },
+    "endpoint": {
+      "name": "DeleteCourses",
+      "description": "Deletes a course or organization in synchronous fashion.\n\nThe 'system.course.DELETE' entitlement is needed to delete a course, while 'system.org.DELETE' is needed for an organization.\n\n**Since**: 3400.8.0\n\n**Deprecated**: since 3800.1.0; use the v3 end-point instead",
+      "method": "delete",
+      "path": "/learn/api/public/v2/courses/{courseId}",
+      "pathParameters": [],
+      "queryParameters": [],
+      "releaseStatus": "PUBLIC",
+      "isMultipart": false
+    }
+  },
+  {
+    "api": {
+      "name": "Deprecated - courses",
+      "description": "Blackboard Learn deprecated - courses API provides endpoints for managing deprecated - courses related operations."
+    },
+    "endpoint": {
+      "name": "PatchCourses",
+      "description": "Updates a course or organization.\n\nTo update a course, the user must have either 'system.course|org.properties.MODIFY' or 'course.configure-properties.EXECUTE' entitlements.  However, if the user has the latter entitlement, then additional entitlements are needed to be able to update certain fields, as shown below: \n\n | Field                           | Entitlements Required                                                  |\n |---------------------------------|------------------------------------------------------------------------|\n | name                            | course.name.MODIFY                                                     |\n | description                     | course.name.MODIFY                                                     |\n | allowGuests                     | course.configure-guest-access.EXECUTE                                  |\n | enrollment.type                 | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.start                | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.end                  | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | enrollment.accessCode           | course.configure-properties.EXECUTE, course.enrollment.MODIFY          |\n | availability.available          | course.configure-properties.EXECUTE, course.availability.MODIFY        |\n | locale.id                       | course.configure-properties.EXECUTE, course.locale.MODIFY              |\n | locale.force                    | course.configure-properties.EXECUTE, course.locale.MODIFY              |\n | availability.duration.type      | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.start     | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.end       | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n | availability.duration.daysOfUse | course.configure-properties.EXECUTE, course.configure-duration.EXECUTE |\n \n\n**Since**: 3400.8.0\n\n**Deprecated**: since 3800.1.0; use the v3 end-point instead",
+      "method": "patch",
+      "path": "/learn/api/public/v2/courses/{courseId}",
+      "pathParameters": [],
       "queryParameters": [],
       "releaseStatus": "PUBLIC",
       "isMultipart": false

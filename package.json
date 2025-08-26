@@ -1,12 +1,12 @@
 {
-  "name": "square-mcp-server",
+  "name": "blackboard-mcp-server",
   "version": "0.1.2",
-  "description": "MCP Server for Square API",
+  "description": "MCP Server for Blackboard Learn API",
   "license": "APACHE-2.0",
-  "author": "Block, Inc",
+  "author": "Alan Chen",
   "type": "module",
   "bin": {
-    "square-mcp-server": "dist/index.js"
+    "blackboard-mcp-server": "dist/index.js"
   },
   "files": [
     "dist"

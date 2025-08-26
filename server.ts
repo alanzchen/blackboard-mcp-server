@@ -6,7 +6,6 @@ import express from "express";
 import cors from 'cors';
 import crypto from 'crypto';
 import { Server } from "http"
-import { typeMap } from './utils/type-map.js';
 import { ApiMethodInfo, ApiParameter } from './api-types.js';
 import escapeHtml from 'escape-html';
 
@@ -277,10 +276,10 @@ server.tool(
 // Register get_request_type tool
 server.tool(
   "get_type_info",
-  "Get type information for a Square API method. You must call this before calling the make_api_request tool.",
+  "Get type information for a Blackboard Learn API method. You must call this before calling the make_api_request tool.",
   {
-    service: z.string().describe("The Square API service category (e.g., 'catalog', 'payments')"),
-    method: z.string().describe("The API method to call (e.g., 'list', 'create')")
+    service: z.string().describe("The Blackboard Learn API service category (e.g., 'courses', 'users')"),
+    method: z.string().describe("The API method to call (e.g., 'getCourse', 'getUser')")
   },
   async (params) => {
     try {
@@ -297,12 +296,18 @@ server.tool(
       }
 
       const methodInfo = methods[method];
-      const requestTypeName = methodInfo.requestType;
       
-      const typeInfo = typeMap[requestTypeName];
-      if (!typeInfo) {
-        throw new Error(`Type information not found for ${requestTypeName}`);
-      }
+      // Build type information from the method's parameter definitions
+      const typeInfo = {
+        description: methodInfo.description,
+        method: methodInfo.method,
+        path: methodInfo.path,
+        pathParams: methodInfo.pathParams || [],
+        queryParams: methodInfo.queryParams || [],
+        requestType: methodInfo.requestType || 'object',
+        isMultipart: methodInfo.isMultipart || false,
+        isWrite: methodInfo.isWrite || false
+      };
 
       return {
         content: [{
@@ -328,9 +333,9 @@ server.tool(
 // register service info tool
 server.tool(
   "get_service_info",
-  "Get information about a Square API service. Call me before trying to get type info",
+  "Get information about a Blackboard Learn API service. Call me before trying to get type info",
   {
-    service: z.string().describe("The Square API service category (e.g., 'catalog', 'payments')")
+    service: z.string().describe("The Blackboard Learn API service category (e.g., 'courses', 'users')")
   },
   async (params) => {
     try {

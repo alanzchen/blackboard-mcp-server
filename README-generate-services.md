@@ -128,7 +128,6 @@ Generated services depend on:
 - `node-fetch`: HTTP requests
 - `../api-types.js`: Type definitions
 - `../config.js`: Base URL and utilities
-- `../utils/type-map.js`: Type mapping
 
 ## Advanced Usage
 

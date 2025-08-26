@@ -23,28 +23,28 @@ async function promptForAccessToken(): Promise<string> {
   });
 
   return new Promise((resolve) => {
-    rl.question('\n🔑 Enter your Square ACCESS_TOKEN: ', (token) => {
+    rl.question('\n🔑 Enter your Blackboard Learn ACCESS_TOKEN: ', (token) => {
       rl.close();
       resolve(token.trim());
     });
   });
 }
 
-async function promptForSandboxMode(): Promise<boolean> {
+async function promptForBaseUrl(): Promise<string> {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
   });
 
   return new Promise((resolve) => {
-    rl.question('\n🏝️  Use Square sandbox environment? (y/N): ', (answer) => {
+    rl.question('\n🏫 Enter your Blackboard Learn BASE_URL (e.g., https://myschool.blackboard.com): ', (answer) => {
       rl.close();
-      resolve(answer.trim().toLowerCase() === 'y');
+      resolve(answer.trim());
     });
   });
 }
 
-async function updateGooseConfig(accessToken: string, useSandbox: boolean): Promise<void> {
+async function updateGooseConfig(accessToken: string, baseUrl: string): Promise<void> {
   try {
     console.log("\nUpdating Goose configuration...");
 
@@ -79,20 +79,20 @@ async function updateGooseConfig(accessToken: string, useSandbox: boolean): Prom
       console.log("Goose config file not found, creating new one");
     }
 
-    // Add or update Square MCP Server extension
+    // Add or update Blackboard Learn MCP Server extension
     if (!config.extensions) {
       config.extensions = {};
     }
 
-    config.extensions["square_mcp_server"] = {
-      name: "Square MCP Server",
+    config.extensions["blackboard_mcp_server"] = {
+      name: "Blackboard Learn MCP Server",
       cmd: "npx",
-      args: ["square-mcp-server", "start"],
+      args: ["blackboard-mcp-server", "start"],
       enabled: true,
       type: "stdio",
       env: {
         ACCESS_TOKEN: accessToken,
-        SANDBOX: useSandbox ? "true" : "false",
+        BASE_URL: baseUrl,
       }
     };
 
@@ -109,7 +109,7 @@ async function updateGooseConfig(accessToken: string, useSandbox: boolean): Prom
   }
 }
 
-async function updateClaudeConfig(accessToken: string, useSandbox: boolean): Promise<void> {
+async function updateClaudeConfig(accessToken: string, baseUrl: string): Promise<void> {
   try {
     console.log("\nUpdating Claude configuration...");
 
@@ -167,17 +167,17 @@ async function updateClaudeConfig(accessToken: string, useSandbox: boolean): Pro
       console.log("Claude config file not found, creating new one");
     }
 
-    // Add or update Square MCP Server
+    // Add or update Blackboard Learn MCP Server
     if (!config.mcpServers) {
       config.mcpServers = {};
     }
 
-    config.mcpServers["mcp_square_api"] = {
+    config.mcpServers["mcp_blackboard_api"] = {
       command: "npx",
-      args: ["square-mcp-server", "start"],
+      args: ["blackboard-mcp-server", "start"],
       env: {
         ACCESS_TOKEN: accessToken,
-        SANDBOX: useSandbox ? "true" : "false",
+        BASE_URL: baseUrl,
       }
     };
 
@@ -194,10 +194,10 @@ async function updateClaudeConfig(accessToken: string, useSandbox: boolean): Pro
 
 async function generateGooseUrl(): Promise<string> {
   try {
-    const packageName = "square-mcp-server";
+    const packageName = "blackboard-mcp-server";
     const gooseUrl = `goose://extension?cmd=npx&arg=${encodeURIComponent(
       packageName
-    )}&arg=start&id=mcp_square_api&name=Square%20MCP%20Server&description=Square%20API%20MCP%20Server`;
+    )}&arg=start&id=mcp_blackboard_api&name=Blackboard%20Learn%20MCP%20Server&description=Blackboard%20Learn%20API%20MCP%20Server`;
 
     return gooseUrl;
   } catch (error) {
@@ -217,26 +217,26 @@ async function main() {
   };
 
   const argv = await yargs(hideBin(process.argv))
-    .scriptName("mcp_square_api")
+    .scriptName("mcp_blackboard_api")
     .usage("$0 [cmd] [args]")
-    .command("install", "Install Square MCP Server in Goose and Claude", {}, async () => {
-      console.log("\n🚀 Starting Square MCP Server installation...\n");
+    .command("install", "Install Blackboard Learn MCP Server in Goose and Claude", {}, async () => {
+      console.log("\n🚀 Starting Blackboard Learn MCP Server installation...\n");
       
-      console.log("This will configure the Square MCP Server for use with Claude and Goose.");
+      console.log("This will configure the Blackboard Learn MCP Server for use with Claude and Goose.");
 
-      // Prompt for Square access token
+      // Prompt for Blackboard Learn access token
       const accessToken = await promptForAccessToken();
       if (!accessToken) {
-        console.warn("\nNo access token provided. Server will not be able to access Square API.");
+        console.warn("\nNo access token provided. Server will not be able to access Blackboard Learn API.");
         console.warn("You can set ACCESS_TOKEN environment variable when starting the server manually.");
       }
 
-      // Prompt for sandbox mode
-      const useSandbox = await promptForSandboxMode();
-      console.log(`\n${useSandbox ? '🏝️  Using sandbox environment' : '🌎 Using production environment'}`);
+      // Prompt for base URL
+      const baseUrl = await promptForBaseUrl();
+      console.log(`\n🏫 Using Blackboard Learn instance: ${baseUrl}`);
 
-      await updateClaudeConfig(accessToken, useSandbox);
-      await updateGooseConfig(accessToken, useSandbox);
+      await updateClaudeConfig(accessToken, baseUrl);
+      await updateGooseConfig(accessToken, baseUrl);
 
       const gooseUrl = await generateGooseUrl();
 
@@ -246,15 +246,15 @@ async function main() {
       );
       console.log(`\n\x1b[1m${gooseUrl}\x1b[0m\n`);
     })
-    .command("start", "Start the Square MCP Server", {}, startCommand)
+    .command("start", "Start the Blackboard Learn MCP Server", {}, startCommand)
     .command(
       "get-goose-url",
       "Get Goose URL for the server",
       {},
       async () => {
-        console.log("\n🔍 Getting Goose URL for Square MCP Server...");
+        console.log("\n🔍 Getting Goose URL for Blackboard Learn MCP Server...");
         const gooseUrl = await generateGooseUrl();
-        console.log("\n🦢 Goose URL for Square MCP Server:");
+        console.log("\n🦢 Goose URL for Blackboard Learn MCP Server:");
         console.log(`\n\x1b[1m${gooseUrl}\x1b[0m\n`);
       }
     )

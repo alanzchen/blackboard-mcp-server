@@ -6,6 +6,7 @@ import express from "express";
 import cors from 'cors';
 import crypto from 'crypto';
 import { Server } from "http"
+import { typeMap } from './utils/type-map.js';
 import { ApiMethodInfo, ApiParameter } from './api-types.js';
 import escapeHtml from 'escape-html';
 
@@ -276,10 +277,10 @@ server.tool(
 // Register get_request_type tool
 server.tool(
   "get_type_info",
-  "Get type information for a Blackboard Learn API method. You must call this before calling the make_api_request tool.",
+  "Get type information for a Square API method. You must call this before calling the make_api_request tool.",
   {
-    service: z.string().describe("The Blackboard Learn API service category (e.g., 'courses', 'users')"),
-    method: z.string().describe("The API method to call (e.g., 'getCourse', 'getUser')")
+    service: z.string().describe("The Square API service category (e.g., 'catalog', 'payments')"),
+    method: z.string().describe("The API method to call (e.g., 'list', 'create')")
   },
   async (params) => {
     try {
@@ -296,20 +297,12 @@ server.tool(
       }
 
       const methodInfo = methods[method];
+      const requestTypeName = methodInfo.requestType;
       
-      // Build type information from the method's parameter definitions
-      const typeInfo = {
-        description: methodInfo.description,
-        method: methodInfo.method,
-        path: methodInfo.path,
-        pathParams: methodInfo.pathParams || [],
-        queryParams: methodInfo.queryParams || [],
-        requestBodySchema: methodInfo.requestBodySchema || null,
-        responseSchema: methodInfo.responseSchema || null,
-        requestType: methodInfo.requestType || 'object',
-        isMultipart: methodInfo.isMultipart || false,
-        isWrite: methodInfo.isWrite || false
-      };
+      const typeInfo = typeMap[requestTypeName];
+      if (!typeInfo) {
+        throw new Error(`Type information not found for ${requestTypeName}`);
+      }
 
       return {
         content: [{
@@ -335,9 +328,9 @@ server.tool(
 // register service info tool
 server.tool(
   "get_service_info",
-  "Get information about a Blackboard Learn API service. Call me before trying to get type info",
+  "Get information about a Square API service. Call me before trying to get type info",
   {
-    service: z.string().describe("The Blackboard Learn API service category (e.g., 'courses', 'users')")
+    service: z.string().describe("The Square API service category (e.g., 'catalog', 'payments')")
   },
   async (params) => {
     try {
@@ -370,103 +363,6 @@ server.tool(
           text: JSON.stringify({
             error: err.message,
             details: err.errors || err.stack
-          }, null, 2)
-        }],
-        isError: true
-      };
-    }
-  }
-);
-
-// Register type lookup tool
-server.tool(
-  "get_type_definition",
-  "Get detailed type definition information from the generated TypeScript types. This provides schema information for complex types referenced in API responses and requests.",
-  {
-    typeName: z.string().describe("The TypeScript type name to look up (e.g., 'BlackboardWebappsBlackboardPublicapiV1CoursesCourse')")
-  },
-  async (params) => {
-    try {
-      const { typeName } = params;
-      
-      // Import the generated types dynamically
-      const { TypeMap, getTypeInfo } = await import('./generated-types.js');
-      
-      const typeInfo = getTypeInfo(typeName);
-      if (!typeInfo) {
-        // Try to find similar type names
-        const allTypes = Object.keys(TypeMap);
-        const similarTypes = allTypes.filter(name => 
-          name.toLowerCase().includes(typeName.toLowerCase()) ||
-          typeName.toLowerCase().includes(name.toLowerCase())
-        ).slice(0, 10);
-        
-        return {
-          content: [{
-            type: "text",
-            text: JSON.stringify({
-              error: `Type '${typeName}' not found`,
-              availableTypes: allTypes.length > 20 ? 
-                `${allTypes.length} types available. Call get_all_types to see them all.` : 
-                allTypes,
-              similarTypes: similarTypes.length > 0 ? similarTypes : undefined
-            }, null, 2)
-          }],
-          isError: true
-        };
-      }
-
-      return {
-        content: [{
-          type: "text",
-          text: JSON.stringify(typeInfo, null, 2)
-        }]
-      };
-    } catch (err: any) {
-      return {
-        content: [{
-          type: "text",
-          text: JSON.stringify({
-            error: "Failed to load type definitions",
-            details: err.message,
-            note: "Make sure to run 'npm run generate-types' first to generate type definitions"
-          }, null, 2)
-        }],
-        isError: true
-      };
-    }
-  }
-);
-
-// Register tool to list all available types
-server.tool(
-  "get_all_types",
-  "Get a list of all available TypeScript type names from the generated type definitions.",
-  {},
-  async () => {
-    try {
-      // Import the generated types dynamically
-      const { getAllTypes } = await import('./generated-types.js');
-      
-      const allTypes = getAllTypes();
-      
-      return {
-        content: [{
-          type: "text",
-          text: JSON.stringify({
-            totalCount: allTypes.length,
-            types: allTypes
-          }, null, 2)
-        }]
-      };
-    } catch (err: any) {
-      return {
-        content: [{
-          type: "text",
-          text: JSON.stringify({
-            error: "Failed to load type definitions",
-            details: err.message,
-            note: "Make sure to run 'npm run generate-types' first to generate type definitions"
           }, null, 2)
         }],
         isError: true

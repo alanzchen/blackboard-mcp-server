@@ -1,12 +1,12 @@
 {
-  "name": "blackboard-mcp-server",
+  "name": "square-mcp-server",
   "version": "0.1.2",
-  "description": "MCP Server for Blackboard Learn API",
+  "description": "MCP Server for Square API",
   "license": "APACHE-2.0",
-  "author": "Alan Chen",
+  "author": "Block, Inc",
   "type": "module",
   "bin": {
-    "blackboard-mcp-server": "dist/index.js"
+    "square-mcp-server": "dist/index.js"
   },
   "files": [
     "dist"
@@ -16,9 +16,7 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "start": "node dist/index.js start",
-    "generate-services": "node scripts/generate-services.js",
-    "generate-types": "node scripts/generate-types.js",
-    "generate": "npm run generate-types && npm run generate-services"
+    "generate-services": "node scripts/generate-services.js"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.5.0",

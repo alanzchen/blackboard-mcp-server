@@ -1,134 +1,178 @@
-# Blackboard Learn Model Context Protocol Server
+# Square Model Context Protocol Server (Beta)
 
-This project follows the [Model Context Protocol](https://modelcontextprotocol.com/) standard, allowing AI assistants to interact with Blackboard Learn's REST API.
+This project follows the [Model Context Protocol](https://modelcontextprotocol.com/) standard, allowing AI assistants to interact with Square's connect API.
+
+<a href="https://glama.ai/mcp/servers/@square/square-mcp-server">
+  <img width="380" height="200" src="https://glama.ai/mcp/servers/@square/square-mcp-server/badge" alt="Square Model Context Protocol Server MCP server" />
+</a>
 
 ## Quick Start
 
-Get up and running with the Blackboard Learn MCP server using npx:
+Get up and running with the Square MCP server using npx:
 
 ```bash
 # Basic startup
-npx blackboard-mcp-server start
+npx square-mcp-server start
 
 # With environment configuration
-ACCESS_TOKEN=YOUR_BLACKBOARD_ACCESS_TOKEN BASE_URL=https://your-blackboard-instance.edu npx blackboard-mcp-server start
+ACCESS_TOKEN=YOUR_SQUARE_ACCESS_TOKEN SANDBOX=true npx square-mcp-server start
 
 # local runs
-npx /path/to/project/blackboard-mcp-server
+npx /path/to/project/square-mcp-server
 ```
 
-Replace `YOUR_BLACKBOARD_ACCESS_TOKEN` with your actual Blackboard Learn access token. You can obtain your access token by following the guide at [Blackboard Learn REST API Authentication](https://docs.blackboard.com/learn/REST/getting-started/authentication).
+Replace `YOUR_SQUARE_ACCESS_TOKEN` with your actual Square access token. You can obtain your access token by following the guide at [Square Access Tokens](https://developer.squareup.com/docs/build-basics/access-tokens). You can also set environment variables before running the command.
+
+## Remote MCP Server
+
+Square now offers a hosted remote MCP server at:
+
+```
+https://mcp.squareup.com/sse
+```
+
+The remote MCP is recommended as it uses OAuth authentication, allowing you to log in with your Square account directly without having to create or manage access tokens manually.
 
 ## Configuration Options
 
 | Environment Variable | Purpose | Example |
 |---------------------|---------|---------|
-| `ACCESS_TOKEN` | Your Blackboard Learn API access token | `ACCESS_TOKEN=bb_access_token_123...` |
-| `BASE_URL` | Your Blackboard Learn instance URL | `BASE_URL=https://myschool.blackboard.com` |
+| `ACCESS_TOKEN` | Your Square API access token | `ACCESS_TOKEN=sq0atp-...` |
+| `SANDBOX` | Use Square sandbox environment | `SANDBOX=true` |
+| `PRODUCTION` | Use Square production environment | `PRODUCTION=true` |
 | `DISALLOW_WRITES` | Restrict to read-only operations | `DISALLOW_WRITES=true` |
+| `SQUARE_VERSION` | Specify Square API version | `SQUARE_VERSION=2025-04-16` |
 
 ## Integration with AI Assistants
+
+### Goose Integration
+
+To configure the Square MCP Server with [Goose](https://block.github.io/goose/):
+
+#### Remote MCP
+To install the Square remote MCP in Goose, click this URL on a computer where Goose is installed:
+
+[goose://extension?cmd=npx&arg=mcp-remote&arg=https%3A%2F%2Fmcp.squareup.com%2Fsse&id=square_mcp_production_remote&name=Square%20MCP%20Remote&description=Square%20Production%20MCP%20Remote](goose://extension?cmd=npx&arg=mcp-remote&arg=https%3A%2F%2Fmcp.squareup.com%2Fsse&id=square_mcp_production_remote&name=Square%20MCP%20Remote&description=Square%20Production%20MCP%20Remote)
+
+Or copy and paste the URL into your browser's address bar.
+
+```bash
+# Automatic installation
+npx square-mcp-server install
+
+# Get URL for manual installation
+npx square-mcp-server get-goose-url
+```
+
+The `install` command automatically updates your Goose configuration.
 
 ### Claude Desktop Integration
 
 For Claude Desktop integration, see the [Model Context Protocol Quickstart Guide](https://modelcontextprotocol.io/quickstart/user). Add this configuration to your `claude_desktop_config.json`:
 
+#### Remote MCP
 ```json
 {
   "mcpServers": {
-    "mcp_blackboard_api": {
+    "mcp_square_api": {
       "command": "npx",
-      "args": ["blackboard-mcp-server", "start"],
+      "args": ["mcp-remote", "https://mcp.squareup.com/sse"]
+    }
+  }
+}
+```
+
+This approach allows you to authenticate directly with your Square account credentials without needing to manage access tokens.
+
+#### Local MCP
+```json
+{
+  "mcpServers": {
+    "mcp_square_api": {
+      "command": "npx",
+      "args": ["square-mcp-server", "start"],
       "env": {
-        "ACCESS_TOKEN": "YOUR_BLACKBOARD_ACCESS_TOKEN",
-        "BASE_URL": "https://your-blackboard-instance.edu"
+        "ACCESS_TOKEN": "YOUR_SQUARE_ACCESS_TOKEN",
+        "SANDBOX": "true"
       }
     }
   }
 }
 ```
 
-### Goose Integration
-
-To configure the Blackboard Learn MCP Server with [Goose](https://block.github.io/goose/):
-
-```bash
-# Automatic installation
-npx blackboard-mcp-server install
-
-# Get URL for manual installation
-npx blackboard-mcp-server get-goose-url
-```
-
-The `install` command automatically updates your Goose configuration.
-
 ## Tool Reference
 
-The Blackboard Learn MCP Server provides a streamlined set of tools for interacting with Blackboard Learn APIs:
+The Square MCP Server provides a streamlined set of tools for interacting with Square APIs:
 
 | Tool | Description | Primary Use |
 |------|-------------|------------|
 | `get_service_info` | Discover methods available for a service | Exploration and discovery |
-| `get_type_info` | Get detailed parameter requirements and schemas | Request preparation |
-| `get_type_definition` | Get complete type definitions for complex types | Understanding data structures |
-| `get_all_types` | List all available TypeScript type names | Type discovery |
-| `make_api_request` | Execute API calls to Blackboard Learn | Performing operations |
+| `get_type_info` | Get detailed parameter requirements | Request preparation |
+| `make_api_request` | Execute API calls to Square | Performing operations |
 
 ## Service Catalog
 
-Blackboard Learn MCP Server provides access to Blackboard Learn's complete [REST API ecosystem](https://docs.blackboard.com/learn/REST). Check out the [Blackboard Learn API Documentation](https://docs.blackboard.com/learn/REST) for detailed information about each service:
+Square MCP Server provides access to Square's complete [API ecosystem](https://developer.squareup.com/reference/square). Check out the [Square API Documentation](https://developer.squareup.com/docs) for detailed information about each service:
 
 | Service | Description |
 |---------|-------------|
-| `oauth` | OAuth 2.0 authentication |
-| `courses` | Course management and administration |
-| `users` | User account management |
-| `coursegrades` | Grading and gradebook operations |
-| `content` | Course content management |
-| `discussions` | Discussion boards and forums |
-| `assignments` | Assignment management |
-| `coursememberships` | Course enrollment and membership |
-| `announcements` | Course and system announcements |
-| `calendar` | Calendar and event management |
-| `rubrics` | Rubric management and evaluation |
-| `lti` | Learning Tools Interoperability |
-| `proctoring` | Proctoring and monitoring |
-| `attendance` | Attendance tracking |
-| `roles` | User roles and permissions |
-| `datasources` | Data source management |
-| `system` | System configuration and settings |
-
-And many more services covering the complete Blackboard Learn API surface.
+| `applepay` | Apple Pay integration |
+| `bankaccounts` | Bank account management |
+| `bookingcustomattributes` | Custom attributes for bookings |
+| `bookings` | Appointment booking management |
+| `cards` | Payment card management |
+| `cashdrawers` | Cash drawer management |
+| `catalog` | Catalog management (items, categories, etc.) |
+| `checkout` | Checkout and payment processing |
+| `customercustomattributes` | Custom attributes for customers |
+| `customergroups` | Customer grouping |
+| `customersegments` | Customer segmentation |
+| `customers` | Customer management |
+| `devices` | Square device management |
+| `disputes` | Payment dispute handling |
+| `events` | Event tracking |
+| `giftcardactivities` | Gift card activity tracking |
+| `giftcards` | Gift card management |
+| `inventory` | Inventory tracking |
+| `invoices` | Invoice management |
+| `labor` | Workforce management |
+| `locationcustomattributes` | Custom attributes for locations |
+| `locations` | Location management |
+| `loyalty` | Loyalty program management |
+| `merchantcustomattributes` | Custom attributes for merchants |
+| `merchants` | Merchant account management |
+| `oauth` | Authentication |
+| `ordercustomattributes` | Custom attributes for orders |
+| `orders` | Order management |
+| `payments` | Payment processing |
+| `payouts` | Payout management |
+| `refunds` | Refund management |
+| `sites` | Website integration |
+| `snippets` | Square Online Code integration |
+| `subscriptions` | Subscription management |
+| `team` | Staff management |
+| `terminal` | Square Terminal management |
+| `vendors` | Supplier management |
+| `webhooksubscriptions` | Event notifications |
 
 ## Usage Pattern
 
-For optimal interaction with the Blackboard Learn API through MCP:
+For optimal interaction with the Square API through MCP:
 
 1. **Discover**: Use `get_service_info` to explore available methods
    ```
-   get_service_info(service: "courses")
+   get_service_info(service: "catalog")
    ```
 
 2. **Understand**: Use `get_type_info` to learn parameter requirements
    ```
-   get_type_info(service: "courses", method: "getCourse")
+   get_type_info(service: "catalog", method: "list")
    ```
 
 3. **Execute**: Use `make_api_request` to perform the operation
    ```
-   make_api_request(service: "courses", method: "getCourse", request: {"courseId": "_123_1"})
+   make_api_request(service: "catalog", method: "list", request: {})
    ```
-
-## Service Generation
-
-This repository includes an automated service generator that creates TypeScript services from Blackboard Learn's API specification:
-
-```bash
-# Generate all services from learn-swagger.json
-npm run generate-services
-```
-
-This creates 51+ service files covering the complete Blackboard Learn API. See [README-generate-services.md](README-generate-services.md) for detailed information about the service generation process.
 
 ## Development and Debugging
 
@@ -140,7 +184,7 @@ The [MCP Inspector](https://modelcontextprotocol.io/docs/tools/inspector) provid
 # Build the project
 npm run build
 
-# Start the inspector with the Blackboard Learn MCP Server
+# Start the inspector with the Square MCP Server
 npx @modelcontextprotocol/inspector node dist/index.js start
 ```
 
@@ -152,48 +196,6 @@ npx @modelcontextprotocol/inspector node dist/index.js start
 4. Run the server: `node dist/index.js start`
 5. Test your changes using the MCP Inspector
 
-## API Coverage
-
-The generated services provide comprehensive coverage of Blackboard Learn's REST API:
-
-- **Academic Management**: Courses, content, assignments, grading
-- **User Management**: Users, roles, memberships, enrollment
-- **Communication**: Discussions, announcements, messages
-- **Assessment**: Rubrics, evaluations, proctoring, attendance
-- **Integration**: OAuth, LTI, webhooks, data sources
-- **Administration**: System settings, institutional hierarchy
-
-## Type Map & Schema Support
-
-The Blackboard Learn MCP Server includes comprehensive type map functionality to help LLMs understand API data structures:
-
-### Generated Types
-- **159 TypeScript type definitions** from Blackboard Learn's API specification
-- **Complete schema information** for request/response bodies
-- **Runtime type lookup** for understanding complex data structures
-
-### LLM Integration
-The type system provides enhanced tools for AI assistants:
-
-1. **Schema-aware method info**: `get_type_info` returns detailed schemas
-2. **Type definition lookup**: `get_type_definition` provides complete type structures  
-3. **Type discovery**: `get_all_types` lists all available types
-4. **Smart error handling**: Suggests similar types when lookups fail
-
-### Automatic Generation
-```bash
-# Generate types and services
-npm run generate
-
-# Generate types only
-npm run generate-types
-
-# Generate services only  
-npm run generate-services
-```
-
-For detailed documentation about the type system, see [TYPE-MAP-DOCS.md](TYPE-MAP-DOCS.md).
-
 ## Contributing
 
-Contributions are welcome! Please open an issue to discuss proposed changes before submitting a pull request. This repository uses an automated service generator, so changes to API services should be made through the generator script when possible.
+This repository is auto-generated from Square's OpenAPI Specification. While contributions are welcome, please note that changes will need to be incorporated into the generator that produces this code. Please open an issue to discuss proposed changes before submitting a pull request.

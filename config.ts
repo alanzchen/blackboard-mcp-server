@@ -1,5 +1,5 @@
 /**
- * Shared configuration for Blackboard Learn API services
+ * Shared configuration for Square API services
  */
 import { Response } from 'node-fetch';
 import { setBaseUrl } from './server.js';
@@ -10,13 +10,13 @@ import { setBaseUrl } from './server.js';
 export const baseUrl = setBaseUrl()
 
 /**
- * Blackboard Learn API version to use
+ * Square API version to use
  */
-export const apiVersion = process.env.BLACKBOARD_VERSION || 'v1';
+export const apiVersion = process.env.SQUARE_VERSION || '2025-04-16';
 
 /**
- * Standard request headers for Blackboard Learn API
- * @param accessToken Blackboard Learn API access token
+ * Standard request headers for Square API
+ * @param accessToken Square API access token
  * @returns Headers object
  */
 export function getRequestHeaders(accessToken: string): Record<string, string> {
@@ -24,7 +24,8 @@ export function getRequestHeaders(accessToken: string): Record<string, string> {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
     'Authorization': `Bearer ${accessToken}`,
-    'User-Agent': 'Blackboard-MCP-Server/0.1.2'
+    'Square-Version': apiVersion,
+    'User-Agent': 'Square-MCP-Server/0.1.1'
   };
 }
 

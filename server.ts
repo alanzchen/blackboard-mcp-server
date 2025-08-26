@@ -10,49 +10,63 @@ import { typeMap } from './utils/type-map.js';
 import { ApiMethodInfo, ApiParameter } from './api-types.js';
 import escapeHtml from 'escape-html';
 
-import { ApplePayMethods, ApplePayHandlers } from './services/applepay.js';
-import { BankAccountsMethods, BankAccountsHandlers } from './services/bankaccounts.js';
-import { BookingCustomAttributesMethods, BookingCustomAttributesHandlers } from './services/bookingcustomattributes.js';
-import { BookingsMethods, BookingsHandlers } from './services/bookings.js';
-import { CardsMethods, CardsHandlers } from './services/cards.js';
-import { CashDrawersMethods, CashDrawersHandlers } from './services/cashdrawers.js';
-import { CatalogMethods, CatalogHandlers } from './services/catalog.js';
-import { CheckoutMethods, CheckoutHandlers } from './services/checkout.js';
-import { CustomerCustomAttributesMethods, CustomerCustomAttributesHandlers } from './services/customercustomattributes.js';
-import { CustomerGroupsMethods, CustomerGroupsHandlers } from './services/customergroups.js';
-import { CustomerSegmentsMethods, CustomerSegmentsHandlers } from './services/customersegments.js';
-import { CustomersMethods, CustomersHandlers } from './services/customers.js';
-import { DevicesMethods, DevicesHandlers } from './services/devices.js';
-import { DisputesMethods, DisputesHandlers } from './services/disputes.js';
-import { EventsMethods, EventsHandlers } from './services/events.js';
-import { GiftCardActivitiesMethods, GiftCardActivitiesHandlers } from './services/giftcardactivities.js';
-import { GiftCardsMethods, GiftCardsHandlers } from './services/giftcards.js';
-import { InventoryMethods, InventoryHandlers } from './services/inventory.js';
-import { InvoicesMethods, InvoicesHandlers } from './services/invoices.js';
-import { LaborMethods, LaborHandlers } from './services/labor.js';
-import { LocationCustomAttributesMethods, LocationCustomAttributesHandlers } from './services/locationcustomattributes.js';
-import { LocationsMethods, LocationsHandlers } from './services/locations.js';
-import { LoyaltyMethods, LoyaltyHandlers } from './services/loyalty.js';
-import { MerchantCustomAttributesMethods, MerchantCustomAttributesHandlers } from './services/merchantcustomattributes.js';
-import { MerchantsMethods, MerchantsHandlers } from './services/merchants.js';
-import { OAuthMethods, OAuthHandlers } from './services/oauth.js';
-import { OrderCustomAttributesMethods, OrderCustomAttributesHandlers } from './services/ordercustomattributes.js';
-import { OrdersMethods, OrdersHandlers } from './services/orders.js';
-import { PaymentsMethods, PaymentsHandlers } from './services/payments.js';
-import { PayoutsMethods, PayoutsHandlers } from './services/payouts.js';
-import { RefundsMethods, RefundsHandlers } from './services/refunds.js';
-import { SitesMethods, SitesHandlers } from './services/sites.js';
-import { SnippetsMethods, SnippetsHandlers } from './services/snippets.js';
-import { SubscriptionsMethods, SubscriptionsHandlers } from './services/subscriptions.js';
-import { TeamMethods, TeamHandlers } from './services/team.js';
-import { TerminalMethods, TerminalHandlers } from './services/terminal.js';
-import { VendorsMethods, VendorsHandlers } from './services/vendors.js';
-import { WebhookSubscriptionsMethods, WebhookSubscriptionsHandlers } from './services/webhooksubscriptions.js';
+// Blackboard Learn API Services
+import { AdaptiveReleaseMethods, AdaptiveReleaseHandlers } from './services/adaptiverelease.js';
+import { AnnouncementsMethods, AnnouncementsHandlers } from './services/announcements.js';
+import { AttemptReceiptMethods, AttemptReceiptHandlers } from './services/attemptreceipt.js';
+import { AttendanceMethods, AttendanceHandlers } from './services/attendance.js';
+import { CalendarMethods, CalendarHandlers } from './services/calendar.js';
+import { ColumnExceptionsMethods, ColumnExceptionsHandlers } from './services/columnexceptions.js';
+import { ContentMethods, ContentHandlers } from './services/content.js';
+import { ContentCollectionResourcesMethods, ContentCollectionResourcesHandlers } from './services/contentcollectionresources.js';
+import { ContentFileAttachmentsMethods, ContentFileAttachmentsHandlers } from './services/contentfileattachments.js';
+import { ContentGroupAssignmentsMethods, ContentGroupAssignmentsHandlers } from './services/contentgroupassignments.js';
+import { ContentResourcesMethods, ContentResourcesHandlers } from './services/contentresources.js';
+import { ContentReviewMethods, ContentReviewHandlers } from './services/contentreview.js';
+import { CourseAnnouncementsMethods, CourseAnnouncementsHandlers } from './services/courseannouncements.js';
+import { CourseAssessmentsMethods, CourseAssessmentsHandlers } from './services/courseassessments.js';
+import { CourseCategoriesMethods, CourseCategoriesHandlers } from './services/coursecategories.js';
+import { CourseGradeAttemptsMethods, CourseGradeAttemptsHandlers } from './services/coursegradeattempts.js';
+import { CourseGradebookCategoriesMethods, CourseGradebookCategoriesHandlers } from './services/coursegradebookcategories.js';
+import { CourseGradeNotationsMethods, CourseGradeNotationsHandlers } from './services/coursegradenotations.js';
+import { CourseGradesMethods, CourseGradesHandlers } from './services/coursegrades.js';
+import { CourseGradingPeriodsMethods, CourseGradingPeriodsHandlers } from './services/coursegradingperiods.js';
+import { CourseGroupsMethods, CourseGroupsHandlers } from './services/coursegroups.js';
+import { CourseGroupUsersMethods, CourseGroupUsersHandlers } from './services/coursegroupusers.js';
+import { CourseMembershipsMethods, CourseMembershipsHandlers } from './services/coursememberships.js';
+import { CourseMessagesMethods, CourseMessagesHandlers } from './services/coursemessages.js';
+import { CoursesMethods, CoursesHandlers } from './services/courses.js';
+import { CourseTocMethods, CourseTocHandlers } from './services/coursetoc.js';
+import { DataSourcesMethods, DataSourcesHandlers } from './services/datasources.js';
+import { DeprecatedCourseGradesMethods, DeprecatedCourseGradesHandlers } from './services/deprecatedcoursegrades.js';
+import { DeprecatedCourseGroupsMethods, DeprecatedCourseGroupsHandlers } from './services/deprecatedcoursegroups.js';
+import { DeprecatedCourseGroupUsersMethods, DeprecatedCourseGroupUsersHandlers } from './services/deprecatedcoursegroupusers.js';
+import { DeprecatedCoursesMethods, DeprecatedCoursesHandlers } from './services/deprecatedcourses.js';
+import { DiscussionsMethods, DiscussionsHandlers } from './services/discussions.js';
+import { GoalsMethods, GoalsHandlers } from './services/goals.js';
+import { InstitutionalHierarchyMethods, InstitutionalHierarchyHandlers } from './services/institutionalhierarchy.js';
+import { InstitutionalHierarchyAdministratorsMethods, InstitutionalHierarchyAdministratorsHandlers } from './services/institutionalhierarchyadministrators.js';
+import { LtiMethods, LtiHandlers } from './services/lti.js';
+import { OauthMethods, OauthHandlers } from './services/oauth.js';
+import { PerformanceDashboardMethods, PerformanceDashboardHandlers } from './services/performancedashboard.js';
+import { PerformanceScaleMethods, PerformanceScaleHandlers } from './services/performancescale.js';
+import { ProctoringMethods, ProctoringHandlers } from './services/proctoring.js';
+import { PronounsMethods, PronounsHandlers } from './services/pronouns.js';
+import { RolesMethods, RolesHandlers } from './services/roles.js';
+import { RubricAssociationsMethods, RubricAssociationsHandlers } from './services/rubricassociations.js';
+import { RubricEvaluationsMethods, RubricEvaluationsHandlers } from './services/rubricevaluations.js';
+import { RubricsMethods, RubricsHandlers } from './services/rubrics.js';
+import { SessionsMethods, SessionsHandlers } from './services/sessions.js';
+import { SISLogsMethods, SISLogsHandlers } from './services/sislogs.js';
+import { SystemMethods, SystemHandlers } from './services/system.js';
+import { TermsMethods, TermsHandlers } from './services/terms.js';
+import { UploadsMethods, UploadsHandlers } from './services/uploads.js';
+import { UsersMethods, UsersHandlers } from './services/users.js';
 
 // Create MCP server
 const server = new McpServer(
   {
-    name: "square-mcp",
+    name: "blackboard-mcp",
     version: "1.0.0"
   }
 );
@@ -61,12 +75,12 @@ const server = new McpServer(
 /**
  * PUBLIC API
  * 
- * This MCP server is designed for public use with the Square API.
- * It provides a standard interface for accessing Square services
+ * This MCP server is designed for public use with the Blackboard Learn API.
+ * It provides a standard interface for accessing Blackboard Learn services
  * through the Model Context Protocol.
  * 
- * For questions or support, visit the Square Developer Forum:
- * https://developer.squareup.com/forums
+ * For questions or support, visit the Blackboard Developer Community:
+ * https://community.blackboard.com/developers
  */
 
 const accessToken: string | undefined = process.env.ACCESS_TOKEN;
@@ -76,13 +90,11 @@ async function getAccessToken(): Promise<string> {
 }
 
 export function setBaseUrl() {
-  let baseUrl = "https://connect.squareup.com";
+  let baseUrl = "https://blackboard.myschool.edu";
 
-  if (process.env.SANDBOX == "true" && process.env.PRODUCTION == "true") {
-    throw new Error("Both SANDBOX and PRODUCTION env vars are true");
-  }
-  if (process.env.SANDBOX == "true") {
-    baseUrl = "https://connect.squareupsandbox.com"
+  // Allow override via environment variable
+  if (process.env.BLACKBOARD_BASE_URL) {
+    baseUrl = process.env.BLACKBOARD_BASE_URL;
   }
 
   return baseUrl
@@ -95,95 +107,121 @@ type ServiceHandlers = { [key: string]: { [key: string]: (accessToken: string, a
 
 // Create a mapping of service methods and handlers
 export const serviceMethodsMap: ServiceMethods = {
-  "ApplePay": ApplePayMethods,
-  "BankAccounts": BankAccountsMethods,
-  "BookingCustomAttributes": BookingCustomAttributesMethods,
-  "Bookings": BookingsMethods,
-  "Cards": CardsMethods,
-  "CashDrawers": CashDrawersMethods,
-  "Catalog": CatalogMethods,
-  "Checkout": CheckoutMethods,
-  "CustomerCustomAttributes": CustomerCustomAttributesMethods,
-  "CustomerGroups": CustomerGroupsMethods,
-  "CustomerSegments": CustomerSegmentsMethods,
-  "Customers": CustomersMethods,
-  "Devices": DevicesMethods,
-  "Disputes": DisputesMethods,
-  "Events": EventsMethods,
-  "GiftCardActivities": GiftCardActivitiesMethods,
-  "GiftCards": GiftCardsMethods,
-  "Inventory": InventoryMethods,
-  "Invoices": InvoicesMethods,
-  "Labor": LaborMethods,
-  "LocationCustomAttributes": LocationCustomAttributesMethods,
-  "Locations": LocationsMethods,
-  "Loyalty": LoyaltyMethods,
-  "MerchantCustomAttributes": MerchantCustomAttributesMethods,
-  "Merchants": MerchantsMethods,
-  "OAuth": OAuthMethods,
-  "OrderCustomAttributes": OrderCustomAttributesMethods,
-  "Orders": OrdersMethods,
-  "Payments": PaymentsMethods,
-  "Payouts": PayoutsMethods,
-  "Refunds": RefundsMethods,
-  "Sites": SitesMethods,
-  "Snippets": SnippetsMethods,
-  "Subscriptions": SubscriptionsMethods,
-  "Team": TeamMethods,
-  "Terminal": TerminalMethods,
-  "Vendors": VendorsMethods,
-  "WebhookSubscriptions": WebhookSubscriptionsMethods
+  "Adaptive Release": AdaptiveReleaseMethods,
+  "Announcements": AnnouncementsMethods,
+  "Attempt Receipt": AttemptReceiptMethods,
+  "Attendance": AttendanceMethods,
+  "Calendar": CalendarMethods,
+  "Column Exceptions": ColumnExceptionsMethods,
+  "Content": ContentMethods,
+  "Content Collection Resources": ContentCollectionResourcesMethods,
+  "Content File Attachments": ContentFileAttachmentsMethods,
+  "Content Group Assignments": ContentGroupAssignmentsMethods,
+  "Content Resources": ContentResourcesMethods,
+  "Content Review": ContentReviewMethods,
+  "Course Announcements": CourseAnnouncementsMethods,
+  "Course Assessments": CourseAssessmentsMethods,
+  "Course Categories": CourseCategoriesMethods,
+  "Course Grade Attempts": CourseGradeAttemptsMethods,
+  "Course Gradebook Categories": CourseGradebookCategoriesMethods,
+  "Course Grade Notations": CourseGradeNotationsMethods,
+  "Course Grades": CourseGradesMethods,
+  "Course Grading Periods": CourseGradingPeriodsMethods,
+  "Course Groups": CourseGroupsMethods,
+  "Course Group Users": CourseGroupUsersMethods,
+  "Course Memberships": CourseMembershipsMethods,
+  "Course Messages": CourseMessagesMethods,
+  "Courses": CoursesMethods,
+  "Course Toc": CourseTocMethods,
+  "Data Sources": DataSourcesMethods,
+  "Deprecated Course Grades": DeprecatedCourseGradesMethods,
+  "Deprecated Course Groups": DeprecatedCourseGroupsMethods,
+  "Deprecated Course Group Users": DeprecatedCourseGroupUsersMethods,
+  "Deprecated Courses": DeprecatedCoursesMethods,
+  "Discussions": DiscussionsMethods,
+  "Goals": GoalsMethods,
+  "Institutional Hierarchy": InstitutionalHierarchyMethods,
+  "Institutional Hierarchy Administrators": InstitutionalHierarchyAdministratorsMethods,
+  "LTI": LtiMethods,
+  "OAuth": OauthMethods,
+  "Performance Dashboard": PerformanceDashboardMethods,
+  "Performance Scale": PerformanceScaleMethods,
+  "Proctoring": ProctoringMethods,
+  "Pronouns": PronounsMethods,
+  "Roles": RolesMethods,
+  "Rubric Associations": RubricAssociationsMethods,
+  "Rubric Evaluations": RubricEvaluationsMethods,
+  "Rubrics": RubricsMethods,
+  "Sessions": SessionsMethods,
+  "SIS Logs": SISLogsMethods,
+  "System": SystemMethods,
+  "Terms": TermsMethods,
+  "Uploads": UploadsMethods,
+  "Users": UsersMethods
 };
 
 export const serviceHandlersMap: ServiceHandlers = {
-  "ApplePay": ApplePayHandlers,
-  "BankAccounts": BankAccountsHandlers,
-  "BookingCustomAttributes": BookingCustomAttributesHandlers,
-  "Bookings": BookingsHandlers,
-  "Cards": CardsHandlers,
-  "CashDrawers": CashDrawersHandlers,
-  "Catalog": CatalogHandlers,
-  "Checkout": CheckoutHandlers,
-  "CustomerCustomAttributes": CustomerCustomAttributesHandlers,
-  "CustomerGroups": CustomerGroupsHandlers,
-  "CustomerSegments": CustomerSegmentsHandlers,
-  "Customers": CustomersHandlers,
-  "Devices": DevicesHandlers,
-  "Disputes": DisputesHandlers,
-  "Events": EventsHandlers,
-  "GiftCardActivities": GiftCardActivitiesHandlers,
-  "GiftCards": GiftCardsHandlers,
-  "Inventory": InventoryHandlers,
-  "Invoices": InvoicesHandlers,
-  "Labor": LaborHandlers,
-  "LocationCustomAttributes": LocationCustomAttributesHandlers,
-  "Locations": LocationsHandlers,
-  "Loyalty": LoyaltyHandlers,
-  "MerchantCustomAttributes": MerchantCustomAttributesHandlers,
-  "Merchants": MerchantsHandlers,
-  "OAuth": OAuthHandlers,
-  "OrderCustomAttributes": OrderCustomAttributesHandlers,
-  "Orders": OrdersHandlers,
-  "Payments": PaymentsHandlers,
-  "Payouts": PayoutsHandlers,
-  "Refunds": RefundsHandlers,
-  "Sites": SitesHandlers,
-  "Snippets": SnippetsHandlers,
-  "Subscriptions": SubscriptionsHandlers,
-  "Team": TeamHandlers,
-  "Terminal": TerminalHandlers,
-  "Vendors": VendorsHandlers,
-  "WebhookSubscriptions": WebhookSubscriptionsHandlers
+  "Adaptive Release": AdaptiveReleaseHandlers,
+  "Announcements": AnnouncementsHandlers,
+  "Attempt Receipt": AttemptReceiptHandlers,
+  "Attendance": AttendanceHandlers,
+  "Calendar": CalendarHandlers,
+  "Column Exceptions": ColumnExceptionsHandlers,
+  "Content": ContentHandlers,
+  "Content Collection Resources": ContentCollectionResourcesHandlers,
+  "Content File Attachments": ContentFileAttachmentsHandlers,
+  "Content Group Assignments": ContentGroupAssignmentsHandlers,
+  "Content Resources": ContentResourcesHandlers,
+  "Content Review": ContentReviewHandlers,
+  "Course Announcements": CourseAnnouncementsHandlers,
+  "Course Assessments": CourseAssessmentsHandlers,
+  "Course Categories": CourseCategoriesHandlers,
+  "Course Grade Attempts": CourseGradeAttemptsHandlers,
+  "Course Gradebook Categories": CourseGradebookCategoriesHandlers,
+  "Course Grade Notations": CourseGradeNotationsHandlers,
+  "Course Grades": CourseGradesHandlers,
+  "Course Grading Periods": CourseGradingPeriodsHandlers,
+  "Course Groups": CourseGroupsHandlers,
+  "Course Group Users": CourseGroupUsersHandlers,
+  "Course Memberships": CourseMembershipsHandlers,
+  "Course Messages": CourseMessagesHandlers,
+  "Courses": CoursesHandlers,
+  "Course Toc": CourseTocHandlers,
+  "Data Sources": DataSourcesHandlers,
+  "Deprecated Course Grades": DeprecatedCourseGradesHandlers,
+  "Deprecated Course Groups": DeprecatedCourseGroupsHandlers,
+  "Deprecated Course Group Users": DeprecatedCourseGroupUsersHandlers,
+  "Deprecated Courses": DeprecatedCoursesHandlers,
+  "Discussions": DiscussionsHandlers,
+  "Goals": GoalsHandlers,
+  "Institutional Hierarchy": InstitutionalHierarchyHandlers,
+  "Institutional Hierarchy Administrators": InstitutionalHierarchyAdministratorsHandlers,
+  "LTI": LtiHandlers,
+  "OAuth": OauthHandlers,
+  "Performance Dashboard": PerformanceDashboardHandlers,
+  "Performance Scale": PerformanceScaleHandlers,
+  "Proctoring": ProctoringHandlers,
+  "Pronouns": PronounsHandlers,
+  "Roles": RolesHandlers,
+  "Rubric Associations": RubricAssociationsHandlers,
+  "Rubric Evaluations": RubricEvaluationsHandlers,
+  "Rubrics": RubricsHandlers,
+  "Sessions": SessionsHandlers,
+  "SIS Logs": SISLogsHandlers,
+  "System": SystemHandlers,
+  "Terms": TermsHandlers,
+  "Uploads": UploadsHandlers,
+  "Users": UsersHandlers
 };
 
-// Register unified Square API tool
+// Register unified Blackboard Learn API tool
 server.tool(
   "make_api_request",
-  `Unified tool for all Square API operations. Be sure to get types before calling. Available services:
+  `Unified tool for all Blackboard Learn API operations. Be sure to get types before calling. Available services:
   ${Object.keys(serviceMethodsMap).map(name => name.toLowerCase()).join(", ")}.`,
   {
-    service: z.string().describe("The Square API service category (e.g., 'catalog', 'payments')"),
-    method: z.string().describe("The API method to call (e.g., 'list', 'create')"),
+    service: z.string().describe("The Blackboard Learn API service category (e.g., 'courses', 'users')"),
+    method: z.string().describe("The API method to call (e.g., 'getCourse', 'createUser')"),
     request: z.object({}).passthrough().optional().describe("The request object for the API call.")
   },
   async (params) => {

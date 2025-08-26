@@ -332,7 +332,6 @@ import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
 import * as path from 'path';
-import { typeMap } from '../utils/type-map.js';
 
 /**
  * Method information for each API endpoint

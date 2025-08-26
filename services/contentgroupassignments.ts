@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -53,6 +53,12 @@ export const ContentGroupAssignmentsMethods: { [key: string]: ApiMethodInfo } = 
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "ContentGroupAssignmentsGetContentGroupsRequest",
     isMultipart: false,
     originalName: "getContentGroups",
@@ -91,6 +97,12 @@ export const ContentGroupAssignmentsMethods: { [key: string]: ApiMethodInfo } = 
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.content.ContentGroup",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentContentGroup"
+},
     requestType: "ContentGroupAssignmentsGetContentGroupRequest",
     isMultipart: false,
     originalName: "getContentGroup",
@@ -135,6 +147,25 @@ export const ContentGroupAssignmentsMethods: { [key: string]: ApiMethodInfo } = 
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "contentId": {
+            "type": "string",
+            "description": "The ID of the associated content."
+        },
+        "groupId": {
+            "type": "string",
+            "description": "The ID of the association of content and group."
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.content.ContentGroupV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1ContentContentGroupV1"
+},
     requestType: "ContentGroupAssignmentsCreateContentGroupRequest",
     isMultipart: false,
     originalName: "createContentGroup",
@@ -173,6 +204,8 @@ export const ContentGroupAssignmentsMethods: { [key: string]: ApiMethodInfo } = 
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "ContentGroupAssignmentsDeleteContentGroupRequest",
     isMultipart: false,
     originalName: "deleteContentGroup",

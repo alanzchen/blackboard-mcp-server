@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -112,6 +112,12 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "DeprecatedCoursesGetCoursesRequest",
     isMultipart: false,
     originalName: "getCourses",
@@ -131,6 +137,160 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "externalId": {
+            "type": "string",
+            "description": "An optional externally-defined unique ID for the course. Defaults to the courseId.\n\nFormerly known as 'batchUid'.",
+            "maxLength": 256
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this course. This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "courseId": {
+            "type": "string",
+            "description": "The Course ID attribute, shown to users in the UI.",
+            "maxLength": 100
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the course.",
+            "maxLength": 333
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the course."
+        },
+        "organization": {
+            "type": "boolean",
+            "description": "Whether this object represents an Organization. Defaults to false."
+        },
+        "ultraStatus": {
+            "type": "string",
+            "description": "Whether the course is rendered using Classic or Ultra Course View.\n\n\n| Type      | Description\n | --------- | --------- |\n| Undecided | The ultra status is not decided. |\n| Classic | The course is decided as classic. |\n| Ultra | The course is decided as ultra |\n| Ultrapreview | The course is currently in Ultra mode but during the preview state where it may still be reverted via a Restore to the classic state |\n",
+            "enum": [
+                "Undecided",
+                "Classic",
+                "Ultra",
+                "Ultrapreview"
+            ]
+        },
+        "allowGuests": {
+            "type": "boolean",
+            "description": "Whether guests (users with the role guest) are allowed access to the course. Modifiable only for Classic course. Defaults to {@code true} for Classic Courses and {@code false} for Ultra Courses."
+        },
+        "readOnly": {
+            "type": "boolean",
+            "description": "This status does not affect availability of the course for viewing in any way. readOnly is valid for both Ultra and Classic courses. If an Ultra course is in readOnly mode, updates are not possible. For a Classic course in readOnly mode, updates are still possible (through Web UI but not through REST i.e. closed is enforced for original courses when updated through REST the same way Ultra courses are blocked) but new notifications are not generated.\n\n**Deprecated**: since 3400.8.0; use the v2 endpoint's closedComplete property instead"
+        },
+        "termId": {
+            "type": "string",
+            "description": "The ID of the term associated to this course. This may optionally be the term's externalId using the syntax \"externalId:spring.2016\"."
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling availability of the course to students.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Availability",
+            "properties": {
+                "available": {
+                    "type": "string",
+                    "description": "Whether the course is currently available to students. Instructors can always access the course if they have 'Access unavailable course' entitlement. If set to 'Term', the course's parent term availability settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+                    "enum": [
+                        "Yes",
+                        "No",
+                        "Disabled",
+                        "Term"
+                    ]
+                },
+                "duration": {
+                    "type": "object",
+                    "description": "Settings controlling the length of time the course is available.",
+                    "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Availability.Duration",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "The intended length of the course.\n\n\n| Type      | Description\n | --------- | --------- |\n| Continuous | Course is active on an ongoing basis. |\n| DateRange | Course is only intended to be available between specific date ranges |\n| FixedNumDays | Course is only available for a set number of days |\n| UseTerm | Course availablity is dictated by its associated term |\n",
+                            "enum": [
+                                "Continuous",
+                                "DateRange",
+                                "FixedNumDays",
+                                "UseTerm"
+                            ]
+                        },
+                        "start": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course starts. May only be set if availability.duration.type is DateRange."
+                        },
+                        "end": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course ends. May only be set if availability.duration.type is DateRange."
+                        },
+                        "daysOfUse": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The number of days this course can be used. May only be set if availability.duration.type is FixedNumDays."
+                        }
+                    }
+                }
+            }
+        },
+        "enrollment": {
+            "type": "object",
+            "description": "Settings controlling how students may enroll in the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Enrollment",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Specifies the enrollment options for the course. Defaults to InstructorLed.\n\n\n| Type      | Description\n | --------- | --------- |\n| InstructorLed | Enrollment tasks for the course can only performed by the instructor |\n| SelfEnrollment | Instructors have the ability to enroll users, and students can also enroll themselves in the course |\n| EmailEnrollment | Instructors have the ability to enroll users, and students can email requests to the instructor for enrollment |\n",
+                    "enum": [
+                        "InstructorLed",
+                        "SelfEnrollment",
+                        "EmailEnrollment"
+                    ]
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollments are allowed for the course. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "end": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollment in this course ends. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "accessCode": {
+                    "type": "string",
+                    "description": "The enrollment access code associated with this course. May only be set if enrollment.type is SelfEnrollment."
+                }
+            }
+        },
+        "locale": {
+            "type": "object",
+            "description": "Settings controlling localization within the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Locale",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The locale of this course."
+                },
+                "force": {
+                    "type": "boolean",
+                    "description": "Whether students are forced to use the course's specified locale."
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1CoursesCourseV1"
+},
     requestType: "DeprecatedCoursesCreateCourseRequest",
     isMultipart: false,
     originalName: "createCourse",
@@ -157,6 +317,12 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.courses.Course",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1CoursesCourse"
+},
     requestType: "DeprecatedCoursesGetCourseRequest",
     isMultipart: false,
     originalName: "getCourse",
@@ -176,6 +342,8 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "DeprecatedCoursesDeleteCourseRequest",
     isMultipart: false,
     originalName: "deleteCourse",
@@ -202,6 +370,141 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "externalId": {
+            "type": "string",
+            "description": "An optional externally-defined unique ID for the course. Defaults to the courseId.\n\nFormerly known as 'batchUid'.",
+            "maxLength": 256
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this course. This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the course.",
+            "maxLength": 333
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the course."
+        },
+        "allowGuests": {
+            "type": "boolean",
+            "description": "Whether guests (users with the role guest) are allowed access to the course. Modifiable only for Classic course. Defaults to {@code true} for Classic Courses and {@code false} for Ultra Courses."
+        },
+        "readOnly": {
+            "type": "boolean",
+            "description": "This status does not affect availability of the course for viewing in any way. readOnly is valid for both Ultra and Classic courses. If an Ultra course is in readOnly mode, updates are not possible. For a Classic course in readOnly mode, updates are still possible (through Web UI but not through REST i.e. closed is enforced for original courses when updated through REST the same way Ultra courses are blocked) but new notifications are not generated.\n\n**Deprecated**: since 3400.8.0; use the v2 endpoint's closedComplete property instead"
+        },
+        "termId": {
+            "type": "string",
+            "description": "The ID of the term associated to this course. This may optionally be the term's externalId using the syntax \"externalId:spring.2016\"."
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling availability of the course to students.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Availability",
+            "properties": {
+                "available": {
+                    "type": "string",
+                    "description": "Whether the course is currently available to students. Instructors can always access the course if they have 'Access unavailable course' entitlement. If set to 'Term', the course's parent term availability settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course.  **Since**: 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+                    "enum": [
+                        "Yes",
+                        "No",
+                        "Disabled",
+                        "Term"
+                    ]
+                },
+                "duration": {
+                    "type": "object",
+                    "description": "Settings controlling the length of time the course is available.",
+                    "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Availability.Duration",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "The intended length of the course.\n\n\n| Type      | Description\n | --------- | --------- |\n| Continuous | Course is active on an ongoing basis. |\n| DateRange | Course is only intended to be available between specific date ranges |\n| FixedNumDays | Course is only available for a set number of days |\n| UseTerm | Course availablity is dictated by its associated term |\n",
+                            "enum": [
+                                "Continuous",
+                                "DateRange",
+                                "FixedNumDays",
+                                "UseTerm"
+                            ]
+                        },
+                        "start": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course starts. May only be set if availability.duration.type is DateRange."
+                        },
+                        "end": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course ends. May only be set if availability.duration.type is DateRange."
+                        },
+                        "daysOfUse": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The number of days this course can be used. May only be set if availability.duration.type is FixedNumDays."
+                        }
+                    }
+                }
+            }
+        },
+        "enrollment": {
+            "type": "object",
+            "description": "Settings controlling how students may enroll in the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Enrollment",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Specifies the enrollment options for the course. Defaults to InstructorLed.\n\n\n| Type      | Description\n | --------- | --------- |\n| InstructorLed | Enrollment tasks for the course can only performed by the instructor |\n| SelfEnrollment | Instructors have the ability to enroll users, and students can also enroll themselves in the course |\n| EmailEnrollment | Instructors have the ability to enroll users, and students can email requests to the instructor for enrollment |\n",
+                    "enum": [
+                        "InstructorLed",
+                        "SelfEnrollment",
+                        "EmailEnrollment"
+                    ]
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollments are allowed for the course. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "end": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollment in this course ends. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "accessCode": {
+                    "type": "string",
+                    "description": "The enrollment access code associated with this course. May only be set if enrollment.type is SelfEnrollment."
+                }
+            }
+        },
+        "locale": {
+            "type": "object",
+            "description": "Settings controlling localization within the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.courses.CourseV1.Locale",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The locale of this course."
+                },
+                "force": {
+                    "type": "boolean",
+                    "description": "Whether students are forced to use the course's specified locale."
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.courses.Course",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1CoursesCourse"
+},
     requestType: "DeprecatedCoursesUpdateCourseRequest",
     isMultipart: false,
     originalName: "updateCourse",
@@ -221,6 +524,17 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "courseId": {
+            "type": "string",
+            "description": "The Course ID to copy into."
+        }
+    },
+    "description": ""
+},
+    responseSchema: null,
     requestType: "DeprecatedCoursesCopyCourseRequest",
     isMultipart: false,
     originalName: "copyCourse",
@@ -342,6 +656,12 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "DeprecatedCoursesGetCourses2Request",
     isMultipart: false,
     originalName: "getCourses",
@@ -361,6 +681,166 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "externalId": {
+            "type": "string",
+            "description": "An optional externally-defined unique ID for the course. Defaults to the courseId.\n\nFormerly known as 'batchUid'.",
+            "maxLength": 256
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this course. This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "courseId": {
+            "type": "string",
+            "description": "The Course ID attribute, shown to users in the UI.",
+            "maxLength": 100
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the course.",
+            "maxLength": 333
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the course."
+        },
+        "organization": {
+            "type": "boolean",
+            "description": "Whether this object represents an Organization. Defaults to false."
+        },
+        "ultraStatus": {
+            "type": "string",
+            "description": "Whether the course is rendered using Classic or Ultra Course View.\n\n\n| Type      | Description\n | --------- | --------- |\n| Undecided | The ultra status is not decided. |\n| Classic | The course is decided as classic. |\n| Ultra | The course is decided as ultra |\n| Ultrapreview | The course is currently in Ultra mode but during the preview state where it may still be reverted via a Restore to the classic state |\n",
+            "enum": [
+                "Undecided",
+                "Classic",
+                "Ultra",
+                "Ultrapreview"
+            ]
+        },
+        "allowGuests": {
+            "type": "boolean",
+            "description": "Whether guests (users with the role guest) are allowed access to the course. Modifiable only for Classic course. Defaults to {@code true} for Classic Courses and {@code false} for Ultra Courses."
+        },
+        "allowObservers": {
+            "type": "boolean",
+            "description": "Whether observers are allowed access to the course. Modifiable only for Classic course. Defaults to {@code false}.\n\n**Since**: 3900.31.0"
+        },
+        "closedComplete": {
+            "type": "boolean",
+            "description": "This status does not affect availability of the course for viewing in any way. closedComplete is valid for both Ultra and Classic courses. If an Ultra course is in closedComplete mode, updates are not possible. For a Classic course in closedComplete mode, updates are still possible (through Web UI but not through REST i.e. closed is enforced for original courses when updated through REST the same way Ultra courses are blocked) but new notifications are not generated."
+        },
+        "termId": {
+            "type": "string",
+            "description": "The ID of the term associated to this course. This may optionally be the term's externalId using the syntax \"externalId:spring.2016\"."
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling availability of the course to students.",
+            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability",
+            "properties": {
+                "available": {
+                    "type": "string",
+                    "description": "Whether the course is currently available to students. Instructors can always access the course if they have 'Access unavailable course' entitlement. If set to 'Term', the course's parent term availability settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course. @since 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+                    "enum": [
+                        "Yes",
+                        "No",
+                        "Disabled",
+                        "Term"
+                    ]
+                },
+                "duration": {
+                    "type": "object",
+                    "description": "Settings controlling the length of time the course is available.",
+                    "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability.Duration",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "The intended length of the course. Possible values are:\n\n- Continuous: The course is active on an ongoing basis. This is the default.\n- DateRange: The course will only be available between specific date ranges.\n- FixedNumDays: The course will only be available for a set number of days.\n- Term: The course's parent term duration settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Continuous | Course is active on an ongoing basis. |\n| DateRange | Course is only intended to be available between specific date ranges |\n| FixedNumDays | Course is only available for a set number of days |\n| UseTerm | Course availablity is dictated by its associated term |\n",
+                            "enum": [
+                                "Continuous",
+                                "DateRange",
+                                "FixedNumDays",
+                                "UseTerm"
+                            ]
+                        },
+                        "start": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course starts. May only be set if availability.duration.type is DateRange."
+                        },
+                        "end": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course ends. May only be set if availability.duration.type is DateRange."
+                        },
+                        "daysOfUse": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The number of days this course can be used. May only be set if availability.duration.type is FixedNumDays."
+                        }
+                    }
+                }
+            }
+        },
+        "enrollment": {
+            "type": "object",
+            "description": "Settings controlling how students may enroll in the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Enrollment",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Specifies the enrollment options for the course. Defaults to InstructorLed.\n\n\n| Type      | Description\n | --------- | --------- |\n| InstructorLed | Enrollment tasks for the course can only performed by the instructor |\n| SelfEnrollment | Instructors have the ability to enroll users, and students can also enroll themselves in the course |\n| EmailEnrollment | Instructors have the ability to enroll users, and students can email requests to the instructor for enrollment |\n",
+                    "enum": [
+                        "InstructorLed",
+                        "SelfEnrollment",
+                        "EmailEnrollment"
+                    ]
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollments are allowed for the course. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "end": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollment in this course ends. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "accessCode": {
+                    "type": "string",
+                    "description": "The enrollment access code associated with this course. May only be set if enrollment.type is SelfEnrollment.",
+                    "maxLength": 50
+                }
+            }
+        },
+        "locale": {
+            "type": "object",
+            "description": "Settings controlling localization within the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Locale",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The locale of this course.",
+                    "maxLength": 20
+                },
+                "force": {
+                    "type": "boolean",
+                    "description": "Whether students are forced to use the course's specified locale."
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV2CoursesCourseV2"
+},
     requestType: "DeprecatedCoursesCreateCourse2Request",
     isMultipart: false,
     originalName: "createCourse",
@@ -387,6 +867,12 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV2CoursesCourseV2"
+},
     requestType: "DeprecatedCoursesGetCourse2Request",
     isMultipart: false,
     originalName: "getCourse",
@@ -406,6 +892,8 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "DeprecatedCoursesDeleteCourse2Request",
     isMultipart: false,
     originalName: "deleteCourse",
@@ -432,6 +920,147 @@ export const DeprecatedCoursesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "externalId": {
+            "type": "string",
+            "description": "An optional externally-defined unique ID for the course. Defaults to the courseId.\n\nFormerly known as 'batchUid'.",
+            "maxLength": 256
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this course. This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "name": {
+            "type": "string",
+            "description": "The name of the course.",
+            "maxLength": 333
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the course."
+        },
+        "allowGuests": {
+            "type": "boolean",
+            "description": "Whether guests (users with the role guest) are allowed access to the course. Modifiable only for Classic course. Defaults to {@code true} for Classic Courses and {@code false} for Ultra Courses."
+        },
+        "allowObservers": {
+            "type": "boolean",
+            "description": "Whether observers are allowed access to the course. Modifiable only for Classic course. Defaults to {@code false}.\n\n**Since**: 3900.31.0"
+        },
+        "closedComplete": {
+            "type": "boolean",
+            "description": "This status does not affect availability of the course for viewing in any way. closedComplete is valid for both Ultra and Classic courses. If an Ultra course is in closedComplete mode, updates are not possible. For a Classic course in closedComplete mode, updates are still possible (through Web UI but not through REST i.e. closed is enforced for original courses when updated through REST the same way Ultra courses are blocked) but new notifications are not generated."
+        },
+        "termId": {
+            "type": "string",
+            "description": "The ID of the term associated to this course. This may optionally be the term's externalId using the syntax \"externalId:spring.2016\"."
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling availability of the course to students.",
+            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability",
+            "properties": {
+                "available": {
+                    "type": "string",
+                    "description": "Whether the course is currently available to students. Instructors can always access the course if they have 'Access unavailable course' entitlement. If set to 'Term', the course's parent term availability settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes | Students may access the course. |\n| No | Students may not access the course. |\n| Disabled | Disabled by the SIS. Students may not access the course. @since 3100.0.0 |\n| Term | Availability is inherited from the term settings. Requires a termId be set. |\n",
+                    "enum": [
+                        "Yes",
+                        "No",
+                        "Disabled",
+                        "Term"
+                    ]
+                },
+                "duration": {
+                    "type": "object",
+                    "description": "Settings controlling the length of time the course is available.",
+                    "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Availability.Duration",
+                    "properties": {
+                        "type": {
+                            "type": "string",
+                            "description": "The intended length of the course. Possible values are:\n\n- Continuous: The course is active on an ongoing basis. This is the default.\n- DateRange: The course will only be available between specific date ranges.\n- FixedNumDays: The course will only be available for a set number of days.\n- Term: The course's parent term duration settings will be used.\n\n\n| Type      | Description\n | --------- | --------- |\n| Continuous | Course is active on an ongoing basis. |\n| DateRange | Course is only intended to be available between specific date ranges |\n| FixedNumDays | Course is only available for a set number of days |\n| UseTerm | Course availablity is dictated by its associated term |\n",
+                            "enum": [
+                                "Continuous",
+                                "DateRange",
+                                "FixedNumDays",
+                                "UseTerm"
+                            ]
+                        },
+                        "start": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course starts. May only be set if availability.duration.type is DateRange."
+                        },
+                        "end": {
+                            "type": "string",
+                            "format": "date-time",
+                            "description": "The date this course ends. May only be set if availability.duration.type is DateRange."
+                        },
+                        "daysOfUse": {
+                            "type": "integer",
+                            "format": "int32",
+                            "description": "The number of days this course can be used. May only be set if availability.duration.type is FixedNumDays."
+                        }
+                    }
+                }
+            }
+        },
+        "enrollment": {
+            "type": "object",
+            "description": "Settings controlling how students may enroll in the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Enrollment",
+            "properties": {
+                "type": {
+                    "type": "string",
+                    "description": "Specifies the enrollment options for the course. Defaults to InstructorLed.\n\n\n| Type      | Description\n | --------- | --------- |\n| InstructorLed | Enrollment tasks for the course can only performed by the instructor |\n| SelfEnrollment | Instructors have the ability to enroll users, and students can also enroll themselves in the course |\n| EmailEnrollment | Instructors have the ability to enroll users, and students can email requests to the instructor for enrollment |\n",
+                    "enum": [
+                        "InstructorLed",
+                        "SelfEnrollment",
+                        "EmailEnrollment"
+                    ]
+                },
+                "start": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollments are allowed for the course. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "end": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "The date on which enrollment in this course ends. May only be set if enrollment.type is SelfEnrollment."
+                },
+                "accessCode": {
+                    "type": "string",
+                    "description": "The enrollment access code associated with this course. May only be set if enrollment.type is SelfEnrollment.",
+                    "maxLength": 50
+                }
+            }
+        },
+        "locale": {
+            "type": "object",
+            "description": "Settings controlling localization within the course.",
+            "title": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2.Locale",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The locale of this course.",
+                    "maxLength": 20
+                },
+                "force": {
+                    "type": "boolean",
+                    "description": "Whether students are forced to use the course's specified locale."
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v2.courses.CourseV2",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV2CoursesCourseV2"
+},
     requestType: "DeprecatedCoursesUpdateCourse2Request",
     isMultipart: false,
     originalName: "updateCourse",

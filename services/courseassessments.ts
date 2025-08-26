@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -53,6 +53,12 @@ export const CourseAssessmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseAssessmentsGetQuestionsRequest",
     isMultipart: false,
     originalName: "getQuestions",
@@ -85,6 +91,49 @@ export const CourseAssessmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "The title of the question."
+        },
+        "text": {
+            "type": "string",
+            "description": "The main text content for the question. It may include plain and formatted text, and all kinds of content supported by the full text editor."
+        },
+        "position": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Position of the Question on the Assessment Canvas."
+        },
+        "points": {
+            "type": "number",
+            "description": "The point value for the question."
+        },
+        "correctResponseFeedback": {
+            "type": "string",
+            "description": "Feedback displayed to students when their submitted response is correct."
+        },
+        "incorrectResponseFeedback": {
+            "type": "string",
+            "description": "Feedback displayed to students when their submitted response is incorrect."
+        },
+        "instructorNotes": {
+            "type": "string",
+            "description": "Text added to the question as a note for the instructor. It is not intended to be displayed to students."
+        },
+        "questionHandler": {
+            "$ref": "#/definitions/blackboard.plugin.assessment.publicapi.v1.questions.handlers.QuestionHandler"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.assessment.publicapi.v1.questions.QuestionV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginAssessmentPublicapiV1QuestionsQuestionV1"
+},
     requestType: "CourseAssessmentsCreateQuestionRequest",
     isMultipart: false,
     originalName: "createQuestion",
@@ -123,6 +172,12 @@ export const CourseAssessmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.assessment.publicapi.v1.questions.Question",
+    "typeName": "BlackboardPluginAssessmentPublicapiV1QuestionsQuestion"
+},
     requestType: "CourseAssessmentsGetQuestionByIdRequest",
     isMultipart: false,
     originalName: "getQuestionById",
@@ -161,6 +216,8 @@ export const CourseAssessmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "CourseAssessmentsDeleteQuestionRequest",
     isMultipart: false,
     originalName: "deleteQuestion",
@@ -199,6 +256,49 @@ export const CourseAssessmentsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "The title of the question."
+        },
+        "text": {
+            "type": "string",
+            "description": "The main text content for the question. It may include plain and formatted text, and all kinds of content supported by the full text editor."
+        },
+        "position": {
+            "type": "integer",
+            "format": "int32",
+            "description": "Position of the Question on the Assessment Canvas."
+        },
+        "points": {
+            "type": "number",
+            "description": "The point value for the question."
+        },
+        "correctResponseFeedback": {
+            "type": "string",
+            "description": "Feedback displayed to students when their submitted response is correct."
+        },
+        "incorrectResponseFeedback": {
+            "type": "string",
+            "description": "Feedback displayed to students when their submitted response is incorrect."
+        },
+        "instructorNotes": {
+            "type": "string",
+            "description": "Text added to the question as a note for the instructor. It is not intended to be displayed to students."
+        },
+        "questionHandler": {
+            "$ref": "#/definitions/blackboard.plugin.assessment.publicapi.v1.questions.handlers.QuestionHandler"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.assessment.publicapi.v1.questions.Question",
+    "typeName": "BlackboardPluginAssessmentPublicapiV1QuestionsQuestion"
+},
     requestType: "CourseAssessmentsUpdateQuestionRequest",
     isMultipart: false,
     originalName: "updateQuestion",

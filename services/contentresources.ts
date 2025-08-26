@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -53,6 +53,12 @@ export const ContentResourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "ContentResourcesGetTopLevelCourseResourcesRequest",
     isMultipart: false,
     originalName: "getTopLevelCourseResources",
@@ -85,6 +91,12 @@ export const ContentResourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.contentResources.Resource",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentResourcesResource"
+},
     requestType: "ContentResourcesGetCourseResourceRequest",
     isMultipart: false,
     originalName: "getCourseResource",
@@ -141,6 +153,12 @@ export const ContentResourcesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "ContentResourcesGetCourseResourceChildrenRequest",
     isMultipart: false,
     originalName: "getCourseResourceChildren",

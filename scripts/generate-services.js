@@ -133,6 +133,87 @@ function generateRequestTypeName(tag, methodName) {
   return `${className}${capitalizedMethod}Request`;
 }
 
+// Helper function to resolve schema reference
+function resolveSchemaRef(schema, swagger) {
+  if (!schema) return null;
+  
+  if (schema.$ref) {
+    const refKey = schema.$ref.replace('#/definitions/', '');
+    return {
+      type: 'reference',
+      ref: refKey,
+      typeName: sanitizeTypeName(refKey)
+    };
+  }
+  
+  if (schema.type === 'array' && schema.items) {
+    const itemSchema = resolveSchemaRef(schema.items, swagger);
+    return {
+      type: 'array',
+      items: itemSchema
+    };
+  }
+  
+  return {
+    type: schema.type || 'object',
+    properties: schema.properties || {},
+    description: schema.description || ''
+  };
+}
+
+// Helper function to sanitize type names for TypeScript (same as in generate-types.js)
+function sanitizeTypeName(name) {
+  return name
+    .split('.')
+    .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+    .join('')
+    .replace(/[^a-zA-Z0-9]/g, '');
+}
+
+// Helper function to extract request body schema
+function extractRequestBodySchema(methodObj, swagger) {
+  if (!methodObj.parameters) return null;
+  
+  const bodyParam = methodObj.parameters.find(param => {
+    // Handle direct parameter or referenced parameter
+    if (param.in === 'body') return true;
+    if (param.$ref) {
+      const refKey = param.$ref.replace('#/parameters/', '');
+      const resolvedParam = swagger.parameters[refKey];
+      return resolvedParam && resolvedParam.in === 'body';
+    }
+    return false;
+  });
+  
+  if (!bodyParam) return null;
+  
+  let resolvedParam = bodyParam;
+  if (bodyParam.$ref) {
+    const refKey = bodyParam.$ref.replace('#/parameters/', '');
+    resolvedParam = swagger.parameters[refKey];
+  }
+  
+  if (resolvedParam && resolvedParam.schema) {
+    return resolveSchemaRef(resolvedParam.schema, swagger);
+  }
+  
+  return null;
+}
+
+// Helper function to extract response schema
+function extractResponseSchema(methodObj, swagger) {
+  if (!methodObj.responses) return null;
+  
+  // Look for successful response (200, 201, etc.)
+  const successResponse = methodObj.responses['200'] || methodObj.responses['201'] || methodObj.responses['default'];
+  
+  if (successResponse && successResponse.schema) {
+    return resolveSchemaRef(successResponse.schema, swagger);
+  }
+  
+  return null;
+}
+
 // Group endpoints by tag
 const endpointsByTag = {};
 
@@ -151,6 +232,8 @@ Object.entries(swagger.paths).forEach(([pathStr, pathObj]) => {
     }
     
     const { pathParams, queryParams } = extractParameters(methodObj.parameters, swagger);
+    const requestBodySchema = extractRequestBodySchema(methodObj, swagger);
+    const responseSchema = extractResponseSchema(methodObj, swagger);
     
     const methodName = operationIdToMethodName(methodObj.operationId, methodObj.summary);
     
@@ -165,6 +248,8 @@ Object.entries(swagger.paths).forEach(([pathStr, pathObj]) => {
       description: methodObj.description || methodObj.summary || '',
       pathParams,
       queryParams,
+      requestBodySchema,
+      responseSchema,
       isWrite: isWriteOperation(method),
       originalName: methodObj.operationId || methodName,
       requestType: generateRequestTypeName(tag, uniqueMethodName)
@@ -183,6 +268,8 @@ function generateServiceFile(tag, endpoints) {
     path: "${endpoint.path}",
     pathParams: ${JSON.stringify(endpoint.pathParams, null, 4)},
     queryParams: ${JSON.stringify(endpoint.queryParams, null, 4)},
+    requestBodySchema: ${JSON.stringify(endpoint.requestBodySchema, null, 4)},
+    responseSchema: ${JSON.stringify(endpoint.responseSchema, null, 4)},
     requestType: "${endpoint.requestType}",
     isMultipart: false,
     originalName: "${endpoint.originalName}",
@@ -327,7 +414,7 @@ ${handlerBody}
   }).join(',\n\n');
   
   return `import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';

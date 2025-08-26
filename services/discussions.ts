@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -65,6 +65,21 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {
+        "statusCode": {
+            "readOnly": true,
+            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
+        },
+        "statusCodeValue": {
+            "readOnly": true,
+            "$ref": "#/definitions/int"
+        }
+    },
+    "description": ""
+},
     requestType: "DiscussionsGetDiscussionsRequest",
     isMultipart: false,
     originalName: "getDiscussions",
@@ -84,6 +99,34 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "Title given to the discussion forum",
+            "maxLength": 333
+        },
+        "available": {
+            "type": "boolean",
+            "description": "Indicates if the discussion is available"
+        },
+        "gradable": {
+            "type": "boolean",
+            "description": "Indicates if the discussion allows grading"
+        },
+        "topic": {
+            "description": "Topic of the Discussion. Only applicable to Ultra discussions.",
+            "$ref": "#/definitions/blackboard.plugin.discussionboard.spring.rest.publicapi.v1.Topic"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.discussionboard.spring.rest.publicapi.v1.DiscussionV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginDiscussionboardSpringRestPublicapiV1DiscussionV1"
+},
     requestType: "DiscussionsCreateDiscussionRequest",
     isMultipart: false,
     originalName: "createDiscussion",
@@ -116,6 +159,12 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.discussionboard.spring.rest.publicapi.v1.Discussion",
+    "typeName": "BlackboardPluginDiscussionboardSpringRestPublicapiV1Discussion"
+},
     requestType: "DiscussionsGetDiscussionRequest",
     isMultipart: false,
     originalName: "getDiscussion",
@@ -148,6 +197,34 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "Title given to the discussion forum",
+            "maxLength": 333
+        },
+        "available": {
+            "type": "boolean",
+            "description": "Indicates if the discussion is available"
+        },
+        "gradable": {
+            "type": "boolean",
+            "description": "Indicates if the discussion allows grading"
+        },
+        "topic": {
+            "description": "Topic of the Discussion. Only applicable to Ultra discussions.",
+            "$ref": "#/definitions/blackboard.plugin.discussionboard.spring.rest.publicapi.v1.Topic"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.discussionboard.spring.rest.publicapi.v1.Discussion",
+    "typeName": "BlackboardPluginDiscussionboardSpringRestPublicapiV1Discussion"
+},
     requestType: "DiscussionsUpdateDiscussionRequest",
     isMultipart: false,
     originalName: "updateDiscussion",
@@ -198,6 +275,21 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {
+        "statusCode": {
+            "readOnly": true,
+            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
+        },
+        "statusCodeValue": {
+            "readOnly": true,
+            "$ref": "#/definitions/int"
+        }
+    },
+    "description": ""
+},
     requestType: "DiscussionsGetDiscussionGroupsRequest",
     isMultipart: false,
     originalName: "getDiscussionGroups",
@@ -230,6 +322,12 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "org.springframework.http.ResponseEntity<blackboard.plugin.discussionboard.spring.rest.publicapi.v1.DiscussionGroupV1>",
+    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardPluginDiscussionboardSpringRestPublicapiV1DiscussionGroupV1"
+},
     requestType: "DiscussionsCreateDiscussionGroupAssociationRequest",
     isMultipart: false,
     originalName: "createDiscussionGroupAssociation",
@@ -358,6 +456,21 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {
+        "statusCode": {
+            "readOnly": true,
+            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
+        },
+        "statusCodeValue": {
+            "readOnly": true,
+            "$ref": "#/definitions/int"
+        }
+    },
+    "description": ""
+},
     requestType: "DiscussionsGetDiscussionMessagesRequest",
     isMultipart: false,
     originalName: "getDiscussionMessages",
@@ -390,6 +503,34 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "groupId": {
+            "type": "string",
+            "description": "The Id of the group, only set for group discussions."
+        },
+        "status": {
+            "type": "string",
+            "description": "Status of the message.\n\n\n| Type      | Description\n | --------- | --------- |\n| Published | Message is published in the discussion and visible for all users. |\n| Deleted | Message is shown in the discussion as soft-deleted. |\n| Draft | Message is stored as a draft and only visible for the author user. |\n",
+            "enum": [
+                "Published",
+                "Deleted",
+                "Draft"
+            ]
+        },
+        "body": {
+            "type": "string",
+            "description": "Body of the message, in BbML format."
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "org.springframework.http.ResponseEntity<blackboard.plugin.discussionboard.spring.rest.publicapi.v1.MessageV1>",
+    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardPluginDiscussionboardSpringRestPublicapiV1MessageV1"
+},
     requestType: "DiscussionsCreateMessageRequest",
     isMultipart: false,
     originalName: "createMessage",
@@ -428,6 +569,12 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "org.springframework.http.ResponseEntity<blackboard.plugin.discussionboard.spring.rest.publicapi.v1.MessageV1>",
+    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardPluginDiscussionboardSpringRestPublicapiV1MessageV1"
+},
     requestType: "DiscussionsDeleteMessageRequest",
     isMultipart: false,
     originalName: "deleteMessage",
@@ -466,6 +613,30 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "status": {
+            "type": "string",
+            "description": "Status of the message.\n\n\n| Type      | Description\n | --------- | --------- |\n| Published | Message is published in the discussion and visible for all users. |\n| Deleted | Message is shown in the discussion as soft-deleted. |\n| Draft | Message is stored as a draft and only visible for the author user. |\n",
+            "enum": [
+                "Published",
+                "Deleted",
+                "Draft"
+            ]
+        },
+        "body": {
+            "type": "string",
+            "description": "Body of the message, in BbML format."
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.discussionboard.spring.rest.publicapi.v1.Message",
+    "typeName": "BlackboardPluginDiscussionboardSpringRestPublicapiV1Message"
+},
     requestType: "DiscussionsUpdateMessageRequest",
     isMultipart: false,
     originalName: "updateMessage",
@@ -600,6 +771,21 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {
+        "statusCode": {
+            "readOnly": true,
+            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
+        },
+        "statusCodeValue": {
+            "readOnly": true,
+            "$ref": "#/definitions/int"
+        }
+    },
+    "description": ""
+},
     requestType: "DiscussionsGetMessageRepliesRequest",
     isMultipart: false,
     originalName: "getMessageReplies",
@@ -638,6 +824,34 @@ export const DiscussionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "groupId": {
+            "type": "string",
+            "description": "The Id of the group, only set for group discussions."
+        },
+        "status": {
+            "type": "string",
+            "description": "Status of the message.\n\n\n| Type      | Description\n | --------- | --------- |\n| Published | Message is published in the discussion and visible for all users. |\n| Deleted | Message is shown in the discussion as soft-deleted. |\n| Draft | Message is stored as a draft and only visible for the author user. |\n",
+            "enum": [
+                "Published",
+                "Deleted",
+                "Draft"
+            ]
+        },
+        "body": {
+            "type": "string",
+            "description": "Body of the message, in BbML format."
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "org.springframework.http.ResponseEntity<blackboard.plugin.discussionboard.spring.rest.publicapi.v1.MessageV1>",
+    "typeName": "OrgSpringframeworkHttpResponseEntityblackboardPluginDiscussionboardSpringRestPublicapiV1MessageV1"
+},
     requestType: "DiscussionsCreateMessageReplyRequest",
     isMultipart: false,
     originalName: "createMessageReply",

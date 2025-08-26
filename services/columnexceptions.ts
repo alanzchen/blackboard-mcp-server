@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -47,6 +47,29 @@ export const ColumnExceptionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "usersIds": {
+            "description": "Search for user exceptions associated with these users Ids.\n\n**Since**: 3900.103.0",
+            "$ref": "#/definitions/java.util.List<blackboard.platform.rest.util.IdTORest>"
+        },
+        "groupIds": {
+            "description": "Search for user exceptions associated with these groups Ids.\n\n**Since**: 3900.103.0",
+            "$ref": "#/definitions/java.util.List<blackboard.platform.rest.util.IdTORest>"
+        },
+        "fullDetails": {
+            "type": "boolean",
+            "description": "If true, the full details of the user exceptions will be returned.\n\n**Since**: 3900.103.0"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "ColumnExceptionsGetExceptionsByIdsRequest",
     isMultipart: false,
     originalName: "getExceptionsByIds",
@@ -85,6 +108,12 @@ export const ColumnExceptionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.gradebook.publicapi.v1.GradableItemOverride",
+    "typeName": "BlackboardWebappsGradebookPublicapiV1GradableItemOverride"
+},
     requestType: "ColumnExceptionsGetUserExceptionRequest",
     isMultipart: false,
     originalName: "getUserException",
@@ -123,6 +152,69 @@ export const ColumnExceptionsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "courseId": {
+            "type": "string",
+            "description": "ID of the course that this exception is associated with."
+        },
+        "columnId": {
+            "type": "string",
+            "description": "ID of the column that this exception is associated with."
+        },
+        "userId": {
+            "type": "string",
+            "description": "The user ID associated with this exception. If null check the group ID."
+        },
+        "gradableItemUserOptions": {
+            "type": "object",
+            "description": "Settings controlling date exception options of the gradable item to student.",
+            "title": "blackboard.webapps.gradebook.publicapi.v1.GradableItemOverrideV1.GradableItemUserOptions",
+            "properties": {
+                "fixedDueDate": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Fixed due date. Only used if Due Date Exception Type is LIMITED_FIXED."
+                },
+                "dueDateExceptionType": {
+                    "type": "string",
+                    "description": "The type of due date exception granted to this user.\n\nPossible values are:\n\n- NORMAL : The user/group has no due date exception, meaning the gradable item's due date applies to them.\n- LIMITED_FIXED : The user/group has a due date exception which is fixed or static, meaning that if the gradable item's due date changes, this exceptional due date will not.\n\n\n| Type      | Description\n | --------- | --------- |\n| Normal | The user/group has no due date exception, meaning the gradable item's due date applies to them. |\n| LimitedFixed | The user/group has a due date exception which is fixed or static, meaning that if the gradable item's due date changes, this exceptional due date will not. |\n| LimitedRelative | The user/group has a due date exception which is relative to the gradable item's due date, meaning that if the latter changes, then so does the former. |\n| Unlimited | The user/group has no due date, meaning the gradable item will never be marked as late for them. |\n",
+                    "enum": [
+                        "Normal",
+                        "LimitedFixed",
+                        "LimitedRelative",
+                        "Unlimited"
+                    ]
+                }
+            }
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling exceptional availability of the content to students. It only applies for assessment gradable items.",
+            "title": "blackboard.webapps.gradebook.publicapi.v1.GradableItemOverrideV1.Availability",
+            "properties": {}
+        },
+        "assessmentUserOptions": {
+            "type": "object",
+            "description": "Settings controlling exception options of the assessment to students. It only applies for assessment gradable items.",
+            "title": "blackboard.webapps.gradebook.publicapi.v1.GradableItemOverrideV1.AssessmentUserOptions",
+            "properties": {
+                "attempts": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "The number of attempts allowed for related user. This will be null or absent if there are no overrides for the user/group it means the content item attempts will apply. Zero value means unlimited attempts. Negative values are not allowed."
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.gradebook.publicapi.v1.GradableItemOverrideV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsGradebookPublicapiV1GradableItemOverrideV1"
+},
     requestType: "ColumnExceptionsPutExceptionsRequest",
     isMultipart: false,
     originalName: "putExceptions",
@@ -148,6 +240,8 @@ export const ColumnExceptionsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "ColumnExceptionsDeleteUserExceptionRequest",
     isMultipart: false,
     originalName: "deleteUserException",

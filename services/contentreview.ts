@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -41,6 +41,12 @@ export const ContentReviewMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.content.ReviewStatus",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentReviewStatus"
+},
     requestType: "ContentReviewGetReviewStatusRequest",
     isMultipart: false,
     originalName: "getReviewStatus",
@@ -79,6 +85,21 @@ export const ContentReviewMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "reviewed": {
+            "type": "boolean",
+            "description": "The current status of the content's 'reviewed' attribute.\n\n**Since**: 3700.16.0"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.content.ReviewStatus",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentReviewStatus"
+},
     requestType: "ContentReviewUpdateReviewStatusRequest",
     isMultipart: false,
     originalName: "updateReviewStatus",

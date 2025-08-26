@@ -69,7 +69,9 @@ The Blackboard Learn MCP Server provides a streamlined set of tools for interact
 | Tool | Description | Primary Use |
 |------|-------------|------------|
 | `get_service_info` | Discover methods available for a service | Exploration and discovery |
-| `get_type_info` | Get detailed parameter requirements | Request preparation |
+| `get_type_info` | Get detailed parameter requirements and schemas | Request preparation |
+| `get_type_definition` | Get complete type definitions for complex types | Understanding data structures |
+| `get_all_types` | List all available TypeScript type names | Type discovery |
 | `make_api_request` | Execute API calls to Blackboard Learn | Performing operations |
 
 ## Service Catalog
@@ -160,6 +162,37 @@ The generated services provide comprehensive coverage of Blackboard Learn's REST
 - **Assessment**: Rubrics, evaluations, proctoring, attendance
 - **Integration**: OAuth, LTI, webhooks, data sources
 - **Administration**: System settings, institutional hierarchy
+
+## Type Map & Schema Support
+
+The Blackboard Learn MCP Server includes comprehensive type map functionality to help LLMs understand API data structures:
+
+### Generated Types
+- **159 TypeScript type definitions** from Blackboard Learn's API specification
+- **Complete schema information** for request/response bodies
+- **Runtime type lookup** for understanding complex data structures
+
+### LLM Integration
+The type system provides enhanced tools for AI assistants:
+
+1. **Schema-aware method info**: `get_type_info` returns detailed schemas
+2. **Type definition lookup**: `get_type_definition` provides complete type structures  
+3. **Type discovery**: `get_all_types` lists all available types
+4. **Smart error handling**: Suggests similar types when lookups fail
+
+### Automatic Generation
+```bash
+# Generate types and services
+npm run generate
+
+# Generate types only
+npm run generate-types
+
+# Generate services only  
+npm run generate-services
+```
+
+For detailed documentation about the type system, see [TYPE-MAP-DOCS.md](TYPE-MAP-DOCS.md).
 
 ## Contributing
 

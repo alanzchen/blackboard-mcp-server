@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -113,6 +113,12 @@ export const CourseMembershipsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseMembershipsGetCourseMembershipsRequest",
     isMultipart: false,
     originalName: "getCourseMemberships",
@@ -151,6 +157,12 @@ export const CourseMembershipsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.memberships.CourseMembership",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1MembershipsCourseMembership"
+},
     requestType: "CourseMembershipsGetMembershipRequest",
     isMultipart: false,
     originalName: "getMembership",
@@ -183,6 +195,47 @@ export const CourseMembershipsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "childCourseId": {
+            "type": "string",
+            "description": "The primary ID of the child, cross-listed course, in which the user is directly enrolled. </p> This field is read only in Learn versions 3000.11.0 through 3400.0.0. As of 3400.1.0, this field is mutable.  </p> If this membership's course is a parent course in a cross-listed set, the childCourseId can be updated to move the membership enrollment between child courses and the parent course in  the set.  Patching the childCourseId to \"null\" will move the membership to the parent course.\n\n**Since**: 3000.11.0"
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this course.  This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "availability": {
+            "description": "Settings controlling availability of the course membership.",
+            "$ref": "#/definitions/blackboard.webapps.blackboard.publicapi.v1.memberships.Availability"
+        },
+        "courseRoleId": {
+            "type": "string",
+            "description": "The user's role in the course.\n\nThese roles are also valid for an organization, although they are named differently in the UI.\n\nCustom course roles may also be referenced by their IDs.\n\n\n| Type      | Description\n | --------- | --------- |\n| Instructor | Has access to all areas in the Control Panel. This role is generally given to those developing, teaching, or facilitating the class. Instructors may access a course that is unavailable to students. This role is customizable and may have different capabilities from what is documented here. |\n| BbFacilitator | The facilitator is an instructor like role. Facilitators are restricted versions of an instructor, in that they are able to deliver course instruction and administer all aspects of a pre-constructed course, but are not allowed to modify or alter the course. This role is customizable and may have different capabilities from what is documented here. |\n| TeachingAssistant | The teaching assistant role is that of a co-teacher. Teaching assistants are able to administer all areas of a course. Their only limitations are those imposed by the instructor or Blackboard administrator at your school. This role is customizable and may have different capabilities from what is documented here. |\n| CourseBuilder | Manages the course without having access to student grades. This role is customizable and may have different capabilities from what is documented here. |\n| Grader | Assists the instructor in the creation, management, delivery, and grading of items. This role is customizable and may have different capabilities from what is documented here. |\n| Student |  |\n| Guest | Has no access to the Control Panel. Areas within the course are made available to guests, but typically they can only view course materials; they do not have access to tests or assessments, and do not have permission to post on discussion boards. This role's behavior is immutable. |\n",
+            "enum": [
+                "Instructor",
+                "BbFacilitator",
+                "TeachingAssistant",
+                "CourseBuilder",
+                "Grader",
+                "Student",
+                "Guest"
+            ]
+        },
+        "displayOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "For primary instructor implementation, position or displayOrder cannot be negative, the minimum position is 1, with which is the primary instructor (aka. Leader instructor). Multiple primary instructor have the same displayOrder 1.\n\nThis operation only takes effect when the course role is non-student and non-guest roles, otherwise it's silently ignored, since <code>displayOrder</code> is for this design.\n\nAll cases violating the above restrictions will be set as <code>null</code> All display orders don't keep uniqueness, just save as-is."
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.memberships.CourseMembershipV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1MembershipsCourseMembershipV1"
+},
     requestType: "CourseMembershipsCreateMembershipRequest",
     isMultipart: false,
     originalName: "createMembership",
@@ -208,6 +261,8 @@ export const CourseMembershipsMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "CourseMembershipsDeleteMembershipRequest",
     isMultipart: false,
     originalName: "deleteMembership",
@@ -240,6 +295,47 @@ export const CourseMembershipsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "childCourseId": {
+            "type": "string",
+            "description": "The primary ID of the child, cross-listed course, in which the user is directly enrolled. </p> This field is read only in Learn versions 3000.11.0 through 3400.0.0. As of 3400.1.0, this field is mutable.  </p> If this membership's course is a parent course in a cross-listed set, the childCourseId can be updated to move the membership enrollment between child courses and the parent course in  the set.  Patching the childCourseId to \"null\" will move the membership to the parent course.\n\n**Since**: 3000.11.0"
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this course.  This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "availability": {
+            "description": "Settings controlling availability of the course membership.",
+            "$ref": "#/definitions/blackboard.webapps.blackboard.publicapi.v1.memberships.Availability"
+        },
+        "courseRoleId": {
+            "type": "string",
+            "description": "The user's role in the course.\n\nThese roles are also valid for an organization, although they are named differently in the UI.\n\nCustom course roles may also be referenced by their IDs.\n\n\n| Type      | Description\n | --------- | --------- |\n| Instructor | Has access to all areas in the Control Panel. This role is generally given to those developing, teaching, or facilitating the class. Instructors may access a course that is unavailable to students. This role is customizable and may have different capabilities from what is documented here. |\n| BbFacilitator | The facilitator is an instructor like role. Facilitators are restricted versions of an instructor, in that they are able to deliver course instruction and administer all aspects of a pre-constructed course, but are not allowed to modify or alter the course. This role is customizable and may have different capabilities from what is documented here. |\n| TeachingAssistant | The teaching assistant role is that of a co-teacher. Teaching assistants are able to administer all areas of a course. Their only limitations are those imposed by the instructor or Blackboard administrator at your school. This role is customizable and may have different capabilities from what is documented here. |\n| CourseBuilder | Manages the course without having access to student grades. This role is customizable and may have different capabilities from what is documented here. |\n| Grader | Assists the instructor in the creation, management, delivery, and grading of items. This role is customizable and may have different capabilities from what is documented here. |\n| Student |  |\n| Guest | Has no access to the Control Panel. Areas within the course are made available to guests, but typically they can only view course materials; they do not have access to tests or assessments, and do not have permission to post on discussion boards. This role's behavior is immutable. |\n",
+            "enum": [
+                "Instructor",
+                "BbFacilitator",
+                "TeachingAssistant",
+                "CourseBuilder",
+                "Grader",
+                "Student",
+                "Guest"
+            ]
+        },
+        "displayOrder": {
+            "type": "integer",
+            "format": "int32",
+            "description": "For primary instructor implementation, position or displayOrder cannot be negative, the minimum position is 1, with which is the primary instructor (aka. Leader instructor). Multiple primary instructor have the same displayOrder 1.\n\nThis operation only takes effect when the course role is non-student and non-guest roles, otherwise it's silently ignored, since <code>displayOrder</code> is for this design.\n\nAll cases violating the above restrictions will be set as <code>null</code> All display orders don't keep uniqueness, just save as-is."
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.memberships.CourseMembership",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1MembershipsCourseMembership"
+},
     requestType: "CourseMembershipsUpdateMembershipRequest",
     isMultipart: false,
     originalName: "updateMembership",
@@ -350,6 +446,12 @@ export const CourseMembershipsMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseMembershipsGetUserMembershipsRequest",
     isMultipart: false,
     originalName: "getUserMemberships",

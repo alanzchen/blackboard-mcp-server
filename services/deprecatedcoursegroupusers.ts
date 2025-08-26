@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -53,6 +53,12 @@ export const DeprecatedCourseGroupUsersMethods: { [key: string]: ApiMethodInfo }
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "DeprecatedCourseGroupUsersGetGroupMembershipsRequest",
     isMultipart: false,
     originalName: "getGroupMemberships",
@@ -91,6 +97,12 @@ export const DeprecatedCourseGroupUsersMethods: { [key: string]: ApiMethodInfo }
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.groupspace.publicapi.v1.groups.GroupMembership",
+    "typeName": "BlackboardPluginGroupspacePublicapiV1GroupsGroupMembership"
+},
     requestType: "DeprecatedCourseGroupUsersGetGroupMembershipRequest",
     isMultipart: false,
     originalName: "getGroupMembership",
@@ -129,6 +141,12 @@ export const DeprecatedCourseGroupUsersMethods: { [key: string]: ApiMethodInfo }
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.groupspace.publicapi.v1.groups.GroupMembershipV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginGroupspacePublicapiV1GroupsGroupMembershipV1"
+},
     requestType: "DeprecatedCourseGroupUsersCreateGroupMembershipRequest",
     isMultipart: false,
     originalName: "createGroupMembership",
@@ -160,6 +178,8 @@ export const DeprecatedCourseGroupUsersMethods: { [key: string]: ApiMethodInfo }
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "DeprecatedCourseGroupUsersDeleteGroupMembershipRequest",
     isMultipart: false,
     originalName: "deleteGroupMembership",

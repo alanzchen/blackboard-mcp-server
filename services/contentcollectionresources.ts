@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -88,6 +88,21 @@ export const ContentCollectionResourcesMethods: { [key: string]: ApiMethodInfo }
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {
+        "statusCode": {
+            "readOnly": true,
+            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
+        },
+        "statusCodeValue": {
+            "readOnly": true,
+            "$ref": "#/definitions/int"
+        }
+    },
+    "description": ""
+},
     requestType: "ContentCollectionResourcesGetResourcesRequest",
     isMultipart: false,
     originalName: "getResources",
@@ -114,6 +129,12 @@ export const ContentCollectionResourcesMethods: { [key: string]: ApiMethodInfo }
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.contentCollection.ContentCollectionResource",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1ContentCollectionContentCollectionResource"
+},
     requestType: "ContentCollectionResourcesGetContentCollectionResourceRequest",
     isMultipart: false,
     originalName: "getContentCollectionResource",
@@ -206,6 +227,21 @@ export const ContentCollectionResourcesMethods: { [key: string]: ApiMethodInfo }
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {
+        "statusCode": {
+            "readOnly": true,
+            "$ref": "#/definitions/org.springframework.http.HttpStatusEnum"
+        },
+        "statusCodeValue": {
+            "readOnly": true,
+            "$ref": "#/definitions/int"
+        }
+    },
+    "description": ""
+},
     requestType: "ContentCollectionResourcesGetResourceChildrenRequest",
     isMultipart: false,
     originalName: "getResourceChildren",

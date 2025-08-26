@@ -13,6 +13,24 @@ export interface ApiParameter {
 }
 
 /**
+ * Schema information for request/response bodies
+ */
+export interface ApiSchema {
+  /** Schema type */
+  type: string;
+  /** Type reference (for complex types) */
+  ref?: string;
+  /** TypeScript type name */
+  typeName?: string;
+  /** Schema properties (for object types) */
+  properties?: Record<string, any>;
+  /** Description */
+  description?: string;
+  /** Array item schema (for array types) */
+  items?: ApiSchema;
+}
+
+/**
  * API method information
  */
 export interface ApiMethodInfo {
@@ -26,6 +44,10 @@ export interface ApiMethodInfo {
   pathParams: ApiParameter[];
   /** Query parameters */
   queryParams: ApiParameter[];
+  /** Request body schema */
+  requestBodySchema?: ApiSchema | null;
+  /** Response schema */
+  responseSchema?: ApiSchema | null;
   /** Request type name */
   requestType: string;
   /** Whether this is a multipart request */

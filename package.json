@@ -16,7 +16,9 @@
     "prepare": "npm run build",
     "watch": "tsc --watch",
     "start": "node dist/index.js start",
-    "generate-services": "node scripts/generate-services.js"
+    "generate-services": "node scripts/generate-services.js",
+    "generate-types": "node scripts/generate-types.js",
+    "generate": "npm run generate-types && npm run generate-services"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.5.0",

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -53,6 +53,12 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "AttendanceGetCourseMeetingsRequest",
     isMultipart: false,
     originalName: "getCourseMeetings",
@@ -79,6 +85,43 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "courseId": {
+            "type": "string",
+            "description": "The primary ID of the course."
+        },
+        "title": {
+            "type": "string",
+            "description": "The title of the meeting"
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the meeting"
+        },
+        "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The start time of meeting"
+        },
+        "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The end time of meeting"
+        },
+        "externalLink": {
+            "type": "string",
+            "description": "The externalLink of course meeting"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.attendance.publicapi.v1.CourseMeetingV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginAttendancePublicapiV1CourseMeetingV1"
+},
     requestType: "AttendanceCreateCourseMeetingRequest",
     isMultipart: false,
     originalName: "createCourseMeeting",
@@ -98,6 +141,8 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "AttendanceDeleteAllMeetingsInCourseRequest",
     isMultipart: false,
     originalName: "deleteAllMeetingsInCourse",
@@ -124,6 +169,12 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.attendance.publicapi.v1.download.AttendanceDataDownloadUrl",
+    "typeName": "BlackboardPluginAttendancePublicapiV1DownloadAttendanceDataDownloadUrl"
+},
     requestType: "AttendanceGenerateAttendanceDataDownloadUrlRequest",
     isMultipart: false,
     originalName: "generateAttendanceDataDownloadUrl",
@@ -180,6 +231,12 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "AttendanceGetAttendanceRecordsByUserIdRequest",
     isMultipart: false,
     originalName: "getAttendanceRecordsByUserId",
@@ -205,6 +262,8 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "AttendanceDeleteAllAttendanceRecordsByCourseAndUserIdRequest",
     isMultipart: false,
     originalName: "deleteAllAttendanceRecordsByCourseAndUserId",
@@ -230,6 +289,8 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "AttendanceDeleteAllAttendanceByUserIdRequest",
     isMultipart: false,
     originalName: "deleteAllAttendanceByUserId",
@@ -256,6 +317,12 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.attendance.publicapi.v1.CourseMeeting",
+    "typeName": "BlackboardPluginAttendancePublicapiV1CourseMeeting"
+},
     requestType: "AttendanceGetCourseMeetingRequest",
     isMultipart: false,
     originalName: "getCourseMeeting",
@@ -281,6 +348,8 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "AttendanceDeleteCourseMeetingRequest",
     isMultipart: false,
     originalName: "deleteCourseMeeting",
@@ -313,6 +382,43 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "courseId": {
+            "type": "string",
+            "description": "The primary ID of the course."
+        },
+        "title": {
+            "type": "string",
+            "description": "The title of the meeting"
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the meeting"
+        },
+        "start": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The start time of meeting"
+        },
+        "end": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The end time of meeting"
+        },
+        "externalLink": {
+            "type": "string",
+            "description": "The externalLink of course meeting"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.attendance.publicapi.v1.CourseMeeting",
+    "typeName": "BlackboardPluginAttendancePublicapiV1CourseMeeting"
+},
     requestType: "AttendanceUpdateCourseMeetingRequest",
     isMultipart: false,
     originalName: "updateCourseMeeting",
@@ -369,6 +475,12 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "AttendanceGetAttendanceRecordsByMeetingIdRequest",
     isMultipart: false,
     originalName: "getAttendanceRecordsByMeetingId",
@@ -401,6 +513,35 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "meetingId": {
+            "type": "string",
+            "description": "The primary id of the meeting."
+        },
+        "userId": {
+            "type": "string",
+            "description": "The learn external id of the user."
+        },
+        "status": {
+            "type": "string",
+            "description": "The attendance status of the user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Absent |  |\n| Late |  |\n| Present |  |\n| Excused |  |\n",
+            "enum": [
+                "Absent",
+                "Late",
+                "Present",
+                "Excused"
+            ]
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.plugin.attendance.publicapi.v1.AttendanceRecordV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardPluginAttendancePublicapiV1AttendanceRecordV1"
+},
     requestType: "AttendanceCreateAttendanceRecordRequest",
     isMultipart: false,
     originalName: "createAttendanceRecord",
@@ -426,6 +567,8 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "AttendanceDeleteAllRecordsInMeetingRequest",
     isMultipart: false,
     originalName: "deleteAllRecordsInMeeting",
@@ -458,6 +601,31 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "meetingId": {
+            "type": "string",
+            "description": "The primary id of the meeting."
+        },
+        "userId": {
+            "type": "string",
+            "description": "The learn external id of the user."
+        },
+        "status": {
+            "type": "string",
+            "description": "The attendance status of the user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Absent |  |\n| Late |  |\n| Present |  |\n| Excused |  |\n",
+            "enum": [
+                "Absent",
+                "Late",
+                "Present",
+                "Excused"
+            ]
+        }
+    },
+    "description": ""
+},
+    responseSchema: null,
     requestType: "AttendanceUpdateAttendanceRecordsRequest",
     isMultipart: false,
     originalName: "updateAttendanceRecords",
@@ -496,6 +664,12 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.attendance.publicapi.v1.AttendanceRecord",
+    "typeName": "BlackboardPluginAttendancePublicapiV1AttendanceRecord"
+},
     requestType: "AttendanceGetAttendanceRecordRequest",
     isMultipart: false,
     originalName: "getAttendanceRecord",
@@ -527,6 +701,8 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "AttendanceDeleteAttendanceRecordRequest",
     isMultipart: false,
     originalName: "deleteAttendanceRecord",
@@ -565,6 +741,35 @@ export const AttendanceMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "meetingId": {
+            "type": "string",
+            "description": "The primary id of the meeting."
+        },
+        "userId": {
+            "type": "string",
+            "description": "The learn external id of the user."
+        },
+        "status": {
+            "type": "string",
+            "description": "The attendance status of the user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Absent |  |\n| Late |  |\n| Present |  |\n| Excused |  |\n",
+            "enum": [
+                "Absent",
+                "Late",
+                "Present",
+                "Excused"
+            ]
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.plugin.attendance.publicapi.v1.AttendanceRecord",
+    "typeName": "BlackboardPluginAttendancePublicapiV1AttendanceRecord"
+},
     requestType: "AttendanceUpdateAttendanceRecordRequest",
     isMultipart: false,
     originalName: "updateAttendanceRecord",

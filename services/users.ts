@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -130,6 +130,12 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "UsersGetUsersRequest",
     isMultipart: false,
     originalName: "getUsers",
@@ -149,6 +155,317 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "externalId": {
+            "type": "string",
+            "description": "An optional externally-defined unique ID for the user.  Defaults to the userName.\n\nFormerly known as 'batchUid'.",
+            "maxLength": 256
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this user.  This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "userName": {
+            "type": "string",
+            "description": "The userName property, shown in the UI."
+        },
+        "studentId": {
+            "type": "string",
+            "description": "The user's student ID name or number as defined by the school or institution.",
+            "maxLength": 100
+        },
+        "password": {
+            "type": "string",
+            "description": "The user's login password."
+        },
+        "educationLevel": {
+            "type": "string",
+            "description": "The education level of this user.\n\n\n| Type      | Description\n | --------- | --------- |\n| K8 | Kindergarten through 8th grade |\n| HighSchool | Grades 9 through 12. |\n| Freshman | College or university freshman. |\n| Sophomore | College or university sophomore. |\n| Junior | College or university junior. |\n| Senior | College or university senior. |\n| GraduateSchool | Graduate school student. |\n| PostGraduateSchool | Post-graduate school student. |\n| Unknown | Education Level is not known, or not specified. |\n",
+            "enum": [
+                "K8",
+                "HighSchool",
+                "Freshman",
+                "Sophomore",
+                "Junior",
+                "Senior",
+                "GraduateSchool",
+                "PostGraduateSchool",
+                "Unknown"
+            ]
+        },
+        "gender": {
+            "type": "string",
+            "description": "The gender of this user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Female | Female |\n| Male | Male |\n| Other | Other  **Since**: 3900.32.0 |\n| Unknown | Gender is not known, or not specified. |\n",
+            "enum": [
+                "Female",
+                "Male",
+                "Other",
+                "Unknown"
+            ]
+        },
+        "pronouns": {
+            "type": "string",
+            "description": "The pronouns of this user.\n\n**Since**: 3900.27.0",
+            "maxLength": 1000
+        },
+        "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The birth date of this user. Only the date portion of this value has significance, since a person's birthdate represents a full day and not a moment in time. Take care to ignore the zeroed time portion when deserializing this value to ensure it's not converted to the previous calendar day if your local time zone has a negative UTC offset."
+        },
+        "institutionRoleIds": {
+            "description": "The primary and secondary institution roles assigned to this user. The primary institution role is the first item in the list, followed by all secondary institution roles sorted alphabetically.\n\n**Since**: 3300.3.0",
+            "$ref": "#/definitions/java.util.List<java.lang.String>"
+        },
+        "systemRoleIds": {
+            "description": "The system roles (the administrative user roles in the UI) for this user.  The first role in this list is the user's primary system role, while the remaining are secondary system roles.",
+            "$ref": "#/definitions/java.util.List<blackboard.data.user.User.SystemRole>"
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling availability of the user account.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Availability",
+            "properties": {
+                "available": {
+                    "type": "string",
+                    "description": "Whether the user is available within the system. Unavailable users cannot log in.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n",
+                    "enum": [
+                        "Yes",
+                        "No",
+                        "Disabled"
+                    ]
+                }
+            }
+        },
+        "name": {
+            "type": "object",
+            "description": "Properties used to build the user's display name.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Name",
+            "properties": {
+                "given": {
+                    "type": "string",
+                    "description": "The given (first) name of this user.",
+                    "maxLength": 100
+                },
+                "family": {
+                    "type": "string",
+                    "description": "The family (last) name of this user.",
+                    "maxLength": 100
+                },
+                "middle": {
+                    "type": "string",
+                    "description": "The middle name of this user.",
+                    "maxLength": 100
+                },
+                "other": {
+                    "type": "string",
+                    "description": "The other name (nickname) of this user.",
+                    "maxLength": 100
+                },
+                "suffix": {
+                    "type": "string",
+                    "description": "The suffix of this user's name.  Examples: Jr., III, PhD.",
+                    "maxLength": 100
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of this user.  Examples: Mr., Ms., Dr.",
+                    "maxLength": 100
+                },
+                "preferredDisplayName": {
+                    "type": "string",
+                    "description": "The preferred display name of this user.\n\n**Since**: 3900.48.0\n\n\n| Type      | Description\n | --------- | --------- |\n| GivenName | User requests displaying givenName when formatting names for display. This is the default behavior. |\n| OtherName | User requests displaying otherName when formatting names for display. |\n| Both | User requests displaying otherName and givenName when formatting names for display. |\n",
+                    "enum": [
+                        "GivenName",
+                        "OtherName",
+                        "Both"
+                    ]
+                }
+            },
+            "required": [
+                "family",
+                "given"
+            ]
+        },
+        "job": {
+            "type": "object",
+            "description": "The user's job information.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Job",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The user's job title.",
+                    "maxLength": 100
+                },
+                "department": {
+                    "type": "string",
+                    "description": "The department the user belongs to.",
+                    "maxLength": 100
+                },
+                "company": {
+                    "type": "string",
+                    "description": "The company the user works for.",
+                    "maxLength": 100
+                }
+            }
+        },
+        "contact": {
+            "type": "object",
+            "description": "The user's contact information.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Contact",
+            "properties": {
+                "homePhone": {
+                    "type": "string",
+                    "description": "The user's home phone number.",
+                    "maxLength": 50
+                },
+                "mobilePhone": {
+                    "type": "string",
+                    "description": "The user's mobile phone number.",
+                    "maxLength": 50
+                },
+                "businessPhone": {
+                    "type": "string",
+                    "description": "The user's business phone number.",
+                    "maxLength": 50
+                },
+                "businessFax": {
+                    "type": "string",
+                    "description": "The user's business fax number.",
+                    "maxLength": 50
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The user's email address.",
+                    "maxLength": 100
+                },
+                "institutionEmail": {
+                    "type": "string",
+                    "description": "The user's institutional email address.\n\n**Since**: 3900.19.0",
+                    "maxLength": 254
+                },
+                "webPage": {
+                    "type": "string",
+                    "description": "The URL of the user's personal website.",
+                    "maxLength": 100
+                }
+            }
+        },
+        "address": {
+            "type": "object",
+            "description": "The user's mailing address.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Address",
+            "properties": {
+                "street1": {
+                    "type": "string",
+                    "description": "The street address of the user.",
+                    "maxLength": 100
+                },
+                "street2": {
+                    "type": "string",
+                    "description": "An additional field to store the street address of the user.",
+                    "maxLength": 100
+                },
+                "city": {
+                    "type": "string",
+                    "description": "The city the user resides in.",
+                    "maxLength": 50
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state or province the user resides in.",
+                    "maxLength": 50
+                },
+                "zipCode": {
+                    "type": "string",
+                    "description": "The zip code or postal code the user resides in.",
+                    "maxLength": 50
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The country the user resides in.",
+                    "maxLength": 50
+                }
+            }
+        },
+        "locale": {
+            "type": "object",
+            "description": "The user's localization settings.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Locale",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The locale specified by the user.  This locale will be used anywhere the user is allowed to customize their locale; courses may force a specific locale, overriding the user's locale preference."
+                },
+                "calendar": {
+                    "type": "string",
+                    "description": "The calendar type specified by the user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Gregorian | Gregorian |\n| GregorianHijri | Gregorian &amp; Hijri |\n| Hijri | Hijri |\n| HijriGregorian | Hijri &amp; Gregorian |\n",
+                    "enum": [
+                        "Gregorian",
+                        "GregorianHijri",
+                        "Hijri",
+                        "HijriGregorian"
+                    ]
+                },
+                "firstDayOfWeek": {
+                    "type": "string",
+                    "description": "The user's preferred first day of the week.\n\n\n| Type      | Description\n | --------- | --------- |\n| 0 | Sunday |\n| 1 | Monday |\n| 6 | Saturday |\n",
+                    "enum": [
+                        "0",
+                        "1",
+                        "6"
+                    ]
+                }
+            }
+        },
+        "avatar": {
+            "type": "object",
+            "description": "The user's avatar metadata\n\n**Since**: 3800.13.0",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.AvatarTOPub",
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "description": "The source of the user's avatar\n\n**Since**: 3800.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Default | The server default avatar |\n| User | The user set his/her own avatar |\n| System | A privileged user set the user's avatar to something other than default |\n",
+                    "enum": [
+                        "Default",
+                        "User",
+                        "System"
+                    ]
+                },
+                "uploadId": {
+                    "type": "string",
+                    "description": "The upload id of the avatar image file, if referencing a newly-uploaded file\n\n**Since**: 3800.13.0"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The resource file id of the user's avatar, if referencing a Content Collection Resource\n\n**Since**: 3900.50.0"
+                }
+            }
+        },
+        "pronunciation": {
+            "type": "string",
+            "description": "Pronunciation text for user's name\n\n**Since**: 3900.32.0"
+        },
+        "pronunciationAudio": {
+            "type": "object",
+            "description": "Pronunciation Audio file for user's name\n\n**Since**: 3900.32.0",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.PronunciationAudioTOPub",
+            "properties": {
+                "uploadId": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.users.UserV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1UsersUserV1"
+},
     requestType: "UsersCreateUserRequest",
     isMultipart: false,
     originalName: "createUser",
@@ -175,6 +492,12 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.users.User",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1UsersUser"
+},
     requestType: "UsersGetUserRequest",
     isMultipart: false,
     originalName: "getUser",
@@ -201,6 +524,8 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "UsersDeleteUserRequest",
     isMultipart: false,
     originalName: "deleteUser",
@@ -227,6 +552,313 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "externalId": {
+            "type": "string",
+            "description": "An optional externally-defined unique ID for the user.  Defaults to the userName.\n\nFormerly known as 'batchUid'.",
+            "maxLength": 256
+        },
+        "dataSourceId": {
+            "type": "string",
+            "description": "The ID of the data source associated with this user.  This may optionally be the data source's externalId using the syntax \"externalId:math101\"."
+        },
+        "userName": {
+            "type": "string",
+            "description": "The userName property, shown in the UI."
+        },
+        "studentId": {
+            "type": "string",
+            "description": "The user's student ID name or number as defined by the school or institution.",
+            "maxLength": 100
+        },
+        "password": {
+            "type": "string",
+            "description": "The user's login password."
+        },
+        "educationLevel": {
+            "type": "string",
+            "description": "The education level of this user.\n\n\n| Type      | Description\n | --------- | --------- |\n| K8 | Kindergarten through 8th grade |\n| HighSchool | Grades 9 through 12. |\n| Freshman | College or university freshman. |\n| Sophomore | College or university sophomore. |\n| Junior | College or university junior. |\n| Senior | College or university senior. |\n| GraduateSchool | Graduate school student. |\n| PostGraduateSchool | Post-graduate school student. |\n| Unknown | Education Level is not known, or not specified. |\n",
+            "enum": [
+                "K8",
+                "HighSchool",
+                "Freshman",
+                "Sophomore",
+                "Junior",
+                "Senior",
+                "GraduateSchool",
+                "PostGraduateSchool",
+                "Unknown"
+            ]
+        },
+        "gender": {
+            "type": "string",
+            "description": "The gender of this user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Female | Female |\n| Male | Male |\n| Other | Other  **Since**: 3900.32.0 |\n| Unknown | Gender is not known, or not specified. |\n",
+            "enum": [
+                "Female",
+                "Male",
+                "Other",
+                "Unknown"
+            ]
+        },
+        "pronouns": {
+            "type": "string",
+            "description": "The pronouns of this user.\n\n**Since**: 3900.27.0",
+            "maxLength": 1000
+        },
+        "birthDate": {
+            "type": "string",
+            "format": "date-time",
+            "description": "The birth date of this user. Only the date portion of this value has significance, since a person's birthdate represents a full day and not a moment in time. Take care to ignore the zeroed time portion when deserializing this value to ensure it's not converted to the previous calendar day if your local time zone has a negative UTC offset."
+        },
+        "institutionRoleIds": {
+            "description": "The primary and secondary institution roles assigned to this user. The primary institution role is the first item in the list, followed by all secondary institution roles sorted alphabetically.\n\n**Since**: 3300.3.0",
+            "$ref": "#/definitions/java.util.List<java.lang.String>"
+        },
+        "systemRoleIds": {
+            "description": "The system roles (the administrative user roles in the UI) for this user.  The first role in this list is the user's primary system role, while the remaining are secondary system roles.",
+            "$ref": "#/definitions/java.util.List<blackboard.data.user.User.SystemRole>"
+        },
+        "availability": {
+            "type": "object",
+            "description": "Settings controlling availability of the user account.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Availability",
+            "properties": {
+                "available": {
+                    "type": "string",
+                    "description": "Whether the user is available within the system. Unavailable users cannot log in.\n\n\n| Type      | Description\n | --------- | --------- |\n| Yes |  |\n| No |  |\n| Disabled |   **Since**: 3100.0.0 |\n",
+                    "enum": [
+                        "Yes",
+                        "No",
+                        "Disabled"
+                    ]
+                }
+            }
+        },
+        "name": {
+            "type": "object",
+            "description": "Properties used to build the user's display name.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Name",
+            "properties": {
+                "given": {
+                    "type": "string",
+                    "description": "The given (first) name of this user.",
+                    "maxLength": 100
+                },
+                "family": {
+                    "type": "string",
+                    "description": "The family (last) name of this user.",
+                    "maxLength": 100
+                },
+                "middle": {
+                    "type": "string",
+                    "description": "The middle name of this user.",
+                    "maxLength": 100
+                },
+                "other": {
+                    "type": "string",
+                    "description": "The other name (nickname) of this user.",
+                    "maxLength": 100
+                },
+                "suffix": {
+                    "type": "string",
+                    "description": "The suffix of this user's name.  Examples: Jr., III, PhD.",
+                    "maxLength": 100
+                },
+                "title": {
+                    "type": "string",
+                    "description": "The title of this user.  Examples: Mr., Ms., Dr.",
+                    "maxLength": 100
+                },
+                "preferredDisplayName": {
+                    "type": "string",
+                    "description": "The preferred display name of this user.\n\n**Since**: 3900.48.0\n\n\n| Type      | Description\n | --------- | --------- |\n| GivenName | User requests displaying givenName when formatting names for display. This is the default behavior. |\n| OtherName | User requests displaying otherName when formatting names for display. |\n| Both | User requests displaying otherName and givenName when formatting names for display. |\n",
+                    "enum": [
+                        "GivenName",
+                        "OtherName",
+                        "Both"
+                    ]
+                }
+            }
+        },
+        "job": {
+            "type": "object",
+            "description": "The user's job information.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Job",
+            "properties": {
+                "title": {
+                    "type": "string",
+                    "description": "The user's job title.",
+                    "maxLength": 100
+                },
+                "department": {
+                    "type": "string",
+                    "description": "The department the user belongs to.",
+                    "maxLength": 100
+                },
+                "company": {
+                    "type": "string",
+                    "description": "The company the user works for.",
+                    "maxLength": 100
+                }
+            }
+        },
+        "contact": {
+            "type": "object",
+            "description": "The user's contact information.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Contact",
+            "properties": {
+                "homePhone": {
+                    "type": "string",
+                    "description": "The user's home phone number.",
+                    "maxLength": 50
+                },
+                "mobilePhone": {
+                    "type": "string",
+                    "description": "The user's mobile phone number.",
+                    "maxLength": 50
+                },
+                "businessPhone": {
+                    "type": "string",
+                    "description": "The user's business phone number.",
+                    "maxLength": 50
+                },
+                "businessFax": {
+                    "type": "string",
+                    "description": "The user's business fax number.",
+                    "maxLength": 50
+                },
+                "email": {
+                    "type": "string",
+                    "description": "The user's email address.",
+                    "maxLength": 100
+                },
+                "institutionEmail": {
+                    "type": "string",
+                    "description": "The user's institutional email address.\n\n**Since**: 3900.19.0",
+                    "maxLength": 254
+                },
+                "webPage": {
+                    "type": "string",
+                    "description": "The URL of the user's personal website.",
+                    "maxLength": 100
+                }
+            }
+        },
+        "address": {
+            "type": "object",
+            "description": "The user's mailing address.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Address",
+            "properties": {
+                "street1": {
+                    "type": "string",
+                    "description": "The street address of the user.",
+                    "maxLength": 100
+                },
+                "street2": {
+                    "type": "string",
+                    "description": "An additional field to store the street address of the user.",
+                    "maxLength": 100
+                },
+                "city": {
+                    "type": "string",
+                    "description": "The city the user resides in.",
+                    "maxLength": 50
+                },
+                "state": {
+                    "type": "string",
+                    "description": "The state or province the user resides in.",
+                    "maxLength": 50
+                },
+                "zipCode": {
+                    "type": "string",
+                    "description": "The zip code or postal code the user resides in.",
+                    "maxLength": 50
+                },
+                "country": {
+                    "type": "string",
+                    "description": "The country the user resides in.",
+                    "maxLength": 50
+                }
+            }
+        },
+        "locale": {
+            "type": "object",
+            "description": "The user's localization settings.",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.Locale",
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "The locale specified by the user.  This locale will be used anywhere the user is allowed to customize their locale; courses may force a specific locale, overriding the user's locale preference."
+                },
+                "calendar": {
+                    "type": "string",
+                    "description": "The calendar type specified by the user.\n\n\n| Type      | Description\n | --------- | --------- |\n| Gregorian | Gregorian |\n| GregorianHijri | Gregorian &amp; Hijri |\n| Hijri | Hijri |\n| HijriGregorian | Hijri &amp; Gregorian |\n",
+                    "enum": [
+                        "Gregorian",
+                        "GregorianHijri",
+                        "Hijri",
+                        "HijriGregorian"
+                    ]
+                },
+                "firstDayOfWeek": {
+                    "type": "string",
+                    "description": "The user's preferred first day of the week.\n\n\n| Type      | Description\n | --------- | --------- |\n| 0 | Sunday |\n| 1 | Monday |\n| 6 | Saturday |\n",
+                    "enum": [
+                        "0",
+                        "1",
+                        "6"
+                    ]
+                }
+            }
+        },
+        "avatar": {
+            "type": "object",
+            "description": "The user's avatar metadata\n\n**Since**: 3800.13.0",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.AvatarTOPub",
+            "properties": {
+                "source": {
+                    "type": "string",
+                    "description": "The source of the user's avatar\n\n**Since**: 3800.13.0\n\n\n| Type      | Description\n | --------- | --------- |\n| Default | The server default avatar |\n| User | The user set his/her own avatar |\n| System | A privileged user set the user's avatar to something other than default |\n",
+                    "enum": [
+                        "Default",
+                        "User",
+                        "System"
+                    ]
+                },
+                "uploadId": {
+                    "type": "string",
+                    "description": "The upload id of the avatar image file, if referencing a newly-uploaded file\n\n**Since**: 3800.13.0"
+                },
+                "resourceId": {
+                    "type": "string",
+                    "description": "The resource file id of the user's avatar, if referencing a Content Collection Resource\n\n**Since**: 3900.50.0"
+                }
+            }
+        },
+        "pronunciation": {
+            "type": "string",
+            "description": "Pronunciation text for user's name\n\n**Since**: 3900.32.0"
+        },
+        "pronunciationAudio": {
+            "type": "object",
+            "description": "Pronunciation Audio file for user's name\n\n**Since**: 3900.32.0",
+            "title": "blackboard.webapps.blackboard.publicapi.v1.users.UserV1.PronunciationAudioTOPub",
+            "properties": {
+                "uploadId": {
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.users.User",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1UsersUser"
+},
     requestType: "UsersUpdateUserRequest",
     isMultipart: false,
     originalName: "updateUser",
@@ -246,6 +878,8 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "UsersGetUserAvatarRequest",
     isMultipart: false,
     originalName: "getUserAvatar",
@@ -290,6 +924,12 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "UsersGetObserveesRequest",
     isMultipart: false,
     originalName: "getObservees",
@@ -334,6 +974,12 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "UsersGetObserversRequest",
     isMultipart: false,
     originalName: "getObservers",
@@ -366,6 +1012,12 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.users.UserV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1UsersUserV1"
+},
     requestType: "UsersCreateObserverRequest",
     isMultipart: false,
     originalName: "createObserver",
@@ -398,6 +1050,8 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "UsersDeleteObserverRequest",
     isMultipart: false,
     originalName: "deleteObserver",
@@ -417,6 +1071,8 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "UsersGetUserPronunciationAudioRequest",
     isMultipart: false,
     originalName: "getUserPronunciationAudio",
@@ -461,6 +1117,12 @@ export const UsersMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "UsersGetCurrentActiveUserByIdRequest",
     isMultipart: false,
     originalName: "getCurrentActiveUserById",

@@ -1,5 +1,5 @@
 import fetch from 'node-fetch';
-import { ApiMethodInfo, ApiParameter } from '../api-types.js';
+import { ApiMethodInfo, ApiParameter, ApiSchema } from '../api-types.js';
 import FormData from 'form-data';
 import { baseUrl, apiVersion, getRequestHeaders, handleResponse } from '../config.js';
 import * as fs from 'fs';
@@ -95,6 +95,12 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseCategoriesGetCategoriesRequest",
     isMultipart: false,
     originalName: "getCategories",
@@ -121,6 +127,49 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "parentId": {
+            "type": "string",
+            "description": "The ID of this category's parent category"
+        },
+        "categoryId": {
+            "type": "string",
+            "description": "The human-readable id of the category"
+        },
+        "title": {
+            "type": "string",
+            "description": "The title of category"
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the category"
+        },
+        "frontPage": {
+            "type": "boolean",
+            "description": "Boolean indicating whether or not the category should appear on the catalog front page"
+        },
+        "available": {
+            "type": "boolean",
+            "description": "Boolean indicating whether or not the category is available"
+        },
+        "restricted": {
+            "type": "boolean",
+            "description": "Boolean indicating whether or not category is available to all roles, or restricted to a specific set of roles."
+        },
+        "institutionRoleIds": {
+            "description": "The roles for which this category is available, if category is set to restricted. Not populated for lists of categories, only for individual category",
+            "$ref": "#/definitions/java.util.List<java.lang.String>"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.categories.CategoryV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1CategoriesCategoryV1"
+},
     requestType: "CourseCategoriesCreateCategoryRequest",
     isMultipart: false,
     originalName: "createCategory",
@@ -153,6 +202,12 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.categories.Category",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1CategoriesCategory"
+},
     requestType: "CourseCategoriesGetCategoryRequest",
     isMultipart: false,
     originalName: "getCategory",
@@ -178,6 +233,8 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "CourseCategoriesDeleteCategoryRequest",
     isMultipart: false,
     originalName: "deleteCategory",
@@ -210,6 +267,41 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: {
+    "type": "object",
+    "properties": {
+        "title": {
+            "type": "string",
+            "description": "The title of category"
+        },
+        "description": {
+            "type": "string",
+            "description": "The description of the category"
+        },
+        "frontPage": {
+            "type": "boolean",
+            "description": "Boolean indicating whether or not the category should appear on the catalog front page"
+        },
+        "available": {
+            "type": "boolean",
+            "description": "Boolean indicating whether or not the category is available"
+        },
+        "restricted": {
+            "type": "boolean",
+            "description": "Boolean indicating whether or not category is available to all roles, or restricted to a specific set of roles."
+        },
+        "institutionRoleIds": {
+            "description": "The roles for which this category is available, if category is set to restricted. Not populated for lists of categories, only for individual category",
+            "$ref": "#/definitions/java.util.List<java.lang.String>"
+        }
+    },
+    "description": ""
+},
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.webapps.blackboard.publicapi.v1.categories.Category",
+    "typeName": "BlackboardWebappsBlackboardPublicapiV1CategoriesCategory"
+},
     requestType: "CourseCategoriesUpdateCategoryRequest",
     isMultipart: false,
     originalName: "updateCategory",
@@ -266,6 +358,12 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseCategoriesGetMembershipsRequest",
     isMultipart: false,
     originalName: "getMemberships",
@@ -304,6 +402,12 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "reference",
+    "ref": "blackboard.platform.restspring.http.RestResponseEntity<blackboard.webapps.blackboard.publicapi.v1.categories.CategoryCourseMembershipV1>",
+    "typeName": "BlackboardPlatformRestspringHttpRestResponseEntityblackboardWebappsBlackboardPublicapiV1CategoriesCategoryCourseMembershipV1"
+},
     requestType: "CourseCategoriesCreateMembershipRequest",
     isMultipart: false,
     originalName: "createMembership",
@@ -335,6 +439,8 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
     }
 ],
     queryParams: [],
+    requestBodySchema: null,
+    responseSchema: null,
     requestType: "CourseCategoriesDeleteMembershipRequest",
     isMultipart: false,
     originalName: "deleteMembership",
@@ -433,6 +539,12 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseCategoriesGetChildCategoriesRequest",
     isMultipart: false,
     originalName: "getChildCategories",
@@ -483,6 +595,12 @@ export const CourseCategoriesMethods: { [key: string]: ApiMethodInfo } = {
         "required": false
     }
 ],
+    requestBodySchema: null,
+    responseSchema: {
+    "type": "object",
+    "properties": {},
+    "description": ""
+},
     requestType: "CourseCategoriesGetMemberships2Request",
     isMultipart: false,
     originalName: "getMemberships",
